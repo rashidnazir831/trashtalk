@@ -1,0 +1,327 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8439cb8182ce44308c70dc94c2ddd11, type: 3}
+  m_Name: CardDB
+  m_EditorClassIdentifier: 
+  list:
+  - name: Ace of Spades
+    suit: Spades
+    description: Ace of Spades
+    score: 14
+    rank: 1
+    value: 0
+  - name: King of Spades
+    suit: Spades
+    description: King of Spades
+    score: 13
+    rank: 13
+    value: 0
+  - name: Queen of Spades
+    suit: Spades
+    description: Queen of Spades
+    score: 12
+    rank: 12
+    value: 0
+  - name: Jack of Spades
+    suit: Spades
+    description: Jack of Spades
+    score: 11
+    rank: 11
+    value: 0
+  - name: Ten of Spades
+    suit: Spades
+    description: Ten of Spades
+    score: 10
+    rank: 10
+    value: 0
+  - name: Nine of Spades
+    suit: Spades
+    description: Nine of Spades
+    score: 9
+    rank: 9
+    value: 0
+  - name: Eight of Spades
+    suit: Spades
+    description: Eight of Spades
+    score: 8
+    rank: 8
+    value: 0
+  - name: Seven of Spades
+    suit: Spades
+    description: Seven of Spades
+    score: 7
+    rank: 7
+    value: 0
+  - name: Six of Spades
+    suit: Spades
+    description: Six of Spades
+    score: 6
+    rank: 6
+    value: 0
+  - name: Five of Spades
+    suit: Spades
+    description: Five of Spades
+    score: 5
+    rank: 5
+    value: 0
+  - name: Four of Spades
+    suit: Spades
+    description: Four of Spades
+    score: 4
+    rank: 4
+    value: 0
+  - name: Three of Spades
+    suit: Spades
+    description: Three of Spades
+    score: 3
+    rank: 3
+    value: 0
+  - name: Two of Spades
+    suit: Spades
+    description: Two of Spades
+    score: 2
+    rank: 2
+    value: 0
+  - name: Ace of Hearts
+    suit: Hearts
+    description: Ace of Hearts
+    score: 14
+    rank: 1
+    value: 0
+  - name: King of Hearts
+    suit: Hearts
+    description: King of Hearts
+    score: 13
+    rank: 13
+    value: 0
+  - name: Queen of Hearts
+    suit: Hearts
+    description: Queen of Hearts
+    score: 12
+    rank: 12
+    value: 0
+  - name: Jack of Hearts
+    suit: Hearts
+    description: Jack of Hearts
+    score: 11
+    rank: 11
+    value: 0
+  - name: Ten of Hearts
+    suit: Hearts
+    description: Ten of Hearts
+    score: 10
+    rank: 10
+    value: 0
+  - name: Nine of Hearts
+    suit: Hearts
+    description: Nine of Hearts
+    score: 9
+    rank: 9
+    value: 0
+  - name: Eight of Hearts
+    suit: Hearts
+    description: Eight of Hearts
+    score: 8
+    rank: 8
+    value: 0
+  - name: Seven of Hearts
+    suit: Hearts
+    description: Seven of Hearts
+    score: 7
+    rank: 7
+    value: 0
+  - name: Six of Hearts
+    suit: Hearts
+    description: Six of Hearts
+    score: 6
+    rank: 6
+    value: 0
+  - name: Five of Hearts
+    suit: Hearts
+    description: Five of Hearts
+    score: 5
+    rank: 5
+    value: 0
+  - name: Four of Hearts
+    suit: Hearts
+    description: Four of Hearts
+    score: 4
+    rank: 4
+    value: 0
+  - name: Three of Hearts
+    suit: Hearts
+    description: Three of Hearts
+    score: 3
+    rank: 3
+    value: 0
+  - name: Two of Hearts
+    suit: Hearts
+    description: Two of Hearts
+    score: 2
+    rank: 2
+    value: 0
+  - name: Ace of Diamonds
+    suit: Diamonds
+    description: Ace of Diamonds
+    score: 14
+    rank: 1
+    value: 0
+  - name: King of Diamonds
+    suit: Diamonds
+    description: King of Diamonds
+    score: 13
+    rank: 13
+    value: 0
+  - name: Queen of Diamonds
+    suit: Diamonds
+    description: Queen of Diamonds
+    score: 12
+    rank: 12
+    value: 0
+  - name: Jack of Diamonds
+    suit: Diamonds
+    description: Jack of Diamonds
+    score: 11
+    rank: 11
+    value: 0
+  - name: Ten of Diamonds
+    suit: Diamonds
+    description: Ten of Diamonds
+    score: 10
+    rank: 10
+    value: 0
+  - name: Nine of Diamonds
+    suit: Diamonds
+    description: Nine of Diamonds
+    score: 9
+    rank: 9
+    value: 0
+  - name: Eight of Diamonds
+    suit: Diamonds
+    description: Eight of Diamonds
+    score: 8
+    rank: 8
+    value: 0
+  - name: Seven of Diamonds
+    suit: Diamonds
+    description: Seven of Diamonds
+    score: 7
+    rank: 7
+    value: 0
+  - name: Six of Diamonds
+    suit: Diamonds
+    description: Six of Diamonds
+    score: 6
+    rank: 6
+    value: 0
+  - name: Five of Diamonds
+    suit: Diamonds
+    description: Five of Diamonds
+    score: 5
+    rank: 5
+    value: 0
+  - name: Four of Diamonds
+    suit: Diamonds
+    description: Four of Diamonds
+    score: 4
+    rank: 4
+    value: 0
+  - name: Three of Diamonds
+    suit: Diamonds
+    description: Three of Diamonds
+    score: 3
+    rank: 3
+    value: 0
+  - name: Two of Diamonds
+    suit: Diamonds
+    description: Two of Diamonds
+    score: 2
+    rank: 2
+    value: 0
+  - name: Ace of Clubs
+    suit: Clubs
+    description: Ace of Clubs
+    score: 14
+    rank: 1
+    value: 0
+  - name: King of Clubs
+    suit: Clubs
+    description: King of Clubs
+    score: 13
+    rank: 13
+    value: 0
+  - name: Queen of Clubs
+    suit: Clubs
+    description: Queen of Clubs
+    score: 12
+    rank: 0
+    value: 0
+  - name: Jack of Clubs
+    suit: Clubs
+    description: Jack of Clubs
+    score: 11
+    rank: 0
+    value: 0
+  - name: Ten of Clubs
+    suit: Clubs
+    description: Ten of Clubs
+    score: 10
+    rank: 10
+    value: 0
+  - name: Nine of Clubs
+    suit: Clubs
+    description: Nine of Clubs
+    score: 9
+    rank: 9
+    value: 0
+  - name: Eight of Clubs
+    suit: Clubs
+    description: Eight of Clubs
+    score: 8
+    rank: 8
+    value: 0
+  - name: Seven of Clubs
+    suit: Clubs
+    description: Seven of Clubs
+    score: 7
+    rank: 7
+    value: 0
+  - name: Six of Clubs
+    suit: Clubs
+    description: Six of Clubs
+    score: 6
+    rank: 6
+    value: 0
+  - name: Five of Clubs
+    suit: Clubs
+    description: Five of Clubs
+    score: 5
+    rank: 5
+    value: 0
+  - name: Four of Clubs
+    suit: Clubs
+    description: Four of Clubs
+    score: 4
+    rank: 4
+    value: 0
+  - name: Three of Clubs
+    suit: Clubs
+    description: Three of Clubs
+    score: 3
+    rank: 3
+    value: 0
+  - name: Two of Clubs
+    suit: Clubs
+    description: Two of Clubs
+    score: 2
+    rank: 2
+    value: 0
