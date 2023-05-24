@@ -1,6 +1,6 @@
 # Trash Talk
 
-Short project description or overview.
+Short project description or overview by Hunain.
 
 ## Table of Contents
 
