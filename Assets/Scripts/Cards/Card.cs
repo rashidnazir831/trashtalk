@@ -61,20 +61,21 @@ public class Card : MonoBehaviour,ICard
         Transform currentPlayerDeckTransform = CardsPositions.instance.GetPlayerCardsTransform(playerIndex);
 
         LeanTween.rotate(gameObject, Vector3.zero, 0.2f).setEase(LeanTweenType.easeInOutQuad);
-        LeanTween.scale(gameObject, Vector3.one * (isOwn?4:1),0.2f);
+        LeanTween.scale(gameObject, Vector3.one * (isOwn?3.5f:1),0.2f);
         LeanTween.move(gameObject, currentPlayerDeckTransform.position, 0.2f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
         {
             if (makeParent)
             {
                 transform.SetParent(currentPlayerDeckTransform);
+                transform.localEulerAngles = Vector3.zero;
                 HandCardsUI hand = transform.GetComponentInParent<HandCardsUI>();
                 if (hand != null)
                 {
-                  //  hand.UpdateCardArrangement();
+                    hand.UpdateCardArrangement();
                 }
             }
 
-            transform.localEulerAngles = Vector3.zero;
+           
         });
     }
 }

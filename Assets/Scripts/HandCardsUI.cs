@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class HandCardsUI : MonoBehaviour
@@ -7,30 +8,66 @@ public class HandCardsUI : MonoBehaviour
     public GameObject cardPrefab;
     public float radius = 50f;
 
-  //  private List<GameObject> cardObjects = new List<GameObject>();
+    public RectTransform cardRect;
 
+    private float CardWidth;
+    public Transform centerPoint;
+
+    private void Start()
+    {
+        //int total = transform.childCount;
+        //float distance = 100 / 2; //size / 2
+        //float x = 0;
+        //float y = 0;
+
+        //for (int i = 0; i < total; i++)
+        //{
+        //    transform.GetChild(i).transform.localPosition = new Vector2(x, y);
+        //    x += distance;
+        //}
+        CardWidth = cardRect.rect.width;
+    
+    }
 
     // Call this method to update the card arrangement whenever a card is removed
     public void UpdateCardArrangement()
     {
-        int cardCount = transform.childCount;
+        int total = transform.childCount;
+        float maxAngle = 30;
+        float fullAngle = -maxAngle;
+        float anglePerCard = fullAngle / total;
+        float firstAngle = CalcFirstAngle(fullAngle);
+        float handWidth = CalcHandWidth(total);
 
-        if (cardCount == 0)
-            return;
-
-        // Calculate the angle between each card based on the card count
-        float angleStep = 360f / cardCount;
-
-        for (int i = 0; i < cardCount; i++)
+     //   float percTwistedAngleAddYPos = 0.5f;
+        float initialXPos = 0 - handWidth * 0.5f;
+        print("total: " + total);
+        for (int i = 0; i < total; i++)
         {
-            // Calculate the position of each card along the circle
-            float angle = i * angleStep * Mathf.Deg2Rad;
-            float x = radius * Mathf.Cos(angle);
-            float y = radius * Mathf.Sin(angle);
+            Transform card = transform.GetChild(i).transform;
+            float angleTwist = firstAngle + i * anglePerCard;
 
-            // Update the position and rotation of the card
-            transform.GetChild(i).localPosition = new Vector3(x, y, 0f);
-            transform.GetChild(i).transform.localRotation = Quaternion.Euler(0f, 0f, -angle * Mathf.Rad2Deg);
+            float yDistance = Mathf.Abs(angleTwist);
+            float xPos = initialXPos + i * (CardWidth + 50);
+
+            float yPos = (-25) - yDistance;
+
+            card.localRotation = Quaternion.Euler(0, 0, angleTwist);
+
+            card.localPosition = new Vector3(xPos, yPos, 0);
         }
+    }
+
+    private float CalcHandWidth(int quantityOfCards)
+    {
+        var widthCards = quantityOfCards * CardWidth;
+        var widthSpacing = (quantityOfCards) * (CardWidth / 2);
+        return widthCards + widthSpacing;
+    }
+
+    private float CalcFirstAngle(float fullAngle)
+    {
+        var magicMathFactor = 0.1f;
+        return -(fullAngle / 2) + fullAngle * magicMathFactor;
     }
 }
