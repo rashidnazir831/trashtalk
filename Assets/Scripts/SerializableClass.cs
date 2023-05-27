@@ -6,6 +6,7 @@ using UnityEngine;
     public class CardData
     {
         public string name;
+        public string shortCode;
         public string suit;
         public string description;
         public int score;

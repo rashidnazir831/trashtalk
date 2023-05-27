@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Card : MonoBehaviour,ICard
@@ -7,6 +8,9 @@ public class Card : MonoBehaviour,ICard
     public CardData data;
     public GameObject front;
     public GameObject back;
+
+    private Image frontImage;
+    private Sprite frontSprite;
 
     Transform parent;
 
@@ -21,21 +25,86 @@ public class Card : MonoBehaviour,ICard
     private void Awake()
     {
         parent = transform.parent;
+        frontImage = front.GetComponent<Image>();
     }
 
     public  void SetData(CardData data)
     {
         this.data = data;
+
+        SetCardUI();
     }
 
-    public void SwitchSide()
+    void SetCardUI()
     {
-        //if(back.activeSelf)
+        frontSprite = Resources.Load<Sprite>($"Cards/{this.data.shortCode}");
 
-        bool isFrontActive = front.activeSelf;
+        if (frontSprite != null)
+            frontImage.sprite = frontSprite;
+    }
+
+    public void SwitchSide(bool showOnlyFront = false, bool animated=false, bool isVertical=false)
+    {
+        if (animated)
+        {
+            SwichSideAnimated(isVertical);
+            return;
+        }
+
+        bool isFrontActive = front.activeSelf && !showOnlyFront;
 
         front.SetActive(!isFrontActive);
         back.SetActive(isFrontActive);
+    }
+
+    public void SwichSideAnimated(bool isVertical=false)
+    {
+        float x = isVertical?90:0;
+        float y = isVertical ? 0 : 90;
+
+
+        if (front.activeSelf)
+        {
+            RotateObjectAnimated(front, Vector2.zero, new Vector2(x, y), () =>
+            {
+                front.SetActive(false);
+                front.transform.localEulerAngles = Vector2.zero;
+
+                RotateObjectAnimated(back, new Vector2(x, y), Vector2.zero, () =>
+                {
+                    back.SetActive(true);
+                });
+            });
+
+            
+        }
+        else
+        {
+            RotateObjectAnimated(back, Vector2.zero, new Vector2(x, y), () =>
+            {
+                back.SetActive(false);
+                back.transform.localEulerAngles = Vector2.zero;
+
+                RotateObjectAnimated(front, new Vector2(x, y), Vector2.zero, () =>
+                {
+                    front.SetActive(true);
+                });
+            });           
+        }
+    }
+
+    private void RotateObjectAnimated(GameObject obj, Vector3 startRotation, Vector3 endRotation, System.Action onComplete)
+    {
+        obj.transform.localEulerAngles = startRotation;
+        obj.SetActive(true);
+
+
+        LeanTween.rotateLocal(obj, endRotation, 0.2f).setOnComplete(() =>
+        {
+            onComplete?.Invoke();
+        });
+
+
     }
 
     public void SetInitialParent()
@@ -68,14 +137,13 @@ public class Card : MonoBehaviour,ICard
             {
                 transform.SetParent(currentPlayerDeckTransform);
                 transform.localEulerAngles = Vector3.zero;
+
                 HandCardsUI hand = transform.GetComponentInParent<HandCardsUI>();
                 if (hand != null)
                 {
                     hand.UpdateCardArrangement();
                 }
             }
-
-           
         });
     }
 }

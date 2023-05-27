@@ -13,6 +13,8 @@ public class HandCardsUI : MonoBehaviour
     private float CardWidth;
     public Transform centerPoint;
 
+    //private List<Card> cardsInHands;
+
     private void Start()
     {
         //int total = transform.childCount;
@@ -41,10 +43,11 @@ public class HandCardsUI : MonoBehaviour
 
      //   float percTwistedAngleAddYPos = 0.5f;
         float initialXPos = 0 - handWidth * 0.5f;
-        print("total: " + total);
+
         for (int i = 0; i < total; i++)
         {
             Transform card = transform.GetChild(i).transform;
+          //  cardsInHands.Add(card);
             float angleTwist = firstAngle + i * anglePerCard;
 
             float yDistance = Mathf.Abs(angleTwist);
@@ -55,6 +58,22 @@ public class HandCardsUI : MonoBehaviour
             card.localRotation = Quaternion.Euler(0, 0, angleTwist);
 
             card.localPosition = new Vector3(xPos, yPos, 0);
+
+            //if(i == total-1)
+            //{
+            //    Invoke("ShowCardsFront", 1);
+            //}
+        }
+    }
+
+    public IEnumerator ShowPlayerCards()
+    {
+        Card[] cardsInHands = GetComponentsInChildren<Card>();
+
+        foreach(Card obj in cardsInHands)
+        {
+            obj.SwichSideAnimated();
+            yield return new WaitForSeconds(0.1f);
         }
     }
 

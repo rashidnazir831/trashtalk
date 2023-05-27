@@ -7,6 +7,7 @@ public class GameplayManager : MonoBehaviour
     public static GameplayManager instance;
 
     public GameObject dealButton;
+    public HandCardsUI cardHand;
 
     int totalPlayers;
     int currentPlayerIndex;
@@ -53,6 +54,7 @@ public class GameplayManager : MonoBehaviour
 
     public void StartBid()
     {
+        cardHand.StartCoroutine(cardHand.ShowPlayerCards());
         bidManager.StartBid(this.totalPlayers, this.currentPlayerIndex);
     }
 
@@ -76,9 +78,12 @@ public class GameplayManager : MonoBehaviour
     IEnumerator BotPlay(Player botPlayer)
     {
         List<Card> hand = botPlayer.hand;
-
         Card playedCard = botPlayer.PlayCard(0);
-        playedCard.SwitchSide();
+
+
+        playedCard.SwitchSide(true);
+
+
         playedCard.SetInitialParent();
         playedCard.MoveCard(CardsPositions.instance.GetPlayerShowCardTransform(botPlayer.tablePosition));
         yield return new WaitForSeconds(1f);
