@@ -42,7 +42,7 @@ public class HandCardsUI : MonoBehaviour
         float handWidth = CalcHandWidth(total);
 
      //   float percTwistedAngleAddYPos = 0.5f;
-        float initialXPos = 0 - handWidth * 0.5f;
+        float initialXPos =  -handWidth * 0.5f;
 
         for (int i = 0; i < total; i++)
         {
@@ -51,7 +51,7 @@ public class HandCardsUI : MonoBehaviour
             float angleTwist = firstAngle + i * anglePerCard;
 
             float yDistance = Mathf.Abs(angleTwist);
-            float xPos = initialXPos + i * (CardWidth + 50);
+            float xPos = initialXPos + i * (CardWidth + 20);
 
             float yPos = (-25) - yDistance;
 
@@ -72,6 +72,7 @@ public class HandCardsUI : MonoBehaviour
 
         foreach(Card obj in cardsInHands)
         {
+            SoundManager.Instance.PlaySoundEffect(Sound.Click);
             obj.SwichSideAnimated();
             yield return new WaitForSeconds(0.1f);
         }
@@ -79,7 +80,7 @@ public class HandCardsUI : MonoBehaviour
 
     private float CalcHandWidth(int quantityOfCards)
     {
-        var widthCards = quantityOfCards * CardWidth;
+        var widthCards = quantityOfCards * (CardWidth - 30);
         var widthSpacing = (quantityOfCards) * (CardWidth / 2);
         return widthCards + widthSpacing;
     }

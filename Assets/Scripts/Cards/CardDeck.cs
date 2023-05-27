@@ -82,7 +82,7 @@ public class CardDeck : MonoBehaviour
 
                 // Set the target position for the card to move to (player's position)
                 //   card.targetPosition = playerPositions[j].position;
-
+                SoundManager.Instance.PlaySoundEffect(Sound.Hint);
                 Card card = GetNextCard(cardNumber);
                 cardNumber++;
 
@@ -103,7 +103,7 @@ public class CardDeck : MonoBehaviour
                 card.MoveToPlayerPosition(player.tablePosition, isOwn);
                 currentPlayerIndex = (currentPlayerIndex + 1) % 4;
 
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(0.1f);
 
             }
         }

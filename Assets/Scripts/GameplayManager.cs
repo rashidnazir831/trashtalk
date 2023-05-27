@@ -28,7 +28,6 @@ public class GameplayManager : MonoBehaviour
     {
         //totalPlayers = PlayerManager.instance.players.Count;
         //currentPlayerIndex = Random.Range(0, totalPlayers);
-
     }
 
     private void Start()
@@ -44,6 +43,9 @@ public class GameplayManager : MonoBehaviour
         this.totalPlayers = PlayerManager.instance.players.Count;
         this.currentPlayerIndex = Random.Range(0, totalPlayers);
         this.totalPlayerPlayed = 0;
+
+        SoundManager.Instance.PlayBackgroundMusic(Sound.Music);
+
     }
 
     public void Deal()

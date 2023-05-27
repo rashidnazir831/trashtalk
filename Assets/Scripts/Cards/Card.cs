@@ -114,9 +114,9 @@ public class Card : MonoBehaviour,ICard
 
     public void MoveCard(Transform trans, bool makeParent=true, System.Action onComplete=null)
     {
-        LeanTween.scale(gameObject, Vector3.one, 0.2f);
+        LeanTween.scale(gameObject, Vector3.one, 0.1f);
 
-        LeanTween.move(gameObject, trans.position, 0.2f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
+        LeanTween.move(gameObject, trans.position, 0.1f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
         {
             if (makeParent)
                 transform.SetParent(trans);
@@ -129,9 +129,9 @@ public class Card : MonoBehaviour,ICard
     {
         Transform currentPlayerDeckTransform = CardsPositions.instance.GetPlayerCardsTransform(playerIndex);
 
-        LeanTween.rotate(gameObject, Vector3.zero, 0.2f).setEase(LeanTweenType.easeInOutQuad);
-        LeanTween.scale(gameObject, Vector3.one * (isOwn?3.5f:1),0.2f);
-        LeanTween.move(gameObject, currentPlayerDeckTransform.position, 0.2f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
+        LeanTween.rotate(gameObject, Vector3.zero, 0.1f).setEase(LeanTweenType.easeInOutQuad);
+        LeanTween.scale(gameObject, Vector3.one * (isOwn?3f:1),0.1f);
+        LeanTween.move(gameObject, currentPlayerDeckTransform.position, 0.1f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
         {
             if (makeParent)
             {

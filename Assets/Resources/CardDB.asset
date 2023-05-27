@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   list:
   - name: Ace of Spades
-    shortCode: 
+    shortCode: aceOfSpades
     suit: Spades
     description: Ace of Spades
     score: 14
     rank: 1
     value: 0
   - name: King of Spades
-    shortCode: 
+    shortCode: kingOfSpades
     suit: Spades
     description: King of Spades
     score: 13
@@ -70,7 +70,7 @@ MonoBehaviour:
     rank: 7
     value: 0
   - name: Six of Spades
-    shortCode: sexOfSpades
+    shortCode: sixOfSpades
     suit: Spades
     description: Six of Spades
     score: 6
