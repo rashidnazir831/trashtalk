@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface ICard
 {
-    void MoveToPlayerPosition(int index,bool isOwn, bool makeParent);
-    void MoveCard(Transform transform, bool makeParent, System.Action onComplete);
+    void MoveToPlayerPosition(int index, bool makeParent);
+    void MoveCard(Transform transform, float customSize, bool makeParent, System.Action onComplete);
 }
 
 //public interface ICardFactory

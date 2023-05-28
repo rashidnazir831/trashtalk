@@ -65,16 +65,25 @@ public class HandCardsUI : MonoBehaviour
             //}
         }
     }
-
+    Card[] cardsInHands;
     public IEnumerator ShowPlayerCards()
     {
-        Card[] cardsInHands = GetComponentsInChildren<Card>();
+        cardsInHands = GetComponentsInChildren<Card>();
 
-        foreach(Card obj in cardsInHands)
+        foreach(Card card in cardsInHands)
         {
             SoundManager.Instance.PlaySoundEffect(Sound.Click);
-            obj.SwichSideAnimated();
+            card.SwichSideAnimated();
             yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    public void ActiveMainPlayerCards()
+    {
+        foreach (Card card in cardsInHands)
+        {
+            card.ActiveButton();
+            card.ActiveDragable();
         }
     }
 

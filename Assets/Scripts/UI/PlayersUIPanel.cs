@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
-using UnityEngine;
 
 public class PlayersUIPanel : UIPanel
 {
@@ -27,16 +26,22 @@ public class PlayersUIPanel : UIPanel
     public override void UpdateData(Action<object[]> callBack, params object[] parameters)
     {
         string type = (string)parameters[0];
-        switch(type)
+        int playerNumber = 0;
+        switch (type)
         {
             case "ShowBidUI":
-                int playerNumber = (int)parameters[1];
+                playerNumber = (int)parameters[1];
                 int bidCount = (int)parameters[2];
                 this.callBack = callBack;
                 ShowBidUI(playerNumber, bidCount);
                 break;
             case "HideAllBidsUIs":
                 HideAllBidsUIs();
+                break;
+            case "UpdateCardCount":
+                playerNumber = (int)parameters[1];
+                int count = (int)parameters[2];
+                UpdateCardCount(playerNumber-1,count);
                 break;
 
         }
@@ -45,6 +50,14 @@ public class PlayersUIPanel : UIPanel
     void ShowBidUI(int playerNumber, int bidCout=-1)
     {
         playerUI[playerNumber].ShowBidUI(bidCout,SelectBid);
+    }
+
+    void UpdateCardCount(int playerNumber, int count)
+    {
+        print("number+ " + playerNumber);
+        playerUI[playerNumber].UpdateCardCount(count);
+
+    //    cardsCountText.text = $"{count}";
     }
 
     void SelectBid(int bid)

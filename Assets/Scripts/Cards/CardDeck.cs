@@ -92,15 +92,15 @@ public class CardDeck : MonoBehaviour
                 //card.targetPosition = targetPosition;
 
                 Player player =  PlayerManager.instance.GetPlayer(j);
-                bool isOwn = player.isOwn;
+            //    bool isOwn = player.isOwn;
 
                 player.AddCardToHand(card);
-
+                card.SetOwner(player);
              //   if (isOwn)
              //       card.SwitchSide();
 
                 // Move the card to the target position using Lean Tween
-                card.MoveToPlayerPosition(player.tablePosition, isOwn);
+                card.MoveToPlayerPosition(player.tablePosition);
                 currentPlayerIndex = (currentPlayerIndex + 1) % 4;
 
                 yield return new WaitForSeconds(0.1f);

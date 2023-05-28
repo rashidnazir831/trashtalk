@@ -12,6 +12,11 @@ public class Card : MonoBehaviour,ICard
     private Image frontImage;
     private Sprite frontSprite;
 
+    private Button button;
+    private CardDragHandler dragHandler;
+
+    private Player cardOwner;
+
     Transform parent;
 
     public enum Suit
@@ -26,6 +31,14 @@ public class Card : MonoBehaviour,ICard
     {
         parent = transform.parent;
         frontImage = front.GetComponent<Image>();
+        dragHandler = GetComponent<CardDragHandler>();
+        button = GetComponent<Button>();
+    }
+
+    private void Start()
+    {
+        dragHandler.enabled = false;
+        button.interactable = false;
     }
 
     public  void SetData(CardData data)
@@ -33,6 +46,11 @@ public class Card : MonoBehaviour,ICard
         this.data = data;
 
         SetCardUI();
+    }
+
+    public void SetOwner(Player player)
+    {
+        this.cardOwner = player;
     }
 
     void SetCardUI()
@@ -75,8 +93,6 @@ public class Card : MonoBehaviour,ICard
                     back.SetActive(true);
                 });
             });
-
-            
         }
         else
         {
@@ -98,13 +114,10 @@ public class Card : MonoBehaviour,ICard
         obj.transform.localEulerAngles = startRotation;
         obj.SetActive(true);
 
-
         LeanTween.rotateLocal(obj, endRotation, 0.2f).setOnComplete(() =>
         {
             onComplete?.Invoke();
         });
-
-
     }
 
     public void SetInitialParent()
@@ -112,30 +125,43 @@ public class Card : MonoBehaviour,ICard
         transform.SetParent(parent);
     }
 
-    public void MoveCard(Transform trans, bool makeParent=true, System.Action onComplete=null)
+    public void MoveCard(Transform trans,float customSize=1, bool makeParent=true, System.Action onComplete=null)
     {
-        LeanTween.scale(gameObject, Vector3.one, 0.1f);
+        LeanTween.scale(gameObject, new Vector2(customSize, customSize), 0.1f);
 
         LeanTween.move(gameObject, trans.position, 0.1f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
         {
             if (makeParent)
+            {
                 transform.SetParent(trans);
+                trans.SetAsLastSibling();
+            }
 
             onComplete?.Invoke();
         });
     }
 
-    public void MoveToPlayerPosition(int playerIndex,bool isOwn, bool makeParent=true)
+    public void MoveToPlayerPosition(int playerIndex, bool makeParent=true)
     {
-        Transform currentPlayerDeckTransform = CardsPositions.instance.GetPlayerCardsTransform(playerIndex);
+        Transform currentPlayerDeckTransform = TableController.instance.GetPlayerCardsTransform(playerIndex);
 
-        LeanTween.rotate(gameObject, Vector3.zero, 0.1f).setEase(LeanTweenType.easeInOutQuad);
-        LeanTween.scale(gameObject, Vector3.one * (isOwn?3f:1),0.1f);
+        LeanTween.rotate(gameObject, Vector2.zero, 0.1f).setEase(LeanTweenType.easeInOutQuad);
+        LeanTween.scale(gameObject, Vector2.one * (this.cardOwner.isOwn? 3f:1),0.1f);
         LeanTween.move(gameObject, currentPlayerDeckTransform.position, 0.1f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
         {
             if (makeParent)
             {
-                transform.SetParent(currentPlayerDeckTransform);
+                print("own: " + this.cardOwner.isOwn);
+                if (this.cardOwner.isOwn)
+                {
+                    transform.SetParent(currentPlayerDeckTransform);
+                }
+                else
+                {
+                    gameObject.SetActive(false);
+                    UIEvents.UpdateData("PlayersUIPanel", null, "UpdateCardCount", playerIndex, this.cardOwner.hand.Count);
+                }
+
                 transform.localEulerAngles = Vector3.zero;
 
                 HandCardsUI hand = transform.GetComponentInParent<HandCardsUI>();
@@ -145,5 +171,23 @@ public class Card : MonoBehaviour,ICard
                 }
             }
         });
+    }
+
+    public void PlaceCardOnTable()
+    {
+        ActiveButton(false);
+        ActiveDragable(false);
+        GameplayManager.instance.PlaceCardOnTable(cardOwner,this);
+    }
+
+    public void ActiveButton(bool interactable=true)
+    {
+        this.button.interactable = interactable;
+    }
+
+    public void ActiveDragable(bool enabled = true)
+    {
+        this.dragHandler.enabled = enabled;
+
     }
 }

@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Trick
 {
-    public Player player;
+  //  public Player player;
     public List<Card> cards;
 
-    public Trick(Player player)
+    public Trick()
     {
-        this.player = player;
         this.cards = new List<Card>();
     }
 

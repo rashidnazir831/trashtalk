@@ -8,6 +8,7 @@ public class GameplayManager : MonoBehaviour
 
     public GameObject dealButton;
     public HandCardsUI cardHand;
+    private Trick currentTrick;
 
     int totalPlayers;
     int currentPlayerIndex;
@@ -28,11 +29,13 @@ public class GameplayManager : MonoBehaviour
     {
         //totalPlayers = PlayerManager.instance.players.Count;
         //currentPlayerIndex = Random.Range(0, totalPlayers);
+        currentTrick = new Trick();
     }
 
     private void Start()
     {
-        PlayerManager.instance.AddPlayer("Player 1",true,true,1);
+        //PlayerManager.instance.AddPlayer("Player 1", true, true, 1);
+        PlayerManager.instance.AddPlayer("Player 1",false,true,1);
         PlayerManager.instance.AddPlayer("Player 2", true,false,2);
         PlayerManager.instance.AddPlayer("Player 3", true, false, 3);
         PlayerManager.instance.AddPlayer("Player 4", true, false, 4);
@@ -62,6 +65,7 @@ public class GameplayManager : MonoBehaviour
 
     public void StartGame()
     {
+        cardHand.ActiveMainPlayerCards();
         StartTricks();
     }
 
@@ -73,22 +77,38 @@ public class GameplayManager : MonoBehaviour
     public void PlayTurn()
     {
        Player currentPlayer = PlayerManager.instance.players[currentPlayerIndex];
+       PlayerManager.instance.SetPlayerTurn(currentPlayerIndex);
 
-       StartCoroutine(BotPlay(currentPlayer));
+        if (currentPlayer.isBot)
+        {
+            StartCoroutine(BotPlay(currentPlayer));
+        }
+        else
+        {
+            print("your turn");
+        }
     }
 
     IEnumerator BotPlay(Player botPlayer)
     {
+        yield return new WaitForSeconds(1f);
         List<Card> hand = botPlayer.hand;
-        Card playedCard = botPlayer.PlayCard(0);
 
+        print("count:" + hand.Count);
+
+        Card playedCard = botPlayer.PlayCard(0);
+        playedCard.gameObject.SetActive(true);
 
         playedCard.SwitchSide(true);
 
+        playedCard.MoveCard(TableController.instance.GetPlayerShowCardTransform(botPlayer.tablePosition),2);
+        currentTrick.AddCard(playedCard);
+        botPlayer.hand.Remove(playedCard);
 
-        playedCard.SetInitialParent();
-        playedCard.MoveCard(CardsPositions.instance.GetPlayerShowCardTransform(botPlayer.tablePosition));
-        yield return new WaitForSeconds(1f);
+        print("count now: " + botPlayer.hand.Count);
+
+
+    //    yield return new WaitForSeconds(1f);
 
         DecideNext();
 
@@ -99,13 +119,20 @@ public class GameplayManager : MonoBehaviour
         //}
     }
 
+    public void PlaceCardOnTable(Player player, Card playedCard)
+    {
+        playedCard.MoveCard(TableController.instance.GetPlayerShowCardTransform(player.tablePosition), 2);
+        player.hand.Remove(playedCard);
+        currentTrick.AddCard(playedCard);
+        DecideNext();
+    }
+
     void DecideNext()
     {
         this.totalPlayerPlayed++;
 
         if (this.totalPlayerPlayed == this.totalPlayers)
         {
-            print("round over");
             return;
         }
 
@@ -114,8 +141,6 @@ public class GameplayManager : MonoBehaviour
         PlayTurn();
 
     }
-
-
 
     private bool IsGameOver()
     {

@@ -53,6 +53,11 @@ public class PlayerManager : MonoBehaviour
     //    currentPlayerIndex = 0;
     //}
 
+    public void SetPlayerTurn(int playerIndex)
+    {
+        //logic if player has turn
+    }
+
     public Player GetCurrentPlayer()
     {
         return players[currentPlayerIndex];

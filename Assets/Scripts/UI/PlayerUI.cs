@@ -7,8 +7,15 @@ public class PlayerUI : MonoBehaviour
 {
     public PlayerBidUI bidUI;
     public Text myBids;
+    public Text cardsCountText;
+
 
     System.Action<int> callBack;
+
+    public void UpdateCardCount(int cardCount)
+    {
+        cardsCountText.text = $"{cardCount}";
+    }
 
    public void ShowBidUI(int bidCount = -1,System.Action<int> callBack=null)
    {
