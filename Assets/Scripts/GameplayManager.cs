@@ -98,18 +98,23 @@ public class GameplayManager : MonoBehaviour
         playedCard.gameObject.SetActive(true);
 
         playedCard.SwitchSide(true);
+        print("currentPlayerIndex" + currentPlayerIndex);
 
         playedCard.MoveCard(TableController.instance.GetPlayerShowCardTransform(botPlayer.tablePosition),2.5f,true, ()=> {
+            TrickManager.AddCard(playedCard);
+
+            botPlayer.hand.Remove(playedCard);
+            UIEvents.UpdateData(Panel.PlayersUIPanel, null, "UpdateCardCount", currentPlayerIndex, botPlayer.hand.Count);
 
             TrickManager.HighlightLowCards();
-        });
-        TrickManager.AddCard(playedCard);
 
-        botPlayer.hand.Remove(playedCard);
+            DecideNext();
+
+        });
+
 
     //    yield return new WaitForSeconds(1f);
 
-        DecideNext();
     }
 
     public void PlaceCardOnTable(Player player, Card playedCard)

@@ -41,7 +41,7 @@ public class PlayersUIPanel : UIPanel
             case "UpdateCardCount":
                 playerNumber = (int)parameters[1];
                 int count = (int)parameters[2];
-                UpdateCardCount(playerNumber-1,count);
+                UpdateCardCount(playerNumber,count);
                 break;
 
         }

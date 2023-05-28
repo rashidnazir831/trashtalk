@@ -31,7 +31,7 @@ public class BidManager : MonoBehaviour
 
         if (currentPlayerIndex == 0)//it is temproray later it will be decided by ID or other property
         {
-            UIEvents.UpdateData("PlayersUIPanel", PlacePlayerBid,  "ShowBidUI", currentPlayerIndex,-1);
+            UIEvents.UpdateData(Panel.PlayersUIPanel, PlacePlayerBid,  "ShowBidUI", currentPlayerIndex,-1);
             
         }
         else
@@ -82,7 +82,7 @@ public class BidManager : MonoBehaviour
         }
 
         botPlayer.SetBid(bid);
-        UIEvents.UpdateData("PlayersUIPanel",null, "ShowBidUI", currentPlayerIndex,bid);
+        UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowBidUI", currentPlayerIndex,bid);
 
         yield return new WaitForSeconds (1);
         DecideNext();
@@ -94,7 +94,7 @@ public class BidManager : MonoBehaviour
 
         if(totalBidsPlaced == totalPlayers)
         {
-            UIEvents.UpdateData("PlayersUIPanel", null, "HideAllBidsUIs");
+            UIEvents.UpdateData(Panel.PlayersUIPanel, null, "HideAllBidsUIs");
             GameplayManager.instance.StartGame();
             return;
         }

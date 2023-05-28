@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 511846786572514009}
   - component: {fileID: 511846786572514014}
   - component: {fileID: 511846786572514015}
+  - component: {fileID: 2183684102684852319}
   m_Layer: 5
   m_Name: SignupPanel
   m_TagString: Untagged
@@ -154,6 +155,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2183684102684852319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511846786572514008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd43cef9092034d8fb07be6308aa2d26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2263849501541542781
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,7 +289,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9202710513069166362}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2183684102684852319}
+        m_TargetAssemblyTypeName: SignupPanel, Assembly-CSharp
+        m_MethodName: PlayAsGuest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2492760631338748677
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,7 +545,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2492760631641128983}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2183684102684852319}
+        m_TargetAssemblyTypeName: SignupPanel, Assembly-CSharp
+        m_MethodName: ConnectWithFacebook
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2492760632236187807
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,7 +1188,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5470719359067694651}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2183684102684852319}
+        m_TargetAssemblyTypeName: SignupPanel, Assembly-CSharp
+        m_MethodName: ConnectWithApple
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8354094549082083701
 GameObject:
   m_ObjectHideFlags: 0

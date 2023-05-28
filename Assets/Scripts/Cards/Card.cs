@@ -140,7 +140,7 @@ public class Card : MonoBehaviour,ICard
                 transform.SetParent(trans);
                 trans.SetAsLastSibling();
             }
-
+            transform.eulerAngles = Vector3.zero;
             onComplete?.Invoke();
         });
     }
@@ -163,7 +163,7 @@ public class Card : MonoBehaviour,ICard
                 else
                 {
                     gameObject.SetActive(false);
-                    UIEvents.UpdateData("PlayersUIPanel", null, "UpdateCardCount", playerIndex, this.cardOwner.hand.Count);
+                    UIEvents.UpdateData(Panel.PlayersUIPanel, null, "UpdateCardCount", playerIndex-1, this.cardOwner.hand.Count);
                 }
 
                 transform.localEulerAngles = Vector3.zero;
