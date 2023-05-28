@@ -54,7 +54,7 @@ public class PlayersUIPanel : UIPanel
 
     void UpdateCardCount(int playerNumber, int count)
     {
-        print("number+ " + playerNumber);
+//        print("number+ " + playerNumber);
         playerUI[playerNumber].UpdateCardCount(count);
 
     //    cardsCountText.text = $"{count}";

@@ -8,7 +8,7 @@ public class GameplayManager : MonoBehaviour
 
     public GameObject dealButton;
     public HandCardsUI cardHand;
-    private Trick currentTrick;
+  //  private Trick currentTrick;
 
     int totalPlayers;
     int currentPlayerIndex;
@@ -29,7 +29,7 @@ public class GameplayManager : MonoBehaviour
     {
         //totalPlayers = PlayerManager.instance.players.Count;
         //currentPlayerIndex = Random.Range(0, totalPlayers);
-        currentTrick = new Trick();
+     //   currentTrick = new Trick();
     }
 
     private void Start()
@@ -65,7 +65,6 @@ public class GameplayManager : MonoBehaviour
 
     public void StartGame()
     {
-        cardHand.ActiveMainPlayerCards();
         StartTricks();
     }
 
@@ -85,6 +84,7 @@ public class GameplayManager : MonoBehaviour
         }
         else
         {
+            cardHand.ActiveMainPlayerCards();
             print("your turn");
         }
     }
@@ -94,36 +94,33 @@ public class GameplayManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         List<Card> hand = botPlayer.hand;
 
-        print("count:" + hand.Count);
-
         Card playedCard = botPlayer.PlayCard(0);
         playedCard.gameObject.SetActive(true);
 
         playedCard.SwitchSide(true);
 
-        playedCard.MoveCard(TableController.instance.GetPlayerShowCardTransform(botPlayer.tablePosition),2);
-        currentTrick.AddCard(playedCard);
+        playedCard.MoveCard(TableController.instance.GetPlayerShowCardTransform(botPlayer.tablePosition),2.5f,true, ()=> {
+
+            TrickManager.HighlightLowCards();
+        });
+        TrickManager.AddCard(playedCard);
+
         botPlayer.hand.Remove(playedCard);
-
-        print("count now: " + botPlayer.hand.Count);
-
 
     //    yield return new WaitForSeconds(1f);
 
         DecideNext();
-
-        //if (currentPlayerIndex < PlayerManager.instance.players.Count-1)
-        //{
-        //    this.totalPlayerPlayed++;
-        //    PlayTurn();
-        //}
     }
 
     public void PlaceCardOnTable(Player player, Card playedCard)
     {
-        playedCard.MoveCard(TableController.instance.GetPlayerShowCardTransform(player.tablePosition), 2);
+        cardHand.ActiveMainPlayerCards(false);
+
+        playedCard.MoveCard(TableController.instance.GetPlayerShowCardTransform(player.tablePosition), 2.5f,true,()=> {
+            TrickManager.HighlightLowCards();
+        });
         player.hand.Remove(playedCard);
-        currentTrick.AddCard(playedCard);
+        TrickManager.AddCard(playedCard);
         DecideNext();
     }
 
@@ -133,6 +130,10 @@ public class GameplayManager : MonoBehaviour
 
         if (this.totalPlayerPlayed == this.totalPlayers)
         {
+            Player player = TrickManager.GetTrickWinner();
+
+            print("round complete, winner is: " + player.name);
+
             return;
         }
 

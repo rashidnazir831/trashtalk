@@ -15,6 +15,7 @@ public class Player : IPlayer
     public int bid;
     public bool isBot = false;
     public bool isOwn = false;
+    public List<Card> winningCards;
 
 
     public Player(string playerName, bool isBot,bool isOwn, int tablePos)
@@ -27,9 +28,20 @@ public class Player : IPlayer
         hand = new List<Card>();
     }
 
+    public void AddWinningCard(Card card)
+    {
+        winningCards.Add(card);
+    }
+
     public void AddCardToHand(Card card)
     {
         hand.Add(card);
+    }
+
+    public void ResetCards()    //Reset cards in each rounds
+    {
+        winningCards.Clear();
+        hand.Clear();
     }
 
     public Card PlayCard(int index)
@@ -45,7 +57,7 @@ public class Player : IPlayer
 
     public void SetBid(int bid)
     {
-        Debug.Log("set Bid: " + bid);
+        //Debug.Log("set Bid: " + bid);
         this.bid = bid;
     }
 

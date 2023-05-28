@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class Card : MonoBehaviour,ICard
     public CardData data;
     public GameObject front;
     public GameObject back;
+    public bool isLeadingCard = false;
 
     private Image frontImage;
     private Sprite frontSprite;
@@ -15,7 +17,7 @@ public class Card : MonoBehaviour,ICard
     private Button button;
     private CardDragHandler dragHandler;
 
-    private Player cardOwner;
+    public Player cardOwner;
 
     Transform parent;
 
@@ -26,6 +28,8 @@ public class Card : MonoBehaviour,ICard
         Diamonds,
         Clubs
     }
+
+    public Suit suit;
 
     private void Awake()
     {
@@ -44,7 +48,7 @@ public class Card : MonoBehaviour,ICard
     public  void SetData(CardData data)
     {
         this.data = data;
-
+        this.suit = (Suit)Enum.Parse(typeof(Card.Suit), data.suit);
         SetCardUI();
     }
 
@@ -151,7 +155,7 @@ public class Card : MonoBehaviour,ICard
         {
             if (makeParent)
             {
-                print("own: " + this.cardOwner.isOwn);
+//                print("own: " + this.cardOwner.isOwn);
                 if (this.cardOwner.isOwn)
                 {
                     transform.SetParent(currentPlayerDeckTransform);
@@ -189,5 +193,11 @@ public class Card : MonoBehaviour,ICard
     {
         this.dragHandler.enabled = enabled;
 
+    }
+
+    public void HighlightCard(bool normal)
+    {
+        Color color = normal ? Color.white : Color.gray;
+        frontImage.color = color;
     }
 }

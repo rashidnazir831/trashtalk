@@ -78,12 +78,12 @@ public class HandCardsUI : MonoBehaviour
         }
     }
 
-    public void ActiveMainPlayerCards()
+    public void ActiveMainPlayerCards(bool active=true)
     {
         foreach (Card card in cardsInHands)
         {
-            card.ActiveButton();
-            card.ActiveDragable();
+            card.ActiveButton(active);
+            card.ActiveDragable(active);
         }
     }
 
