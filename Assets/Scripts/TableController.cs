@@ -52,6 +52,11 @@ public class TableController : MonoBehaviour
 
     }
 
+    //public Transform GetPlayerWinCardTransform()
+    //{
+
+    //}
+
     public void ShowTableCardArea(bool show)
     {
         cardAreaBorder.SetActive(show);

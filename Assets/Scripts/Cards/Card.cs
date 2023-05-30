@@ -129,7 +129,7 @@ public class Card : MonoBehaviour,ICard
         transform.SetParent(parent);
     }
 
-    public void MoveCard(Transform trans,float customSize=1, bool makeParent=true, System.Action onComplete=null)
+    public void MoveCard(Transform trans, float customSize = 1, bool makeParent = true, bool hideOnReach = false, System.Action onComplete=null)
     {
         LeanTween.scale(gameObject, new Vector2(customSize, customSize), 0.1f);
 
@@ -140,6 +140,8 @@ public class Card : MonoBehaviour,ICard
                 transform.SetParent(trans);
                 trans.SetAsLastSibling();
             }
+            gameObject.SetActive(!hideOnReach);
+
             transform.eulerAngles = Vector3.zero;
             onComplete?.Invoke();
         });

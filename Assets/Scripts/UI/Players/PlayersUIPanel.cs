@@ -43,6 +43,10 @@ public class PlayersUIPanel : UIPanel
                 int count = (int)parameters[2];
                 UpdateCardCount(playerNumber,count);
                 break;
+            case "UpdateBidCount":
+                playerNumber = (int)parameters[1];
+                UpdateBidCount(playerNumber, (int)parameters[2], (int)parameters[3]);
+                break;
 
         }
     }
@@ -54,10 +58,12 @@ public class PlayersUIPanel : UIPanel
 
     void UpdateCardCount(int playerNumber, int count)
     {
-//        print("number+ " + playerNumber);
         playerUI[playerNumber].UpdateCardCount(count);
+    }
 
-    //    cardsCountText.text = $"{count}";
+    void UpdateBidCount(int playerNumber, int bidWon, int totalBid)
+    {
+        playerUI[playerNumber].UpdateBids(totalBid, bidWon);
     }
 
     void SelectBid(int bid)

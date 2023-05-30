@@ -42,7 +42,6 @@ public class BidManager : MonoBehaviour
 
     public void PlacePlayerBid(object[] parameters)
     {
-
         this.currentPlayer.SetBid((int)parameters[0]);
         DecideNext();
     }
@@ -83,9 +82,15 @@ public class BidManager : MonoBehaviour
 
         botPlayer.SetBid(bid);
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowBidUI", currentPlayerIndex,bid);
-
+        UpdateBidCount(botPlayer);
         yield return new WaitForSeconds (1);
         DecideNext();
+    }
+
+    public void UpdateBidCount(Player player)
+    {
+      //  int playerPos = player.tablePosition;
+        UIEvents.UpdateData(Panel.PlayersUIPanel, null, "UpdateBidCount", currentPlayerIndex, player.bidWon,player.bidPlaced);
     }
 
     void DecideNext()

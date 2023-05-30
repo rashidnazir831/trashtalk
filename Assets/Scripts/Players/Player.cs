@@ -12,7 +12,8 @@ public class Player : IPlayer
     public List<Card> hand;
     public int score;
     public int tablePosition;
-    public int bid;
+    public int bidPlaced;
+    public int bidWon;
     public bool isBot = false;
     public bool isOwn = false;
     public List<Card> winningCards;
@@ -24,7 +25,8 @@ public class Player : IPlayer
         this.isBot = isBot;
         this.tablePosition = tablePos;
         this.isOwn = isOwn;
-        this.bid = 0;
+        this.bidPlaced = 0;
+        this.bidWon = 0;
         hand = new List<Card>();
     }
 
@@ -57,8 +59,7 @@ public class Player : IPlayer
 
     public void SetBid(int bid)
     {
-        //Debug.Log("set Bid: " + bid);
-        this.bid = bid;
+        this.bidPlaced = bid;
     }
 
 

@@ -52,26 +52,18 @@ public static class TrickManager
             if (bestCard == null)
             {
                 bestCard = card;
-                Debug.Log("if " + card.name); ;
             }
             else if (card.suit == Card.Suit.Spades && bestCard.suit != Card.Suit.Spades)
             {
-             
                 bestCard = card; // Spades card is the best
-                Debug.Log("else if 1 " + card.name); ;
-
             }
             else if (card.suit == bestCard.suit && card.data.score > bestCard.data.score)
             {
                 bestCard = card; // Higher rank of leading suit is the best
-                Debug.Log("else if 2 " + card.name);
-
             }
             else if (card.data.score > bestCard.data.score && bestCard.suit != Card.Suit.Spades)
             {
                 bestCard = card; // Higher rank of leading suit is the best
-                Debug.Log("else if 3 " + card.name);
-
             }
 
         }
@@ -80,18 +72,20 @@ public static class TrickManager
 
     public static Player GetTrickWinner()
     {
-        Player roundWinner = leadingCard.cardOwner;
-
-        foreach (Card card in cards)
-        {
-            if (card.suit == leadingCard.suit && card.data.score >= leadingCard.data.score)
-            {
-                roundWinner = card.cardOwner;
-                leadingCard = card;
-            }
-        }
+        Player roundWinner = GetBestCard().cardOwner;
 
         return roundWinner;
+    }
+
+    public static void GiveCardsToWinner(Player winner, Action onSuccess)
+    {
+
+        foreach(Card card in cards)
+        {
+          //  card.MoveCard()
+        }
+
+        onSuccess();
     }
 
     public static void ResetTrick()

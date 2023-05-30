@@ -6,14 +6,19 @@ using UnityEngine;
 public class PlayerUI : MonoBehaviour
 {
     public PlayerBidUI bidUI;
+    public GameObject cardCountContainer;
     public Text myBids;
     public Text cardsCountText;
+    public Text bidCount;
 
 
     System.Action<int> callBack;
 
     public void UpdateCardCount(int cardCount)
     {
+
+        cardCountContainer.SetActive(cardCount > 0);
+
         cardsCountText.text = $"{cardCount}";
     }
 
@@ -29,6 +34,11 @@ public class PlayerUI : MonoBehaviour
         myBids.text = $"{bid}";
         this.bidUI.gameObject.SetActive(false);
         this.callBack(bid);
+    }
+
+    public void UpdateBids(int totalBids, int bidWon)
+    {
+        bidCount.text = $"{bidWon}/{totalBids}";
     }
 
     public void HideBidUI()

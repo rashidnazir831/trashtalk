@@ -5,7 +5,7 @@ using UnityEngine;
 public interface ICard
 {
     void MoveToPlayerPosition(int index, bool makeParent);
-    void MoveCard(Transform transform, float customSize, bool makeParent, System.Action onComplete);
+    void MoveCard(Transform transform, float customSize, bool makeParent, bool hideOnReach, System.Action onComplete);
 }
 
 //public interface ICardFactory
