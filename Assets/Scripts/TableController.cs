@@ -24,12 +24,12 @@ public class TableController : MonoBehaviour
 
     public Transform GetPlayerCardsTransform(int playerNumber)
     {
-        return playerCardsPositions[playerNumber-1];
+        return playerCardsPositions[playerNumber];
     }
 
     public Transform GetPlayerShowCardTransform(int playerNumber)
     {
-        return showCardPositions[playerNumber - 1];
+        return showCardPositions[playerNumber];
     }
 
     public bool IsCardPlaceable(Vector3 pos, Camera cam)

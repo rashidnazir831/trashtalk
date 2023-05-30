@@ -35,10 +35,10 @@ public class GameplayManager : MonoBehaviour
     private void Start()
     {
         //PlayerManager.instance.AddPlayer("Player 1", true, true, 1);
-        PlayerManager.instance.AddPlayer("Player 1",false,true,1);
-        PlayerManager.instance.AddPlayer("Player 2", true,false,2);
-        PlayerManager.instance.AddPlayer("Player 3", true, false, 3);
-        PlayerManager.instance.AddPlayer("Player 4", true, false, 4);
+        PlayerManager.instance.AddPlayer("Player 1",false,true,0);
+        PlayerManager.instance.AddPlayer("Player 2", true,false,1);
+        PlayerManager.instance.AddPlayer("Player 3", true, false, 2);
+        PlayerManager.instance.AddPlayer("Player 4", true, false, 3);
 
         cardDeck = GetComponentInChildren<CardDeck>();
         bidManager = GetComponent<BidManager>();
@@ -136,7 +136,7 @@ public class GameplayManager : MonoBehaviour
         if (this.totalPlayerPlayed == this.totalPlayers)
         {
             Player player = TrickManager.GetTrickWinner();
-         //   bidManager.UpdateBidCount(player);
+            UIEvents.UpdateData(Panel.PlayersUIPanel, null, "WinnerAnimation", player.tablePosition);
             TrickManager.GiveCardsToWinner(player,CompleteTrick);
             return;
         }

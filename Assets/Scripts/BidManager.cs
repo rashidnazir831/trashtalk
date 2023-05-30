@@ -89,8 +89,8 @@ public class BidManager : MonoBehaviour
 
     public void UpdateBidCount(Player player)
     {
-      //  int playerPos = player.tablePosition;
-        UIEvents.UpdateData(Panel.PlayersUIPanel, null, "UpdateBidCount", currentPlayerIndex, player.bidWon,player.bidPlaced);
+        int playerPos = player.tablePosition;
+        UIEvents.UpdateData(Panel.PlayersUIPanel, null, "UpdateBidCount", playerPos, player.bidWon,player.bidPlaced);
     }
 
     void DecideNext()

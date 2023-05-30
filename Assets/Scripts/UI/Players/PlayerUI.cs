@@ -13,10 +13,13 @@ public class PlayerUI : MonoBehaviour
 
 
     System.Action<int> callBack;
+    private void Start()
+    {
+    }
 
     public void UpdateCardCount(int cardCount)
     {
-
+        print(name);
         cardCountContainer.SetActive(cardCount > 0);
 
         cardsCountText.text = $"{cardCount}";
@@ -39,6 +42,14 @@ public class PlayerUI : MonoBehaviour
     public void UpdateBids(int totalBids, int bidWon)
     {
         bidCount.text = $"{bidWon}/{totalBids}";
+    }
+
+    public void WinAnimation()
+    {
+        LeanTween.scale(gameObject, new Vector2(1.1f,1.1f), 0.5f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(()=> {
+            LeanTween.scale(gameObject, Vector2.one, 0.5f).setEase(LeanTweenType.easeInOutQuad);
+
+        });
     }
 
     public void HideBidUI()

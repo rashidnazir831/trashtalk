@@ -47,6 +47,10 @@ public class PlayersUIPanel : UIPanel
                 playerNumber = (int)parameters[1];
                 UpdateBidCount(playerNumber, (int)parameters[2], (int)parameters[3]);
                 break;
+            case "WinnerAnimation":
+                playerNumber = (int)parameters[1];
+                ShowWinnerAnimation(playerNumber);
+                break;
 
         }
     }
@@ -64,6 +68,12 @@ public class PlayersUIPanel : UIPanel
     void UpdateBidCount(int playerNumber, int bidWon, int totalBid)
     {
         playerUI[playerNumber].UpdateBids(totalBid, bidWon);
+    }
+
+    void ShowWinnerAnimation(int playerNumber)
+    {
+        playerUI[playerNumber].WinAnimation();
+
     }
 
     void SelectBid(int bid)

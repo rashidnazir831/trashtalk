@@ -165,7 +165,7 @@ public class Card : MonoBehaviour,ICard
                 else
                 {
                     gameObject.SetActive(false);
-                    UIEvents.UpdateData(Panel.PlayersUIPanel, null, "UpdateCardCount", playerIndex-1, this.cardOwner.hand.Count);
+                    UIEvents.UpdateData(Panel.PlayersUIPanel, null, "UpdateCardCount", playerIndex, this.cardOwner.hand.Count);
                 }
 
                 transform.localEulerAngles = Vector3.zero;
