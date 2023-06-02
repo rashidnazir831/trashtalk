@@ -16,6 +16,7 @@ public class GameplayManager : MonoBehaviour
 
     CardDeck cardDeck;
     BidManager bidManager;
+    BotTrick botTrick;
 
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class GameplayManager : MonoBehaviour
 
         cardDeck = GetComponentInChildren<CardDeck>();
         bidManager = GetComponent<BidManager>();
+        botTrick = new BotTrick();
 
         this.totalPlayers = PlayerManager.instance.players.Count;
         this.currentPlayerIndex = Random.Range(0, totalPlayers);
@@ -90,7 +92,7 @@ public class GameplayManager : MonoBehaviour
     public void StartTricks()
     {
         this.totalPlayerPlayed = 0;
-        currentPlayerIndex = (currentPlayerIndex + 1) % 4;
+//        currentPlayerIndex = (currentPlayerIndex + 1) % 4;
 
         PlayTurn();
     }
@@ -117,7 +119,9 @@ public class GameplayManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         List<Card> hand = botPlayer.hand;
 
-        Card playedCard = botPlayer.PlayCard(0);
+        //Card playedCard = botPlayer.PlayCard(0);
+        Card playedCard = botTrick.GetBestCard(botPlayer.hand);
+        print("bot has choosen: " + playedCard.name);
         playedCard.gameObject.SetActive(true);
 
         playedCard.SwitchSide(true);
@@ -150,6 +154,7 @@ public class GameplayManager : MonoBehaviour
             TrickManager.HighlightLowCards();
         });
         player.hand.Remove(playedCard);
+        cardHand.OnUseHandCard(playedCard);
         TrickManager.AddCard(playedCard);
         DecideNext();
     }
@@ -169,13 +174,17 @@ public class GameplayManager : MonoBehaviour
         PlayTurn();
     }
 
+    Player trickWinner;
+
     void OnWinTrick()
     {
         Player player = TrickManager.GetTrickWinner();
+        this.trickWinner = player;
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "WinnerAnimation", player.tablePosition);
         TrickManager.GiveCardsToWinner(player);
         CompleteTrick();
     }
+
 
     void CompleteTrick()
     {
@@ -193,6 +202,9 @@ public class GameplayManager : MonoBehaviour
     void ResetTrick()
     {
         TrickManager.ResetTrick();
+
+        currentPlayerIndex = this.trickWinner.tablePosition;
+
         StartTricks();
     }
 

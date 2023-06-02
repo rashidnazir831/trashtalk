@@ -65,12 +65,16 @@ public class HandCardsUI : MonoBehaviour
             //}
         }
     }
-    Card[] cardsInHands;
+    List<Card> cardsInHand;
     public IEnumerator ShowPlayerCards()
     {
-        cardsInHands = GetComponentsInChildren<Card>();
+        cardsInHand = new List<Card>();
+        foreach (Transform child in transform)
+        {
+            cardsInHand.Add(child.GetComponent<Card>());
+        }
 
-        foreach(Card card in cardsInHands)
+        foreach (Card card in cardsInHand)
         {
             SoundManager.Instance.PlaySoundEffect(Sound.Click);
             card.SwichSideAnimated();
@@ -78,13 +82,82 @@ public class HandCardsUI : MonoBehaviour
         }
     }
 
-    public void ActiveMainPlayerCards(bool active=true)
+    public void ActiveMainPlayerCards(bool allActive=true)
     {
-        foreach (Card card in cardsInHands)
+        Card.Suit leadingSuit = Card.Suit.Spades;
+        bool isFirstTurn = true;
+
+        if (TrickManager.cards.Count > 0)
         {
+            leadingSuit = TrickManager.cards[0].suit;
+            isFirstTurn = false;
+        }
+        bool hasNormalCards = HasNormalCards();
+        bool hasLeadingSuit = HasLeadingSuit(leadingSuit);
+
+        foreach (Card card in cardsInHand)
+        {
+            bool active = true;
+            if (allActive)
+            {
+                if (isFirstTurn)
+                {
+                    if (hasNormalCards)
+                    {
+                        active = (card.suit != Card.Suit.Spades);
+                    }
+                }
+                else
+                {
+                    if (hasLeadingSuit)
+                    {
+                        active = (card.suit == leadingSuit);
+                    }
+                    else
+                    {
+                        active = hasNormalCards ? (card.suit != Card.Suit.Spades)?true:false:
+                            card.suit == Card.Suit.Spades?true:false;
+                    }
+                }
+            }
+            else
+            {
+                active = allActive;
+            }
+
             card.ActiveButton(active);
             card.ActiveDragable(active);
+            card.HighlightCard(active);
         }
+    }
+
+    bool HasNormalCards()
+    {
+        foreach (Card card in cardsInHand)
+        {
+            if(card.suit != Card.Suit.Spades)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool HasLeadingSuit(Card.Suit leadingSuit)
+    {
+        foreach (Card card in cardsInHand)
+        {
+            if (card.suit == leadingSuit)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void OnUseHandCard(Card card)
+    {
+        cardsInHand.Remove(card);
     }
 
     private float CalcHandWidth(int quantityOfCards)

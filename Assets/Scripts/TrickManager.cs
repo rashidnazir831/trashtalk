@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class TrickManager
 {
-    static List<Card> cards;
+    public static List<Card> cards;
     static Card leadingCard;
    // static Card.Suit leadingSuit;
 
@@ -39,7 +39,7 @@ public static class TrickManager
 
         bestCard.HighlightCard(true);
 
-        Debug.Log("best card: " + bestCard.name);
+//        Debug.Log("best card: " + bestCard.name);
     }
 
     static Card GetBestCard()
