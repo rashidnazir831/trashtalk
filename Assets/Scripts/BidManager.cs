@@ -43,6 +43,7 @@ public class BidManager : MonoBehaviour
     public void PlacePlayerBid(object[] parameters)
     {
         this.currentPlayer.SetBid((int)parameters[0]);
+        UpdateBidCount(this.currentPlayer);
         DecideNext();
     }
 

@@ -19,7 +19,7 @@ public class PlayerUI : MonoBehaviour
 
     public void UpdateCardCount(int cardCount)
     {
-        print(name);
+//        print(name);
         cardCountContainer.SetActive(cardCount > 0);
 
         cardsCountText.text = $"{cardCount}";
@@ -34,7 +34,7 @@ public class PlayerUI : MonoBehaviour
 
     void SelectBid(int bid)
     {
-        myBids.text = $"{bid}";
+      //  myBids.text = $"{bid}";
         this.bidUI.gameObject.SetActive(false);
         this.callBack(bid);
     }
@@ -42,6 +42,14 @@ public class PlayerUI : MonoBehaviour
     public void UpdateBids(int totalBids, int bidWon)
     {
         bidCount.text = $"{bidWon}/{totalBids}";
+    }
+
+    public void HideBidCount()
+    {
+      //  if (bidCount != null)
+        bidCount.text = "";
+        //if (myBids != null)
+        //    myBids.text = "0";
     }
 
     public void WinAnimation()

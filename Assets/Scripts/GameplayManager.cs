@@ -45,9 +45,28 @@ public class GameplayManager : MonoBehaviour
 
         this.totalPlayers = PlayerManager.instance.players.Count;
         this.currentPlayerIndex = Random.Range(0, totalPlayers);
-        this.totalPlayerPlayed = 0;
+   //     this.totalPlayerPlayed = 0;
 
         SoundManager.Instance.PlayBackgroundMusic(Sound.Music);
+        NewGame();
+    }
+
+    public void NewGame()
+    {
+        dealButton.SetActive(true);
+        this.totalPlayers = PlayerManager.instance.players.Count;
+        this.currentPlayerIndex = Random.Range(0, totalPlayers);
+
+        foreach (Player player in PlayerManager.instance.players)
+        {
+            player.ResetCards();
+        }
+
+        TrickManager.ResetTrick();
+        TableController.instance.ClearCards();
+        cardDeck.CreateInitialDeck();
+
+        UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ResetUI");
 
     }
 
@@ -70,6 +89,9 @@ public class GameplayManager : MonoBehaviour
 
     public void StartTricks()
     {
+        this.totalPlayerPlayed = 0;
+        currentPlayerIndex = (currentPlayerIndex + 1) % 4;
+
         PlayTurn();
     }
 
@@ -85,6 +107,7 @@ public class GameplayManager : MonoBehaviour
         else
         {
             cardHand.ActiveMainPlayerCards();
+            UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowHideYourTurnHeading", true);
             print("your turn");
         }
     }
@@ -119,6 +142,8 @@ public class GameplayManager : MonoBehaviour
 
     public void PlaceCardOnTable(Player player, Card playedCard)
     {
+        cardHand.UpdateCardArrangement();
+
         cardHand.ActiveMainPlayerCards(false);
 
         playedCard.MoveCard(TableController.instance.GetPlayerShowCardTransform(player.tablePosition), 2.5f,true,false,()=> {
@@ -135,9 +160,7 @@ public class GameplayManager : MonoBehaviour
 
         if (this.totalPlayerPlayed == this.totalPlayers)
         {
-            Player player = TrickManager.GetTrickWinner();
-            UIEvents.UpdateData(Panel.PlayersUIPanel, null, "WinnerAnimation", player.tablePosition);
-            TrickManager.GiveCardsToWinner(player,CompleteTrick);
+            Invoke("OnWinTrick", 1);
             return;
         }
 
@@ -146,14 +169,38 @@ public class GameplayManager : MonoBehaviour
         PlayTurn();
     }
 
+    void OnWinTrick()
+    {
+        Player player = TrickManager.GetTrickWinner();
+        UIEvents.UpdateData(Panel.PlayersUIPanel, null, "WinnerAnimation", player.tablePosition);
+        TrickManager.GiveCardsToWinner(player);
+        CompleteTrick();
+    }
+
     void CompleteTrick()
     {
-        ResetTrick();
+        if (IsRoundOver())
+        {
+            Invoke("OnRoundOver", 1);
+        }
+        else
+        {
+            Invoke("ResetTrick", 1);
+        }
+
     }
 
     void ResetTrick()
     {
         TrickManager.ResetTrick();
+        StartTricks();
+    }
+
+    void OnRoundOver()
+    {
+        print("round over");
+        UIEvents.ShowPanel(Panel.GameOverPanel);
+
     }
 
     void ResetRound()
@@ -161,8 +208,16 @@ public class GameplayManager : MonoBehaviour
 
     }
 
-    private bool IsGameOver()
+    private bool IsRoundOver()
     {
-        return false;
+        foreach (Player player in PlayerManager.instance.players)
+        {
+            if (player.hand.Count > 0)
+            {
+                return false;
+            }
+        }
+        return true;
+
     }
 }

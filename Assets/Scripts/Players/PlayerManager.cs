@@ -42,10 +42,10 @@ public class PlayerManager : MonoBehaviour
     //    return playerDeckPosition[playerNumber];
     //}
 
-    public void GetTablePosition()
-    {
+    //public void GetTablePosition()
+    //{
 
-    }
+    //}
 
     //public PlayerManager(List<Player> playerList)
     //{

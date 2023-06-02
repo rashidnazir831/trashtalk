@@ -33,6 +33,7 @@ public class CardDragHandler : MonoBehaviour,IPointerDownHandler, IDragHandler,I
             initialPosition = transform.position;
             isDragging = true;
             TableController.instance.ShowTableCardArea(true);
+            UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowHideYourTurnHeading", false);
         }
     }
 

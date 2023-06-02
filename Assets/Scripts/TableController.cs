@@ -6,6 +6,8 @@ public class TableController : MonoBehaviour
 {
     public Transform[] playerCardsPositions;
     public Transform[] showCardPositions;
+    public Transform[] wonCardTransform;
+
     public GameObject cardAreaBorder;
     private RectTransform cardAreaRect;
 
@@ -32,6 +34,11 @@ public class TableController : MonoBehaviour
         return showCardPositions[playerNumber];
     }
 
+    public Transform GetPlayerWonCardTransform(int playerTablePos)
+    {
+        return wonCardTransform[playerTablePos];
+    }
+
     public bool IsCardPlaceable(Vector3 pos, Camera cam)
     {
     //    RectTransformUtility.RectangleContainsScreenPoint(cardAreaRect, pos, cam);
@@ -56,6 +63,17 @@ public class TableController : MonoBehaviour
     //{
 
     //}
+
+    public void ClearCards()
+    {
+        foreach(Transform child in wonCardTransform)
+        {
+            foreach(Transform subChild in child)
+            {
+            //    Destroy(subChild.gameObject);
+            }
+        }
+    }
 
     public void ShowTableCardArea(bool show)
     {

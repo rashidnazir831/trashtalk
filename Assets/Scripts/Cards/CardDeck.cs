@@ -14,7 +14,7 @@ public class CardDeck : MonoBehaviour
 
     void Start()
     {
-       CreateInitialDeck();
+    //   CreateInitialDeck();
     }
 
     public void CreateInitialDeck()

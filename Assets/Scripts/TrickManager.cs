@@ -77,15 +77,20 @@ public static class TrickManager
         return roundWinner;
     }
 
-    public static void GiveCardsToWinner(Player winner, Action onSuccess)
+    public static void GiveCardsToWinner(Player winner)
     {
+
+        Transform transform = TableController.instance.GetPlayerWonCardTransform(winner.tablePosition);
 
         foreach(Card card in cards)
         {
-          //  card.MoveCard()
+            card.MoveCard(transform,1,true,true);
         }
 
-        onSuccess();
+     //   winner.bidWon++;
+
+        UIEvents.UpdateData(Panel.PlayersUIPanel, null, "UpdateBidCount", winner.tablePosition, ++winner.bidWon, winner.bidPlaced);
+
     }
 
     public static void ResetTrick()

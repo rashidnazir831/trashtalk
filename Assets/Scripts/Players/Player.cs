@@ -27,6 +27,7 @@ public class Player : IPlayer
         this.isOwn = isOwn;
         this.bidPlaced = 0;
         this.bidWon = 0;
+        winningCards = new List<Card>();
         hand = new List<Card>();
     }
 

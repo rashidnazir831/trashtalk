@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEngine;
+
 
 public class PlayersUIPanel : UIPanel
 {
+    public GameObject yourTurnHeading;
     private PlayerUI[] playerUI;
     private Action<object[]> callBack;
     object[] data;
@@ -51,7 +54,26 @@ public class PlayersUIPanel : UIPanel
                 playerNumber = (int)parameters[1];
                 ShowWinnerAnimation(playerNumber);
                 break;
+            case "ShowHideYourTurnHeading":
+                bool show = (bool)parameters[1];
+                ShowHideYourTurnHeading(show);
+                break;
+            case "ResetUI":
+                ResetUI();
+                break;
 
+        }
+    }
+
+    public void ResetUI()
+    {
+        //temp condition
+        if (playerUI == null)
+            return;
+
+        foreach(PlayerUI ui in playerUI)
+        {
+            ui.HideBidCount();
         }
     }
 
@@ -73,7 +95,11 @@ public class PlayersUIPanel : UIPanel
     void ShowWinnerAnimation(int playerNumber)
     {
         playerUI[playerNumber].WinAnimation();
+    }
 
+    void ShowHideYourTurnHeading(bool show)
+    {
+        yourTurnHeading.SetActive(show);
     }
 
     void SelectBid(int bid)
