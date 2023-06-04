@@ -44,7 +44,7 @@ public class PlayersUIPanel : UIPanel
             case "UpdateCardCount":
                 playerNumber = (int)parameters[1];
                 int count = (int)parameters[2];
-                UpdateCardCount(playerNumber,count);
+                UpdateCardCount(playerNumber, count);
                 break;
             case "UpdateBidCount":
                 playerNumber = (int)parameters[1];
@@ -71,15 +71,15 @@ public class PlayersUIPanel : UIPanel
         if (playerUI == null)
             return;
 
-        foreach(PlayerUI ui in playerUI)
+        foreach (PlayerUI ui in playerUI)
         {
             ui.HideBidCount();
         }
     }
 
-    void ShowBidUI(int playerNumber, int bidCout=-1)
+    void ShowBidUI(int playerNumber, int bidCout = -1)
     {
-        playerUI[playerNumber].ShowBidUI(bidCout,SelectBid);
+        playerUI[playerNumber].ShowBidUI(bidCout, SelectBid);
     }
 
     void UpdateCardCount(int playerNumber, int count)
@@ -110,7 +110,7 @@ public class PlayersUIPanel : UIPanel
 
     void HideAllBidsUIs()
     {
-        foreach(PlayerUI player in playerUI)
+        foreach (PlayerUI player in playerUI)
         {
             player.HideBidUI();
         }

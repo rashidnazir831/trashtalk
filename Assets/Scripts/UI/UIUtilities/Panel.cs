@@ -12,5 +12,7 @@ public enum Panel
     FriendsPanel,
     LevelPanel,
     GameSelectPanel,
-    GameOverPanel
+    GameOverPanel,
+    TabPanels,
+    Popup
 }

@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class FriendsPanel : UIPanel
+public class TabPanels : UIPanel
 {
+    public Transform buttons;
     public Transform panels;
-    public Transform tabButtons;
 
     int lastActiveIndex = 0;
 
     private void OnEnable()
     {
-        SelectPanel(0);
+        SelectPanel(1);
     }
 
     public override void Show()
@@ -36,20 +36,21 @@ public class FriendsPanel : UIPanel
                 SelectPanel(panelIndex);
                 break;
         }
-    }
 
-    public void OnBackButton()
-    {
-        Hide();
-        UIEvents.ShowPanel(Panel.TabPanels);
-    }
+     }
 
     public void SelectPanel(int index)
     {
         if (index == lastActiveIndex)
             return;
 
-        SetButtons(index);
+        if(index == 3)
+        {
+            Hide();
+            UIEvents.ShowPanel(Panel.FriendsPanel);
+            UIEvents.UpdateData(Panel.FriendsPanel, null, "SelectPanel", 2);
+            return;
+        }
 
         panels.GetChild(index).gameObject.SetActive(true);
         panels.GetChild(lastActiveIndex).gameObject.SetActive(false);
@@ -57,9 +58,4 @@ public class FriendsPanel : UIPanel
         lastActiveIndex = index;
     }
 
-    void SetButtons(int index)
-    {
-        tabButtons.GetChild(index).GetComponent<FriendsTabButton>().SetActiveInactive(true);
-        tabButtons.GetChild(lastActiveIndex).GetComponent<FriendsTabButton>().SetActiveInactive(false);
-    }
 }

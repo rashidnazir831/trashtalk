@@ -12,7 +12,7 @@ public class SignupPanel : UIPanel
 
     public void PlayAsGuest()
     {
-        UIEvents.ShowPanel(Panel.GameplayPanel);
+        UIEvents.ShowPanel(Panel.GameSelectPanel);
         Hide();
     }
 
