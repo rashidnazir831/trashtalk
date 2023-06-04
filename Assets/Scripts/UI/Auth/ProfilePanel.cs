@@ -18,4 +18,10 @@ public class ProfilePanel : UIPanel
     public override void UpdateData(Action<object[]> callBack, params object[] parameters)
     {
     }
+
+    public void OnSubmitButton()
+    {
+        UIEvents.ShowPanel(Panel.Popup);
+        UIEvents.UpdateData(Panel.Popup, null, "SetData", "Profile updated", "OK", "");
+    }
 }
