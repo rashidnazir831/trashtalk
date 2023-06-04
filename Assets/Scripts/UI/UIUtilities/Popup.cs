@@ -54,15 +54,22 @@ public class Popup :UIPanel
 
     public void OnButton1()
     {
-        this.callBackData = new object[] {1};
-        this.callBack(callBackData);
+        if (this.callBackData != null)
+        {
+            this.callBackData = new object[] { 1 };
+            this.callBack(callBackData);
+        }
+
         Hide();
     }
 
     public void OnButton2()
     {
-        this.callBackData = new object[] {2};
-        this.callBack(callBackData);
+        if (this.callBackData != null)
+        {
+            this.callBackData = new object[] { 2 };
+            this.callBack(callBackData);
+        }
         Hide();
 
     }
