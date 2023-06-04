@@ -26,15 +26,9 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-    private GameplayManager()
-    {
-        //totalPlayers = PlayerManager.instance.players.Count;
-        //currentPlayerIndex = Random.Range(0, totalPlayers);
-     //   currentTrick = new Trick();
-    }
-
     private void Start()
     {
+//        PlayerManager.instance.RemoveAllPlayer();
         //PlayerManager.instance.AddPlayer("Player 1", true, true, 1);
         PlayerManager.instance.AddPlayer("Player 1",false,true,0);
         PlayerManager.instance.AddPlayer("Player 2", true,false,1);

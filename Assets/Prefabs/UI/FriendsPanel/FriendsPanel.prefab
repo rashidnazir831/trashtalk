@@ -121,7 +121,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8195622773406642455}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7567305489268412246}
+        m_TargetAssemblyTypeName: FriendsListPanel, Assembly-CSharp
+        m_MethodName: OnStartButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1043246534966110001
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,7 +415,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4266194155021345517}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5325388697063833032}
+        m_TargetAssemblyTypeName: LobbyPanel, Assembly-CSharp
+        m_MethodName: OnStartButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5418972754271865488
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +549,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4607744429800344066}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6010725872864159428}
+        m_TargetAssemblyTypeName: InviteFriendsPanel, Assembly-CSharp
+        m_MethodName: OnInviteButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6599286058505946200
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,6 +1317,7 @@ GameObject:
   - component: {fileID: 7502729983146119575}
   - component: {fileID: 7502729983146119573}
   - component: {fileID: 7502729983146119572}
+  - component: {fileID: 6010725872864159428}
   m_Layer: 5
   m_Name: InviteFriends
   m_TagString: Untagged
@@ -1348,6 +1385,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6010725872864159428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7502729983146119574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d2c7adfe44f44035b3ee91fce42e8c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7502729983197425651
 GameObject:
   m_ObjectHideFlags: 0
@@ -2980,6 +3029,7 @@ GameObject:
   - component: {fileID: 7502729984121887341}
   - component: {fileID: 7502729984121887379}
   - component: {fileID: 7502729984121887378}
+  - component: {fileID: 7567305489268412246}
   m_Layer: 5
   m_Name: Friends
   m_TagString: Untagged
@@ -3047,6 +3097,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7567305489268412246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7502729984121887340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5693b49afa834bfb9de47651e42f257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7502729984145304672
 GameObject:
   m_ObjectHideFlags: 0
@@ -3170,7 +3232,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1417862725}
         m_TargetAssemblyTypeName: FriendsPanel, Assembly-CSharp
-        m_MethodName: Hide
+        m_MethodName: OnBackButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4109,6 +4171,7 @@ GameObject:
   - component: {fileID: 7502729984639885879}
   - component: {fileID: 7502729984639885877}
   - component: {fileID: 7502729984639885876}
+  - component: {fileID: 5325388697063833032}
   m_Layer: 5
   m_Name: Lobby
   m_TagString: Untagged
@@ -4176,6 +4239,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5325388697063833032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7502729984639885878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b1e331aa9f940428715a1c2fd69073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7502729984691583140
 GameObject:
   m_ObjectHideFlags: 0
