@@ -5,6 +5,16 @@ using UnityEngine;
 
 public class FriendsPanel : UIPanel
 {
+    public Transform panels;
+    public Transform tabButtons;
+
+    int lastActiveIndex;
+
+    private void Start()
+    {
+        SelectPanel(0);
+    }
+
     public override void Show()
     {
         gameObject.SetActive(true);
@@ -17,5 +27,26 @@ public class FriendsPanel : UIPanel
 
     public override void UpdateData(Action<object[]> callBack, params object[] parameters)
     {
+
+    }
+
+    public void SelectPanel(int index)
+    {
+        if (index == lastActiveIndex)
+            return;
+
+        SetButtons(index);
+
+        panels.GetChild(index).gameObject.SetActive(true);
+        panels.GetChild(lastActiveIndex).gameObject.SetActive(false);
+
+        lastActiveIndex = index;
+
+    }
+
+    void SetButtons(int index)
+    {
+        tabButtons.GetChild(index).GetComponent<FriendsTabButton>().SetActiveInactive(true);
+        tabButtons.GetChild(lastActiveIndex).GetComponent<FriendsTabButton>().SetActiveInactive(false);
     }
 }

@@ -6,7 +6,7 @@ public class GameplayManager : MonoBehaviour
 {
     public static GameplayManager instance;
 
-    public GameObject dealButton;
+    public GameObject playButton;
     public HandCardsUI cardHand;
   //  private Trick currentTrick;
 
@@ -55,7 +55,7 @@ public class GameplayManager : MonoBehaviour
 
     public void NewGame()
     {
-        dealButton.SetActive(true);
+        playButton.SetActive(true);
         this.totalPlayers = PlayerManager.instance.players.Count;
         this.currentPlayerIndex = Random.Range(0, totalPlayers);
 
@@ -74,7 +74,7 @@ public class GameplayManager : MonoBehaviour
 
     public void Deal()
     {
-        dealButton.SetActive(false);
+        playButton.SetActive(false);
         cardDeck.DistributeCards();
     }
 
