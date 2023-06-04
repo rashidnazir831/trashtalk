@@ -8,9 +8,9 @@ public class FriendsPanel : UIPanel
     public Transform panels;
     public Transform tabButtons;
 
-    int lastActiveIndex = 0;
+    int lastActiveIndex;
 
-    private void OnEnable()
+    private void Start()
     {
         SelectPanel(0);
     }
@@ -27,21 +27,7 @@ public class FriendsPanel : UIPanel
 
     public override void UpdateData(Action<object[]> callBack, params object[] parameters)
     {
-        string type = (string)parameters[0];
 
-        switch (type)
-        {
-            case "SelectPanel":
-                int panelIndex = (int)parameters[1];
-                SelectPanel(panelIndex);
-                break;
-        }
-    }
-
-    public void OnBackButton()
-    {
-        Hide();
-        UIEvents.ShowPanel(Panel.TabPanels);
     }
 
     public void SelectPanel(int index)
@@ -55,6 +41,7 @@ public class FriendsPanel : UIPanel
         panels.GetChild(lastActiveIndex).gameObject.SetActive(false);
 
         lastActiveIndex = index;
+
     }
 
     void SetButtons(int index)

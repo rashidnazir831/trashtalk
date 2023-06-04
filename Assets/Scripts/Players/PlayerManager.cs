@@ -27,11 +27,6 @@ public class PlayerManager : MonoBehaviour
         players.Add(player);
     }
 
-    public void RemoveAllPlayer()
-    {
-        players.Clear();
-    }
-
     public Player GetPlayer(int index)
     {
        return players[index];

@@ -26,7 +26,6 @@ public class GameOverPanel : UIPanel
     public void OnNoButton()
     {
         Hide();
-        UIEvents.HidePanel(Panel.GameplayPanel);
-        UIEvents.ShowPanel(Panel.GameSelectPanel);
+        GameplayManager.instance.NewGame();
     }
 }

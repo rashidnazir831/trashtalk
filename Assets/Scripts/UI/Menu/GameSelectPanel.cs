@@ -18,20 +18,4 @@ public class GameSelectPanel : UIPanel
     public override void UpdateData(Action<object[]> callBack, params object[] parameters)
     {
     }
-
-    public void OnPractice()
-    {
-        OpenTabPanel();
-    }
-
-    public void OnMultiplayer()
-    {
-        OpenTabPanel();
-    }
-
-    void OpenTabPanel()
-    {
-        UIEvents.ShowPanel(Panel.TabPanels);
-        Hide();
-    }
 }
