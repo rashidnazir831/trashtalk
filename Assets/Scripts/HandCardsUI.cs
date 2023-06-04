@@ -172,4 +172,12 @@ public class HandCardsUI : MonoBehaviour
         var magicMathFactor = 0.1f;
         return -(fullAngle / 2) + fullAngle * magicMathFactor;
     }
+
+    public void ClearHandCards()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 }

@@ -66,7 +66,6 @@ public class CardDeck : MonoBehaviour
 
     public IEnumerator DistributeCardsWithDelay()
     {
-
         //   int playerCount = playerPositions.Length;
         int cardsPerPlayer = 13;
         int cardNumber = 0;
@@ -116,5 +115,16 @@ public class CardDeck : MonoBehaviour
     private Card GetNextCard(int index)
     {
         return cards[index];
+    }
+
+    public void ClearDeck()
+    {
+        if(cards != null)
+            cards.Clear();
+
+        foreach(Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 }

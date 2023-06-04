@@ -48,12 +48,17 @@ public class PlayerUI : MonoBehaviour
             myBids.text = $"{bidWon}/{totalBids}";
     }
 
-    public void HideBidCount()
+    public void ResetUI()
     {
         if (bidCount != null)
             bidCount.text = "";
         if (myBids != null)
             myBids.text = "0";
+
+        if(cardCountContainer)
+            cardCountContainer.SetActive(false);
+
+        HideBidUI();
     }
 
     public void WinAnimation()

@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
+        print("players");
         if(instance == null)
         {
             instance = this;
@@ -30,6 +31,19 @@ public class PlayerManager : MonoBehaviour
     public Player GetPlayer(int index)
     {
        return players[index];
+    }
+
+    public void ClearPlayers()
+    {
+        players.Clear();
+    }
+
+    public void ClearPlayersData()
+    {
+        foreach (Player player in players)
+        {
+            player.ResetCards();
+        }
     }
 
     //public void AddCardToHand(Card card)

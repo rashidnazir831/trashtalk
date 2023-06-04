@@ -73,8 +73,10 @@ public class PlayersUIPanel : UIPanel
 
         foreach (PlayerUI ui in playerUI)
         {
-            ui.HideBidCount();
+            ui.ResetUI();
         }
+
+        yourTurnHeading.SetActive(false);
     }
 
     void ShowBidUI(int playerNumber, int bidCout = -1)

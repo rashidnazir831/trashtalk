@@ -21,6 +21,7 @@ public class GameplayPanel : UIPanel
 
     public void OnHomeButton()
     {
+        Time.timeScale = 0;
         UIEvents.ShowPanel(Panel.Popup);
         UIEvents.UpdateData(Panel.Popup, (obj) => {
 
@@ -29,7 +30,7 @@ public class GameplayPanel : UIPanel
                 Hide();
                 UIEvents.ShowPanel(Panel.GameSelectPanel);
             }
-
+            Time.timeScale = 1;
         }, "SetData", "Are you sure you want to leave game?", "Yes", "No");
 
     }

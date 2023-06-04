@@ -75,6 +75,34 @@ public class TableController : MonoBehaviour
         }
     }
 
+    public void ClearAllContainers()
+    {
+        foreach (Transform child in playerCardsPositions)
+        {
+            foreach (Transform subChild in child)
+            {
+                Destroy(subChild.gameObject);
+            }
+        }
+
+
+        foreach (Transform child in showCardPositions)
+        {
+            foreach (Transform subChild in child)
+            {
+                Destroy(subChild.gameObject);
+            }
+        }
+
+        foreach (Transform child in wonCardTransform)
+        {
+            foreach(Transform subChild in child)
+            {
+                Destroy(subChild.gameObject);
+            }
+        }
+}
+
     public void ShowTableCardArea(bool show)
     {
         cardAreaBorder.SetActive(show);

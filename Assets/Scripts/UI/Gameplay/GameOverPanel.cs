@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class GameOverPanel : UIPanel
 {
-   public override void Show()
-   {
+    public override void Show()
+    {
         gameObject.SetActive(true);
-   }
+    }
 
-   public override void Hide()
-   {
+    public override void Hide()
+    {
         gameObject.SetActive(false);
-   }
+    }
 
     public override void UpdateData(System.Action<object[]> callBack, params object[] parameters)
     {
@@ -20,12 +20,13 @@ public class GameOverPanel : UIPanel
     public void OnYesButton()
     {
         Hide();
-        GameplayManager.instance.NewGame();
+        GameplayManager.instance.ResetGame();
     }
 
     public void OnNoButton()
     {
         Hide();
-        GameplayManager.instance.NewGame();
+        UIEvents.HidePanel(Panel.GameplayPanel);
+        UIEvents.ShowPanel(Panel.GameSelectPanel);
     }
 }

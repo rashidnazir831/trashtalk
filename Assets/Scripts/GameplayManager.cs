@@ -33,8 +33,12 @@ public class GameplayManager : MonoBehaviour
      //   currentTrick = new Trick();
     }
 
-    private void Start()
+    private void OnEnable()
     {
+        //print("onenable");
+        //ResetPanelData();
+        PlayerManager.instance.ClearPlayers();
+
         //PlayerManager.instance.AddPlayer("Player 1", true, true, 1);
         PlayerManager.instance.AddPlayer("Player 1",false,true,0);
         PlayerManager.instance.AddPlayer("Player 2", true,false,1);
@@ -45,31 +49,41 @@ public class GameplayManager : MonoBehaviour
         bidManager = GetComponent<BidManager>();
         botTrick = new BotTrick();
 
-        this.totalPlayers = PlayerManager.instance.players.Count;
-        this.currentPlayerIndex = Random.Range(0, totalPlayers);
-   //     this.totalPlayerPlayed = 0;
-
+      //  this.totalPlayers = PlayerManager.instance.players.Count;
+      //  this.currentPlayerIndex = Random.Range(0, totalPlayers);
+        //     this.totalPlayerPlayed = 0;
         SoundManager.Instance.PlayBackgroundMusic(Sound.Music);
-        NewGame();
+
+        ResetGame();
     }
 
-    public void NewGame()
+    void ResetContainers()
     {
+        cardDeck.ClearDeck();
+        cardHand.ClearHandCards();
+        TableController.instance.ClearAllContainers();
+    }
+
+
+
+
+
+    public void ResetGame()
+    {
+        ResetContainers();
+
         playButton.SetActive(true);
         this.totalPlayers = PlayerManager.instance.players.Count;
         this.currentPlayerIndex = Random.Range(0, totalPlayers);
 
-        foreach (Player player in PlayerManager.instance.players)
-        {
-            player.ResetCards();
-        }
+        PlayerManager.instance.ClearPlayersData();
 
         TrickManager.ResetTrick();
-        TableController.instance.ClearCards();
+      //  TableController.instance.ClearCards();
         cardDeck.CreateInitialDeck();
 
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ResetUI");
-
+        
     }
 
     public void Deal()
