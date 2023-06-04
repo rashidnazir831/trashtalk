@@ -2233,7 +2233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 57839213806815973, guid: 54e030ef96ab9412583b61c74e2e695b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54e030ef96ab9412583b61c74e2e695b, type: 3}
@@ -4177,6 +4177,10 @@ PrefabInstance:
     - target: {fileID: 9215373207374992251, guid: f0d5d4b409429425da08f56b1b1d6819, type: 3}
       propertyPath: m_Name
       value: GamePlay
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215373207374992251, guid: f0d5d4b409429425da08f56b1b1d6819, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9215373207374992252, guid: f0d5d4b409429425da08f56b1b1d6819, type: 3}
       propertyPath: m_Pivot.x
