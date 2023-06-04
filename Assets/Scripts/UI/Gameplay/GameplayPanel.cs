@@ -25,12 +25,13 @@ public class GameplayPanel : UIPanel
         UIEvents.ShowPanel(Panel.Popup);
         UIEvents.UpdateData(Panel.Popup, (obj) => {
 
+            Time.timeScale = 1;
+
             if ((int)obj[0] == 1)//on yes
             {
                 Hide();
                 UIEvents.ShowPanel(Panel.GameSelectPanel);
             }
-            Time.timeScale = 1;
         }, "SetData", "Are you sure you want to leave game?", "Yes", "No");
 
     }

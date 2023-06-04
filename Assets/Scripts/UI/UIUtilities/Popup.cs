@@ -54,7 +54,7 @@ public class Popup :UIPanel
 
     public void OnButton1()
     {
-        if (this.callBackData != null)
+        if (this.callBack != null)
         {
             this.callBackData = new object[] { 1 };
             this.callBack(callBackData);
@@ -65,7 +65,7 @@ public class Popup :UIPanel
 
     public void OnButton2()
     {
-        if (this.callBackData != null)
+        if (this.callBack != null)
         {
             this.callBackData = new object[] { 2 };
             this.callBack(callBackData);
