@@ -11,7 +11,6 @@ public class PlayerUI : MonoBehaviour
     public Text cardsCountText;
     public Text bidCount;
 
-
     System.Action<int> callBack;
     private void Start()
     {
@@ -41,15 +40,20 @@ public class PlayerUI : MonoBehaviour
 
     public void UpdateBids(int totalBids, int bidWon)
     {
-        bidCount.text = $"{bidWon}/{totalBids}";
+
+        if (bidCount != null)
+            bidCount.text = $"{bidWon}/{totalBids}";
+
+        if (myBids != null)
+            myBids.text = $"{bidWon}/{totalBids}";
     }
 
     public void HideBidCount()
     {
-      //  if (bidCount != null)
-        bidCount.text = "";
-        //if (myBids != null)
-        //    myBids.text = "0";
+        if (bidCount != null)
+            bidCount.text = "";
+        if (myBids != null)
+            myBids.text = "0";
     }
 
     public void WinAnimation()

@@ -28,7 +28,7 @@ public class CardDeck : MonoBehaviour
 
         totalCardsInDeck = cardsList.Count;
 
-        for (int i=0;i< totalCardsInDeck; i++)
+        for (int i=0;i< 4; i++)
         {
             CardData cardData = cardsList[i];
             GameObject cardObj = Instantiate(cardPrefab, this.transform);
@@ -68,7 +68,7 @@ public class CardDeck : MonoBehaviour
     {
 
         //   int playerCount = playerPositions.Length;
-        int cardsPerPlayer = 13;
+        int cardsPerPlayer = 1;
         int cardNumber = 0;
 
         int currentPlayerIndex = 0;

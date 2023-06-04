@@ -3138,7 +3138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &611525732
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8775,7 +8775,7 @@ MonoBehaviour:
   cardCountContainer: {fileID: 0}
   myBids: {fileID: 1340668996}
   cardsCountText: {fileID: 0}
-  bidCount: {fileID: 1340668996}
+  bidCount: {fileID: 0}
 --- !u!1 &1955580546
 GameObject:
   m_ObjectHideFlags: 0
@@ -9510,7 +9510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 57839213806815973, guid: 54e030ef96ab9412583b61c74e2e695b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54e030ef96ab9412583b61c74e2e695b, type: 3}

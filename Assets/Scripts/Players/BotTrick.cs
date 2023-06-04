@@ -8,57 +8,67 @@ public class BotTrick
 
     public Card GetBestCard(List<Card> cardsInHand)
     {
-        //Card.Suit leadingSuit = Card.Suit.Spades;
-        //bool isFirstTurn = true;
-        //Card bestCard = null;
+        Card.Suit leadingSuit = Card.Suit.Spades;
+        bool isFirstTurn = true;
+        Card bestCard = null;
 
-        //if (TrickManager.cards.Count > 0)
-        //{
-        //    leadingSuit = TrickManager.cards[0].suit;
-        //    isFirstTurn = false;
-        //}
+        if (TrickManager.cards.Count > 0)
+        {
+            leadingSuit = TrickManager.cards[0].suit;
+            isFirstTurn = false;
+        }
 
-        //bool hasNormalCards = HasNormalCards(cardsInHand);
-        //bool hasLeadingSuit = HasLeadingSuit(cardsInHand, leadingSuit);
+        bool hasNormalCards = HasNormalCards(cardsInHand);
+        bool hasLeadingSuit = HasLeadingSuit(cardsInHand, leadingSuit);
 
-        //Debug.Log("Printing bot cards list: " + isFirstTurn);
+        //Debug.Log("isFirstTurn: " + isFirstTurn);
+        //Debug.Log("Has leading suit: " + hasLeadingSuit);
+        //Debug.Log("Has normal cards: " + hasNormalCards);
+
 
         //foreach (Card card in cardsInHand)
         //{
         //    Debug.Log("bot has: " + card.name);
         //}
 
-        //foreach (Card card in cardsInHand)
-        //{
+        foreach (Card card in cardsInHand)
+        {
 
-        //        if (isFirstTurn)
-        //        {
-        //            if (hasNormalCards && (card.suit != Card.Suit.Spades && (bestCard == null || card.data.rank > bestCard.data.rank)))
-        //            {
-        //                bestCard = card;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            if (hasLeadingSuit && (bestCard == null || card.data.rank > bestCard.data.rank))
-        //            {
-        //                bestCard = card;
-        //            }
-        //        else
-        //            {
-        //            if (hasNormalCards && (bestCard == null || card.data.rank > bestCard.data.rank))
-        //            {
-        //                bestCard = card;
-        //            }
-        //            else if(card.suit == Card.Suit.Spades && (bestCard == null || card.data.rank > bestCard.data.rank))
-        //            {
-        //                bestCard = card;
-        //            }
-        //        }
-        //        }
-            
-        //}
-        return cardsInHand[0];
+            if (isFirstTurn)
+            {
+                if (hasNormalCards)
+                {
+                    if (card.suit != Card.Suit.Spades && (bestCard == null || card.data.score > bestCard.data.score))
+                        bestCard = card;
+                }
+                else if (bestCard == null || card.data.score > bestCard.data.score)
+                {
+                    bestCard = card;
+                }
+            }
+            else
+            {
+                if (hasLeadingSuit)
+                {
+                    if(card.suit == leadingSuit && (bestCard == null || card.data.score > bestCard.data.score))
+                        bestCard = card;
+                }
+                else
+                {
+                    if (hasNormalCards)
+                    {
+                        if (card.suit != Card.Suit.Spades && (bestCard == null || card.data.score > bestCard.data.score))
+                            bestCard = card;
+                    }
+                    else if (bestCard == null || card.data.score > bestCard.data.score)
+                    {
+                        bestCard = card;
+                    }
+                }
+            }
+
+            }
+            return bestCard;
     }
 
     bool HasNormalCards(List<Card> cardsInHand)
