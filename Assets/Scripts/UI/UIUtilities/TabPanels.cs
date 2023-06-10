@@ -47,6 +47,13 @@ public class TabPanels : UIPanel
         if(index == 3)
         {
             Hide();
+            UIEvents.ShowPanel(Panel.GameSelectPanel);
+            return;
+        }
+
+        if (index == 4)
+        {
+            Hide();
             UIEvents.ShowPanel(Panel.FriendsPanel);
             UIEvents.UpdateData(Panel.FriendsPanel, null, "SelectPanel", 2);
             return;
