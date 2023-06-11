@@ -53,7 +53,7 @@ public class GameplayManager : MonoBehaviour
       //  this.currentPlayerIndex = Random.Range(0, totalPlayers);
         //     this.totalPlayerPlayed = 0;
         SoundManager.Instance.PlayBackgroundMusic(Sound.Music);
-
+        playButton.SetActive(true);
         ResetGame();
     }
 
@@ -72,7 +72,6 @@ public class GameplayManager : MonoBehaviour
     {
         ResetContainers();
 
-        playButton.SetActive(true);
         this.totalPlayers = PlayerManager.instance.players.Count;
         this.currentPlayerIndex = Random.Range(0, totalPlayers);
 
@@ -80,15 +79,28 @@ public class GameplayManager : MonoBehaviour
 
         TrickManager.ResetTrick();
       //  TableController.instance.ClearCards();
-        cardDeck.CreateInitialDeck();
 
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ResetUI");
         
     }
 
-    public void Deal()
+    public void OnPlayGameButton()
     {
         playButton.SetActive(false);
+        UIEvents.UpdateData(Panel.GameplayPanel, OnCardsCoverScreen, "ShowCardIntro");
+    }
+
+    void OnCardsCoverScreen(object[] parameters = null)
+    {
+        ResetGame();
+        cardDeck.CreateInitialDeck();
+        TableController.instance.ShowSideTable();
+        Invoke("Deal", 1.5f);
+    }
+
+    public void Deal()
+    {
+     //   playButton.SetActive(false);
         cardDeck.DistributeCards();
     }
 

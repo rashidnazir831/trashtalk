@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class GameplayPanel : UIPanel
 {
+    public GameObject cardIntroPanel;
+    private Action<object[]> callBack;
+
+
     public override void Show()
     {
         gameObject.SetActive(true);
@@ -17,6 +21,21 @@ public class GameplayPanel : UIPanel
 
     public override void UpdateData(Action<object[]> callBack, params object[] parameters)
     {
+        string type = (string)parameters[0];
+
+        switch (type)
+        {
+            case "ShowCardIntro":
+                this.callBack = callBack;
+                ShowCardIntro();
+                break;
+        }
+    }
+
+    void ShowCardIntro()
+    {
+        cardIntroPanel.SetActive(true);
+        cardIntroPanel.GetComponentInChildren<AnimationEvents>().SetCallBack(this.callBack);
     }
 
     public void OnHomeButton()

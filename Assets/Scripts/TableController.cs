@@ -11,6 +11,9 @@ public class TableController : MonoBehaviour
     public GameObject cardAreaBorder;
     private RectTransform cardAreaRect;
 
+    public GameObject topTable;
+    public GameObject sideTable;
+
 
     public static TableController instance;
 
@@ -22,6 +25,13 @@ public class TableController : MonoBehaviour
         }
 
         cardAreaRect = cardAreaBorder.GetComponent<RectTransform>();
+    }
+
+    public void ShowSideTable()
+    {
+        topTable.SetActive(false);
+        sideTable.SetActive(true);
+
     }
 
     public Transform GetPlayerCardsTransform(int playerNumber)

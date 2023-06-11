@@ -27,7 +27,7 @@ public class CardDeck : MonoBehaviour
 
 
         totalCardsInDeck = cardsList.Count;
-
+        float size = 2f;
         for (int i=0;i< totalCardsInDeck; i++)
         {
             CardData cardData = cardsList[i];
@@ -37,6 +37,7 @@ public class CardDeck : MonoBehaviour
             cardObj.transform.SetSiblingIndex(0);
             cardObj.name = cardData.name;
             cardObj.transform.eulerAngles = new Vector3(0, 0, 90);
+            cardObj.transform.localScale *= size;
             cardObj.transform.position = position;
             position.y -= 1f;
 
