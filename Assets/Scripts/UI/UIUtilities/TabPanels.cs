@@ -44,14 +44,14 @@ public class TabPanels : UIPanel
         if (index == lastActiveIndex)
             return;
 
-        if(index == 3)
+        if(index == 4)
         {
             Hide();
             UIEvents.ShowPanel(Panel.GameSelectPanel);
             return;
         }
 
-        if (index == 4)
+        if (index == 5)
         {
             Hide();
             UIEvents.ShowPanel(Panel.FriendsPanel);

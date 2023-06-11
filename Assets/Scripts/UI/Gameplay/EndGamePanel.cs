@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class GameOverPanel : UIPanel
+public class EndGamePanel : UIPanel
 {
     public override void Show()
     {
@@ -14,19 +16,11 @@ public class GameOverPanel : UIPanel
 
     public override void UpdateData(System.Action<object[]> callBack, params object[] parameters)
     {
-        print(parameters[0]);
     }
 
-    public void OnYesButton()
+    public void OnCloseButton()
     {
-        GameplayManager.instance.ResetGame();
+        GameplayManager.instance.StartNewGame();
         Hide();
-    }
-
-    public void OnNoButton()
-    {
-        Hide();
-        UIEvents.HidePanel(Panel.GameplayPanel);
-        UIEvents.ShowPanel(Panel.GameSelectPanel);
     }
 }

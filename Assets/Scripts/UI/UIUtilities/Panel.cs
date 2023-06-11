@@ -14,5 +14,6 @@ public enum Panel
     GameSelectPanel,
     GameOverPanel,
     TabPanels,
-    Popup
+    Popup,
+    EndGamePanel
 }

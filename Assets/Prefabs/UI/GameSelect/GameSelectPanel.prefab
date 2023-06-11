@@ -522,7 +522,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1114671126310735209}
         m_TargetAssemblyTypeName: GameSelectPanel, Assembly-CSharp
-        m_MethodName: OnPractice
+        m_MethodName: OnMultiplayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

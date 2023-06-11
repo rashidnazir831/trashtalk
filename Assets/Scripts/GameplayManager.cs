@@ -53,8 +53,7 @@ public class GameplayManager : MonoBehaviour
       //  this.currentPlayerIndex = Random.Range(0, totalPlayers);
         //     this.totalPlayerPlayed = 0;
         SoundManager.Instance.PlayBackgroundMusic(Sound.Music);
-        playButton.SetActive(true);
-        ResetGame();
+        StartNewGame();
     }
 
     void ResetContainers()
@@ -65,13 +64,17 @@ public class GameplayManager : MonoBehaviour
     }
 
 
-
+    public void StartNewGame()
+    {
+        playButton.SetActive(true);
+        ResetGame();
+    }
 
 
     public void ResetGame()
     {
         ResetContainers();
-
+        //playButton.SetActive(true);
         this.totalPlayers = PlayerManager.instance.players.Count;
         this.currentPlayerIndex = Random.Range(0, totalPlayers);
 
@@ -96,6 +99,7 @@ public class GameplayManager : MonoBehaviour
         cardDeck.CreateInitialDeck();
         TableController.instance.ShowSideTable();
         Invoke("Deal", 1.5f);
+
     }
 
     public void Deal()
@@ -237,7 +241,8 @@ public class GameplayManager : MonoBehaviour
     void OnRoundOver()
     {
         print("round over");
-        UIEvents.ShowPanel(Panel.GameOverPanel);
+        UIEvents.ShowPanel(Panel.EndGamePanel);
+        //    UIEvents.ShowPanel(Panel.GameOverPanel);
 
     }
 
