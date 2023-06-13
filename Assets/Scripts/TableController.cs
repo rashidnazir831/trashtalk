@@ -27,11 +27,10 @@ public class TableController : MonoBehaviour
         cardAreaRect = cardAreaBorder.GetComponent<RectTransform>();
     }
 
-    public void ShowSideTable()
+    public void ShowSideTable(bool showSide=true)
     {
-        topTable.SetActive(false);
-        sideTable.SetActive(true);
-
+        topTable.SetActive(!showSide);
+        sideTable.SetActive(showSide);
     }
 
     public Transform GetPlayerCardsTransform(int playerNumber)

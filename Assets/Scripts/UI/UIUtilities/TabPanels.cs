@@ -12,7 +12,7 @@ public class TabPanels : UIPanel
 
     private void OnEnable()
     {
-        SelectPanel(1);
+        SelectPanel(4);
     }
 
     public override void Show()
@@ -44,12 +44,12 @@ public class TabPanels : UIPanel
         if (index == lastActiveIndex)
             return;
 
-        if(index == 4)
-        {
-            Hide();
-            UIEvents.ShowPanel(Panel.GameSelectPanel);
-            return;
-        }
+        //if(index == 4)
+        //{
+        //    Hide();
+        //    UIEvents.ShowPanel(Panel.GameSelectPanel);
+        //    return;
+        //}
 
         if (index == 5)
         {

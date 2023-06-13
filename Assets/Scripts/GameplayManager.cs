@@ -66,6 +66,7 @@ public class GameplayManager : MonoBehaviour
 
     public void StartNewGame()
     {
+        TableController.instance.ShowSideTable(false);
         playButton.SetActive(true);
         ResetGame();
     }

@@ -49,7 +49,8 @@ public class GameplayPanel : UIPanel
             if ((int)obj[0] == 1)//on yes
             {
                 Hide();
-                UIEvents.ShowPanel(Panel.GameSelectPanel);
+                UIEvents.ShowPanel(Panel.TabPanels);
+                //   UIEvents.ShowPanel(Panel.GameSelectPanel);
             }
         }, "SetData", "Are you sure you want to leave game?", "Yes", "No");
 
