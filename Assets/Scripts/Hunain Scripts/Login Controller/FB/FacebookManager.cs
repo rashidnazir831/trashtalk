@@ -12,9 +12,6 @@ public class FacebookManager : MonoBehaviour
     [Header("FacebookScreen UI Elements")]
     public Button FbLoginBtn;
 
-    [Space]
-    public GameObject Home_Screen;
-
     public static List<FriendDetail> friendList = new List<FriendDetail>();
     List<string> friendsID = new List<string>();
     List<string> friendsname = new List<string>();
@@ -128,7 +125,9 @@ public class FacebookManager : MonoBehaviour
     {
         if (FB.IsLoggedIn)
         {
-            Home_Screen.SetActive(true);
+            UIEvents.ShowPanel(Panel.TabPanels);
+            UIEvents.HidePanel(Panel.SignupPanel);
+
             string query = "/me/friends";
             FB.API("/me?fields=id,name,email", HttpMethod.GET, GetData);
             FB.API("me/picture?type=square&height=350&width=350", HttpMethod.GET, GetPicture);

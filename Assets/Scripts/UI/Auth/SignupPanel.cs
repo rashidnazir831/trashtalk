@@ -12,7 +12,8 @@ public class SignupPanel : UIPanel
 
     public void PlayAsGuest()
     {
-        UIEvents.ShowPanel(Panel.TabPanels);
+        print("Play As Guest");
+        //UIEvents.ShowPanel(Panel.TabPanels);
         Hide();
     }
 

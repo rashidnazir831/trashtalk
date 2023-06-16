@@ -42,18 +42,6 @@ public class AppleManager : MonoBehaviour
     public string f_name = "";
     public string l_name = "";
 
-    //[Space]
-    //[Header("Display Details")]
-    //public Text infoText;
-
-    //[Space]
-    //[Header("Complete Profile Screen (if= login First Time)")]
-    //public GameObject completeProfile_Panel;
-
-    [Space]
-    [Header("Next Screen (if = Already Login)")]
-    public GameObject Home_Screen;
-
     public PlayerProfile profile;// = FindObjectOfType<PlayerProfile>();
 
     public Text errorText;
@@ -261,7 +249,6 @@ public class AppleManager : MonoBehaviour
 
                     SendDataToPlayerProfile();
                     SendDataToDataBase();
-                    StartCoroutine(ChangeScreen(0));
                 }
                 else
                 {
@@ -310,15 +297,10 @@ public class AppleManager : MonoBehaviour
     private void OnLoginSuccess(JObject arg1, long arg2)
     {
         Debug.LogError("OnLoginSuccess: " + arg1.ToString());
+        UIEvents.ShowPanel(Panel.TabPanels);
+        UIEvents.HidePanel(Panel.SignupPanel);
     }
 
-
-
-    
-    private void EnableHomeScreen()
-    {
-        Home_Screen.gameObject.SetActive(true);
-    }
 
     /// <summary>
     /// Check inside Playerprefs and bypass it
@@ -388,17 +370,9 @@ public class AppleManager : MonoBehaviour
 
 
         SendDataToDataBase();
-
-        StartCoroutine(ChangeScreen(3));
     }
 
-    //byte[] byte_profTexture;
 
-    private IEnumerator ChangeScreen(int time)
-    {
-        yield return new WaitForSeconds(time);
-        Home_Screen.SetActive(true);
-    }
 
     /// <summary>
     /// saves data in player profile

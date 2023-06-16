@@ -26,7 +26,8 @@ public class LoginStateCheck : MonoBehaviour
 
         if (PlayerPrefs.HasKey(ConstantVariables.AuthProvider))
         {
-            this.gameObject.SetActive(false);
+            UIEvents.ShowPanel(Panel.TabPanels);
+            UIEvents.HidePanel(Panel.SignupPanel);
         }
     }
 }

@@ -70,6 +70,10 @@ public class GuestLoginController : MonoBehaviour
         PlayerProfile.UpdatePlayerData(playerData.User);
         PlayerProfile.SaveDataToPrefs();
         PlayerProfile.showPlayerDetails();
+
+        UIEvents.ShowPanel(Panel.TabPanels);
+        UIEvents.HidePanel(Panel.SignupPanel);
+
     }
 
     private void OnFail(string obj)
