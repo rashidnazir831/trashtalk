@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 511846786572514014}
   - component: {fileID: 511846786572514015}
   - component: {fileID: 2183684102684852319}
+  - component: {fileID: 334773047}
   m_Layer: 5
   m_Name: SignupPanel
   m_TagString: Untagged
@@ -138,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -167,6 +168,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd43cef9092034d8fb07be6308aa2d26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &334773047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511846786572514008}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5b449764a35d43099fe7ba1e5748696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AppleLoginBtn: {fileID: 4475531024711523206}
 --- !u!1 &2263849501541542781
 GameObject:
   m_ObjectHideFlags: 0
