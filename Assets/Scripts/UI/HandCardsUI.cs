@@ -82,6 +82,11 @@ public class HandCardsUI : MonoBehaviour
         }
     }
 
+    void SortHandCards()
+    {
+
+    }
+
     public void ActiveMainPlayerCards(bool allActive=true)
     {
         Card.Suit leadingSuit = Card.Suit.Spades;
