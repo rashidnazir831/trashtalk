@@ -23,10 +23,10 @@ public class Card : MonoBehaviour,ICard
 
     public enum Suit
     {
-        Spades,
-        Hearts,
-        Diamonds,
-        Clubs
+        Diamonds = 0,
+        Spades = 1,
+        Hearts = 2,
+        Clubs = 3
     }
 
     public Suit suit;

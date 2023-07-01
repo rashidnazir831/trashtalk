@@ -111,6 +111,7 @@ public class GameplayManager : MonoBehaviour
 
     public void StartBid()
     {
+        cardHand.SortHandCards();
         cardHand.StartCoroutine(cardHand.ShowPlayerCards());
         bidManager.StartBid(this.totalPlayers, this.currentPlayerIndex);
     }

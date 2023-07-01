@@ -106,9 +106,69 @@ public class HandCardsUI : MonoBehaviour
         }
     }
 
-    void SortHandCards()
+   public void SortHandCards()
     {
+        // Get the total number of children in the parent GameObject
+        int childCount = transform.childCount;
 
+        // Iterate over the children and arrange them based on their enum value
+        for (int i = 0; i < childCount - 1; i++)
+        {
+            // Get the first child transform
+            Transform child1 = transform.GetChild(i);
+            // Get the script attached to the first child
+            Card card1 = child1.GetComponent<Card>();
+
+            for (int j = i+1; j < childCount; j++)
+            {
+                // Get the second child transform
+                Transform child2 = transform.GetChild(j);
+                // Get the script attached to the second child
+                Card card2 = child2.GetComponent<Card>();
+
+                // Compare the enum values of the scripts
+                if (card1.data.score < card2.data.score)
+                {
+                    SwapPositionAndRotation(child1,child2);
+                    Transform temp = child1;
+                    child1 = child2;
+                    child2 = temp;
+
+                    card1 = child1.GetComponent<Card>();
+                    card2 = child2.GetComponent<Card>();
+                }
+
+                if (card1.suit > card2.suit)
+                {
+                    SwapPositionAndRotation(child1, child2);
+                    Transform temp = child1;
+                    child1 = child2;
+                    child2 = temp;
+
+                    card1 = child1.GetComponent<Card>();
+                    card2 = child2.GetComponent<Card>();
+                }
+            }
+        }
+    }
+
+    void SwapPositionAndRotation(Transform child1, Transform child2)
+    {
+        int child1Index = child1.GetSiblingIndex();
+        int child2Index = child2.GetSiblingIndex();
+
+        child1.SetSiblingIndex(child2Index);
+        child2.SetSiblingIndex(child1Index);
+
+        Vector3 tempPosition = child1.localPosition;
+        Vector3 tempAngle = child1.localEulerAngles;
+
+
+        child1.localPosition = child2.localPosition;
+        child1.localEulerAngles = child2.localEulerAngles;
+
+        child2.localPosition = tempPosition;
+        child2.localEulerAngles = tempAngle;
     }
 
     public void ActiveMainPlayerCards(bool allActive=true)
