@@ -177,12 +177,13 @@ public class GameplayManager : MonoBehaviour
 
     public void PlaceCardOnTable(Player player, Card playedCard)
     {
-        cardHand.UpdateCardArrangement();
+        //cardHand.UpdateCardArrangement();
 
         cardHand.ActiveMainPlayerCards(false);
 
         playedCard.MoveCard(TableController.instance.GetPlayerShowCardTransform(player.tablePosition), 2.5f,true,false,()=> {
             TrickManager.HighlightLowCards();
+            cardHand.UpdateCardArrangement();
         });
         player.hand.Remove(playedCard);
         cardHand.OnUseHandCard(playedCard);

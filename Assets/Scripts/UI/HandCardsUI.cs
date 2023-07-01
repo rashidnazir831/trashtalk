@@ -6,6 +6,9 @@ using UnityEngine;
 public class HandCardsUI : MonoBehaviour
 {
     public GameObject cardPrefab;
+
+    public Transform handCardsTrans;
+
     public float radius = 50f;
 
     public RectTransform cardRect;
@@ -34,37 +37,58 @@ public class HandCardsUI : MonoBehaviour
     // Call this method to update the card arrangement whenever a card is removed
     public void UpdateCardArrangement()
     {
-        int total = transform.childCount;
-        float maxAngle = 30;
-        float fullAngle = -maxAngle;
-        float anglePerCard = fullAngle / total;
-        float firstAngle = CalcFirstAngle(fullAngle);
-        float handWidth = CalcHandWidth(total);
+        int childCount = transform.childCount;
+        int mid = handCardsTrans.childCount / 2;
+        int startNum = mid - (childCount / 2);
+        int currentTrans = startNum;
 
-     //   float percTwistedAngleAddYPos = 0.5f;
-        float initialXPos =  -handWidth * 0.5f;
-
-        for (int i = 0; i < total; i++)
+        for (int i = 0; i < childCount; i++)
         {
-            Transform card = transform.GetChild(i).transform;
-          //  cardsInHands.Add(card);
-            float angleTwist = firstAngle + i * anglePerCard;
+            Transform card = transform.GetChild(i);
+            Transform cardPos = handCardsTrans.GetChild(currentTrans);
 
-            float yDistance = Mathf.Abs(angleTwist);
-            float xPos = initialXPos + i * (CardWidth + 20);
-
-            float yPos = (-25) - yDistance;
-
-            card.localRotation = Quaternion.Euler(0, 0, angleTwist);
-
-            card.localPosition = new Vector3(xPos, yPos, 0);
-
-            //if(i == total-1)
-            //{
-            //    Invoke("ShowCardsFront", 1);
-            //}
+            card.transform.localPosition = cardPos.transform.localPosition;
+            card.transform.localEulerAngles = cardPos.transform.localEulerAngles;
+            card.SetSiblingIndex(i);
+            currentTrans++;
         }
+
+
+        //Old Logic
+
+        /*  int total = transform.childCount;
+          float maxAngle = 30;
+          float fullAngle = -maxAngle;
+          float anglePerCard = fullAngle / total;
+          float firstAngle = CalcFirstAngle(fullAngle);
+          float handWidth = CalcHandWidth(total);
+
+       //   float percTwistedAngleAddYPos = 0.5f;
+          float initialXPos =  -handWidth * 0.5f;
+
+          for (int i = 0; i < total; i++)
+          {
+              Transform card = transform.GetChild(i).transform;
+            //  cardsInHands.Add(card);
+              float angleTwist = firstAngle + i * anglePerCard;
+
+              float yDistance = Mathf.Abs(angleTwist);
+              float xPos = initialXPos + i * (CardWidth + 20);
+
+              float yPos = (-25) - yDistance;
+
+              card.localRotation = Quaternion.Euler(0, 0, angleTwist);
+
+              card.localPosition = new Vector3(xPos, yPos, 0);
+
+              //if(i == total-1)
+              //{
+              //    Invoke("ShowCardsFront", 1);
+              //}
+          }*/
     }
+
+
     List<Card> cardsInHand;
     public IEnumerator ShowPlayerCards()
     {
