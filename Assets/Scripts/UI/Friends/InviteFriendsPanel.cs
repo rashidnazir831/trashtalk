@@ -43,7 +43,7 @@ public class InviteFriendsPanel : MonoBehaviour
     public void OnInviteButton()
     {
         UIEvents.ShowPanel(Panel.Popup);
-        UIEvents.UpdateData(Panel.Popup, null, "SetData", "Invite sent to your selected friends", "OK","");
+        UIEvents.UpdateData(Panel.Popup, null, "SetData", "Invite sent to your selected friends", "","OK");
     }
 
     void ClearContianer(Transform container)
@@ -51,6 +51,4 @@ public class InviteFriendsPanel : MonoBehaviour
         foreach (Transform child in container)
             Destroy(child.gameObject);
     }
-
-   
 }

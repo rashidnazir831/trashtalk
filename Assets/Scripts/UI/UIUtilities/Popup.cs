@@ -8,6 +8,7 @@ public class Popup :UIPanel
 {
     public GameObject button1;
     public GameObject button2;
+    public GameObject closeButton;
 
     public Text description;
     public Text button1Text;
@@ -41,7 +42,7 @@ public class Popup :UIPanel
         }
     }
 
-    void SetData(string description,string button1Text="OK", string button2Text = "CANCEL")
+    void SetData(string description,string button1Text= "CANCEL", string button2Text = "OK")
     {
         this.description.text = description;
 
@@ -50,6 +51,7 @@ public class Popup :UIPanel
 
         this.button1.SetActive(button1Text != "");
         this.button2.SetActive(button2Text != "");
+        this.closeButton.SetActive(button1Text != "");
     }
 
     public void OnButton1()

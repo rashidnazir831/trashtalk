@@ -204,8 +204,12 @@ public class HandCardsUI : MonoBehaviour
                     }
                     else
                     {
-                        active = hasNormalCards ? (card.suit != Card.Suit.Spades)?true:false:
-                            card.suit == Card.Suit.Spades?true:false;
+                        active = true;
+
+
+                        //old logic
+                        //active = hasNormalCards ? (card.suit != Card.Suit.Spades)?true:false:
+                        //    card.suit == Card.Suit.Spades?true:false;
                     }
                 }
             }

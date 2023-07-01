@@ -62,4 +62,10 @@ public class FriendsPanel : UIPanel
         tabButtons.GetChild(index).GetComponent<FriendsTabButton>().SetActiveInactive(true);
         tabButtons.GetChild(lastActiveIndex).GetComponent<FriendsTabButton>().SetActiveInactive(false);
     }
+
+    public void OnLeaderboardButton()
+    {
+        UIEvents.ShowPanel(Panel.LeaderboardPanel);
+        Hide();
+    }
 }

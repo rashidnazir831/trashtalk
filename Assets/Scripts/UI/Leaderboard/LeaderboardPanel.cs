@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class ProfilePanel : UIPanel
+public class LeaderboardPanel : UIPanel
 {
     public override void Show()
     {
@@ -19,9 +19,10 @@ public class ProfilePanel : UIPanel
     {
     }
 
-    public void OnSubmitButton()
+    public void OnBackButton()
     {
-        UIEvents.ShowPanel(Panel.Popup);
-        UIEvents.UpdateData(Panel.Popup, null, "SetData", "Profile updated", "", "OK");
+        UIEvents.ShowPanel(Panel.FriendsPanel);
+        Hide();
+
     }
 }

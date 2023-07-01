@@ -55,15 +55,21 @@ public class BotTrick
                 }
                 else
                 {
-                    if (hasNormalCards)
-                    {
-                        if (card.suit != Card.Suit.Spades && (bestCard == null || card.data.score > bestCard.data.score))
-                            bestCard = card;
-                    }
-                    else if (bestCard == null || card.data.score > bestCard.data.score)
+                    if (bestCard == null || card.data.score > bestCard.data.score)
                     {
                         bestCard = card;
                     }
+
+                    //old logic
+                    //if (hasNormalCards)
+                    //{
+                    //    if (card.suit != Card.Suit.Spades && (bestCard == null || card.data.score > bestCard.data.score))
+                    //        bestCard = card;
+                    //}
+                    //else if (bestCard == null || card.data.score > bestCard.data.score)
+                    //{
+                    //    bestCard = card;
+                    //}
                 }
             }
 
