@@ -30,7 +30,7 @@ public class GameSelectPanel : UIPanel
     public void OnMultiplayer()
     {
         //   OpenTabPanel();
-        UIEvents.UpdateData(Panel.TabPanels, null, "SelectPanel", 5);
+        UIEvents.UpdateData(Panel.TabPanels, null, "SelectPanel", 4);
     }
 
     void OpenTabPanel()
