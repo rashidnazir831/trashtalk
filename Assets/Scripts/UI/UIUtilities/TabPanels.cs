@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
+using TrashTalk;
 
 public class TabPanels : UIPanel
 {
     public Transform buttons;
     public Transform panels;
 
+    public Text coinsText;
+
     int lastActiveIndex = 0;
 
     private void OnEnable()
     {
+        UpdateCoinsUI();
         SelectPanel(3);
+    }
+
+    void UpdateCoinsUI()
+    {
+        coinsText.text = PlayerProfile.Player_coins.ToString();
     }
 
     public override void Show()

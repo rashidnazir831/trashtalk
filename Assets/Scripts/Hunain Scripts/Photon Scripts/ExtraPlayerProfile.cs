@@ -19,7 +19,7 @@ public class ExtraPlayerProfile : MonoBehaviourPunCallbacks
     private void Start()
     {
         Debug.LogError("+++++++++++++++++++++++++="+gameObject.name);
-        Chips.text = PlayerProfile.Player_coins;
+        Chips.text = PlayerProfile.Player_coins.ToString();
         PlayerName.text = PlayerProfile.Player_UserName;
         rawImage.texture = PlayerProfile.Player_rawImage_Texture2D;
     }

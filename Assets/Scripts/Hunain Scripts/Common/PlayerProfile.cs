@@ -12,7 +12,7 @@ public class PlayerProfile : MonoBehaviour
     public static string Player_Password = ConstantVariables.defaultPass;
     public static string authProvider;
     public static string Player_OS;
-    public static string Player_coins;
+    public static long Player_coins;
     public static string GameId;
     public static string RoomId;
     public static bool isNewUser;
@@ -82,7 +82,7 @@ public class PlayerProfile : MonoBehaviour
         Player_Email = "";
         authProvider = "";
         Player_OS = "";
-        Player_coins = "";
+        Player_coins = 0;
         GameId = "";
         RoomId = "";
         PlayerCountry = "";
@@ -104,7 +104,7 @@ public class PlayerProfile : MonoBehaviour
         PlayerProfile.Player_Password   = user.Password;
         PlayerProfile.Player_rawImage_Texture2D   = TextureConverter.Base64ToTexture2D(user.Image);
         PlayerProfile.authProvider      = user.AuthProvider;
-        PlayerProfile.Player_coins      = user.Coins.ToString();
+        PlayerProfile.Player_coins      = user.Coins;
         PlayerProfile.Player_Access_Token = user.AccessToken;
     }
 

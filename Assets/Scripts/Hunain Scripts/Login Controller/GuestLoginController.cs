@@ -42,7 +42,7 @@ public class GuestLoginController : MonoBehaviour
         PlayerProfile.Player_Email = PlayerPrefs.GetString(ConstantVariables.UserEmail);
         PlayerProfile.Player_rawImage_Texture2D = TextureConverter.Base64ToTexture2D(PlayerPrefs.GetString("Picture"));
         PlayerProfile.authProvider =   PlayerPrefs.GetString(ConstantVariables.AuthProvider);
-        PlayerProfile.Player_coins =   PlayerPrefs.GetString("Coins");
+        PlayerProfile.Player_coins =   PlayerPrefs.GetInt("Coins");
         //Controller.instance.Home_Screen.GetComponent<HomeScreen>().ChipsSettter();
     }
 

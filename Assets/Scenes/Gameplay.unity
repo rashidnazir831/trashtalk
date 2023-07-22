@@ -1157,6 +1157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttons: {fileID: 686760097}
   panels: {fileID: 172883473}
+  coinsText: {fileID: 596341229}
 --- !u!222 &588599439
 CanvasRenderer:
   m_ObjectHideFlags: 0
