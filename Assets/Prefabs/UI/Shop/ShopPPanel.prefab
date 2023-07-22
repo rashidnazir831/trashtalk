@@ -357,7 +357,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5264543800194752722}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7825187181810773197}
+        m_TargetAssemblyTypeName: ShopItem, Assembly-CSharp
+        m_MethodName: OnBuyButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5264543800246249054
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +491,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5264543800246249049}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8531187093186328224}
+        m_TargetAssemblyTypeName: ShopItem, Assembly-CSharp
+        m_MethodName: OnBuyButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5264543800315174227
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,7 +1390,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5264543801009740034}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8699104909259654107}
+        m_TargetAssemblyTypeName: ShopItem, Assembly-CSharp
+        m_MethodName: OnBuyButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5264543801041540734
 GameObject:
   m_ObjectHideFlags: 0
@@ -2867,6 +2903,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5264543801298470159}
     m_Modifications:
+    - target: {fileID: 4387725848713650469, guid: 2f5d1a5f0b2414dc5b592f8e773e8279, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4387725848713650469, guid: 2f5d1a5f0b2414dc5b592f8e773e8279, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4387725848713650469, guid: 2f5d1a5f0b2414dc5b592f8e773e8279, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3528639153978129284}
+    - target: {fileID: 4387725848713650469, guid: 2f5d1a5f0b2414dc5b592f8e773e8279, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4387725848713650469, guid: 2f5d1a5f0b2414dc5b592f8e773e8279, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnBuyButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4387725848713650469, guid: 2f5d1a5f0b2414dc5b592f8e773e8279, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ShopItem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4387725848713650469, guid: 2f5d1a5f0b2414dc5b592f8e773e8279, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4387725848737768515, guid: 2f5d1a5f0b2414dc5b592f8e773e8279, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
