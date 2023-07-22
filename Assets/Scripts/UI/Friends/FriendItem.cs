@@ -14,14 +14,18 @@ public class FriendItem : MonoBehaviour
     public Text nameText;
     public Text wonText;
 
+    public Image thumb;
+    public GameObject imageLoader;
+
+    private string imageURL = "https://images.unsplash.com/photo-1520820446914-04cb9819a6cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1736&q=80";
 
     bool isSelected = false;
 
-    Action<GameObject, bool> selectionCallBack;
+    Action<User, bool> selectionCallBack;
 
     User user;
 
-    public void SetData(int type, User user, Action<GameObject, bool> selectCallBack)
+    public void SetData(int type, User user, Action<User, bool> selectCallBack)
     {
         this.user = user;
         this.selectionCallBack = selectCallBack;
@@ -31,11 +35,21 @@ public class FriendItem : MonoBehaviour
 
         nameText.text = this.user.FullName;
         wonText.text = $"Won {this.user.winCount} matches" ;
+
+
+        if (this.imageURL != null && this.imageURL != "")
+        {
+            ImageCacheManager.instance.CheckOrDownloadImage(this.imageURL, this.thumb, () => {
+                imageLoader.SetActive(false);
+            });
+        }
+        else
+            imageLoader.SetActive(false);
     }
 
     public void SelectUnselect()
     {
-        this.selectionCallBack(gameObject, isSelected = !isSelected);
+        this.selectionCallBack(this.user, isSelected = !isSelected);
         selectionBtton.GetChild(0).gameObject.SetActive(!isSelected);
         selectionBtton.GetChild(1).gameObject.SetActive(isSelected);
 

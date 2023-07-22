@@ -11,11 +11,13 @@ public class InviteFriendsPanel : MonoBehaviour
 
     public Button inviteButton;
 
-    List<GameObject> selectedList;
+  //  List<GameObject> selectedList;
+    List<User> selectedUsers;
 
     private void Start()
     {
-        selectedList = new List<GameObject>();
+        //    selectedList = new List<GameObject>();
+        selectedUsers = new List<User>();
         inviteButton.interactable = false;
         ShowList();
     }
@@ -39,14 +41,14 @@ public class InviteFriendsPanel : MonoBehaviour
         //}
     }
 
-    void OnSelect(GameObject item, bool isSelected)
+    void OnSelect(User user, bool isSelected)
     {
         if (isSelected)
-            selectedList.Add(item);
+            selectedUsers.Add(user);
         else
-            selectedList.Remove(item);
+            selectedUsers.Remove(user);
 
-        inviteButton.interactable = (selectedList.Count > 0);
+        inviteButton.interactable = (selectedUsers.Count > 0);
     }
 
     public void OnInviteButton()
