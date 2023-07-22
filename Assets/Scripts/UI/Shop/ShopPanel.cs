@@ -16,4 +16,9 @@ public class ShopPanel : UIPanel
     {
         print(parameters[0]);
     }
+
+    public void OnBuyCoins(int totalCoins, int price)
+    {
+
+    }
 }
