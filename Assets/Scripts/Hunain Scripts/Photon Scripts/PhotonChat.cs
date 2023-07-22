@@ -11,7 +11,6 @@ public class PhotonChat : MonoBehaviourPunCallbacks, IChatClientListener
 {
 
     public ChatAppSettings chatAppSettings;
-    public string Genere;
     internal string friendID;
     public string roomID;
     public string GameID;
@@ -62,6 +61,7 @@ public class PhotonChat : MonoBehaviourPunCallbacks, IChatClientListener
         Debug.Log(state);
         if (state == ChatState.ConnectedToNameServer)
         {
+            Debug.Log("Chat Connected");
             PhotonConnectionController.isChatConnected = true;
         }
         if (state == ChatState.Disconnected)
@@ -111,6 +111,7 @@ public class PhotonChat : MonoBehaviourPunCallbacks, IChatClientListener
         //throw new System.NotImplementedException();
     }
     public ChatClient chatClient;
+   
     [ContextMenu("Connect")]
     internal void Connect()
     {
@@ -148,8 +149,10 @@ public class PhotonChat : MonoBehaviourPunCallbacks, IChatClientListener
     internal IEnumerator RequestAndSendMessage_Co(string targetUserID, string roomID)
     {
         string messagetoSend = targetUserID + "," + roomID + "," + PlayerProfile.GameId;
+        yield return new WaitUntil(()=> PhotonNetwork.InRoom);
         if (PhotonNetwork.InRoom)
         {
+            Debug.Log("RequestAndSendMessage_Co: targetUserID: "  + targetUserID);
             chatClient.SendPrivateMessage(targetUserID, messagetoSend);
             yield return null;
         }
@@ -188,7 +191,7 @@ public class PhotonChat : MonoBehaviourPunCallbacks, IChatClientListener
     {
         //set some loading screen true where there should be option to either play or reejct the request
 
-        Debug.Log("sender id is " + sender.ToString() + " message.  " + message.ToString());
+        Debug.Log("OnPrivateMessage Recieved: sender id is " + sender.ToString() + " message.  " + message.ToString());
         if (message.ToString() == null || sender.ToString() == PlayerProfile.Player_UserID) // i was the sender
         {
             Debug.Log("Game Request Sent");
