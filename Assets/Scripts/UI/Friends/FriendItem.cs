@@ -17,8 +17,7 @@ public class FriendItem : MonoBehaviour
     public Image thumb;
     public GameObject imageLoader;
 
-    private string imageURL = "https://images.unsplash.com/photo-1520820446914-04cb9819a6cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1736&q=80";
-
+    private string imageURL = "https://i.pravatar.cc/300";
     bool isSelected = false;
 
     Action<User, bool> selectionCallBack;

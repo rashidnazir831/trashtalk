@@ -1,5 +1,110 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &700027086144847466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2346280406983897131}
+  - component: {fileID: 7441121306976255243}
+  m_Layer: 0
+  m_Name: Photon Chat Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2346280406983897131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700027086144847466}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7476394074184383854}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7441121306976255243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700027086144847466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dbbfec62d71f4085949784aba9b57eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chatAppSettings:
+    AppIdChat: 31784830-fbb3-4974-a85c-fc2552bba171
+    AppVersion: 0.0.1
+    FixedRegion: US
+    Server: 
+    Port: 0
+    ProxyServer: 
+    Protocol: 0
+    EnableProtocolFallback: 1
+    NetworkLogging: 1
+  Genere: 
+  roomID: 
+  GameID: 
+  SenderID: 
+  playOrReject_Ref: {fileID: 0}
+--- !u!1 &3852357716434142915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8443092380374288578}
+  - component: {fileID: 6729081866688379391}
+  m_Layer: 0
+  m_Name: Photon Room Creator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8443092380374288578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3852357716434142915}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7476394074184383854}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6729081866688379391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3852357716434142915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99971e23a2ed44272b49ddfbcecd5785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RoomID: 
+  roomFullPanel: {fileID: 0}
 --- !u!1 &7476394074184383855
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,9 +136,11 @@ Transform:
   - {fileID: 7476394074751766998}
   - {fileID: 7476394075776382553}
   - {fileID: 7476394076287117207}
-  - {fileID: 7476394075691339911}
   - {fileID: 7476394074645284942}
   - {fileID: 7476394076041283670}
+  - {fileID: 7476394075691339911}
+  - {fileID: 2346280406983897131}
+  - {fileID: 8443092380374288578}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -67,7 +174,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7476394074184383854}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7476394074645284941
 MonoBehaviour:
@@ -148,8 +255,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7476394075691339911}
   - component: {fileID: 7476394075691339910}
-  - component: {fileID: 7476394075691339909}
-  - component: {fileID: 7476394075691339908}
   m_Layer: 0
   m_Name: Photon Connection
   m_TagString: Untagged
@@ -170,7 +275,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7476394074184383854}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7476394075691339910
 MonoBehaviour:
@@ -184,49 +289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda6b4d609ef04d8596d9df0cd63a1cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7476394075691339909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7476394075691339912}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dbbfec62d71f4085949784aba9b57eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chatAppSettings:
-    AppIdChat: 31784830-fbb3-4974-a85c-fc2552bba171
-    AppVersion: 0.0.1
-    FixedRegion: US
-    Server: 
-    Port: 0
-    ProxyServer: 
-    Protocol: 0
-    EnableProtocolFallback: 1
-    NetworkLogging: 1
-  Genere: 
-  roomID: 
-  GameID: 
-  SenderID: 
-  playOrReject_Ref: {fileID: 0}
---- !u!114 &7476394075691339908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7476394075691339912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99971e23a2ed44272b49ddfbcecd5785, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RoomID: 
-  publicRoomName: {fileID: 0}
-  privateRoomName: {fileID: 0}
-  roomFullPanel: {fileID: 0}
 --- !u!1 &7476394075776382554
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +374,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7476394074184383854}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7476394076041283669
 MonoBehaviour:

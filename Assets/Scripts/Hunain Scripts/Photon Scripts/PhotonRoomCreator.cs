@@ -15,8 +15,6 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
     [Space]
     public static bool IsPublicRoom = false;
     public string RoomID = "";
-    public InputField publicRoomName;
-    public InputField privateRoomName;
 
     [Header("Error Panel")]
     public GameObject roomFullPanel;
@@ -61,15 +59,12 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
     /// Main Method for creating Rooms
     /// </summary>
     /// <param name="isPublicRoom"> Room Category </param>
-    private void CreateNewRoom(bool isPublicRoom)
+    private void CreateNewRoom(bool isPublicRoom = true, string roomName = "")
     {
-        Debug.LogError("Count of cuurent room in server = " + PhotonNetwork.CountOfRooms);
-
         if (PhotonNetwork.InLobby)
         {
             if (isPublicRoom == false)
             {
-                string roomName = privateRoomName.text;
                 if (roomName == "" || string.IsNullOrEmpty(roomName))
                 {
                     Debug.LogError("Please Provide Room Name");
@@ -113,33 +108,26 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
             }
             else
             {
-                if (publicRoomName.text == "")
-                {
-                    Debug.LogError("Please Provide Room Name");
-                    return;
-                }
                 WaitingLoader.instance.ShowHide(true);
 
-                IsPublicRoom = true;
-                if (PhotonNetwork.LocalPlayer.NickName == null || PhotonNetwork.LocalPlayer.NickName == "" || string.IsNullOrEmpty(PhotonNetwork.LocalPlayer.NickName))
+                IsPublicRoom = isPublicRoom;
+                if (string.IsNullOrEmpty(PhotonNetwork.LocalPlayer.NickName))
                 {
-                    Debug.LogError("PhotonNetwork.NickName:+++++++" + PhotonNetwork.LocalPlayer.NickName);
                     PhotonNetwork.LocalPlayer.NickName = PlayerProfile.Player_UserName;
                 }
-                Debug.LogError("PhotonNetwork.NickName:+++++++" + PhotonNetwork.LocalPlayer.NickName);
-                PhotonNetwork.GameVersion = "0.0.1";//MasterManager.GameSettings.GameVersion;
+                string gameVersion = "0.0.1";
+                PhotonNetwork.GameVersion = gameVersion;//MasterManager.GameSettings.GameVersion;
                 RoomOptions roomOptions = new RoomOptions();
-                roomOptions.MaxPlayers = 7;//byte.Parse(roomLimit_InputField.text);
+                roomOptions.MaxPlayers = 4;//byte.Parse(roomLimit_InputField.text);
                 roomOptions.PublishUserId = true;
                 roomOptions.IsVisible = isPublicRoom;
                  _myCustomProperties["Host"] = PhotonNetwork.LocalPlayer.UserId;
                 roomOptions.CustomRoomPropertiesForLobby = new string[1] { "Host" };
                 roomOptions.CustomRoomProperties = _myCustomProperties;
-                int randomNo = UnityEngine.Random.Range(100, 999);
-                RoomID = publicRoomName.text.ToUpper() + randomNo.ToString();
-                Debug.Log("RoomID: " + RoomID);
+                int randomNo = UnityEngine.Random.Range(99, 9999);
+                roomName = string.IsNullOrEmpty(roomName) ?"SAND_"+ randomNo:roomName;
+                RoomID = roomName.ToUpper();
                 PhotonNetwork.CreateRoom(RoomID , roomOptions , TypedLobby.Default);
-                Debug.Log("Public Room Created: " + RoomID);
             }
         }
         else
@@ -148,11 +136,11 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
         }
     }
 
-    public void On_Create_Room(bool publicRoom)
+    public void CreateRoomOnPhoton(bool publicRoom = true,string roomName = "")
     {
         if (PhotonNetwork.IsConnectedAndReady && PhotonNetwork.InLobby)
         {
-            CreateNewRoom(publicRoom);
+            CreateNewRoom(publicRoom , roomName);
         }
         else
         {
