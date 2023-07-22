@@ -15,6 +15,16 @@ namespace TrashTalk
         public User User { get; set; }
     }
 
+    public partial class LeaderboardUsers
+    {
+        public List<User> data;
+    }
+
+    public partial class LeaderboardUsers
+    {
+        public static LeaderboardUsers FromJson(string json) => JsonConvert.DeserializeObject<LeaderboardUsers>(json, TrashTalk.Converter.Settings);
+    }
+
     public partial class GlobalUsers
     {
         public GlobalUsersData data;

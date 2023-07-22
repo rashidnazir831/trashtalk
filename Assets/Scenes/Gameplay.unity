@@ -3187,17 +3187,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5062341745217049946, guid: 203a9638a56a944cbaffe63cc6e352d8, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5062341745217049947, guid: 203a9638a56a944cbaffe63cc6e352d8, type: 3}
       propertyPath: m_Name
       value: Player Data
-      objectReference: {fileID: 0}
-    - target: {fileID: 5062341745217049947, guid: 203a9638a56a944cbaffe63cc6e352d8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 203a9638a56a944cbaffe63cc6e352d8, type: 3}
@@ -4119,18 +4111,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Controllers
       objectReference: {fileID: 0}
-    - target: {fileID: 7476394074184383855, guid: 016be68e56d2a4b18b839029b0b5b406, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7476394074645284941, guid: 016be68e56d2a4b18b839029b0b5b406, type: 3}
       propertyPath: playerPersonalData
       value: 
       objectReference: {fileID: 1554312025}
-    - target: {fileID: 7476394074645284941, guid: 016be68e56d2a4b18b839029b0b5b406, type: 3}
-      propertyPath: globalDatabaseUsers
-      value: global-database-users
-      objectReference: {fileID: 0}
     - target: {fileID: 7476394074751766999, guid: 016be68e56d2a4b18b839029b0b5b406, type: 3}
       propertyPath: FbLoginBtn
       value: 
@@ -4139,10 +4123,6 @@ PrefabInstance:
       propertyPath: LoginScreen
       value: 
       objectReference: {fileID: 334773042}
-    - target: {fileID: 7476394075691339909, guid: 016be68e56d2a4b18b839029b0b5b406, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7476394075776382552, guid: 016be68e56d2a4b18b839029b0b5b406, type: 3}
       propertyPath: profile
       value: 

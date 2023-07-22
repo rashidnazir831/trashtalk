@@ -28,8 +28,7 @@ public class WebServiceManager : MonoBehaviour
     [SerializeField] internal string startGameFunction         = "";
     [SerializeField] internal string endGameFunction           = "";
     [SerializeField] internal string globalDatabaseUsers       = "";
-
-
+    [SerializeField] internal string leaderboard               = "";
 
 
     public static WebServiceManager instance;
