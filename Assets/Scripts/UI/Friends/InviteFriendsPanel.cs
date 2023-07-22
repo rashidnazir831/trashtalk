@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TrashTalk;
 
 public class InviteFriendsPanel : MonoBehaviour
 {
@@ -23,11 +24,19 @@ public class InviteFriendsPanel : MonoBehaviour
     {
         ClearContianer(container);
 
-        for (int i = 0; i < 6; i++)
+        List<User> users = PlayerProfile.instance.globalUsers;
+
+        foreach(User user in users)
         {
             GameObject obj = Instantiate(friendItem, container, false);
-            obj.GetComponent<FriendItem>().SetData(transform.GetSiblingIndex(), OnSelect);
+            obj.GetComponent<FriendItem>().SetData(transform.GetSiblingIndex(),user, OnSelect);
         }
+
+        //for (int i = 0; i < users.Count; i++)
+        //{
+        //    GameObject obj = Instantiate(friendItem, container, false);
+        //    obj.GetComponent<FriendItem>().SetData( transform.GetSiblingIndex(), OnSelect);
+        //}
     }
 
     void OnSelect(GameObject item, bool isSelected)

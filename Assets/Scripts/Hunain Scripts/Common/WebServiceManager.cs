@@ -27,6 +27,9 @@ public class WebServiceManager : MonoBehaviour
     [SerializeField] internal string purchaseCoinsFunction     = "";
     [SerializeField] internal string startGameFunction         = "";
     [SerializeField] internal string endGameFunction           = "";
+    [SerializeField] internal string globalDatabaseUsers       = "";
+
+
 
 
     public static WebServiceManager instance;

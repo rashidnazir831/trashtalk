@@ -64,12 +64,14 @@ public class GuestLoginController : MonoBehaviour
     private void OnLoginSuccess(JObject resp, long arg2)
     {
         Debug.Log("OnLoginSuccess: " + resp.ToString());
-        PhotonConnectionController.Instance.ConnectingToPhoton();
 
         var playerData = PlayerData.FromJson(resp.ToString());
         PlayerProfile.UpdatePlayerData(playerData.User);
         PlayerProfile.SaveDataToPrefs();
         PlayerProfile.showPlayerDetails();
+
+        PhotonConnectionController.Instance.ConnectingToPhoton();
+
 
         UIEvents.ShowPanel(Panel.TabPanels);
         UIEvents.HidePanel(Panel.SignupPanel);
@@ -79,12 +81,6 @@ public class GuestLoginController : MonoBehaviour
     private void OnFail(string obj)
     {
         Debug.LogError("OnFail: " + obj.ToString());
-    }
-
-
-    void Update()
-    {
-
     }
 
     private void login()

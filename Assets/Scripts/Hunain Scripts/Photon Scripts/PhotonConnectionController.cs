@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using System;
+using TrashTalk;
 
 public class PhotonConnectionController : MonoBehaviourPunCallbacks
 {
@@ -62,6 +65,12 @@ public class PhotonConnectionController : MonoBehaviourPunCallbacks
 
     public void ConnectingToPhoton()
     {
+        Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
+        keyValuePairs.Add("PageNo", 1);
+
+        //  PageNo
+        WebServiceManager.instance.APIRequest(WebServiceManager.instance.globalDatabaseUsers, Method.POST, null, keyValuePairs, OnGetGlobalUsers, OnFailGlobalUser, CACHEABLE.NULL, true, null);
+
         Debug.Log("ConnectingToPhoton. . .");
         string gameVersion = "0.0.1";
         PhotonNetwork.AuthValues = new AuthenticationValues();
@@ -73,15 +82,22 @@ public class PhotonConnectionController : MonoBehaviourPunCallbacks
         PhotonNetwork.GameVersion = gameVersion;
     }
 
+    public void OnGetGlobalUsers(JObject resp, long arg2)
+    {
+        var globalUsers = GlobalUsers.FromJson(resp.ToString());
+
+        PlayerProfile.instance.globalUsers = globalUsers.data.data;
+
+        Debug.Log("Total Global users: " + PlayerProfile.instance.globalUsers.Count);
+    }
+
+    void OnFailGlobalUser(string msg)
+    {
+        Debug.Log("Fail Global Users:  " + msg);
+    }
 
     // Start is called before the first frame update
     void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
     {
         
     }

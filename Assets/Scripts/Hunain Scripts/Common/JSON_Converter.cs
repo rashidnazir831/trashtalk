@@ -3,6 +3,8 @@ namespace TrashTalk
     using System.Globalization;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
+    using System.Collections.Generic;
+    using System;
 
     public partial class PlayerData
     {
@@ -13,34 +15,53 @@ namespace TrashTalk
         public User User { get; set; }
     }
 
+    public partial class GlobalUsers
+    {
+        public GlobalUsersData data;
+    }
+
+    public partial class GlobalUsers
+    {
+        public static GlobalUsers FromJson(string json) => JsonConvert.DeserializeObject<GlobalUsers>(json, TrashTalk.Converter.Settings);
+    }
+
+    public partial class GlobalUsersData
+    {
+        public List<User> data;
+    }
+
+    [Serializable]
     public partial class User
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public string Id;
 
         [JsonProperty("UserID")]
-        public string UserId { get; set; }
+        public string UserId;
 
         [JsonProperty("FullName")]
-        public string FullName { get; set; }
+        public string FullName;
 
         [JsonProperty("Email")]
-        public string Email { get; set; }
+        public string Email;
 
         [JsonProperty("Password")]
-        public string Password { get; set; }
+        public string Password;
 
         [JsonProperty("Image")]
-        public string Image { get; set; }
+        public string Image;
 
         [JsonProperty("AuthProvider")]
-        public string AuthProvider { get; set; }
+        public string AuthProvider;
 
         [JsonProperty("Coins")]
-        public long Coins { get; set; }
+        public long Coins;
 
         [JsonProperty("AccessToken")]
-        public string AccessToken { get; set; }
+        public string AccessToken;
+
+        [JsonProperty("WinCount")]
+        public string winCount;
     }
 
     public partial class PlayerData

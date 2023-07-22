@@ -21,8 +21,8 @@ public class LobbyPanel : MonoBehaviour
 
         for (int i = 0; i < 7; i++)
         {
-            GameObject obj = Instantiate(friendItem, container, false);
-            obj.GetComponent<FriendItem>().SetData(transform.GetSiblingIndex(),OnSelect);
+  //          GameObject obj = Instantiate(friendItem, container, false);
+//            obj.GetComponent<FriendItem>().SetData(transform.GetSiblingIndex(),OnSelect);
         }
     }
 

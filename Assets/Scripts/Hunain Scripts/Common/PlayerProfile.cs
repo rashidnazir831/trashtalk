@@ -20,10 +20,21 @@ public class PlayerProfile : MonoBehaviour
     public static int gamesWon;
     public static int gamesPlayed;
 
+    public List<User> globalUsers;
+
+    public static PlayerProfile instance;
+
     //public string   Player_Gender;
     public static List<string> PlayerPurchasedProductsIDs = new List<string>();
     public static Dictionary<string  /*productID*/, string /*Count*/> Dict_PlayerPurchasedProductsIDs_And_Count = new Dictionary<string, string>();
 
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+
+        print("Instance name " + instance.name);
+    }
 
     //Start is called before the first frame update
     void Start()
@@ -31,12 +42,6 @@ public class PlayerProfile : MonoBehaviour
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public static void showPlayerDetails()
     {
         Debug.Log("Player Image: " + Player_rawImage_Texture2D);
