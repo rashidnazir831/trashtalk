@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class LevelPanel : UIPanel
 {
+    public LevelItem[] levels;
+
     public override void Show()
     {
         gameObject.SetActive(true);
@@ -17,5 +19,16 @@ public class LevelPanel : UIPanel
 
     public override void UpdateData(Action<object[]> callBack, params object[] parameters)
     {
+
+    }
+
+    private void OnEnable()
+    {
+        int wonMatches = PlayerProfile.gamesWon;
+
+        foreach (LevelItem level in levels)
+        {
+            level.SetData(wonMatches);
+        }
     }
 }

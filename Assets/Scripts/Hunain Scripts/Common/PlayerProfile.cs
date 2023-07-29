@@ -19,6 +19,7 @@ public class PlayerProfile : MonoBehaviour
     public static string PlayerCountry;
     public static int gamesWon;
     public static int gamesPlayed;
+    public static int level = 1;
 
     public List<User> globalUsers;
 
@@ -106,6 +107,8 @@ public class PlayerProfile : MonoBehaviour
         PlayerProfile.authProvider      = user.AuthProvider;
         PlayerProfile.Player_coins      = user.Coins;
         PlayerProfile.Player_Access_Token = user.AccessToken;
+        PlayerProfile.gamesWon = user.winCount;
+
     }
 
     public static void SaveDataToPrefs()

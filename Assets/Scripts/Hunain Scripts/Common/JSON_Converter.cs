@@ -71,7 +71,7 @@ namespace TrashTalk
         public string AccessToken;
 
         [JsonProperty("WinCount")]
-        public string winCount;
+        public int winCount;
     }
 
     public partial class PlayerData
