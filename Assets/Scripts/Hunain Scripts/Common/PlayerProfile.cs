@@ -41,6 +41,10 @@ public class PlayerProfile : MonoBehaviour
     void Start()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
+        print("Current Level: " + GetPlayerLevel());
+        print("Current Level %: " + GetCurrentLevelPercentage());
+
     }
 
     public static void showPlayerDetails()
@@ -122,5 +126,76 @@ public class PlayerProfile : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public static int GetPlayerLevel()
+    {
+        int won = gamesWon;
+
+        if(won >=0 && won <= 10)
+        {
+            return 1;
+        }
+        else if (won >= 10 && won <= 20)
+        {
+            return 2;
+        }
+        else if (won >= 20 && won <= 30)
+        {
+            return 3;
+        }
+        else if (won >= 30 && won <= 40)
+        {
+            return 4;
+        }
+        else if (won >= 40 && won <= 100)
+        {
+            return 5;
+        }
+        else if (won >= 100 && won <= 500)
+        {
+            return 6;
+        }
+
+        return 6;
+    }
+
+
+    public static float GetCurrentLevelPercentage()
+    {
+        int won = gamesWon;
+        int level = GetPlayerLevel();
+        float min = 0;
+        float max = 0;
+
+        switch (level)
+        {
+            case 1:
+                min = 0;
+                max = 10;
+                break;
+            case 2:
+                min = 10;
+                max = 20;
+                break;
+            case 3:
+                min = 20;
+                max = 30;
+                break;
+            case 4:
+                min = 30;
+                max = 40;
+                break;
+            case 5:
+                min = 40;
+                max = 100;
+                break;
+            case 6:
+                min = 100;
+                max = 500;
+                break;
+
+        }
+
+        return ((won-min)/(max-min));
+    }
 
 }

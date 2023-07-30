@@ -12,17 +12,32 @@ public class TabPanels : UIPanel
 
     public Text coinsText;
 
+    public RectTransform levelBar;
+
     int lastActiveIndex = 0;
+    float levelBarWidth;
+
+    private void Awake()
+    {
+        levelBarWidth = levelBar.sizeDelta.x;
+    }
 
     private void OnEnable()
     {
         UpdateCoinsUI();
+        SetLevelUI();
         SelectPanel(3);
     }
 
     void UpdateCoinsUI()
     {
         coinsText.text = PlayerProfile.Player_coins.ToString();
+    }
+
+    void SetLevelUI()
+    {
+        float progress = PlayerProfile.GetCurrentLevelPercentage();
+        levelBar.sizeDelta = new Vector2((progress * levelBarWidth), levelBar.sizeDelta.y);
     }
 
     public override void Show()

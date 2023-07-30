@@ -28,7 +28,7 @@ public class LevelPanel : UIPanel
 
         foreach (LevelItem level in levels)
         {
-            level.SetData(wonMatches);
+            level.SetData(PlayerProfile.GetPlayerLevel(),PlayerProfile.GetCurrentLevelPercentage());
         }
     }
 }
