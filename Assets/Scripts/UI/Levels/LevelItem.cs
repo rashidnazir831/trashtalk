@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LevelItem : MonoBehaviour
 {
-    public int minMatch;
-    public int maxMatch;
+    //public int minMatch;
+    //public int maxMatch;
     public int level;
     public RectTransform progressbar;
 
