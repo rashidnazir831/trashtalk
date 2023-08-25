@@ -17,21 +17,21 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         }
     }
 
-    private void Start()
-    {
-        ConnectToPhoton();
-    }
+    //private void Start()
+    //{
+    //    ConnectToPhoton();
+    //}
 
-    public void ConnectToPhoton()
-    {
-        PhotonNetwork.ConnectUsingSettings();
-    }
+    //public void ConnectToPhoton()
+    //{
+    //    PhotonNetwork.ConnectUsingSettings();
+    //}
 
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log("Connected to Photon");
-        PhotonNetwork.JoinRandomRoom();
-    }
+    //public override void OnConnectedToMaster()
+    //{
+    //    Debug.Log("Connected to Photon");
+    //    //PhotonNetwork.JoinRandomRoom();
+    //}
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
