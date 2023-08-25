@@ -59,7 +59,7 @@ public class InviteFriendsPanel : MonoBehaviour
         string roomName = "SAND_" + Random.Range(99, 9999);
         PhotonRoomCreator.instance.CreateRoomOnPhoton(true, roomName);
        
-        SendGameRequest(roomName, PlayerProfile.Player_UserName, PlayerProfile.Player_UserID, "guest_64edde35ac13418aa95eb866a1d80321_userID");
+        SendGameRequest(roomName, PlayerProfile.Player_UserName, PlayerProfile.Player_UserID, "guest_224ad3276efc4ab9b1fa7c1a37f30945_userID");
 
         //foreach (var item in selectedUsers)
         //{

@@ -37,7 +37,7 @@ public class FriendRow : MonoBehaviour
             Debug.LogError("Chat Client was null");
             PhotonChat.Instance.Connect();
         }
-        PhotonChat.Instance.RequestAndSendMessage(friendUserID, roomName);
+        //PhotonChat.Instance.RequestAndSendMessage(friendUserID, roomName);
     }
 
     public void Setter(string userID, string userName, Texture2D texture2D)

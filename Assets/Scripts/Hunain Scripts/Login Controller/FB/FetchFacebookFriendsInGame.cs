@@ -33,7 +33,7 @@ public class FetchFacebookFriendsInGame : MonoBehaviour
         {
             if (item.toggle.isOn)
             {
-                item.SendGameRequest(PhotonNetwork.CurrentRoom.Name , PlayerProfile.Player_UserName , PlayerProfile.Player_UserID , item.userID);
+                //item.SendGameRequest(PhotonNetwork.CurrentRoom.Name , PlayerProfile.Player_UserName , PlayerProfile.Player_UserID , item.userID);
             } 
         }
     }
