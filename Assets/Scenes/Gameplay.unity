@@ -4149,6 +4149,10 @@ PrefabInstance:
       propertyPath: loginBtn
       value: 
       objectReference: {fileID: 1953254603}
+    - target: {fileID: 8306820697641204478, guid: 016be68e56d2a4b18b839029b0b5b406, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 016be68e56d2a4b18b839029b0b5b406, type: 3}
 --- !u!1001 &1912906814
