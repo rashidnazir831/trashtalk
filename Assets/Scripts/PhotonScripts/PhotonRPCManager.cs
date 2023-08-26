@@ -45,5 +45,28 @@ public class PhotonRPCManager : MonoBehaviourPunCallbacks
         Debug.Log("data: " + data);
     }
 
+    public void OnGetGameRequest(string senderId, string roomId)
+    {
+        print("Got Invitation from: " + senderId);
+        print("Invitation for Room Id: " + roomId);
+
+
+        UIEvents.ShowPanel(Panel.Popup);
+        UIEvents.UpdateData(Panel.Popup, (data) => {
+
+            if ((int)data[0] == 2)//on yes
+            {
+                print("Accepted");
+                PhotonChat.Instance.AcceptGameInvitation(PlayerProfile.Player_UserID,roomId);
+            }
+            else
+            {
+                print("Rejected");
+
+            }
+
+        }, "SetData", "You have received game invitation", "Reject", "Accept");
+    }
+
 
 }

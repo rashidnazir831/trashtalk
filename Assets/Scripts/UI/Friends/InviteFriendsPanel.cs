@@ -53,8 +53,8 @@ public class InviteFriendsPanel : MonoBehaviour
 
     public void OnInviteButton()
     {
-        UIEvents.ShowPanel(Panel.Popup);
-        UIEvents.UpdateData(Panel.Popup, null, "SetData", "Invite sent to your selected friends", "","OK");
+        //UIEvents.ShowPanel(Panel.Popup);
+        //UIEvents.UpdateData(Panel.Popup, null, "SetData", "Invite sent to your selected friends", "","OK");
 
         string roomName = "SAND_" + Random.Range(99, 9999);
         PhotonRoomCreator.instance.CreateRoomOnPhoton(true, roomName);
@@ -81,7 +81,11 @@ public class InviteFriendsPanel : MonoBehaviour
             Debug.LogError("Chat Client was null");
             PhotonChat.Instance.Connect();
         }
-        PhotonChat.Instance.RequestAndSendMessage(friendUserID, roomName);
+        PhotonChat.Instance.RequestAndSendMessage(friendUserID, roomName,()=>{
+
+            UIEvents.ShowPanel(Panel.Popup);
+            UIEvents.UpdateData(Panel.Popup, null, "SetData", "Invite sent to your selected friends", "", "OK");
+        });
     }
 
 

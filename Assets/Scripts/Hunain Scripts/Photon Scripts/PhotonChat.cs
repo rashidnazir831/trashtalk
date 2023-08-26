@@ -132,8 +132,10 @@ public class PhotonChat : MonoBehaviourPunCallbacks, IChatClientListener
         chatClient.SendPrivateMessage(targetUserID, message);
     }
 
-    internal void RequestAndSendMessage(string targetUserID, string roomID)
+    System.Action PUNCallBack;
+    internal void RequestAndSendMessage(string targetUserID, string roomID, System.Action callBack=null)
     {
+        PUNCallBack = callBack;
         StartCoroutine(RequestAndSendMessage_Co(targetUserID, roomID));
     }
 
@@ -148,7 +150,8 @@ public class PhotonChat : MonoBehaviourPunCallbacks, IChatClientListener
 
     internal IEnumerator RequestAndSendMessage_Co(string targetUserID, string roomID)
     {
-        string messagetoSend = targetUserID + "," + roomID + "," + PlayerProfile.GameId;
+        string messagetoSend = "requested," + targetUserID + "," + roomID + "," + PlayerProfile.GameId;
+        print("Gameid is" + PlayerProfile.GameId);
         yield return new WaitUntil(()=> PhotonNetwork.InRoom);
         if (PhotonNetwork.InRoom)
         {
@@ -158,8 +161,19 @@ public class PhotonChat : MonoBehaviourPunCallbacks, IChatClientListener
         }
     }
 
+    internal void AcceptGameInvitation(string senderId, string roomId)
+    {
+      //  if (PhotonNetwork.IsConnected)
+      //  {
+            Debug.Log("Requested Accepted by: "  + senderId);
+            string messagetoSend = "accepted," + roomId;
+            chatClient.SendPrivateMessage(senderId, messagetoSend);
+      //  }
+    }
+
     internal IEnumerator SendJoinRequest(string targetUserID, string action,GameObject prefab =null)
     {
+        print("did came here?");
             if (chatClient == null) Connect();
             yield return new WaitUntil(() => chatClient != null);
             Debug.Log("SendJoinRequest PhotonNetwork.InRoom");
@@ -192,33 +206,41 @@ public class PhotonChat : MonoBehaviourPunCallbacks, IChatClientListener
         //set some loading screen true where there should be option to either play or reejct the request
 
         Debug.Log("OnPrivateMessage Recieved: sender id is " + sender.ToString() + " message.  " + message.ToString());
-        if (message.ToString() == null || sender.ToString() == PlayerProfile.Player_UserID) // i was the sender
+        
+        string[] msg = message.ToString().Split(',');
+        print("message name: " + msg[0]);
+        if (msg[0] == "requested" && sender.ToString() == PlayerProfile.Player_UserID) // i was the sender
         {
+            this.PUNCallBack();
             Debug.Log("Game Request Sent");
             return;
         }
-        else if (message.ToString() == "requested" && sender.ToString() != PlayerProfile.Player_UserID) // i was the reciever in below cases
+        else if (msg[0] == "requested" && sender.ToString() != PlayerProfile.Player_UserID) // i was the reciever in below cases
         {
             Debug.Log("Game Request recieved");
-            if (message.ToString() == "requested")
-            {
+           // if (message.ToString() == "requested")
+           // {
+                PhotonRPCManager.Instance.OnGetGameRequest(sender, msg[2]);
                 Debug.Log("Request received from " + sender.ToString()); 
 
-            }
+          //  }
             return;
         }
-        else if (message.ToString().Contains("accepted") && sender.ToString() != PlayerProfile.Player_UserID)
+        else if (msg[0]=="accepted" && sender.ToString() == PlayerProfile.Player_UserID)
         {
             Debug.Log("Request has been accepted by " + sender.ToString());
-            var roomName = message.ToString().Split(',');
+            print("RoomID: " + msg[1]);
+            PhotonNetwork.JoinRoom(msg[1]);
+
+          //  var roomName = message.ToString().Split(',');
             return;
         }
-        else if (message.ToString() == "rejected" && sender.ToString() != PlayerProfile.Player_UserID)
+        else if (msg[0] == "rejected" && sender.ToString() != PlayerProfile.Player_UserID)
         {
-            if (message.ToString() == "rejected")
-            {
+          //  if (message.ToString() == "rejected")
+          //  {
                 Debug.Log("Request has been rejected by " + sender.ToString());
-            }
+          //  }
             return;
         }
     }

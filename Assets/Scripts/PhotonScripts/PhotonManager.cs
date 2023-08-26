@@ -44,6 +44,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log("Joined a room");
     }
 
+
+
     //public override void OnPlayerEnteredRoom(Player newPlayer)
     //{
     //    Debug.Log("A new player has entered the room");
