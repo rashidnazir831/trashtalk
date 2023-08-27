@@ -265,6 +265,12 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
     {
         Debug.LogError("OnPlayerEnteredRoom playerName: " + newPlayer.NickName);
         UpdatePlayerList();
+
+        if(PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        {
+            GameplayManager.instance.SetPlayButton(true);
+        }
+
         //if (newPlayer != PhotonNetwork.LocalPlayer)
         //{
         //    StartCoroutine(MoveToVs_Screen());
@@ -289,22 +295,9 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
                 url = (string)imageUrl;
             }
             PlayerManager.instance.AddPlayer(item.NickName,item.UserId,url, item.UserId.Equals(PhotonNetwork.LocalPlayer.UserId), item.IsMasterClient, false, 0);
-
-
-            //  playerData.imageURL = item.CustomProperties["Url"].ToString();
-            //playerData.name = item.NickName;
-            //playerData.id = item.UserId;
-            //playerData.isMe = item.UserId.Equals(PhotonNetwork.LocalPlayer.UserId);
-            //playerData.isMaster = item.IsMasterClient;
-
-            //print("playerData.name: " + playerData.name);
-            //print("playerData.id: " + playerData.id);
-            //print("playerData.isMe: " + playerData.isMe);
-            //print("playerData.isMaster: " + playerData.isMaster);
-
-
-            //Global.playerData.Add(playerData);
         }
+
+        UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
     }
     public IEnumerator MoveToVs_Screen()
     {

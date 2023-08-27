@@ -55,13 +55,14 @@ public class GameplayManager : MonoBehaviour
       //  this.currentPlayerIndex = Random.Range(0, totalPlayers);
         //     this.totalPlayerPlayed = 0;
         SoundManager.Instance.PlayBackgroundMusic(Sound.Music);
-        SetPlayButton();
+        SetPlayButton(!Global.isMultiplayer);
         StartNewGame();
     }
 
     private void Start()
     {
-        SetPlayersData();
+        if (!Global.isMultiplayer)
+            SetPlayersData();
     }
 
     public void SetPlayersData()
@@ -78,9 +79,9 @@ public class GameplayManager : MonoBehaviour
         TableController.instance.ClearAllContainers();
     }
 
-    public void SetPlayButton()
+    public void SetPlayButton(bool isActive)
     {
-        playButton.SetActive(!Global.isMultiplayer);
+        playButton.SetActive(isActive);
     }
 
 
@@ -110,6 +111,13 @@ public class GameplayManager : MonoBehaviour
 
     public void OnPlayGameButton()
     {
+        if (Global.isMultiplayer && Photon.Pun.PhotonNetwork.InRoom && Photon.Pun.PhotonNetwork.IsMasterClient) {
+            Photon.Pun.PhotonNetwork.CurrentRoom.IsOpen = false;
+            Photon.Pun.PhotonNetwork.CurrentRoom.IsVisible = false;
+            PhotonRPCManager.Instance.SpawnPlayers();
+        }
+
+
         playButton.SetActive(false);
         UIEvents.UpdateData(Panel.GameplayPanel, OnCardsCoverScreen, "ShowCardIntro");
     }
@@ -120,7 +128,6 @@ public class GameplayManager : MonoBehaviour
         cardDeck.CreateInitialDeck();
         TableController.instance.ShowSideTable();
         Invoke("Deal", 1.5f);
-
     }
 
     public void Deal()

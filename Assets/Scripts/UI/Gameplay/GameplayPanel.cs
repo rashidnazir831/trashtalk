@@ -48,7 +48,12 @@ public class GameplayPanel : UIPanel
 
             if ((int)obj[0] == 2)//on yes
             {
-                
+
+                if (Global.isMultiplayer && Photon.Pun.PhotonNetwork.InRoom)
+                {
+                    Photon.Pun.PhotonNetwork.LeaveRoom();
+                }
+
                 Hide();
                 UIEvents.ShowPanel(Panel.TabPanels);
                 //   UIEvents.ShowPanel(Panel.GameSelectPanel);

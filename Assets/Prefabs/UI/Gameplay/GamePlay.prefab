@@ -11562,6 +11562,7 @@ MonoBehaviour:
   bidCount: {fileID: 0}
   nameText: {fileID: 0}
   gameScore: {fileID: 0}
+  profileImage: {fileID: 0}
 --- !u!1 &9215373206665048695
 GameObject:
   m_ObjectHideFlags: 0
@@ -11633,6 +11634,7 @@ MonoBehaviour:
   bidCount: {fileID: 3120188483813616736}
   nameText: {fileID: 3120188484181054421}
   gameScore: {fileID: 3120188484975933867}
+  profileImage: {fileID: 0}
 --- !u!1 &9215373206805872999
 GameObject:
   m_ObjectHideFlags: 0
@@ -12518,7 +12520,6 @@ GameObject:
   - component: {fileID: 9215373207374992253}
   - component: {fileID: 9215373207374992242}
   - component: {fileID: 9215373207374992240}
-  - component: {fileID: 9215373207374992255}
   - component: {fileID: 9215373207374992241}
   m_Layer: 5
   m_Name: GamePlay
@@ -12526,7 +12527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9215373207374992252
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12617,18 +12618,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playButton: {fileID: 8601195372962729384}
   cardHand: {fileID: 9215373207507520357}
---- !u!114 &9215373207374992255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9215373207374992251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32a44e02ed102433dacfdca82b2a57a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &9215373207374992241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12891,6 +12880,7 @@ MonoBehaviour:
   bidCount: {fileID: 3120188484765157435}
   nameText: {fileID: 8601195371332788973}
   gameScore: {fileID: 8601195372423508586}
+  profileImage: {fileID: 0}
 --- !u!1 &9215373207448606227
 GameObject:
   m_ObjectHideFlags: 0
@@ -13150,6 +13140,7 @@ MonoBehaviour:
   bidCount: {fileID: 3120188484399778284}
   nameText: {fileID: 3120188484796996263}
   gameScore: {fileID: 3120188485887707680}
+  profileImage: {fileID: 0}
 --- !u!1 &9215373207678396862
 GameObject:
   m_ObjectHideFlags: 0

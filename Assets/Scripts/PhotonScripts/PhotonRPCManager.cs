@@ -1,5 +1,6 @@
 using UnityEngine;
 using Photon.Pun;
+using System;
 
 public class PhotonRPCManager : MonoBehaviourPunCallbacks
 {
@@ -45,6 +46,20 @@ public class PhotonRPCManager : MonoBehaviourPunCallbacks
         Debug.Log("data: " + data);
     }
 
+    [PunRPC]
+    public void SpawnPlayers_Rpc()
+    {
+        //Call spawning herh
+    }
+
+
+
+    internal void SpawnPlayers()
+    {
+        SendRPC("SpawnPlayers_Rpc", RpcTarget.All);
+    }
+
+    //TODO This function should be in a photon chat class
     public void OnGetGameRequest(string senderId, string roomId)
     {
         print("Got Invitation from: " + senderId);
@@ -67,6 +82,4 @@ public class PhotonRPCManager : MonoBehaviourPunCallbacks
 
         }, "SetData", "You have received game invitation", "Reject", "Accept");
     }
-
-
 }
