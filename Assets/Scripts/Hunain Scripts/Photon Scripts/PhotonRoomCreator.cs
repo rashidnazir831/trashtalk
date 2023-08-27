@@ -273,15 +273,12 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
         Global.playerData = new System.Collections.Generic.List<MutiplayerData>();
         foreach (var item in PhotonNetwork.PlayerList)
         {
-            MutiplayerData playerData = new MutiplayerData
-            {
-                imageURL = item.CustomProperties["Url"].ToString(),
-                name = item.NickName,
-                id = item.UserId,
-                isMe = item.UserId.Equals(PhotonNetwork.LocalPlayer.UserId),
-                isMaster = item.IsMasterClient
-
-            };
+            MutiplayerData playerData = new MutiplayerData();
+            playerData.imageURL = item.CustomProperties["Url"].ToString();
+               playerData. name = item.NickName;
+             playerData.   id = item.UserId;
+             playerData.   isMe = item.UserId.Equals(PhotonNetwork.LocalPlayer.UserId);
+              playerData.  isMaster = item.IsMasterClient;
 
             Global.playerData.Add(playerData);
         }
