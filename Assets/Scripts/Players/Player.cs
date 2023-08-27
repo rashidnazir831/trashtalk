@@ -18,8 +18,12 @@ public class Player : IPlayer
     public bool isOwn = false;
     public List<Card> winningCards;
 
+    public string id;
+    public bool isMaster;
+    public string imageURL;
+  //  public Sprite sprite;
 
-    public Player(string playerName, bool isBot,bool isOwn, int tablePos)
+    public Player(string playerName, string id, string image, bool isOwn, bool isMaster, bool isBot, int tablePos)
     {
         this.name = playerName;
         this.isBot = isBot;
@@ -27,6 +31,11 @@ public class Player : IPlayer
         this.isOwn = isOwn;
         this.bidPlaced = 0;
         this.bidWon = 0;
+
+        this.id = id;
+        this.isMaster = isMaster;
+        this.imageURL = image;
+
         winningCards = new List<Card>();
         hand = new List<Card>();
     }

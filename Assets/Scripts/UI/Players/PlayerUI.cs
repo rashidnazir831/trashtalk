@@ -14,10 +14,11 @@ public class PlayerUI : MonoBehaviour
 
     public TextMeshProUGUI nameText;
     public Text gameScore;
+    public Image profileImage;
 
     System.Action<int> callBack;
 
-    public MutiplayerData playerData;
+    //public MutiplayerData playerData;
 
     private void OnEnable()
     {
@@ -27,12 +28,19 @@ public class PlayerUI : MonoBehaviour
             SetUI("Bot");
     }
 
-    public void SetUI(string name="Waiting...",int score=0)
+    public void SetUI(string name="Waiting...",int score=0, string imageUrl=null)
     {
         if(nameText!=null)
           nameText.text = name;
         if (gameScore != null)
             gameScore.text = score.ToString();
+
+        if(profileImage !=null)
+        {
+            //Profile work
+        }
+
+
     }
 
     public void UpdateCardCount(int cardCount)

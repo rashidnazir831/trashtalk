@@ -43,6 +43,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Joined a room");
         Global.isMultiplayer = true;
+        UIEvents.HidePanel(Panel.TabPanels);
         UIEvents.HidePanel(Panel.FriendsPanel);
         UIEvents.ShowPanel(Panel.GameplayPanel);
     }

@@ -14,14 +14,14 @@ using UnityEngine;
         public int value;
     }
 
-[System.Serializable]
-public class MutiplayerData
-{
-    public string name;
-    public string id;
-    public bool isMe;
-    public bool isMaster;
-    public int tablePosition;
-    public string imageURL;
-    public Sprite sprite;
-}
+//[System.Serializable]
+//public class MutiplayerData
+//{
+//    public string name;
+//    public string id;
+//    public bool isMe;
+//    public bool isMaster;
+//    public int tablePosition;
+//    public string imageURL;
+//    public Sprite sprite;
+//}

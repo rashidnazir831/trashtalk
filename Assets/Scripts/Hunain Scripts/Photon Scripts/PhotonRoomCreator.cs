@@ -270,17 +270,32 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
 
     void UpdatePlayerList()
     {
-        Global.playerData = new System.Collections.Generic.List<MutiplayerData>();
+        //  Global.playerData = new System.Collections.Generic.List<MutiplayerData>();
+        //   PlayerManager.instance.AddPlayer("Player 1", false, true, 0);
+
+        PlayerManager.instance.ClearPlayers();
+
         foreach (var item in PhotonNetwork.PlayerList)
         {
-            MutiplayerData playerData = new MutiplayerData();
-            playerData.imageURL = item.CustomProperties["Url"].ToString();
-               playerData. name = item.NickName;
-             playerData.   id = item.UserId;
-             playerData.   isMe = item.UserId.Equals(PhotonNetwork.LocalPlayer.UserId);
-              playerData.  isMaster = item.IsMasterClient;
+          //  MutiplayerData playerData = new MutiplayerData();
 
-            Global.playerData.Add(playerData);
+
+            PlayerManager.instance.AddPlayer(item.NickName,item.UserId,null, item.UserId.Equals(PhotonNetwork.LocalPlayer.UserId), item.IsMasterClient, false, 0);
+
+
+            //  playerData.imageURL = item.CustomProperties["Url"].ToString();
+            //playerData.name = item.NickName;
+            //playerData.id = item.UserId;
+            //playerData.isMe = item.UserId.Equals(PhotonNetwork.LocalPlayer.UserId);
+            //playerData.isMaster = item.IsMasterClient;
+
+            //print("playerData.name: " + playerData.name);
+            //print("playerData.id: " + playerData.id);
+            //print("playerData.isMe: " + playerData.isMe);
+            //print("playerData.isMaster: " + playerData.isMaster);
+
+
+            //Global.playerData.Add(playerData);
         }
     }
     public IEnumerator MoveToVs_Screen()

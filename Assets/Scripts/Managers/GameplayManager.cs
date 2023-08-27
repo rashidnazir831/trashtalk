@@ -39,11 +39,13 @@ public class GameplayManager : MonoBehaviour
         //ResetPanelData();
         PlayerManager.instance.ClearPlayers();
 
-        //PlayerManager.instance.AddPlayer("Player 1", true, true, 1);
-        PlayerManager.instance.AddPlayer("Player 1",false,true,0);
-        PlayerManager.instance.AddPlayer("Player 2", true,false,1);
-        PlayerManager.instance.AddPlayer("Player 3", true, false, 2);
-        PlayerManager.instance.AddPlayer("Player 4", true, false, 3);
+        if (!Global.isMultiplayer)
+        {
+            PlayerManager.instance.AddPlayer("Player 1",null, null, true,true, false, 0);
+            PlayerManager.instance.AddPlayer("Bot 1", null, null, false, false, true, 1);
+            PlayerManager.instance.AddPlayer("Bot 2", null, null, false, false, true, 2);
+            PlayerManager.instance.AddPlayer("Bot 3", null, null, false, false, true, 3);
+        }
 
         cardDeck = GetComponentInChildren<CardDeck>();
         bidManager = GetComponent<BidManager>();
@@ -56,6 +58,18 @@ public class GameplayManager : MonoBehaviour
         SetPlayButton();
         StartNewGame();
     }
+
+    private void Start()
+    {
+        SetPlayersData();
+    }
+
+    public void SetPlayersData()
+    {
+        UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
+    }
+
+
 
     void ResetContainers()
     {

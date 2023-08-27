@@ -58,11 +58,34 @@ public class PlayersUIPanel : UIPanel
                 bool show = (bool)parameters[1];
                 ShowHideYourTurnHeading(show);
                 break;
+            case "SetPlayersData":
+                SetPlayersData();
+                break;
             case "ResetUI":
                 ResetUI();
                 break;
 
         }
+    }
+
+    public void SetPlayersData()
+    {
+        //if (Global.isMultiplayer)
+        //{
+        //    List<Player> players = PlayerManager.instance.players;
+        //    for (int i = 0; i < players.Count; i++)
+        //    {
+        //        playerUI[i].SetUI(players[i].name, 0);
+        //    }
+        //}
+        //else
+        //{
+            List<Player> players = PlayerManager.instance.players;
+            for (int i=0;i< players.Count; i++)
+            {
+                playerUI[i].SetUI(players[i].name,0);
+            }
+    //    }
     }
 
     public void ResetUI()

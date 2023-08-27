@@ -22,9 +22,9 @@ public class PlayerManager : MonoBehaviour
         currentPlayerIndex = 0;
     }
 
-    public void AddPlayer(string name, bool isBot, bool isOwn, int tablePos)
+    public void AddPlayer(string name, string id,string image, bool isOwn, bool isMaster, bool isBot, int tablePos)
     {
-        Player player = new Player(name, isBot,isOwn, tablePos);
+        Player player = new Player(name, id,image, isOwn, isMaster, isBot, tablePos);
         players.Add(player);
     }
 
