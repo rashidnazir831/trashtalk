@@ -279,8 +279,13 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
         {
           //  MutiplayerData playerData = new MutiplayerData();
 
-
-            PlayerManager.instance.AddPlayer(item.NickName,item.UserId,null, item.UserId.Equals(PhotonNetwork.LocalPlayer.UserId), item.IsMasterClient, false, 0);
+            object imageUrl; 
+            string url = "";
+            if(item.CustomProperties.TryGetValue("Url", out imageUrl))
+            {
+                url = (string)imageUrl;
+            }
+            PlayerManager.instance.AddPlayer(item.NickName,item.UserId,url, item.UserId.Equals(PhotonNetwork.LocalPlayer.UserId), item.IsMasterClient, false, 0);
 
 
             //  playerData.imageURL = item.CustomProperties["Url"].ToString();
