@@ -209,6 +209,9 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
             roomOptions.CustomRoomProperties = _myCustomProperties;
             PhotonNetwork.CurrentRoom.SetCustomProperties(_myCustomProperties);
         }
+        UpdatePlayerList();
+
+
 
         if (WaitingLoader.instance.gameObject.activeInHierarchy)
         {
