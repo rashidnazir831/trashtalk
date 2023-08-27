@@ -17,7 +17,7 @@ public class PlayerUI : MonoBehaviour
 
     System.Action<int> callBack;
 
-    public PlayerData playerData;
+    public MutiplayerData playerData;
 
     private void OnEnable()
     {

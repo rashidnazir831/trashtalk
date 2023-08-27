@@ -5,5 +5,5 @@ using UnityEngine;
 public static class Global
 {
     public static bool isMultiplayer = false;
-    public static List<PlayerData> playerData;
+    public static List<MutiplayerData> playerData;
 }

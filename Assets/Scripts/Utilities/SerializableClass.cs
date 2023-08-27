@@ -15,7 +15,7 @@ using UnityEngine;
     }
 
 [System.Serializable]
-public class PlayerData
+public class MutiplayerData
 {
     public string name;
     public string id;

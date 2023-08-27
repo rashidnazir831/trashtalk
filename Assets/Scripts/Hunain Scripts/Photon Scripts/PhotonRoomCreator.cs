@@ -270,10 +270,10 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
 
     void UpdatePlayerList()
     {
-        Global.playerData = new System.Collections.Generic.List<PlayerData>();
+        Global.playerData = new System.Collections.Generic.List<MutiplayerData>();
         foreach (var item in PhotonNetwork.PlayerList)
         {
-            PlayerData playerData = new PlayerData
+            MutiplayerData playerData = new MutiplayerData
             {
                 imageURL = item.CustomProperties["Url"].ToString(),
                 name = item.NickName,
