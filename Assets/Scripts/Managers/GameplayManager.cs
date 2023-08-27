@@ -53,6 +53,7 @@ public class GameplayManager : MonoBehaviour
       //  this.currentPlayerIndex = Random.Range(0, totalPlayers);
         //     this.totalPlayerPlayed = 0;
         SoundManager.Instance.PlayBackgroundMusic(Sound.Music);
+        SetPlayButton();
         StartNewGame();
     }
 
@@ -63,11 +64,16 @@ public class GameplayManager : MonoBehaviour
         TableController.instance.ClearAllContainers();
     }
 
+    public void SetPlayButton()
+    {
+        playButton.SetActive(!Global.isMultiplayer);
+    }
+
 
     public void StartNewGame()
     {
         TableController.instance.ShowSideTable(false);
-        playButton.SetActive(true);
+      //  playButton.SetActive(true);
         ResetGame();
     }
 

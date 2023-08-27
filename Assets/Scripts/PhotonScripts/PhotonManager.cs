@@ -42,17 +42,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined a room");
+        Global.isMultiplayer = true;
+        UIEvents.HidePanel(Panel.FriendsPanel);
+        UIEvents.ShowPanel(Panel.GameplayPanel);
     }
-
-
-
-    //public override void OnPlayerEnteredRoom(Player newPlayer)
-    //{
-    //    Debug.Log("A new player has entered the room");
-    //}
-
-    //public override void OnPlayerLeftRoom(Player otherPlayer)
-    //{
-    //    Debug.Log("A player has left the room");
-    //}
 }

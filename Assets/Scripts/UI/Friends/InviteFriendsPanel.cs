@@ -57,9 +57,11 @@ public class InviteFriendsPanel : MonoBehaviour
         //UIEvents.UpdateData(Panel.Popup, null, "SetData", "Invite sent to your selected friends", "","OK");
 
         string roomName = "SAND_" + Random.Range(99, 9999);
+
+        SendGameRequest(roomName, PlayerProfile.Player_UserName, PlayerProfile.Player_UserID, "guest_224ad3276efc4ab9b1fa7c1a37f30945_userID");
+
         PhotonRoomCreator.instance.CreateRoomOnPhoton(true, roomName);
        
-        SendGameRequest(roomName, PlayerProfile.Player_UserName, PlayerProfile.Player_UserID, "guest_224ad3276efc4ab9b1fa7c1a37f30945_userID");
 
         //foreach (var item in selectedUsers)
         //{
@@ -83,8 +85,19 @@ public class InviteFriendsPanel : MonoBehaviour
         }
         PhotonChat.Instance.RequestAndSendMessage(friendUserID, roomName,()=>{
 
-            UIEvents.ShowPanel(Panel.Popup);
-            UIEvents.UpdateData(Panel.Popup, null, "SetData", "Invite sent to your selected friends", "", "OK");
+         //   UIEvents.HidePanel(Panel.TabPanels);
+         //   UIEvents.ShowPanel(Panel.GameplayPanel);
+
+            //UIEvents.ShowPanel(Panel.Popup);
+            //UIEvents.UpdateData(Panel.Popup, (data)=> {
+            //if ((int)data[0] == 2)//on ok
+            //{
+            //        Global.isMultiplayer = true;
+            //    //    UIEvents.HidePanel(Panel.TabPanels);
+            //    //    UIEvents.ShowPanel(Panel.GameplayPanel);
+            //}
+
+            //}, "SetData", "Invite sent to your selected friends", "", "OK");
         });
     }
 

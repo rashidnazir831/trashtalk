@@ -14,12 +14,14 @@ using UnityEngine;
         public int value;
     }
 
-    //[System.Serializable]
-    //public class PlayerData
-    //{
-    //    public string name;
-    //    public string id;
-    //    public string serverId;
-    //    public bool isMe;
-    //    public Vector3 tablePosition;
-    //}
+[System.Serializable]
+public class PlayerData
+{
+    public string name;
+    public string id;
+    public bool isMe;
+    public bool isMaster;
+    public int tablePosition;
+    public string imageURL;
+    public Sprite sprite;
+}

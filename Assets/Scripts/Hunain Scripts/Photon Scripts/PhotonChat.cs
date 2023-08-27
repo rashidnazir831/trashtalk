@@ -163,12 +163,13 @@ public class PhotonChat : MonoBehaviourPunCallbacks, IChatClientListener
 
     internal void AcceptGameInvitation(string senderId, string roomId)
     {
-      //  if (PhotonNetwork.IsConnected)
-      //  {
-            Debug.Log("Requested Accepted by: "  + senderId);
-            string messagetoSend = "accepted," + roomId;
-            chatClient.SendPrivateMessage(senderId, messagetoSend);
-      //  }
+        //  if (PhotonNetwork.IsConnected)
+        //  {
+        //Debug.Log("Requested Accepted by: "  + senderId);
+        //string messagetoSend = "accepted," + roomId;
+        //chatClient.SendPrivateMessage(senderId, messagetoSend);
+        //  }
+        PhotonNetwork.JoinRoom(roomId);
     }
 
     internal IEnumerator SendJoinRequest(string targetUserID, string action,GameObject prefab =null)

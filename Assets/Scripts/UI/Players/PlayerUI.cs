@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -11,9 +12,27 @@ public class PlayerUI : MonoBehaviour
     public Text cardsCountText;
     public Text bidCount;
 
+    public TextMeshProUGUI nameText;
+    public Text gameScore;
+
     System.Action<int> callBack;
-    private void Start()
+
+    public PlayerData playerData;
+
+    private void OnEnable()
     {
+        if(Global.isMultiplayer)
+            SetUI();
+        else
+            SetUI("Bot");
+    }
+
+    public void SetUI(string name="Waiting...",int score=0)
+    {
+        if(nameText!=null)
+          nameText.text = name;
+        if (gameScore != null)
+            gameScore.text = score.ToString();
     }
 
     public void UpdateCardCount(int cardCount)

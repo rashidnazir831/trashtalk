@@ -52,6 +52,7 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         Debug.Log("OnPlayerLeftRoom() Player: "+ otherPlayer);
+        UpdatePlayerList();
     }
 
 
@@ -93,7 +94,7 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
 
                 //PhotonNetwork.GameVersion = "0.0.1";//MasterManager.GameSettings.GameVersion;
                 RoomOptions roomOptions = new RoomOptions();
-                roomOptions.MaxPlayers = 7;//byte.Parse(roomLimit_InputField.text);
+                roomOptions.MaxPlayers = 4;//byte.Parse(roomLimit_InputField.text);
                 roomOptions.PublishUserId = true;
                 roomOptions.IsVisible = isPublicRoom;
                 _myCustomProperties["Host"] = PhotonNetwork.LocalPlayer.UserId;
@@ -221,11 +222,13 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
     {
         string name = PlayerProfile.Player_UserName;
         string pic = TextureConverter.Texture2DToBase64(PlayerProfile.Player_rawImage_Texture2D);
+        string imageUrl = PlayerProfile.imageUrl;
         string email = PlayerProfile.Player_Email;
         string country = PlayerProfile.PlayerCountry;
         Hashtable hash = new Hashtable();
         hash["Name"] = name;
         hash["Picture"] = pic;
+        hash["Url"] = imageUrl;
         hash["Email"] = email;
         hash["Country"] = country;
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
@@ -258,12 +261,31 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         Debug.LogError("OnPlayerEnteredRoom playerName: " + newPlayer.NickName);
+        UpdatePlayerList();
         //if (newPlayer != PhotonNetwork.LocalPlayer)
         //{
         //    StartCoroutine(MoveToVs_Screen());
         //}
     }
 
+    void UpdatePlayerList()
+    {
+        Global.playerData = new System.Collections.Generic.List<PlayerData>();
+        foreach (var item in PhotonNetwork.PlayerList)
+        {
+            PlayerData playerData = new PlayerData
+            {
+                imageURL = item.CustomProperties["Url"].ToString(),
+                name = item.NickName,
+                id = item.UserId,
+                isMe = item.UserId.Equals(PhotonNetwork.LocalPlayer.UserId),
+                isMaster = item.IsMasterClient
+
+            };
+
+            Global.playerData.Add(playerData);
+        }
+    }
     public IEnumerator MoveToVs_Screen()
     {
         Debug.LogError("MoveToVs_Screen()");

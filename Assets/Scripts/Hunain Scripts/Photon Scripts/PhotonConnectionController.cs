@@ -56,6 +56,8 @@ public class PhotonConnectionController : MonoBehaviourPunCallbacks
             PhotonNetwork.JoinLobby(Default);
             //invitationPanel.ChatSetting();
         }
+
+        PhotonRoomCreator.instance.setPhotonProps();
         if (isChatConnected == false)
         {
             PhotonChat.Instance.Connect();

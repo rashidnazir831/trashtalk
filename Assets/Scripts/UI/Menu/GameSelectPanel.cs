@@ -22,6 +22,7 @@ public class GameSelectPanel : UIPanel
     public void OnPractice()
     {
         //    OpenTabPanel();
+        Global.isMultiplayer = false;
         UIEvents.HidePanel(Panel.TabPanels);
         UIEvents.ShowPanel(Panel.GameplayPanel);
        

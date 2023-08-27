@@ -5,6 +5,8 @@ using TrashTalk;
 public class PlayerProfile : MonoBehaviour
 {
     public static Texture2D Player_rawImage_Texture2D;
+
+    public static string imageUrl;
     public static string Player_Access_Token;
     public static string Player_UserName;
     public static string Player_UserID;

@@ -11560,6 +11560,8 @@ MonoBehaviour:
   myBids: {fileID: 8601195371435241585}
   cardsCountText: {fileID: 0}
   bidCount: {fileID: 0}
+  nameText: {fileID: 0}
+  gameScore: {fileID: 0}
 --- !u!1 &9215373206665048695
 GameObject:
   m_ObjectHideFlags: 0
@@ -11629,6 +11631,8 @@ MonoBehaviour:
   myBids: {fileID: 0}
   cardsCountText: {fileID: 3120188485150166411}
   bidCount: {fileID: 3120188483813616736}
+  nameText: {fileID: 3120188484181054421}
+  gameScore: {fileID: 3120188484975933867}
 --- !u!1 &9215373206805872999
 GameObject:
   m_ObjectHideFlags: 0
@@ -12885,6 +12889,8 @@ MonoBehaviour:
   myBids: {fileID: 0}
   cardsCountText: {fileID: 8601195371712974269}
   bidCount: {fileID: 3120188484765157435}
+  nameText: {fileID: 8601195371332788973}
+  gameScore: {fileID: 8601195372423508586}
 --- !u!1 &9215373207448606227
 GameObject:
   m_ObjectHideFlags: 0
@@ -13142,6 +13148,8 @@ MonoBehaviour:
   myBids: {fileID: 0}
   cardsCountText: {fileID: 3120188485484631091}
   bidCount: {fileID: 3120188484399778284}
+  nameText: {fileID: 3120188484796996263}
+  gameScore: {fileID: 3120188485887707680}
 --- !u!1 &9215373207678396862
 GameObject:
   m_ObjectHideFlags: 0
