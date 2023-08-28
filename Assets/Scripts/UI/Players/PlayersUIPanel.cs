@@ -80,9 +80,18 @@ public class PlayersUIPanel : UIPanel
         //}
         //else
         //{
-            List<Player> players = PlayerManager.instance.players;
+        print("setting player here now");
+        print("playerUI == null " + (playerUI==null));
+
+        if (playerUI == null)
+            return;
+        List<Player> players = PlayerManager.instance.players;
+
+        print("also coming here: " + players.Count);
             for (int i=0;i< players.Count; i++)
             {
+                print("playerUi: " + playerUI);
+                print("players[i].name: " + players[i].name);
                 playerUI[i].SetUI(players[i].name,0);
             }
     //    }

@@ -218,6 +218,12 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
             WaitingLoader.instance.ShowHide(false);
         }
 
+        Debug.Log("Joined a room");
+        Global.isMultiplayer = true;
+        UIEvents.HidePanel(Panel.TabPanels);
+        UIEvents.HidePanel(Panel.FriendsPanel);
+        UIEvents.ShowPanel(Panel.GameplayPanel);
+
     }
 
     #region new code
@@ -286,8 +292,8 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
 
         foreach (var item in PhotonNetwork.PlayerList)
         {
-          //  MutiplayerData playerData = new MutiplayerData();
-
+            //  MutiplayerData playerData = new MutiplayerData();
+            print("rrrr: ");
             object imageUrl; 
             string url = "";
             if(item.CustomProperties.TryGetValue("Url", out imageUrl))
@@ -297,6 +303,7 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
             PlayerManager.instance.AddPlayer(item.NickName,item.UserId,url, item.UserId.Equals(PhotonNetwork.LocalPlayer.UserId), item.IsMasterClient, false, 0);
         }
 
+        print("Before going next: the count is: " + PlayerManager.instance.players.Count);
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
     }
     public IEnumerator MoveToVs_Screen()

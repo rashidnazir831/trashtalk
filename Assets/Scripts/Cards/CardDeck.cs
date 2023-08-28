@@ -72,11 +72,12 @@ public class CardDeck : MonoBehaviour
         int cardNumber = 0;
 
         int currentPlayerIndex = 0;
-
+        int playerCount = PlayerManager.instance.players.Count;
         // Iterate through the deck and distribute the cards to players
         for (int i = 0; i < cardsPerPlayer; i++)
         {
-            for (int j = 0; j < 4; j++)
+            //for (int j = 0; j < 4; j++)
+            for (int j = 0; j < playerCount; j++)
             {
                 // Get the next card from the deck
 
@@ -101,7 +102,7 @@ public class CardDeck : MonoBehaviour
 
                 // Move the card to the target position using Lean Tween
                 card.MoveToPlayerPosition(player.tablePosition);
-                currentPlayerIndex = (currentPlayerIndex + 1) % 4;
+                currentPlayerIndex = (currentPlayerIndex + 1) % playerCount;
 
                 yield return new WaitForSeconds(0.1f);
 
