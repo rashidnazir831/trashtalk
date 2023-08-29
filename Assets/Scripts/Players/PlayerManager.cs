@@ -10,6 +10,12 @@ public class PlayerManager : MonoBehaviour
 
     public static PlayerManager instance;
 
+    public List<Player> player   // property
+    {
+        get { return players; }   // get method
+        set { players = value; }  // set method
+    }
+
     private void Awake()
     {
         print("players");
@@ -21,6 +27,8 @@ public class PlayerManager : MonoBehaviour
         players = new List<Player>();
         currentPlayerIndex = 0;
     }
+
+
 
     public void AddPlayer(string name, string id,string image, bool isOwn, bool isMaster, bool isBot, int tablePos)
     {
@@ -80,5 +88,48 @@ public class PlayerManager : MonoBehaviour
     public void GoToNextPlayer()
     {
         currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
+    }
+
+    public List<Player> SortMultiplayerPositions()
+    {
+        List<Player> pl = new List<Player>();
+        pl = this.players;
+
+
+        int myIdIndex = pl.FindIndex(x => x.id == PlayerProfile.Player_UserID);
+        print("SortMultiplayerPositions: and count here is " + pl.Count);
+        if (myIdIndex == -1)
+        {
+            Debug.Log("ID not found in the list.");
+            return pl;
+        }
+
+        //for(int j=0;j< pl.Count; j++)
+        //{
+        //    print("Before RRR: " + j  + " :  " + pl[j].id);
+        //}
+
+        List<Player> sortedList = new List<Player>();
+
+        // Add elements after your ID
+        for (int i = myIdIndex; i < pl.Count; i++)
+        {
+            sortedList.Add(pl[i]);
+        }
+
+        // Add elements before your ID
+        for (int i = 0; i < myIdIndex; i++)
+        {
+            sortedList.Add(pl[i]);
+        }
+        print("sorted list count: " + sortedList.Count);
+
+        //for (int j = 0; j < sortedList.Count; j++)
+        //{
+        //    print("After RRR: " + j + " :  " + sortedList[j].id);
+        //}
+
+
+        return sortedList;
     }
 }

@@ -161,7 +161,9 @@ public class GameplayManager : MonoBehaviour
             List<CardData> c = cardDeck.CardsStringToList(this.multiplayerCards);
             cardDeck.CreateInitialDeck(c);
             AddRemainingPlayers();
-          //  Deal();
+
+        //    UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
+            //  Deal();
             return;
         }
 
@@ -173,15 +175,31 @@ public class GameplayManager : MonoBehaviour
     //Add bot players if there are less than 4 players in photon room
     void AddRemainingPlayers()
     {
-        for(int i = 1; i <= 4; i++)
+
+        for(int i = 0; i < 4; i++)
         {
-            if(i > this.totalPlayers)
+            if(PlayerManager.instance.player[i].id == null)
             {
-                PlayerManager.instance.AddPlayer($"Bot Player {i-1}", null, null, false, false, true, 3);
+           //      PlayerManager.instance.AddPlayer($"Bot Player {i-1}", $"BP {i-1}", null, false, false, true, 3);
+                PlayerManager.instance.players[i].name = $"Bot Player {i}";;
+                PlayerManager.instance.players[i].isOwn = false;
+                PlayerManager.instance.players[i].isMaster = false;
+                PlayerManager.instance.players[i].isBot = true;
+                PlayerManager.instance.players[i].tablePosition = 0;
             }
         }
+
+        PlayerManager.instance.player = PlayerManager.instance.SortMultiplayerPositions();
+
+        for(int r=0;r< PlayerManager.instance.players.Count; r++)
+        {
+            print("on adding player: " + r +" : " + PlayerManager.instance.players[r].name);
+        }
+
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
     }
+
+
 
     public void ReplaceBotWithPlayer(string playerID)
     {
@@ -201,6 +219,34 @@ public class GameplayManager : MonoBehaviour
 
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
     }
+
+    //public List<Player> SortMultiplayerPositions()
+    //{
+    //    List<Player> p = PlayerManager.instance.players;
+    //    int myIdIndex = p.FindIndex(x=>x.id==PlayerProfile.Player_UserID);
+
+    //    if (myIdIndex == -1)
+    //    {
+    //        Debug.Log("ID not found in the list.");
+    //        return PlayerManager.instance.players;
+    //    }
+
+    //    List<Player> sortedList = new List<Player>();
+
+    //    // Add elements after your ID
+    //    for (int i = myIdIndex; i < p.Count; i++)
+    //    {
+    //        sortedList.Add(p[i]);
+    //    }
+
+    //    // Add elements before your ID
+    //    for (int i = 0; i < myIdIndex; i++)
+    //    {
+    //        sortedList.Add(p[i]);
+    //    }
+
+    //    return sortedList;
+    //}
 
     public void Deal()
     {

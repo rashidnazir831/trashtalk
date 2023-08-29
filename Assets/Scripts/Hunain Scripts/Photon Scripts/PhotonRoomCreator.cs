@@ -292,22 +292,72 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
 
         PlayerManager.instance.ClearPlayers();
 
-        foreach (var item in PhotonNetwork.PlayerList)
+        for(int i = 0; i < 4; i++)
         {
-            //  MutiplayerData playerData = new MutiplayerData();
-            print("rrrr: ");
-            object imageUrl; 
-            string url = "";
-            if(item.CustomProperties.TryGetValue("Url", out imageUrl))
-            {
-                url = (string)imageUrl;
-            }
-            PlayerManager.instance.AddPlayer(item.NickName,item.UserId,url, item.UserId.Equals(PhotonNetwork.LocalPlayer.UserId), item.IsMasterClient, false, 0);
+            PlayerManager.instance.AddPlayer($"Waiting..", null, null, false, false, true, 0);
         }
 
+
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            if(i >= PhotonNetwork.PlayerList.Length)
+            {
+                break;
+            }
+
+            if(PlayerManager.instance.players[i].id == null)
+            {
+                object imageUrl;
+                string url = "";
+                if (PhotonNetwork.PlayerList[i].CustomProperties.TryGetValue("Url", out imageUrl))
+                {
+                    url = (string)imageUrl;
+                }
+
+                PlayerManager.instance.players[i].name = PhotonNetwork.PlayerList[i].NickName;
+                PlayerManager.instance.players[i].id = PhotonNetwork.PlayerList[i].UserId;
+
+                PlayerManager.instance.players[i].imageURL = url;
+
+                PlayerManager.instance.players[i].isOwn = PhotonNetwork.PlayerList[i].UserId.Equals(PhotonNetwork.LocalPlayer.UserId);
+                PlayerManager.instance.players[i].isMaster = PhotonNetwork.PlayerList[i].IsMasterClient;
+                PlayerManager.instance.players[i].isBot = false;
+                PlayerManager.instance.players[i].tablePosition = 0;
+            }
+
+         //   PlayerManager.instance.AddPlayer($"Waiting..", null, null, false, false, true, 0);
+        }
+
+        //foreach (var item in PhotonNetwork.PlayerList)
+        //{
+        //    object imageUrl;
+        //    string url = "";
+        //    if (item.CustomProperties.TryGetValue("Url", out imageUrl))
+        //    {
+        //        url = (string)imageUrl;
+        //    }
+        //    PlayerManager.instance.AddPlayer(item.NickName, item.UserId, url, item.UserId.Equals(PhotonNetwork.LocalPlayer.UserId), item.IsMasterClient, false, 0);
+        //}
+
         print("Before going next: the count is: " + PlayerManager.instance.players.Count);
+
+
+
+
+        PlayerManager.instance.players = PlayerManager.instance.SortMultiplayerPositions();
+
+        //for (int j = 0; j < PlayerManager.instance.players.Count; j++)
+        //{
+        //    print("After RRR: " + j + " :  " + PlayerManager.instance.players[j].id);
+        //}
+
+
+
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
+
+     //   Invoke("ttt", 0.5f);
     }
+
     public IEnumerator MoveToVs_Screen()
     {
         Debug.LogError("MoveToVs_Screen()");
