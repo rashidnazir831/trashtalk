@@ -52,7 +52,9 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         Debug.Log("OnPlayerLeftRoom() Player: "+ otherPlayer);
-        UpdatePlayerList();
+        Debug.Log("Player Left Room, Id is:  "  + otherPlayer.UserId) ;
+        GameplayManager.instance.ReplaceBotWithPlayer(otherPlayer.UserId);
+      //  UpdatePlayerList();
     }
 
 

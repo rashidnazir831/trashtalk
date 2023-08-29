@@ -85,6 +85,7 @@ public class PlayersUIPanel : UIPanel
 
         if (playerUI == null)
             return;
+
         List<Player> players = PlayerManager.instance.players;
 
         print("also coming here: " + players.Count);
@@ -92,7 +93,7 @@ public class PlayersUIPanel : UIPanel
             {
                 print("playerUi: " + playerUI);
                 print("players[i].name: " + players[i].name);
-                playerUI[i].SetUI(players[i].name,0);
+                playerUI[i].SetUI(players[i].name, players[i].score);
             }
     //    }
     }

@@ -12,7 +12,7 @@ public class Player : IPlayer
 
     public string name;
     public List<Card> hand;
-    public int score;
+    public int score = 0;
     public int tablePosition;
     public int bidPlaced;
     public int bidWon;

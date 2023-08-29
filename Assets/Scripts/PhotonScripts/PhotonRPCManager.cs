@@ -47,16 +47,17 @@ public class PhotonRPCManager : MonoBehaviourPunCallbacks
     //}
 
     [PunRPC]
-    public void SpawnPlayers_Rpc()
+    public void SpawnPlayers_Rpc(string shuffledCards)
     {
         //Call spawning herh
-        GameplayManager.instance.AnimateCardsScreen();
+        print("Got Shuffled cards from Master: " + shuffledCards);
+        GameplayManager.instance.AnimateCardsScreen(shuffledCards);
     }
 
 
 
-    internal void SpawnPlayers()
+    internal void SpawnPlayers(string shuffledCards)
     {
-        SendRPC("SpawnPlayers_Rpc", RpcTarget.All);
+        SendRPC("SpawnPlayers_Rpc", RpcTarget.All, shuffledCards);
     }
 }

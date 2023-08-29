@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class CardDeck : MonoBehaviour
 {
@@ -17,12 +18,14 @@ public class CardDeck : MonoBehaviour
     //   CreateInitialDeck();
     }
 
-    public void CreateInitialDeck()
+    List<CardData> cardsList;
+    public void CreateInitialDeck(List<CardData> shuffledList = null)
     {
         Vector2 position = deckTransform.position;
-        List<CardData> cardsList = new List<CardData>(cardsDB.list);
-        
-        cardsList = ShuffleCards(cardsList);
+        cardsList = new List<CardData>(cardsDB.list);
+
+        cardsList = shuffledList==null?ShuffleCards(cardsList):shuffledList;
+
         cards = new List<Card>();
 
 
@@ -44,6 +47,54 @@ public class CardDeck : MonoBehaviour
             cards.Add(card);
         }
     }
+
+    public string GetShuffleCardsString()
+    {
+        cardsList = new List<CardData>(cardsDB.list);
+
+        //for (int i = 0; i < cardsList.Count; i++)
+        //{
+        //    print("Cards without shuffle: " + cardsList[i].shortCode);
+        //}
+
+        cardsList = ShuffleCards(cardsList);
+
+        //for (int i = 0; i < cardsList.Count; i++)
+        //{
+        //    print("Cards after shuffle: " + cardsList[i].shortCode);
+        //}
+
+        string s = string.Join(",", cardsList.ConvertAll(x => x.shortCode.ToString()).ToArray());
+
+
+        //print("shuffled string:     " + s);
+
+
+        return s;
+    }
+
+    public List<CardData> CardsStringToList(string s)
+    {
+        cardsList = new List<CardData>(cardsDB.list);
+        List<string> shuffledShortCodes = s.Split(',').ToList();
+
+        List<CardData> shuffledList = cardsList
+            .OrderBy(item => shuffledShortCodes.IndexOf(item.shortCode))
+            .ToList();
+
+
+        //for(int i=0;i< shuffledList.Count; i++)
+        //{
+        //    print("Now again from String to List: " + shuffledList[i].name);
+        //}
+
+        return shuffledList;
+    }
+
+    //public void ShowHideCardContainer(bool isActive)
+    //{
+    //    this.gameObject.SetActive(isActive);
+    //}
 
     public List<T> ShuffleCards<T>(List<T> list)
     {

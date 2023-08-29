@@ -115,19 +115,33 @@ public class GameplayManager : MonoBehaviour
         if (Global.isMultiplayer && Photon.Pun.PhotonNetwork.InRoom && Photon.Pun.PhotonNetwork.IsMasterClient) {
             Photon.Pun.PhotonNetwork.CurrentRoom.IsOpen = false;
             Photon.Pun.PhotonNetwork.CurrentRoom.IsVisible = false;
-            PhotonRPCManager.Instance.SpawnPlayers();
+
+            string shuffledCards = cardDeck.GetShuffleCardsString();
+
+            //    cardDeck.ShowHideCardContainer(false);
+
+            PhotonRPCManager.Instance.SpawnPlayers(shuffledCards);
         }
+        else if(!Global.isMultiplayer)
+        {
+            AnimateCardsScreen();
+        }
+        //if (Photon.Pun.PhotonNetwork.InRoom && Photon.Pun.PhotonNetwork.IsMasterClient)
+        //{
+        //    cardDeck.CreateInitialDeck();
+        //    cardDeck.ShowHideCardContainer(false);
+        //}
 
-        AnimateCardsScreen();
 
-      //  playButton.SetActive(false);
-      //  UIEvents.UpdateData(Panel.GameplayPanel, OnCardsCoverScreen, "ShowCardIntro");
+        //  playButton.SetActive(false);
+        //  UIEvents.UpdateData(Panel.GameplayPanel, OnCardsCoverScreen, "ShowCardIntro");
     }
 
 
-
-    public void AnimateCardsScreen()
+    string multiplayerCards = null;
+    public void AnimateCardsScreen(string shuffledCards=null)
     {
+        this.multiplayerCards = shuffledCards;
         playButton.SetActive(false);
         UIEvents.UpdateData(Panel.GameplayPanel, OnCardsCoverScreen, "ShowCardIntro");
     }
@@ -135,14 +149,25 @@ public class GameplayManager : MonoBehaviour
     void OnCardsCoverScreen(object[] parameters = null)
     {
         ResetGame();
-        cardDeck.CreateInitialDeck();
         TableController.instance.ShowSideTable();
 
         if (Global.isMultiplayer)
+        {
+            //if (Photon.Pun.PhotonNetwork.InRoom && Photon.Pun.PhotonNetwork.IsMasterClient)
+            //{
+            //    cardDeck.CreateInitialDeck();
+            //    cardDeck.ShowHideCardContainer(false);
+            //}
+            List<CardData> c = cardDeck.CardsStringToList(this.multiplayerCards);
+            cardDeck.CreateInitialDeck(c);
             AddRemainingPlayers();
+          //  Deal();
+            return;
+        }
 
-
-      //  Invoke("Deal", 1.5f); //will open this
+        //creating this deck for practice
+        cardDeck.CreateInitialDeck();
+        Invoke("Deal", 1.5f); //will open this
     }
 
     //Add bot players if there are less than 4 players in photon room
@@ -152,9 +177,28 @@ public class GameplayManager : MonoBehaviour
         {
             if(i > this.totalPlayers)
             {
-                PlayerManager.instance.AddPlayer($"Bot {i - this.totalPlayers}", null, null, false, false, true, 3);
+                PlayerManager.instance.AddPlayer($"Bot Player {i-1}", null, null, false, false, true, 3);
             }
         }
+        UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
+    }
+
+    public void ReplaceBotWithPlayer(string playerID)
+    {
+        for(int i=0;i< PlayerManager.instance.players.Count;i++)
+        {
+            Player p = PlayerManager.instance.players[i];
+            if (p.id == playerID)
+            {
+                print("Bot has Taken over player Id: " + playerID);
+
+                p.name = $"Bot Player {i}";
+                p.isBot = true;
+                p.isMaster = false;
+                p.isOwn = false;
+            }
+        }
+
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
     }
 
