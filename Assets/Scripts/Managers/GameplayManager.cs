@@ -190,18 +190,19 @@ public class GameplayManager : MonoBehaviour
     //Add bot players if there are less than 4 players in photon room
     void AddRemainingPlayers()
     {
-
+        int bp = 0;
         for(int i = 0; i < 4; i++)
         {
             if(PlayerManager.instance.player[i].id == null)
             {
-                PlayerManager.instance.players[i].name = $"Bot Player {i}";
+                bp++;
+                PlayerManager.instance.players[i].name = $"Bot Player {bp}";
                 PlayerManager.instance.players[i].isOwn = false;
                 PlayerManager.instance.players[i].isMaster = false;
                 PlayerManager.instance.players[i].isBot = true;
                 PlayerManager.instance.players[i].id = $"BP{i}";
                 //   PlayerManager.instance.players[i].tablePosition = 0;
-                PlayerManager.instance.players[i].photonIndex = i;
+             //   PlayerManager.instance.players[i].photonIndex = i;
             }
         }
 

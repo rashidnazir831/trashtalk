@@ -40,6 +40,9 @@ public class BidManager : MonoBehaviour
 
 
         Player p = PlayerManager.instance.GetPlayerByPhotonIndex(photonIndex);
+
+        print("OnSelectPlayerBit tablePosition: " + p.tablePosition);
+
         p.SetBid(selectedBid);
 
         if (p.id == PlayerProfile.Player_UserID)
@@ -158,6 +161,7 @@ public class BidManager : MonoBehaviour
     int DecideBidByBot(Player botPlayer)
     {
         List<Card> hand = botPlayer.hand;
+
 
         int spadeCount = 0;
         int handStrength = 0;

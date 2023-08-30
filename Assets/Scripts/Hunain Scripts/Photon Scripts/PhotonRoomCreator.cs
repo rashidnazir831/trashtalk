@@ -295,6 +295,7 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
         for(int i = 0; i < 4; i++)
         {
             PlayerManager.instance.AddPlayer($"Waiting..", null, null, false, false, true, 0);
+            PlayerManager.instance.players[i].photonIndex = i;
         }
 
 
