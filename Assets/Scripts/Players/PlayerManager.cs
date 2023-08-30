@@ -114,12 +114,15 @@ public class PlayerManager : MonoBehaviour
         // Add elements after your ID
         for (int i = myIdIndex; i < pl.Count; i++)
         {
+            //PlayerManager.instance.players[i].tablePosition = 0;
+            pl[i].tablePosition = i;
             sortedList.Add(pl[i]);
         }
 
         // Add elements before your ID
         for (int i = 0; i < myIdIndex; i++)
         {
+            pl[i].tablePosition = i;
             sortedList.Add(pl[i]);
         }
         print("sorted list count: " + sortedList.Count);

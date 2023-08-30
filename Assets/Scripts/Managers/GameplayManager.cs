@@ -99,9 +99,15 @@ public class GameplayManager : MonoBehaviour
         ResetContainers();
         //playButton.SetActive(true);
         this.totalPlayers = PlayerManager.instance.players.Count;
-        this.currentPlayerIndex = Random.Range(0, totalPlayers);
 
-    //    PlayerManager.instance.ClearPlayersData();
+
+        if (Global.isMultiplayer)
+            this.currentPlayerIndex = cardDeck.GetMasterIndex();
+        else
+            this.currentPlayerIndex = Random.Range(0, totalPlayers);
+
+
+        //    PlayerManager.instance.ClearPlayersData();
 
         TrickManager.ResetTrick();
       //  TableController.instance.ClearCards();
@@ -162,8 +168,13 @@ public class GameplayManager : MonoBehaviour
             cardDeck.CreateInitialDeck(c);
             AddRemainingPlayers();
 
-        //    UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
-            //  Deal();
+            //    UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
+            Invoke("Deal", 1.5f); //will open this
+
+            //    if(Photon.Pun.PhotonNetwork.InRoom && Photon.Pun.PhotonNetwork.IsMasterClient)
+            //         Invoke("StartDealByMaster", 1.5f); //will open this
+
+
             return;
         }
 
@@ -171,6 +182,10 @@ public class GameplayManager : MonoBehaviour
         cardDeck.CreateInitialDeck();
         Invoke("Deal", 1.5f); //will open this
     }
+
+    //void StartDealByMaster(){
+
+    //}
 
     //Add bot players if there are less than 4 players in photon room
     void AddRemainingPlayers()
@@ -180,26 +195,24 @@ public class GameplayManager : MonoBehaviour
         {
             if(PlayerManager.instance.player[i].id == null)
             {
-           //      PlayerManager.instance.AddPlayer($"Bot Player {i-1}", $"BP {i-1}", null, false, false, true, 3);
                 PlayerManager.instance.players[i].name = $"Bot Player {i}";;
                 PlayerManager.instance.players[i].isOwn = false;
                 PlayerManager.instance.players[i].isMaster = false;
                 PlayerManager.instance.players[i].isBot = true;
-                PlayerManager.instance.players[i].tablePosition = 0;
+             //   PlayerManager.instance.players[i].tablePosition = 0;
+                PlayerManager.instance.players[i].photonIndex = i;
             }
         }
 
         PlayerManager.instance.player = PlayerManager.instance.SortMultiplayerPositions();
 
-        for(int r=0;r< PlayerManager.instance.players.Count; r++)
-        {
-            print("on adding player: " + r +" : " + PlayerManager.instance.players[r].name);
-        }
+        //for(int r=0;r< PlayerManager.instance.players.Count; r++)
+        //{
+        //    print("on adding player: " + r +" : " + PlayerManager.instance.players[r].name);
+        //}
 
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
     }
-
-
 
     public void ReplaceBotWithPlayer(string playerID)
     {
@@ -259,8 +272,11 @@ public class GameplayManager : MonoBehaviour
     {
         cardHand.SortHandCards();
         cardHand.StartCoroutine(cardHand.ShowPlayerCards());
+        //
         bidManager.StartBid(this.totalPlayers, this.currentPlayerIndex);
     }
+
+
 
     public void StartGame()
     {

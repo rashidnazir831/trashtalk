@@ -119,6 +119,7 @@ public class PlayersUIPanel : UIPanel
 
     void UpdateCardCount(int playerNumber, int count)
     {
+        print("here come for updateding card playerNumber: " + playerNumber);
         playerUI[playerNumber].UpdateCardCount(count);
     }
 

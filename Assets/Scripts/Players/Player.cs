@@ -20,6 +20,7 @@ public class Player : IPlayer
     public bool isOwn = false;
     public List<Card> winningCards;
 
+    public int photonIndex = 0;
     public string id;
     public bool isMaster;
     public string imageURL;

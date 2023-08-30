@@ -322,7 +322,10 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
                 PlayerManager.instance.players[i].isOwn = PhotonNetwork.PlayerList[i].UserId.Equals(PhotonNetwork.LocalPlayer.UserId);
                 PlayerManager.instance.players[i].isMaster = PhotonNetwork.PlayerList[i].IsMasterClient;
                 PlayerManager.instance.players[i].isBot = false;
-                PlayerManager.instance.players[i].tablePosition = 0;
+                //PlayerManager.instance.players[i].tablePosition = 0;
+                PlayerManager.instance.players[i].photonIndex = i;
+                
+
             }
 
          //   PlayerManager.instance.AddPlayer($"Waiting..", null, null, false, false, true, 0);
