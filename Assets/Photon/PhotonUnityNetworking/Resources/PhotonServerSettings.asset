@@ -41,6 +41,7 @@ MonoBehaviour:
   - RespawnSpaceship
   - TestCallBack_Rpc
   - SpawnPlayers_Rpc
+  - Place_Bid
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

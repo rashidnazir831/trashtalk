@@ -195,11 +195,12 @@ public class GameplayManager : MonoBehaviour
         {
             if(PlayerManager.instance.player[i].id == null)
             {
-                PlayerManager.instance.players[i].name = $"Bot Player {i}";;
+                PlayerManager.instance.players[i].name = $"Bot Player {i}";
                 PlayerManager.instance.players[i].isOwn = false;
                 PlayerManager.instance.players[i].isMaster = false;
                 PlayerManager.instance.players[i].isBot = true;
-             //   PlayerManager.instance.players[i].tablePosition = 0;
+                PlayerManager.instance.players[i].id = $"BP{i}";
+                //   PlayerManager.instance.players[i].tablePosition = 0;
                 PlayerManager.instance.players[i].photonIndex = i;
             }
         }
@@ -223,6 +224,7 @@ public class GameplayManager : MonoBehaviour
             {
                 print("Bot has Taken over player Id: " + playerID);
 
+                p.id = $"BP{p.photonIndex}";
                 p.name = $"Bot Player {i}";
                 p.isBot = true;
                 p.isMaster = false;
@@ -276,6 +278,11 @@ public class GameplayManager : MonoBehaviour
         bidManager.StartBid(this.totalPlayers, this.currentPlayerIndex);
     }
 
+    //Only for multiplayer
+    public void GetBidFromPlayers(string playerId, int photonIndex, int selectedBid)
+    {
+        bidManager.OnGetPlayerBid(playerId, photonIndex, selectedBid);
+    }
 
 
     public void StartGame()

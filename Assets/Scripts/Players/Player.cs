@@ -32,7 +32,7 @@ public class Player : IPlayer
         this.isBot = isBot;
         this.tablePosition = tablePos;
         this.isOwn = isOwn;
-        this.bidPlaced = 0;
+        this.bidPlaced = -1;
         this.bidWon = 0;
 
         this.id = id;

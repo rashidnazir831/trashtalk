@@ -54,10 +54,21 @@ public class PhotonRPCManager : MonoBehaviourPunCallbacks
         GameplayManager.instance.AnimateCardsScreen(shuffledCards);
     }
 
-
-
     internal void SpawnPlayers(string shuffledCards)
     {
         SendRPC("SpawnPlayers_Rpc", RpcTarget.All, shuffledCards);
+    }
+
+    [PunRPC]
+    public void Place_Bid(string playerId, int photonIndex, int selectedBid)
+    {
+        //Call spawning herh
+        GameplayManager.instance.GetBidFromPlayers(playerId, photonIndex, selectedBid);
+    }
+
+    internal void PlaceBid(string playerId, int photonIndex, int selectedBid)
+    {
+
+        SendRPC("Place_Bid", RpcTarget.All, playerId, photonIndex, selectedBid);
     }
 }

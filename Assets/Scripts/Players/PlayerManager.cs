@@ -54,6 +54,21 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public Player GetMyPlayer()
+    {
+        return players.Find(x => x.id == PlayerProfile.Player_UserID);
+    }
+
+    public Player GetPlayerById(string id)
+    {
+        return players.Find(x => x.id == id);
+    }
+
+    public Player GetPlayerByPhotonIndex(int index)
+    {
+        return players.Find(x => x.photonIndex == index);
+    }
+
     //public void AddCardToHand(Card card)
     //{
     //    hand.Add(card);

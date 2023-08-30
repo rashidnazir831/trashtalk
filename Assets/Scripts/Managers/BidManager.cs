@@ -14,9 +14,69 @@ public class BidManager : MonoBehaviour
     {
         totalBidsPlaced = 0;
         this.totalPlayers = totalPlayers;
-        this.currentPlayerIndex = currentPlayerIndex;
 
+
+        if (Global.isMultiplayer)
+        {
+            ShowMultiplayerBids();
+            return;
+        }
+
+        this.currentPlayerIndex = currentPlayerIndex;
         SelectBid();
+    }
+
+    void ShowMultiplayerBids()
+    {
+        UIEvents.UpdateData(Panel.PlayersUIPanel, PlacePlayerBid,  "ShowBidUI", 0,-1);
+    }
+
+    //Calling when photon player select bid
+    public void OnGetPlayerBid(string playerId, int photonIndex, int selectedBid)//will use for multiplayer
+    {
+        print("OnSelectPlayerBit playerId: " + playerId);
+        print("OnSelectPlayerBit photonIndex: " + photonIndex);
+        print("OnSelectPlayerBit selectedBid: " + selectedBid);
+
+
+        Player p = PlayerManager.instance.GetPlayerByPhotonIndex(photonIndex);
+        p.SetBid(selectedBid);
+
+        if (p.id == PlayerProfile.Player_UserID)
+        {
+            //Show UI to other player
+            UpdateBidCount(p);
+        }
+        else
+        {
+            UIEvents.UpdateData(Panel.PlayersUIPanel, PlacePlayerBid, "ShowBidUI", p.tablePosition, selectedBid);
+
+        }
+
+        if (Photon.Pun.PhotonNetwork.IsMasterClient)
+        {
+            Invoke("SetBotBidByMaster",1);
+        }
+
+        totalBidsPlaced++;
+    }
+
+    void SetBotBidByMaster()
+    {
+        foreach(Player p in PlayerManager.instance.player)
+        {
+            if(p.isBot && p.bidPlaced == -1)
+            {
+                int bid = DecideBidByBot(p);
+                BroadcastBid(p.id,p.photonIndex,bid);
+                break;
+            }
+        }
+    }
+
+    void BroadcastBid(string playerId, int photonIndex, int selectedBid)
+    {
+        PhotonRPCManager.Instance.PlaceBid(playerId, photonIndex, selectedBid);
     }
 
     void SelectBid()
@@ -32,7 +92,6 @@ public class BidManager : MonoBehaviour
         if (currentPlayerIndex == 0)//it is temproray later it will be decided by ID or other property
         {
             UIEvents.UpdateData(Panel.PlayersUIPanel, PlacePlayerBid,  "ShowBidUI", currentPlayerIndex,-1);
-            
         }
         else
         {
@@ -42,6 +101,14 @@ public class BidManager : MonoBehaviour
 
     public void PlacePlayerBid(object[] parameters)
     {
+        if (Global.isMultiplayer)
+        {
+            Player p = PlayerManager.instance.GetMyPlayer();
+            print("Paced Bid 1: " + (int)parameters[0]);
+            BroadcastBid(p.id,p.photonIndex,(int)parameters[0]);
+            return;
+        }
+
         this.currentPlayer.SetBid((int)parameters[0]);
         UpdateBidCount(this.currentPlayer);
         DecideNext();
@@ -51,8 +118,46 @@ public class BidManager : MonoBehaviour
     IEnumerator BotPlaceBid()
     {
         Player botPlayer = this.currentPlayer;
-        List<Card> hand = botPlayer.hand;
+        //List<Card> hand = botPlayer.hand;
        
+
+        //int spadeCount = 0;
+        //int handStrength = 0;
+
+        //foreach (Card card in hand)
+        //{
+        //    if (card.data.suit == Card.Suit.Spades.ToString())
+        //    {
+        //        spadeCount++;
+        //        handStrength += card.data.rank;
+        //    }
+        //}
+
+        int bid = DecideBidByBot(botPlayer);
+
+        //if (handStrength >= 13 && spadeCount >= 1)
+        //{
+        //    bid = spadeCount + 1;
+        //}
+        //else if (handStrength >= 10 && spadeCount >= 2)
+        //{
+        //    bid = spadeCount;
+        //}
+        //else if (handStrength >= 7 && spadeCount >= 3)
+        //{
+        //    bid = spadeCount - 1;
+        //}
+
+        botPlayer.SetBid(bid);
+        UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowBidUI", currentPlayerIndex,bid);
+        UpdateBidCount(botPlayer);
+        yield return new WaitForSeconds (1);
+        DecideNext();
+    }
+
+    int DecideBidByBot(Player botPlayer)
+    {
+        List<Card> hand = botPlayer.hand;
 
         int spadeCount = 0;
         int handStrength = 0;
@@ -81,12 +186,12 @@ public class BidManager : MonoBehaviour
             bid = spadeCount - 1;
         }
 
-        botPlayer.SetBid(bid);
-        UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowBidUI", currentPlayerIndex,bid);
-        UpdateBidCount(botPlayer);
-        yield return new WaitForSeconds (1);
-        DecideNext();
+        return bid;
     }
+
+
+
+
 
     public void UpdateBidCount(Player player)
     {
