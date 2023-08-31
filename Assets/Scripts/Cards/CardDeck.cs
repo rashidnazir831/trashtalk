@@ -122,9 +122,9 @@ public class CardDeck : MonoBehaviour
         int cardsPerPlayer = 13;
         int cardNumber = 0;
 
-        int currentPlayerIndex = Global.isMultiplayer? GetMasterIndex(): 0;
+        int currentPlayerIndex = Global.isMultiplayer? PlayerManager.instance.GetMasterIndex(): 0;
 
-        print("card starting index is: " + currentPlayerIndex);
+   //     print("card starting index is: " + currentPlayerIndex);
 
         int playerCount = PlayerManager.instance.players.Count;
         // Iterate through the deck and distribute the cards to players
@@ -148,7 +148,7 @@ public class CardDeck : MonoBehaviour
 
                 Player player =  PlayerManager.instance.GetPlayer(currentPlayerIndex);
                 //    bool isOwn = player.isOwn;
-                print("Player: " + currentPlayerIndex + " Table position is:  " + player.tablePosition);
+//                print("Player: " + currentPlayerIndex + " Table position is:  " + player.tablePosition);
                 player.AddCardToHand(card);
                 card.SetOwner(player);
              //   if (isOwn)
@@ -166,10 +166,10 @@ public class CardDeck : MonoBehaviour
         GameplayManager.instance.Invoke("StartBid", 1);
     }
 
-    public int GetMasterIndex()
-    {
-        return PlayerManager.instance.players.FindIndex(x=>x.isMaster==true);
-    }
+    //public int GetMasterIndex()
+    //{
+    //    return PlayerManager.instance.players.FindIndex(x=>x.isMaster==true);
+    //}
 
 
     private Card GetNextCard(int index)
@@ -186,5 +186,10 @@ public class CardDeck : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+    }
+
+    public Card GetCard(string shortCode)
+    {
+        return cards.Find(x => x.data.shortCode == shortCode);
     }
 }

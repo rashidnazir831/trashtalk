@@ -28,9 +28,7 @@ public class GameplayManager : MonoBehaviour
 
     private GameplayManager()
     {
-        //totalPlayers = PlayerManager.instance.players.Count;
-        //currentPlayerIndex = Random.Range(0, totalPlayers);
-     //   currentTrick = new Trick();
+
     }
 
     private void OnEnable()
@@ -52,7 +50,6 @@ public class GameplayManager : MonoBehaviour
         botTrick = new BotTrick();
 
       //  this.totalPlayers = PlayerManager.instance.players.Count;
-      //  this.currentPlayerIndex = Random.Range(0, totalPlayers);
         //     this.totalPlayerPlayed = 0;
         SoundManager.Instance.PlayBackgroundMusic(Sound.Music);
         SetPlayButton(!Global.isMultiplayer);
@@ -102,7 +99,7 @@ public class GameplayManager : MonoBehaviour
 
 
         if (Global.isMultiplayer)
-            this.currentPlayerIndex = cardDeck.GetMasterIndex();
+            this.currentPlayerIndex = PlayerManager.instance.GetMasterIndex();
         else
             this.currentPlayerIndex = Random.Range(0, totalPlayers);
 
@@ -288,14 +285,33 @@ public class GameplayManager : MonoBehaviour
 
     public void StartGame()
     {
+        this.currentPlayerIndex = PlayerManager.instance.GetMasterIndex();
         StartTricks();
     }
 
     public void StartTricks()
     {
         this.totalPlayerPlayed = 0;
-//        currentPlayerIndex = (currentPlayerIndex + 1) % 4;
+        //currentPlayerIndex = (currentPlayerIndex + 1) % 4;
 
+
+        if (Global.isMultiplayer && Photon.Pun.PhotonNetwork.InRoom)
+        {
+            if (Photon.Pun.PhotonNetwork.IsMasterClient)
+            {
+            //    this.currentPlayerIndex
+                
+                PhotonRPCManager.Instance.SetPlayerTurn(PlayerManager.instance.player[this.currentPlayerIndex].id, PlayerManager.instance.player[this.currentPlayerIndex].photonIndex);
+            }
+            return;
+        }
+
+        PlayTurn();
+    }
+
+    public void GetPlayerTurn(string playerID,int photonIndex)
+    {
+        this.currentPlayerIndex = PlayerManager.instance.GetPlayerIndexByID(playerID);
         PlayTurn();
     }
 
@@ -306,14 +322,35 @@ public class GameplayManager : MonoBehaviour
 
         if (currentPlayer.isBot)
         {
-            StartCoroutine(BotPlay(currentPlayer));
+            if (Global.isMultiplayer && Photon.Pun.PhotonNetwork.InRoom && Photon.Pun.PhotonNetwork.IsMasterClient)
+                StartCoroutine(BotPlay(currentPlayer));
+            else
+            {
+                StartCoroutine(BotPlay(currentPlayer));
+            }
         }
         else
         {
-            cardHand.ActiveMainPlayerCards();
-            UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowHideYourTurnHeading", true);
-            print("your turn");
+            if (currentPlayer.isOwn)
+            {
+                cardHand.ActiveMainPlayerCards();
+                UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowHideYourTurnHeading", true);
+                print("your turn");
+            }
+            else
+            {
+                //if we want to show anything for other player
+            }
         }
+    }
+
+    void PlayBotTurnByMaster(Player botPlayer)
+    {
+        List<Card> hand = botPlayer.hand;
+        //Card playedCard = botPlayer.PlayCard(0);
+        Card playedCard = botTrick.GetBestCard(botPlayer.hand);
+
+        SendCardPlacedData(botPlayer.id, playedCard.data.shortCode);
     }
 
     IEnumerator BotPlay(Player botPlayer)
@@ -340,8 +377,6 @@ public class GameplayManager : MonoBehaviour
             DecideNext();
 
         });
-
-
     //    yield return new WaitForSeconds(1f);
 
     }
@@ -349,8 +384,16 @@ public class GameplayManager : MonoBehaviour
     public void PlaceCardOnTable(Player player, Card playedCard)
     {
         //cardHand.UpdateCardArrangement();
-
         cardHand.ActiveMainPlayerCards(false);
+
+        if (Global.isMultiplayer)
+        {
+            SendCardPlacedData(player.id, playedCard.data.shortCode);
+            return;
+        }
+            
+
+//        cardHand.ActiveMainPlayerCards(false);
 
         playedCard.MoveCard(TableController.instance.GetPlayerShowCardTransform(player.tablePosition), 2.5f,true,false,()=> {
             TrickManager.HighlightLowCards();
@@ -360,6 +403,16 @@ public class GameplayManager : MonoBehaviour
         cardHand.OnUseHandCard(playedCard);
         TrickManager.AddCard(playedCard);
         DecideNext();
+    }
+
+    void SendCardPlacedData(string playerId, string cardCode)
+    {
+        PhotonRPCManager.Instance.PlacedCardByPlayer(playerId, cardCode);
+    }
+
+    public void OnPlacedCardByMultiplayer(string playerId, string cardCode)
+    {
+        //
     }
 
     void DecideNext()

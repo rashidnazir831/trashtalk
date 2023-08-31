@@ -48,13 +48,14 @@ public class BidManager : MonoBehaviour
         if (p.id == PlayerProfile.Player_UserID)
         {
             //Show UI to other player
-            UpdateBidCount(p);
+        //    UpdateBidCount(p);
         }
         else
         {
             UIEvents.UpdateData(Panel.PlayersUIPanel, PlacePlayerBid, "ShowBidUI", p.tablePosition, selectedBid);
-
         }
+
+        UpdateBidCount(p);
 
         if (Photon.Pun.PhotonNetwork.IsMasterClient)
         {
@@ -62,6 +63,12 @@ public class BidManager : MonoBehaviour
         }
 
         totalBidsPlaced++;
+
+        if (totalBidsPlaced == totalPlayers)
+        {
+            UIEvents.UpdateData(Panel.PlayersUIPanel, null, "HideAllBidsUIs");
+            GameplayManager.instance.StartGame();
+        }
     }
 
     void SetBotBidByMaster()

@@ -69,6 +69,11 @@ public class PlayerManager : MonoBehaviour
         return players.Find(x => x.photonIndex == index);
     }
 
+    public int GetPlayerIndexByID(string id)
+    {
+        return players.FindIndex(x => x.id == id);
+    }
+
     //public void AddCardToHand(Card card)
     //{
     //    hand.Add(card);
@@ -95,14 +100,19 @@ public class PlayerManager : MonoBehaviour
         //logic if player has turn
     }
 
-    public Player GetCurrentPlayer()
-    {
-        return players[currentPlayerIndex];
-    }
+    //public Player GetCurrentPlayer()
+    //{
+    //    return players[currentPlayerIndex];
+    //}
 
-    public void GoToNextPlayer()
+    //public void GoToNextPlayer()
+    //{
+    //    currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
+    //}
+
+    public int GetMasterIndex()
     {
-        currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
+        return players.FindIndex(x => x.isMaster == true);
     }
 
     public List<Player> SortMultiplayerPositions()

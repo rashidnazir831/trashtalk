@@ -157,15 +157,12 @@ public class Card : MonoBehaviour,ICard
         {
             if (makeParent)
             {
-//                print("own: " + this.cardOwner.isOwn);
                 if (this.cardOwner.isOwn)
                 {
-                    print("it was my own card and I am player number: " + playerIndex);
                     transform.SetParent(currentPlayerDeckTransform);
                 }
                 else
                 {
-                    print("it was not my card, and it belongs to player number: " + playerIndex);
                     gameObject.SetActive(false);
                     UIEvents.UpdateData(Panel.PlayersUIPanel, null, "UpdateCardCount", playerIndex, this.cardOwner.hand.Count);
                 }
