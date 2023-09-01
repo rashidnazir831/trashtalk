@@ -8,8 +8,8 @@ public class InviteFriendsPanel : MonoBehaviour
 {
     public Transform container;
     public GameObject friendItem;
-
     public Button inviteButton;
+    public GameObject emptyDataText;
 
   //  List<GameObject> selectedList;
     List<User> selectedUsers;
@@ -28,13 +28,13 @@ public class InviteFriendsPanel : MonoBehaviour
 
         List<User> users = PlayerProfile.instance.globalUsers;
 
-        foreach(User user in users)
+        emptyDataText.SetActive(users.Count == 0);
+
+        foreach (User user in users)
         {
-            if (user.UserId != PlayerProfile.Player_UserID)
-            {
-                GameObject obj = Instantiate(friendItem, container, false);
-                obj.GetComponent<FriendItem>().SetData(transform.GetSiblingIndex(), user, OnSelect);
-            }
+
+            GameObject obj = Instantiate(friendItem, container, false);
+            obj.GetComponent<FriendItem>().SetData(transform.GetSiblingIndex(), user, OnSelect);
         }
 
         //for (int i = 0; i < users.Count; i++)

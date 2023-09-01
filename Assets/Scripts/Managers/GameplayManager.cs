@@ -115,6 +115,8 @@ public class GameplayManager : MonoBehaviour
 
     public void OnPlayGameButton()
     {
+
+
         if (Global.isMultiplayer && Photon.Pun.PhotonNetwork.InRoom && Photon.Pun.PhotonNetwork.IsMasterClient) {
             Photon.Pun.PhotonNetwork.CurrentRoom.IsOpen = false;
             Photon.Pun.PhotonNetwork.CurrentRoom.IsVisible = false;
@@ -144,6 +146,7 @@ public class GameplayManager : MonoBehaviour
     string multiplayerCards = null;
     public void AnimateCardsScreen(string shuffledCards=null)
     {
+
         this.multiplayerCards = shuffledCards;
         playButton.SetActive(false);
         UIEvents.UpdateData(Panel.GameplayPanel, OnCardsCoverScreen, "ShowCardIntro");
@@ -197,13 +200,23 @@ public class GameplayManager : MonoBehaviour
                 PlayerManager.instance.players[i].isOwn = false;
                 PlayerManager.instance.players[i].isMaster = false;
                 PlayerManager.instance.players[i].isBot = true;
-                PlayerManager.instance.players[i].id = $"BP{i}";
+                PlayerManager.instance.players[i].id = $"BP{bp}";
                 //   PlayerManager.instance.players[i].tablePosition = 0;
              //   PlayerManager.instance.players[i].photonIndex = i;
             }
         }
 
+
+
+
         PlayerManager.instance.player = PlayerManager.instance.SortMultiplayerPositions();
+
+        for (int i = 0; i < PlayerManager.instance.player.Count; i++)
+        {
+            print("and Here player ids: " + PlayerManager.instance.player[i].id);
+            print("and Table Position is: " + PlayerManager.instance.player[i].tablePosition);
+
+        }
 
         //for(int r=0;r< PlayerManager.instance.players.Count; r++)
         //{
@@ -222,7 +235,7 @@ public class GameplayManager : MonoBehaviour
             {
                 print("Bot has Taken over player Id: " + playerID);
 
-                p.id = $"BP{p.photonIndex}";
+            //    p.id = $"BP{p.photonIndex}";
                 p.name = $"Bot Player {i}";
                 p.isBot = true;
                 p.isMaster = false;
@@ -312,12 +325,14 @@ public class GameplayManager : MonoBehaviour
         print("It is: " + playerID + " Turn");
         print("and photon index is : " + photonIndex);
         this.currentPlayerIndex = PlayerManager.instance.GetPlayerIndexByID(playerID);
+        print("palyer index here: " + this.currentPlayerIndex);
         PlayTurn();
     }
 
     public void PlayTurn()
     {
        Player currentPlayer = PlayerManager.instance.players[currentPlayerIndex];
+        
        PlayerManager.instance.SetPlayerTurn(currentPlayerIndex);
 
         if (currentPlayer.isBot)
@@ -348,7 +363,7 @@ public class GameplayManager : MonoBehaviour
 
     IEnumerator PlayBotTurnByMaster(Player botPlayer)
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(1f);
         List<Card> hand = botPlayer.hand;
         //Card playedCard = botPlayer.PlayCard(0);
         Card playedCard = botTrick.GetBestCard(botPlayer.hand);
@@ -459,6 +474,15 @@ public class GameplayManager : MonoBehaviour
         {
             DecideNext();
         }
+        else
+        {
+            this.totalPlayerPlayed++;
+            print("in else total played player: " + this.totalPlayerPlayed);
+            if (this.totalPlayerPlayed == this.totalPlayers)
+            {
+                Invoke("OnWinTrick", 1);
+            }
+        }
     }
 
     void DecideNext()
@@ -478,13 +502,11 @@ public class GameplayManager : MonoBehaviour
         {
             if (Photon.Pun.PhotonNetwork.IsMasterClient)
             {
-                print("Before sending turn");
                 PhotonRPCManager.Instance.SetPlayerTurn(PlayerManager.instance.player[this.currentPlayerIndex].id, PlayerManager.instance.player[this.currentPlayerIndex].photonIndex);
             }
             return;
         }
 
-        print("Playing it directly");
         PlayTurn();
     }
 
@@ -498,12 +520,6 @@ public class GameplayManager : MonoBehaviour
         TrickManager.GiveCardsToWinner(player);
         CompleteTrick();
     }
-
-    void BrodcastWinner(string playerID)
-    {
-
-    }
-
 
     void CompleteTrick()
     {

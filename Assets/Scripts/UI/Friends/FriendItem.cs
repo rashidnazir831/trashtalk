@@ -30,8 +30,8 @@ public class FriendItem : MonoBehaviour
         this.selectionCallBack = selectCallBack;
         addButton.SetActive(type == 0 || type==1);
         inviteButton.SetActive(type == 2);
-        selectionBtton = (type == 0 || type == 1) ? addButton .transform: inviteButton.transform;
-
+        selectionBtton = (type == 0 || type == 1) ? addButton.transform: inviteButton.transform;
+        selectionBtton.gameObject.SetActive(user.UserId != PlayerProfile.Player_UserID);
         nameText.text = this.user.FullName;
         wonText.text = $"Won {this.user.winCount} matches" ;
 
