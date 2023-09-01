@@ -197,6 +197,11 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
             TypedLobby Default = new TypedLobby("US", LobbyType.Default);
             PhotonNetwork.JoinLobby(Default);
         }
+
+        if (WaitingLoader.instance.gameObject.activeInHierarchy)
+        {
+            WaitingLoader.instance.ShowHide(false);
+        }
     }
     
     public override void OnJoinedRoom()

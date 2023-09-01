@@ -30,8 +30,11 @@ public class InviteFriendsPanel : MonoBehaviour
 
         foreach(User user in users)
         {
-            GameObject obj = Instantiate(friendItem, container, false);
-            obj.GetComponent<FriendItem>().SetData(transform.GetSiblingIndex(),user, OnSelect);
+            if (user.UserId != PlayerProfile.Player_UserID)
+            {
+                GameObject obj = Instantiate(friendItem, container, false);
+                obj.GetComponent<FriendItem>().SetData(transform.GetSiblingIndex(), user, OnSelect);
+            }
         }
 
         //for (int i = 0; i < users.Count; i++)
@@ -58,15 +61,14 @@ public class InviteFriendsPanel : MonoBehaviour
 
         string roomName = "SAND_" + Random.Range(99, 9999);
 
-        SendGameRequest(roomName, PlayerProfile.Player_UserName, PlayerProfile.Player_UserID, "guest_4bc61b8c686d4a0fb0eff75e5d311b7f_userID");
+       // SendGameRequest(roomName, PlayerProfile.Player_UserName, PlayerProfile.Player_UserID, "guest_7041971c4761418da8bd264305cf1d1a_userID");
+
+        foreach (var item in selectedUsers)
+        {
+            SendGameRequest(roomName, PlayerProfile.Player_UserName, PlayerProfile.Player_UserID, item.UserId);
+        }
 
         PhotonRoomCreator.instance.CreateRoomOnPhoton(true, roomName);
-       
-
-        //foreach (var item in selectedUsers)
-        //{
-        //    SendGameRequest(roomName, PlayerProfile.Player_UserName, PlayerProfile.Player_UserID,item.UserId);
-        //}
     }
 
 

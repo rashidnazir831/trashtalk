@@ -169,6 +169,7 @@ public class PhotonChat : MonoBehaviourPunCallbacks, IChatClientListener
         //string messagetoSend = "accepted," + roomId;
         //chatClient.SendPrivateMessage(senderId, messagetoSend);
         //  }
+        WaitingLoader.instance.ShowHide(true);
         PhotonNetwork.JoinRoom(roomId);
     }
 

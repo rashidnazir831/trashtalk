@@ -34,14 +34,14 @@ public class BidManager : MonoBehaviour
     //Calling when photon player select bid
     public void OnGetPlayerBid(string playerId, int photonIndex, int selectedBid)//will use for multiplayer
     {
-        print("OnSelectPlayerBit playerId: " + playerId);
-        print("OnSelectPlayerBit photonIndex: " + photonIndex);
-        print("OnSelectPlayerBit selectedBid: " + selectedBid);
+        //print("OnSelectPlayerBit playerId: " + playerId);
+        //print("OnSelectPlayerBit photonIndex: " + photonIndex);
+        //print("OnSelectPlayerBit selectedBid: " + selectedBid);
 
 
         Player p = PlayerManager.instance.GetPlayerByPhotonIndex(photonIndex);
 
-        print("OnSelectPlayerBit tablePosition: " + p.tablePosition);
+     //   print("OnSelectPlayerBit tablePosition: " + p.tablePosition);
 
         p.SetBid(selectedBid);
 
@@ -66,9 +66,14 @@ public class BidManager : MonoBehaviour
 
         if (totalBidsPlaced == totalPlayers)
         {
-            UIEvents.UpdateData(Panel.PlayersUIPanel, null, "HideAllBidsUIs");
-            GameplayManager.instance.StartGame();
+            Invoke("OnCompleteMultiplayerBids", 1);
         }
+    }
+
+    void OnCompleteMultiplayerBids()
+    {
+        UIEvents.UpdateData(Panel.PlayersUIPanel, null, "HideAllBidsUIs");
+        GameplayManager.instance.StartGame();
     }
 
     void SetBotBidByMaster()

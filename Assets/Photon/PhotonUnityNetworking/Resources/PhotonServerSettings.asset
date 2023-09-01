@@ -42,6 +42,9 @@ MonoBehaviour:
   - TestCallBack_Rpc
   - SpawnPlayers_Rpc
   - Place_Bid
+  - Set_Player_Turn
+  - Placed_Card_By_Player
+  - Anounce_Round_Winner
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

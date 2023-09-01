@@ -73,7 +73,7 @@ public class PhotonRPCManager : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void Set_Player_Turn(string playerId, int photonIndex, int selectedBid)
+    public void Set_Player_Turn(string playerId, int photonIndex)
     {
         //Call spawning herh
         GameplayManager.instance.GetPlayerTurn(playerId, photonIndex);
@@ -96,5 +96,18 @@ public class PhotonRPCManager : MonoBehaviourPunCallbacks
     {
 
         SendRPC("Placed_Card_By_Player", RpcTarget.All, playerId, cardCode);
+    }
+
+    [PunRPC]
+    public void Anounce_Round_Winner(string playerId, string cardCode)
+    {
+        //Call spawning herh
+       // GameplayManager.instance.OnPlacedCardByMultiplayer(playerId, cardCode);
+    }
+
+    internal void AnounceRoundWinner(string playerId)
+    {
+
+        SendRPC("Anounce_Round_Winner", RpcTarget.All, playerId);
     }
 }

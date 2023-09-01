@@ -298,9 +298,7 @@ public class GameplayManager : MonoBehaviour
         if (Global.isMultiplayer && Photon.Pun.PhotonNetwork.InRoom)
         {
             if (Photon.Pun.PhotonNetwork.IsMasterClient)
-            {
-            //    this.currentPlayerIndex
-                
+            {      
                 PhotonRPCManager.Instance.SetPlayerTurn(PlayerManager.instance.player[this.currentPlayerIndex].id, PlayerManager.instance.player[this.currentPlayerIndex].photonIndex);
             }
             return;
@@ -311,6 +309,8 @@ public class GameplayManager : MonoBehaviour
 
     public void GetPlayerTurn(string playerID,int photonIndex)
     {
+        print("It is: " + playerID + " Turn");
+        print("and photon index is : " + photonIndex);
         this.currentPlayerIndex = PlayerManager.instance.GetPlayerIndexByID(playerID);
         PlayTurn();
     }
@@ -322,12 +322,14 @@ public class GameplayManager : MonoBehaviour
 
         if (currentPlayer.isBot)
         {
-            if (Global.isMultiplayer && Photon.Pun.PhotonNetwork.InRoom && Photon.Pun.PhotonNetwork.IsMasterClient)
-                StartCoroutine(BotPlay(currentPlayer));
-            else
+
+            if (Global.isMultiplayer)
             {
-                StartCoroutine(BotPlay(currentPlayer));
+                if (Photon.Pun.PhotonNetwork.InRoom && Photon.Pun.PhotonNetwork.IsMasterClient)
+                    StartCoroutine(PlayBotTurnByMaster(currentPlayer));
             }
+            else
+                StartCoroutine(BotPlay(currentPlayer));
         }
         else
         {
@@ -344,8 +346,9 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-    void PlayBotTurnByMaster(Player botPlayer)
+    IEnumerator PlayBotTurnByMaster(Player botPlayer)
     {
+        yield return new WaitForSeconds(10f);
         List<Card> hand = botPlayer.hand;
         //Card playedCard = botPlayer.PlayCard(0);
         Card playedCard = botTrick.GetBestCard(botPlayer.hand);
@@ -399,6 +402,7 @@ public class GameplayManager : MonoBehaviour
             TrickManager.HighlightLowCards();
             cardHand.UpdateCardArrangement();
         });
+
         player.hand.Remove(playedCard);
         cardHand.OnUseHandCard(playedCard);
         TrickManager.AddCard(playedCard);
@@ -413,6 +417,48 @@ public class GameplayManager : MonoBehaviour
     public void OnPlacedCardByMultiplayer(string playerId, string cardCode)
     {
         //
+        print("Player placed was : " + playerId);
+        print("Player placed card: " + cardCode);
+        Card card = cardDeck.GetCard(cardCode);
+        Player currentPlayer = PlayerManager.instance.GetPlayerById(playerId);
+        print("and table position of that player is: " + currentPlayer.tablePosition);
+
+
+        currentPlayer.hand.Remove(card);
+        cardHand.OnUseHandCard(card);
+        TrickManager.AddCard(card);
+
+        if (currentPlayer.isOwn)
+        {
+            card.MoveCard(TableController.instance.GetPlayerShowCardTransform(currentPlayer.tablePosition), 2.5f, true, false, () => {
+                TrickManager.HighlightLowCards();
+                cardHand.UpdateCardArrangement();
+            });
+        }
+        else
+        {
+            card.gameObject.SetActive(true);
+            card.SwitchSide(true);
+
+            card.MoveCard(TableController.instance.GetPlayerShowCardTransform(currentPlayer.tablePosition), 2.5f, true, false, () => {
+                //    TrickManager.AddCard(card);
+
+                //    currentPlayer.hand.Remove(card);
+                UIEvents.UpdateData(Panel.PlayersUIPanel, null, "UpdateCardCount", currentPlayer.tablePosition, currentPlayer.hand.Count);
+                TrickManager.HighlightLowCards();
+                //    DecideNext();
+
+            });
+        }
+
+
+
+
+
+        if (Photon.Pun.PhotonNetwork.IsMasterClient)
+        {
+            DecideNext();
+        }
     }
 
     void DecideNext()
@@ -427,6 +473,18 @@ public class GameplayManager : MonoBehaviour
 
         currentPlayerIndex = (currentPlayerIndex + 1) % this.totalPlayers;
 
+
+        if (Global.isMultiplayer && Photon.Pun.PhotonNetwork.InRoom)
+        {
+            if (Photon.Pun.PhotonNetwork.IsMasterClient)
+            {
+                print("Before sending turn");
+                PhotonRPCManager.Instance.SetPlayerTurn(PlayerManager.instance.player[this.currentPlayerIndex].id, PlayerManager.instance.player[this.currentPlayerIndex].photonIndex);
+            }
+            return;
+        }
+
+        print("Playing it directly");
         PlayTurn();
     }
 
@@ -439,6 +497,11 @@ public class GameplayManager : MonoBehaviour
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "WinnerAnimation", player.tablePosition);
         TrickManager.GiveCardsToWinner(player);
         CompleteTrick();
+    }
+
+    void BrodcastWinner(string playerID)
+    {
+
     }
 
 
