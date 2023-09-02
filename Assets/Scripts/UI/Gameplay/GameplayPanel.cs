@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class GameplayPanel : UIPanel
 {
     public GameObject cardIntroPanel;
+    public Text messageText;
     private Action<object[]> callBack;
 
 
@@ -29,7 +32,19 @@ public class GameplayPanel : UIPanel
                 this.callBack = callBack;
                 ShowCardIntro();
                 break;
+            case "ShowHideMessage":
+                this.callBack = callBack;
+                bool show = (bool)parameters[1];
+                string message = (string)parameters[2];
+                ShowHideMessage(show,message);
+                break;
         }
+    }
+
+    void ShowHideMessage(bool show, string message="")
+    {
+        messageText.text = message;
+        messageText.gameObject.SetActive(show);
     }
 
     void ShowCardIntro()

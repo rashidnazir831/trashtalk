@@ -32,7 +32,6 @@ public class InviteFriendsPanel : MonoBehaviour
 
         foreach (User user in users)
         {
-
             GameObject obj = Instantiate(friendItem, container, false);
             obj.GetComponent<FriendItem>().SetData(transform.GetSiblingIndex(), user, OnSelect);
         }

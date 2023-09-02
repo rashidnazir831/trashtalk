@@ -72,6 +72,7 @@ public class Player : IPlayer
 
     public void SetBid(int bid)
     {
+        this.bidWon = 0;
         this.bidPlaced = bid;
     }
 

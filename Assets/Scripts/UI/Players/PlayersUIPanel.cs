@@ -7,9 +7,11 @@ using UnityEngine;
 public class PlayersUIPanel : UIPanel
 {
     public GameObject yourTurnHeading;
+    public Sprite[] botImages;
     private PlayerUI[] playerUI;
     private Action<object[]> callBack;
     object[] data;
+    
 
     private void Start()
     {
@@ -93,7 +95,7 @@ public class PlayersUIPanel : UIPanel
             {
                 print("playerUi: " + playerUI);
                 print("players[i].name: " + PlayerManager.instance.players[i].name);
-                playerUI[i].SetUI(PlayerManager.instance.players[i].name, PlayerManager.instance.players[i].score);
+                playerUI[i].SetUI(PlayerManager.instance.players[i].name, PlayerManager.instance.players[i].isBot? botImages[i]:null,  PlayerManager.instance.players[i].score, "https://i.pravatar.cc/300");
             }
     //    }
     }
@@ -120,7 +122,7 @@ public class PlayersUIPanel : UIPanel
     void UpdateCardCount(int playerNumber, int count)
     {
         //        print("here come for updateding card playerNumber: " + playerNumber);
-        print("here player number is: " + playerNumber);
+//        print("here player number is: " + playerNumber);
         playerUI[playerNumber].UpdateCardCount(count);
     }
 

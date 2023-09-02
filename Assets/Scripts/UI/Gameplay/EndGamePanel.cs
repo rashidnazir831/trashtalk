@@ -20,7 +20,7 @@ public class EndGamePanel : UIPanel
 
     public void OnCloseButton()
     {
-        GameplayManager.instance.StartNewGame();
+    //    GameplayManager.instance.StartNextRound();
         Hide();
     }
 }

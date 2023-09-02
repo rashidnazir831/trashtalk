@@ -231,4 +231,14 @@ public class BidManager : MonoBehaviour
         SelectBid();
 
     }
+
+    public void ClearPlayersBid()
+    {
+        List<Player> pl = PlayerManager.instance.player;
+
+        foreach(Player p in pl)
+        {
+            p.SetBid(-1);
+        }
+    }
 }

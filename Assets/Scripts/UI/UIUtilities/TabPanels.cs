@@ -14,6 +14,10 @@ public class TabPanels : UIPanel
 
     public RectTransform levelBar;
 
+    public Image profileThumb;
+    public GameObject profileImageLoader;
+    private string profileImageURL = "https://i.pravatar.cc/300";
+
     int lastActiveIndex = 0;
     float levelBarWidth;
 
@@ -27,6 +31,18 @@ public class TabPanels : UIPanel
         UpdateCoinsUI();
         SetLevelUI();
         SelectPanel(3);
+    }
+
+    private void Start()
+    {
+        if (this.profileImageURL != null && this.profileImageURL != "")
+        {
+            ImageCacheManager.instance.CheckOrDownloadImage(this.profileImageURL, this.profileThumb, () => {
+                profileImageLoader.SetActive(false);
+            });
+        }
+        else
+            profileImageLoader.SetActive(false);
     }
 
     void UpdateCoinsUI()

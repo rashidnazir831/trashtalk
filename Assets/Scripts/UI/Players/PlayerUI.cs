@@ -15,6 +15,8 @@ public class PlayerUI : MonoBehaviour
     public TextMeshProUGUI nameText;
     public Text gameScore;
     public Image profileImage;
+    public GameObject imageLoader;
+    //private string profileImageURL = "https://i.pravatar.cc/300";
 
     System.Action<int> callBack;
 
@@ -28,16 +30,36 @@ public class PlayerUI : MonoBehaviour
             SetUI("Bot");
     }
 
-    public void SetUI(string name="Waiting...",int score=0, string imageUrl=null)
+    public void SetUI(string name="Waiting...",Sprite botSprite=null, int score=0, string imageUrl=null)
     {
-        if(nameText!=null)
+        if (nameText!=null)
           nameText.text = name;
         if (gameScore != null)
             gameScore.text = score.ToString();
 
+
         if(profileImage !=null)
         {
             //Profile work
+            if (botSprite !=null)
+            {
+                imageLoader.SetActive(false);
+
+                this.profileImage.sprite = botSprite;
+
+                return;
+            }
+
+            if (imageUrl != null && imageUrl != "")
+            {
+                ImageCacheManager.instance.CheckOrDownloadImage(imageUrl, this.profileImage, () => {
+                    imageLoader.SetActive(false);
+                });
+            }
+            else
+                imageLoader.SetActive(false);
+
+
         }
 
 

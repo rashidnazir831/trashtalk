@@ -46,20 +46,24 @@ public class ImageCacheManager : MonoBehaviour
         }
 
         //--
-        if (!IsCacheImageExist(url))
-        {
-            //Debug.Log("DownLoad Image " + url);
-            StartCoroutine(DownloadImage(url, currentImage, onCallBack));
+        //will open from here
+        /*  if (!IsCacheImageExist(url))
+          {
+              //Debug.Log("DownLoad Image " + url);
+              StartCoroutine(DownloadImage(url, currentImage, onCallBack));
 
-        }
-        else
-        {
-            //Debug.Log("Load Image " + url);
-            currentImage.sprite = SpriteReturnFromLink(url);
+          }
+          else
+          {
+              //Debug.Log("Load Image " + url);
+              currentImage.sprite = SpriteReturnFromLink(url);
 
-            if(onCallBack!=null)
-                onCallBack.Invoke();
-        }
+              if(onCallBack!=null)
+                  onCallBack.Invoke();
+          }*/
+        //to here
+        StartCoroutine(DownloadImage(url, currentImage, onCallBack));//will remove this line
+
 
     }
     public Sprite SpriteReturnFromLink(string url)

@@ -44,14 +44,21 @@ public class GameplayManager : MonoBehaviour
             PlayerManager.instance.AddPlayer("Bot 2", null, null, false, false, true, 2);
             PlayerManager.instance.AddPlayer("Bot 3", null, null, false, false, true, 3);
         }
+        else
+        {
+            ShowMultiplayerMessage(true, Photon.Pun.PhotonNetwork.IsMasterClient?"Waiting other players to join game.":"Waiting master to start game.");
+        }
 
         cardDeck = GetComponentInChildren<CardDeck>();
         bidManager = GetComponent<BidManager>();
         botTrick = new BotTrick();
-
+        RoundManager.instance.ClearAllRounds();
       //  this.totalPlayers = PlayerManager.instance.players.Count;
         //     this.totalPlayerPlayed = 0;
         SoundManager.Instance.PlayBackgroundMusic(Sound.Music);
+
+        print("is multiplayer: " + Global.isMultiplayer);
+
         SetPlayButton(!Global.isMultiplayer);
         StartNewGame();
     }
@@ -86,7 +93,7 @@ public class GameplayManager : MonoBehaviour
     public void StartNewGame()
     {
         TableController.instance.ShowSideTable(false);
-      //  playButton.SetActive(true);
+        //playButton.SetActive(true);
         ResetGame();
     }
 
@@ -94,6 +101,7 @@ public class GameplayManager : MonoBehaviour
     public void ResetGame()
     {
         ResetContainers();
+        bidManager.ClearPlayersBid();
         //playButton.SetActive(true);
         this.totalPlayers = PlayerManager.instance.players.Count;
 
@@ -115,8 +123,6 @@ public class GameplayManager : MonoBehaviour
 
     public void OnPlayGameButton()
     {
-
-
         if (Global.isMultiplayer && Photon.Pun.PhotonNetwork.InRoom && Photon.Pun.PhotonNetwork.IsMasterClient) {
             Photon.Pun.PhotonNetwork.CurrentRoom.IsOpen = false;
             Photon.Pun.PhotonNetwork.CurrentRoom.IsVisible = false;
@@ -146,7 +152,9 @@ public class GameplayManager : MonoBehaviour
     string multiplayerCards = null;
     public void AnimateCardsScreen(string shuffledCards=null)
     {
+        UIEvents.HidePanel(Panel.EndGamePanel);//it is needed to be closed, if other players are still on endgame screen and master started game already
 
+        ShowMultiplayerMessage(false);
         this.multiplayerCards = shuffledCards;
         playButton.SetActive(false);
         UIEvents.UpdateData(Panel.GameplayPanel, OnCardsCoverScreen, "ShowCardIntro");
@@ -466,10 +474,6 @@ public class GameplayManager : MonoBehaviour
             });
         }
 
-
-
-
-
         if (Photon.Pun.PhotonNetwork.IsMasterClient)
         {
             DecideNext();
@@ -525,6 +529,7 @@ public class GameplayManager : MonoBehaviour
     {
         if (IsRoundOver())
         {
+            RoundManager.instance.AddCurrentRoundProgress();
             Invoke("OnRoundOver", 1);
         }
         else
@@ -546,14 +551,53 @@ public class GameplayManager : MonoBehaviour
     void OnRoundOver()
     {
         print("round over");
+
+       // if(needNextRound) logic will be here
+        StartNextRound();
+
+
         UIEvents.ShowPanel(Panel.EndGamePanel);
-        //    UIEvents.ShowPanel(Panel.GameOverPanel);
+        //UIEvents.ShowPanel(Panel.GameOverPanel);
 
     }
 
-    void ResetRound()
-    {
 
+
+    public void StartNextRound()
+    {
+        //  if Need next round
+        //         logic
+      //  UIEvents.HidePanel(Panel.EndGamePanel);
+
+        if (!Global.isMultiplayer)
+        {
+            SetPlayButton(true);
+            StartNewGame();
+            return;
+        }
+
+    //    TableController.instance.ShowSideTable(false);
+
+        if (Photon.Pun.PhotonNetwork.InRoom && Photon.Pun.PhotonNetwork.IsMasterClient)
+        {
+            SetPlayButton(true);
+          //  ResetGame();
+        }
+        else
+        {
+            ShowMultiplayerMessage(true, "Waiting master to start round.");
+        }
+        ResetGame();
+    }
+
+    public void StartRound()
+    {
+        ShowMultiplayerMessage(false);
+    }
+
+    public void ShowMultiplayerMessage(bool show, string message="")
+    {
+        UIEvents.UpdateData(Panel.GameplayPanel, null, "ShowHideMessage", show, message);
     }
 
     private bool IsRoundOver()
@@ -566,6 +610,5 @@ public class GameplayManager : MonoBehaviour
             }
         }
         return true;
-
     }
 }

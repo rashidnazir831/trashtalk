@@ -281,6 +281,7 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
 
         if(PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 2)
         {
+            GameplayManager.instance.ShowMultiplayerMessage(false);
             GameplayManager.instance.SetPlayButton(true);
         }
 
