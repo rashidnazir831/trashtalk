@@ -56,6 +56,13 @@ public class PlayersUIPanel : UIPanel
                 playerNumber = (int)parameters[1];
                 ShowWinnerAnimation(playerNumber);
                 break;
+
+            case "SetTurnIndication":
+                playerNumber = (int)parameters[1];
+                bool isTurn = (bool)parameters[2];
+                SetTurnIndication(playerNumber,isTurn);
+                break;
+
             case "ShowHideYourTurnHeading":
                 bool show = (bool)parameters[1];
                 ShowHideYourTurnHeading(show);
@@ -129,6 +136,11 @@ public class PlayersUIPanel : UIPanel
     void UpdateBidCount(int playerNumber, int bidWon, int totalBid)
     {
         playerUI[playerNumber].UpdateBids(totalBid, bidWon);
+    }
+
+    public void SetTurnIndication(int playerNumber, bool isTurn)
+    {
+        playerUI[playerNumber].SetTurnIndication(isTurn);
     }
 
     void ShowWinnerAnimation(int playerNumber)

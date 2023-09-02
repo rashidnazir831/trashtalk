@@ -10748,6 +10748,7 @@ GameObject:
   - component: {fileID: 8601195372715332006}
   - component: {fileID: 8601195372715332000}
   - component: {fileID: 8601195372715332007}
+  - component: {fileID: 8125881335434919936}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -10796,7 +10797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.116279125, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10817,6 +10818,21 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Your Turn
+--- !u!114 &8125881335434919936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8601195372715332005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8601195372962729384
 GameObject:
   m_ObjectHideFlags: 0
@@ -12009,6 +12025,7 @@ MonoBehaviour:
   gameScore: {fileID: 0}
   profileImage: {fileID: 0}
   imageLoader: {fileID: 0}
+  profileBG: {fileID: 0}
 --- !u!1 &9215373206665048695
 GameObject:
   m_ObjectHideFlags: 0
@@ -12082,6 +12099,7 @@ MonoBehaviour:
   gameScore: {fileID: 3120188484975933867}
   profileImage: {fileID: 3120188485328324566}
   imageLoader: {fileID: 1343592582886546334}
+  profileBG: {fileID: 3120188485042675453}
 --- !u!1 &9215373206805872999
 GameObject:
   m_ObjectHideFlags: 0
@@ -12979,7 +12997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9215373207374992252
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13336,6 +13354,7 @@ MonoBehaviour:
   gameScore: {fileID: 8601195372423508586}
   profileImage: {fileID: 8601195372100715040}
   imageLoader: {fileID: 1929189826094491682}
+  profileBG: {fileID: 8601195371485353619}
 --- !u!1 &9215373207448606227
 GameObject:
   m_ObjectHideFlags: 0
@@ -13597,6 +13616,7 @@ MonoBehaviour:
   gameScore: {fileID: 3120188485887707680}
   profileImage: {fileID: 3120188484071766634}
   imageLoader: {fileID: 7472633282958768032}
+  profileBG: {fileID: 3120188484679036633}
 --- !u!1 &9215373207678396862
 GameObject:
   m_ObjectHideFlags: 0

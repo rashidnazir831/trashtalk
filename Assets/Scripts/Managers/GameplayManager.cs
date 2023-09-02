@@ -303,6 +303,16 @@ public class GameplayManager : MonoBehaviour
         bidManager.OnGetPlayerBid(playerId, photonIndex, selectedBid);
     }
 
+    void SetPlayerTurnIndication(Player p=null, bool removeFromAll=false)
+    {
+        foreach(Player pl in PlayerManager.instance.players)
+        {
+            if (removeFromAll)
+                UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetTurnIndication", pl.tablePosition, false);
+            else
+                UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetTurnIndication", pl.tablePosition, pl.tablePosition == p.tablePosition);
+        }
+    }
 
     public void StartGame()
     {
@@ -339,10 +349,10 @@ public class GameplayManager : MonoBehaviour
 
     public void PlayTurn()
     {
-       Player currentPlayer = PlayerManager.instance.players[currentPlayerIndex];
+       Player currentPlayer = PlayerManager.instance.players[this.currentPlayerIndex];
         
-       PlayerManager.instance.SetPlayerTurn(currentPlayerIndex);
-
+       PlayerManager.instance.SetPlayerTurn(this.currentPlayerIndex);
+       SetPlayerTurnIndication(currentPlayer); 
         if (currentPlayer.isBot)
         {
 
@@ -390,13 +400,13 @@ public class GameplayManager : MonoBehaviour
         playedCard.gameObject.SetActive(true);
 
         playedCard.SwitchSide(true);
-        print("currentPlayerIndex" + currentPlayerIndex);
+        print("currentPlayerIndex" + this.currentPlayerIndex);
 
         playedCard.MoveCard(TableController.instance.GetPlayerShowCardTransform(botPlayer.tablePosition),2.5f,true,false, ()=> {
             TrickManager.AddCard(playedCard);
 
             botPlayer.hand.Remove(playedCard);
-            UIEvents.UpdateData(Panel.PlayersUIPanel, null, "UpdateCardCount", currentPlayerIndex, botPlayer.hand.Count);
+            UIEvents.UpdateData(Panel.PlayersUIPanel, null, "UpdateCardCount", this.currentPlayerIndex, botPlayer.hand.Count);
 
             TrickManager.HighlightLowCards();
 
@@ -499,7 +509,7 @@ public class GameplayManager : MonoBehaviour
             return;
         }
 
-        currentPlayerIndex = (currentPlayerIndex + 1) % this.totalPlayers;
+        this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.totalPlayers;
 
 
         if (Global.isMultiplayer && Photon.Pun.PhotonNetwork.InRoom)
@@ -530,6 +540,7 @@ public class GameplayManager : MonoBehaviour
         if (IsRoundOver())
         {
             RoundManager.instance.AddCurrentRoundProgress();
+            SetPlayerTurnIndication(null, true);
             Invoke("OnRoundOver", 1);
         }
         else
@@ -543,7 +554,7 @@ public class GameplayManager : MonoBehaviour
     {
         TrickManager.ResetTrick();
 
-        currentPlayerIndex = this.trickWinner.tablePosition;
+        this.currentPlayerIndex = this.trickWinner.tablePosition;
 
         StartTricks();
     }

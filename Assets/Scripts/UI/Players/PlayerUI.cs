@@ -16,6 +16,7 @@ public class PlayerUI : MonoBehaviour
     public Text gameScore;
     public Image profileImage;
     public GameObject imageLoader;
+    public Image profileBG;
     //private string profileImageURL = "https://i.pravatar.cc/300";
 
     System.Action<int> callBack;
@@ -116,6 +117,13 @@ public class PlayerUI : MonoBehaviour
             LeanTween.scale(gameObject, Vector2.one, 0.5f).setEase(LeanTweenType.easeInOutQuad);
 
         });
+    }
+
+    public void SetTurnIndication(bool isTurn)
+    {
+        if (profileBG == null)
+            return;
+        profileBG.color = isTurn?Color.red:Color.white;
     }
 
     public void HideBidUI()
