@@ -37,13 +37,17 @@ public class TabPanels : UIPanel
     {
         if (this.profileImageURL != null && this.profileImageURL != "")
         {
-            ImageCacheManager.instance.CheckOrDownloadImage(this.profileImageURL, this.profileThumb, () => {
-                profileImageLoader.SetActive(false);
-            });
+            ImageCacheManager.instance.CheckOrDownloadImage(this.profileImageURL, this.profileThumb, DownloadCallBack);
         }
         else
             profileImageLoader.SetActive(false);
     }
+
+    void DownloadCallBack(Texture2D texture2D)
+    {
+        profileImageLoader.SetActive(false);
+    }
+
 
     void UpdateCoinsUI()
     {

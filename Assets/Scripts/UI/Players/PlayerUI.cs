@@ -53,17 +53,17 @@ public class PlayerUI : MonoBehaviour
 
             if (imageUrl != null && imageUrl != "")
             {
-                ImageCacheManager.instance.CheckOrDownloadImage(imageUrl, this.profileImage, () => {
-                    imageLoader.SetActive(false);
-                });
+                ImageCacheManager.instance.CheckOrDownloadImage(imageUrl, this.profileImage, DownloadCallBack);
             }
             else
                 imageLoader.SetActive(false);
-
-
         }
 
 
+    }
+    void DownloadCallBack(Texture2D texture2D)
+    {
+        imageLoader.SetActive(false);
     }
 
     public void UpdateCardCount(int cardCount)

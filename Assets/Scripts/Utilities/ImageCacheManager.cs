@@ -30,41 +30,9 @@ public class ImageCacheManager : MonoBehaviour
         fileStorage = Application.persistentDataPath;
     }
 
-    public void CheckOrDownloadImage(string url, Image currentImage, Action onCallBack = null)
+    public void CheckOrDownloadImage(string url, Image currentImage = null, Action<Texture2D> onCallBack = null)
     {
-        
-
-        //Jugar
-        if (url.Contains("graph.facebook.com") || url.Contains("googleapis.com"))
-        {
-            StartCoroutine(DownloadImage(url, currentImage));
-            return;
-        }
-        else if(!url.Contains("http"))
-        {
-      //      url = GamePlayManager.instance.config.baseUrl + url;
-        }
-
-        //--
-        //will open from here
-        /*  if (!IsCacheImageExist(url))
-          {
-              //Debug.Log("DownLoad Image " + url);
-              StartCoroutine(DownloadImage(url, currentImage, onCallBack));
-
-          }
-          else
-          {
-              //Debug.Log("Load Image " + url);
-              currentImage.sprite = SpriteReturnFromLink(url);
-
-              if(onCallBack!=null)
-                  onCallBack.Invoke();
-          }*/
-        //to here
         StartCoroutine(DownloadImage(url, currentImage, onCallBack));//will remove this line
-
-
     }
     public Sprite SpriteReturnFromLink(string url)
     {
@@ -77,7 +45,7 @@ public class ImageCacheManager : MonoBehaviour
         //    return null;
     }
 
-    IEnumerator DownloadImage(string url,Image image = null, Action onCallBack = null)
+    IEnumerator DownloadImage(string url,Image image = null, Action<Texture2D> onCallBack = null)
     {
         //WWW www = new WWW(imageURL);
         if (!string.IsNullOrEmpty(url))
@@ -92,7 +60,7 @@ public class ImageCacheManager : MonoBehaviour
                 Debug.Log("DownloadFailed");
 
                 if (onCallBack != null)
-                    onCallBack.Invoke();
+                    onCallBack.Invoke(null);
             }
             else
             {
@@ -104,7 +72,7 @@ public class ImageCacheManager : MonoBehaviour
                 CacheImage(www, url);
 
                 if (onCallBack != null)
-                    onCallBack.Invoke();
+                    onCallBack.Invoke(tex);
 
             }
         }

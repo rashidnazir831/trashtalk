@@ -27,11 +27,15 @@ public class LeaderboardItem : MonoBehaviour
 
         if (this.imageURL != null && this.imageURL != "")
         {
-            ImageCacheManager.instance.CheckOrDownloadImage(this.imageURL, this.thumb, () => {
-                imageLoader.SetActive(false);
-            });
+            ImageCacheManager.instance.CheckOrDownloadImage(this.imageURL, this.thumb,DownloadCallBack);
         }
         else
             imageLoader.SetActive(false);
     }
+
+    void DownloadCallBack(Texture2D texture2D)
+    {
+        imageLoader.SetActive(false);
+    }
+
 }

@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using TrashTalk;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GuestLoginController : MonoBehaviour
 {
@@ -117,34 +118,32 @@ public class GuestLoginController : MonoBehaviour
 
 public class GuestLoginGenerator
 {
-    private const string EmailPrefix = "guest_";
-    private const string PasswordSuffix = "_pass";
+    private const string namePrefix = "guest_";
+    private const string passwordSuffix = "_pass";
 
-    static string uniqueId = Guid.NewGuid().ToString("N"); // Generate a unique identifier without dashes
+    static string uniqueId = Random.Range(1, 51).ToString();
 
     public static string GenerateUniqueEmail()
     {
-        string email = EmailPrefix + uniqueId + "@trashtalk.com";
+        string email = namePrefix + uniqueId + "@trashtalk.com";
         return email;
     }
 
     public static string GenerateUniqueUserId()
     {
-        string userID = EmailPrefix + uniqueId + "_userID";
+        string userID = SystemInfo.deviceUniqueIdentifier;
         return userID;
     }
 
-
     public static string GenerateUniqueName()
     {
-        string userID = EmailPrefix + uniqueId;
+        string userID = namePrefix + uniqueId;
         return userID;
     }
 
     public static string GenerateRandomPassword()
     {
-        string uniqueId = Guid.NewGuid().ToString("N"); // Generate a unique identifier without dashes
-        string password = uniqueId + PasswordSuffix;
+        string password = namePrefix + uniqueId + passwordSuffix;
         return password;
     }
 }

@@ -7,7 +7,7 @@ public class FriendsPanel : UIPanel
 {
     public Transform panels;
     public Transform tabButtons;
-
+    
     int lastActiveIndex = 0;
 
     private void OnEnable()

@@ -197,6 +197,7 @@ public class FacebookManager : MonoBehaviour
             Debug.Log(result.Error);
         }
 
+        PlayerProfile.imageUrl = "https" + "://graph.facebook.com/" + PlayerProfile.Player_UserID + "/picture?redirect=false&width=100&height=100";
         PlayerProfile.authProvider = ConstantVariables.Facebook;
         AttemptLogin();
 
@@ -205,13 +206,15 @@ public class FacebookManager : MonoBehaviour
     private void AttemptLogin()
     {
 
+
         Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
         keyValuePairs.Add("UserID", PlayerProfile.Player_UserID);
         keyValuePairs.Add("FullName", PlayerProfile.Player_UserName);
         keyValuePairs.Add("Email", PlayerProfile.Player_Email);
         keyValuePairs.Add("Password", PlayerProfile.Player_Password);
         keyValuePairs.Add("AuthProvider", PlayerProfile.authProvider);
-        keyValuePairs.Add("image", TextureConverter.Texture2DToBase64(PlayerProfile.Player_rawImage_Texture2D));
+        keyValuePairs.Add("image", PlayerProfile.imageUrl);
+
 
         WebServiceManager.instance.APIRequest(WebServiceManager.instance.signUpFunction, Method.POST, null, keyValuePairs, OnLoginSuccess, OnFail, CACHEABLE.NULL, true, null);
     }
@@ -271,6 +274,7 @@ public class FacebookManager : MonoBehaviour
                 {
                     IDictionary data = result.ResultDictionary["data"] as IDictionary;
                     string photoURL = data["url"] as string;
+
                     StartCoroutine(DownloadFriendPicture_FromURL(photoURL, item));
 
                 }
@@ -280,6 +284,7 @@ public class FacebookManager : MonoBehaviour
 
         //NextPanel.SetActive(true);
     }
+
 
     IEnumerator DownloadFriendPicture_FromURL(string friendPic_url, string friendID/*user id */)
     {
@@ -304,6 +309,8 @@ public class FacebookManager : MonoBehaviour
                     friendDetail.friendName = friendsname[index];
                     friendDetail.friendPicURl = friendPic_url;
                 }
+
+                PlayerProfile.instance.facebookFriends.Add(friendDetail);
 
 
                 //GameObject Friend = Instantiate(FriendRows, Vector3.zero, Quaternion.identity, FriendRowsParent);
@@ -337,10 +344,13 @@ public class FacebookManager : MonoBehaviour
 
     }
 
+    private void SetImage(FriendDetail friendDetail)
+    {
+
+    }
 }
 public class FriendDetail
 {
-
     public string friendUserID;
     public string friendName;
     public string friendPicURl;

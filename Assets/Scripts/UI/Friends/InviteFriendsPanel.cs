@@ -11,8 +11,8 @@ public class InviteFriendsPanel : MonoBehaviour
     public Button inviteButton;
     public GameObject emptyDataText;
 
-  //  List<GameObject> selectedList;
-    List<User> selectedUsers;
+    //  List<GameObject> selectedList;
+    [SerializeField] public List<User> selectedUsers;
 
     private void Start()
     {
