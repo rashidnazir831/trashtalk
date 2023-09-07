@@ -40,10 +40,10 @@ public class GuestLoginController : MonoBehaviour
 
         PlayerProfile.Player_UserID =   PlayerPrefs.GetString(ConstantVariables.UserID);
         PlayerProfile.Player_UserName =   PlayerPrefs.GetString(ConstantVariables.UserName);
-        PlayerProfile.Player_Email = PlayerPrefs.GetString(ConstantVariables.UserEmail);
-        PlayerProfile.Player_rawImage_Texture2D = TextureConverter.Base64ToTexture2D(PlayerPrefs.GetString("Picture"));
-        PlayerProfile.authProvider =   PlayerPrefs.GetString(ConstantVariables.AuthProvider);
-        PlayerProfile.Player_coins =   PlayerPrefs.GetInt("Coins");
+        //PlayerProfile.Player_Email = PlayerPrefs.GetString(ConstantVariables.UserEmail);
+        //PlayerProfile.Player_rawImage_Texture2D = TextureConverter.Base64ToTexture2D(PlayerPrefs.GetString("Picture"));
+        //PlayerProfile.authProvider =   PlayerPrefs.GetString(ConstantVariables.AuthProvider);
+        //PlayerProfile.Player_coins =   PlayerPrefs.GetInt("Coins");
         //Controller.instance.Home_Screen.GetComponent<HomeScreen>().ChipsSettter();
     }
 
@@ -54,9 +54,9 @@ public class GuestLoginController : MonoBehaviour
         Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
         keyValuePairs.Add("UserID", PlayerProfile.Player_UserID);
         keyValuePairs.Add("FullName", PlayerProfile.Player_UserName);
-        keyValuePairs.Add("Email", PlayerProfile.Player_Email);
-        keyValuePairs.Add("Password", PlayerProfile.Player_Password);
-        keyValuePairs.Add("AuthProvider", PlayerProfile.authProvider);
+        //keyValuePairs.Add("Email", PlayerProfile.Player_Email);
+        //keyValuePairs.Add("Password", PlayerProfile.Player_Password);
+        //keyValuePairs.Add("AuthProvider", PlayerProfile.authProvider);
 
 
         WebServiceManager.instance.APIRequest(WebServiceManager.instance.signUpFunction, Method.POST, null, keyValuePairs, OnLoginSuccess, OnFail, CACHEABLE.NULL, true, null);

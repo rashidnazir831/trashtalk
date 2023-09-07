@@ -24,10 +24,11 @@ public class LoginStateCheck : MonoBehaviour
             AppleLoginBtn.gameObject.SetActive(false);
         }
 
-        if (PlayerPrefs.HasKey(ConstantVariables.AuthProvider))
-        {
-            UIEvents.ShowPanel(Panel.TabPanels);
-            UIEvents.HidePanel(Panel.SignupPanel);
-        }
+        //if (PlayerPrefs.HasKey(ConstantVariables.AuthProvider))
+        //{
+        //    Debug.Log("%%%%%%%%%%%" + gameObject.name);
+        //    UIEvents.ShowPanel(Panel.TabPanels);
+        //    UIEvents.HidePanel(Panel.SignupPanel);
+        //}
     }
 }

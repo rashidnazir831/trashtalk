@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using TrashTalk;
+using System;
 
 public class PlayerProfile : MonoBehaviour
 {
@@ -110,12 +111,19 @@ public class PlayerProfile : MonoBehaviour
         PlayerProfile.Player_UserName   = user.FullName;
         PlayerProfile.Player_Email      = user.Email;
         PlayerProfile.Player_Password   = user.Password;
-        PlayerProfile.Player_rawImage_Texture2D   = TextureConverter.Base64ToTexture2D(user.Image);
         PlayerProfile.authProvider      = user.AuthProvider;
         PlayerProfile.Player_coins      = user.Coins;
         PlayerProfile.Player_Access_Token = user.AccessToken;
         PlayerProfile.gamesWon = user.winCount;
+        PlayerProfile.imageUrl = user.ImagePath + "/" + user.Image;
 
+        string url = user.ImagePath + "/" + user.Image;
+        ImageCacheManager.instance.CheckOrDownloadImage(url,null,GetImage);//TextureConverter.Base64ToTexture2D(user.Image);
+    }
+
+    private static void GetImage(Texture2D texture)
+    {
+        PlayerProfile.Player_rawImage_Texture2D = texture;
     }
 
     public static void SaveDataToPrefs()

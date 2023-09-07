@@ -175,8 +175,6 @@ public class FacebookManager : MonoBehaviour
         {
             PlayerProfile.Player_Email = GuestLoginGenerator.GenerateUniqueEmail();
         }
-
-        PhotonConnectionController.Instance.ConnectingToPhoton();
     }
 
 
@@ -197,7 +195,6 @@ public class FacebookManager : MonoBehaviour
             Debug.Log(result.Error);
         }
 
-        PlayerProfile.imageUrl = "https" + "://graph.facebook.com/" + PlayerProfile.Player_UserID + "/picture?redirect=false&width=100&height=100";
         PlayerProfile.authProvider = ConstantVariables.Facebook;
         AttemptLogin();
 
@@ -213,8 +210,7 @@ public class FacebookManager : MonoBehaviour
         keyValuePairs.Add("Email", PlayerProfile.Player_Email);
         keyValuePairs.Add("Password", PlayerProfile.Player_Password);
         keyValuePairs.Add("AuthProvider", PlayerProfile.authProvider);
-        keyValuePairs.Add("image", PlayerProfile.imageUrl);
-
+        //keyValuePairs.Add("image", PlayerProfile.imageUrl);
 
         WebServiceManager.instance.APIRequest(WebServiceManager.instance.signUpFunction, Method.POST, null, keyValuePairs, OnLoginSuccess, OnFail, CACHEABLE.NULL, true, null);
     }
@@ -232,8 +228,9 @@ public class FacebookManager : MonoBehaviour
         PlayerProfile.UpdatePlayerData(playerData.User);
         PlayerProfile.SaveDataToPrefs();
         PlayerProfile.showPlayerDetails();
+        PhotonConnectionController.Instance.ConnectingToPhoton();
     }
-     
+
     /// <summary>
     /// gets API response for friends playing this game
     /// </summary>

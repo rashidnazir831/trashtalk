@@ -61,6 +61,9 @@ namespace TrashTalk
         [JsonProperty("Image")]
         public string Image;
 
+        [JsonProperty("ImagePath")]
+        public string ImagePath;
+
         [JsonProperty("AuthProvider")]
         public string AuthProvider;
 
