@@ -66,7 +66,7 @@ public class GameplayPanel : UIPanel
 
                 if (Global.isMultiplayer && Photon.Pun.PhotonNetwork.InRoom)
                 {
-                    Photon.Pun.PhotonNetwork.LeaveRoom();
+                    PhotonRoomCreator.instance.LeavePhotonRoom();
                 }
 
                 Hide();

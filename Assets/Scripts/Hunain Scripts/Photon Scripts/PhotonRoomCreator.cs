@@ -6,18 +6,24 @@ using System;
 using System.Collections;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class PhotonRoomCreator : MonoBehaviourPunCallbacks
 {
     private Hashtable _myCustomProperties = new Hashtable();
 
 
-    [Space]
     public static bool IsPublicRoom = false;
+    [Space]
     public string RoomID = "";
 
     [Header("Error Panel")]
     public GameObject roomFullPanel;
+
+    [Header("Voice Player")]
+    public VoicePlayer voicePlayer;
+    public List<VoicePlayer> voicePlayers = new();
+
     //[Space]
     //[Header("PopUpAnimationController")]
     //public PopUpAnimationController popUpAnimationController;
@@ -42,6 +48,8 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         Debug.Log("OnJoinedLobby()");
+        UpdateVoicePlayers();
+
         if (WaitingLoader.instance.gameObject.activeInHierarchy)
         {
             WaitingLoader.instance.ShowHide(false);
@@ -203,7 +211,14 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
             WaitingLoader.instance.ShowHide(false);
         }
     }
-    
+
+    public void LeavePhotonRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+        PlayerManager.instance.ClearPlayers();
+    }
+
+
     public override void OnJoinedRoom()
     {
         Debug.Log("OnJoinedRoom()");
@@ -216,6 +231,8 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
             roomOptions.CustomRoomProperties = _myCustomProperties;
             PhotonNetwork.CurrentRoom.SetCustomProperties(_myCustomProperties);
         }
+        PlayerManager.instance.ClearPlayers();
+        UpdateVoicePlayers();
         UpdatePlayerList();
 
 
@@ -277,6 +294,9 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         Debug.LogError("OnPlayerEnteredRoom playerName: " + newPlayer.NickName);
+
+        PlayerManager.instance.ClearPlayers();
+        UpdateVoicePlayers();
         UpdatePlayerList();
 
         if(PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 2)
@@ -295,8 +315,6 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
     {
         //  Global.playerData = new System.Collections.Generic.List<MutiplayerData>();
         //   PlayerManager.instance.AddPlayer("Player 1", false, true, 0);
-
-        PlayerManager.instance.ClearPlayers();
 
         for(int i = 0; i < 4; i++)
         {
@@ -366,6 +384,26 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
 
      //   Invoke("ttt", 0.5f);
+    }
+
+    private void UpdateVoicePlayers()
+    {
+        Debug.Log("UpdateVoicePlayers");
+        foreach (var item in voicePlayers)
+        {
+            Destroy(item.gameObject);
+        }
+        voicePlayers.Clear();
+
+        if (!PhotonNetwork.IsConnected || !PhotonNetwork.InRoom)
+            return;
+        foreach (var item in PhotonNetwork.CurrentRoom.Players)
+        {
+            var player = Instantiate(voicePlayer.gameObject);
+            var obj = player.GetComponent<VoicePlayer>();
+            voicePlayers.Add(obj);
+            obj.SetData(item.Value);
+        }
     }
 
     public IEnumerator MoveToVs_Screen()
