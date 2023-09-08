@@ -21,20 +21,25 @@ public class ShopPanel : UIPanel
         print(parameters[0]);
     }
 
-    public void OnBuyCoins(int totalCoins, int price)
+    public void OnBuyCoins(int totalCoins, int price, string productID)
     {
         print("Purchasing " + totalCoins + " Coin");
         print("Cost: " + price);
+        print("product: " + productID);
 
-        PurchaseThroughInApp();
+        PurchaseThroughInApp(totalCoins, price, productID);
     }
 
-    void PurchaseThroughInApp()
+    void PurchaseThroughInApp(int totalCoins, int price, string productID)
     {
-        Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
-        // keyValuePairs.Add("PageNo", 1);
+        InappManager.instance.PurchaseItem(productID, (payload, signature) => {
 
-        WebServiceManager.instance.APIRequest(WebServiceManager.instance.purchaseCoinsFunction, Method.POST, null, keyValuePairs, OnSuccess, OnFail, CACHEABLE.NULL, true, null);
+            print("In App Success: " + productID);
+            Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
+            // keyValuePairs.Add("PageNo", 1);
+            WebServiceManager.instance.APIRequest(WebServiceManager.instance.purchaseCoinsFunction, Method.POST, null, keyValuePairs, OnSuccess, OnFail, CACHEABLE.NULL, true, null);
+
+        });
     }
 
     void OnSuccess(JObject resp, long arg2)

@@ -7,9 +7,11 @@ public class ShopItem : MonoBehaviour
 {
     public int price;
     public int totalCoins;
+    public string productID;
 
     public Text priceText;
     public Text coinsText;
+    
 
     public ShopPanel shop;
 
@@ -22,7 +24,7 @@ public class ShopItem : MonoBehaviour
 
     public void OnBuyButton()
     {
-        shop.OnBuyCoins(totalCoins, price);
+        shop.OnBuyCoins(totalCoins, price, productID);
     }
 
 }

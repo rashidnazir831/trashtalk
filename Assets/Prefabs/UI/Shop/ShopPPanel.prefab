@@ -754,6 +754,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 10
   totalCoins: 2000
+  productID: coins2000
   priceText: {fileID: 5264543800945451709}
   coinsText: {fileID: 5264543801366678443}
   shop: {fileID: 3781674101265260368}
@@ -852,6 +853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 20
   totalCoins: 5000
+  productID: coins5000
   priceText: {fileID: 5264543801989317308}
   coinsText: {fileID: 5264543802113734328}
   shop: {fileID: 3781674101265260368}
@@ -2645,6 +2647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 6
   totalCoins: 800
+  productID: coins800
   priceText: {fileID: 5264543800995904220}
   coinsText: {fileID: 5264543800182323379}
   shop: {fileID: 3781674101265260368}
@@ -3053,6 +3056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 1
   totalCoins: 100
+  productID: coins100
   priceText: {fileID: 5264543801602073479}
   coinsText: {fileID: 5264543801512657672}
   shop: {fileID: 3781674101265260368}
