@@ -899,7 +899,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 502287526437431744}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9214744490811885113}
+        m_TargetAssemblyTypeName: EndGamePanel, Assembly-CSharp
+        m_MethodName: OnPreviousButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &502287526457058983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,7 +1742,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 502287526592811582}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9214744490811885113}
+        m_TargetAssemblyTypeName: EndGamePanel, Assembly-CSharp
+        m_MethodName: OnNextButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &502287526625172374
 GameObject:
   m_ObjectHideFlags: 0
@@ -3481,7 +3505,7 @@ GameObject:
   - component: {fileID: 502287527367211790}
   - component: {fileID: 502287527367211791}
   m_Layer: 5
-  m_Name: Item1 (5)
+  m_Name: Item6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3758,7 +3782,7 @@ GameObject:
   - component: {fileID: 502287527465734834}
   - component: {fileID: 502287527465734835}
   m_Layer: 5
-  m_Name: Item1 (3)
+  m_Name: Item4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4059,7 +4083,7 @@ GameObject:
   - component: {fileID: 502287527593745580}
   - component: {fileID: 502287527593745581}
   m_Layer: 5
-  m_Name: Item1 (1)
+  m_Name: Item2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4674,7 +4698,7 @@ GameObject:
   - component: {fileID: 502287527833670801}
   - component: {fileID: 502287527833670802}
   m_Layer: 5
-  m_Name: Item1 (2)
+  m_Name: Item3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4876,7 +4900,7 @@ GameObject:
   - component: {fileID: 502287527869643218}
   - component: {fileID: 502287527869643219}
   m_Layer: 5
-  m_Name: Item1 (6)
+  m_Name: Item7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5004,7 +5028,7 @@ GameObject:
   - component: {fileID: 502287527908030235}
   - component: {fileID: 502287527908030236}
   m_Layer: 5
-  m_Name: Item1 (4)
+  m_Name: Item5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6430,3 +6454,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77500f17f78364478bbd5c6b115560fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextButton: {fileID: 502287526592811581}
+  previousButton: {fileID: 502287526437431775}
+  roundText: {fileID: 502287527050719912}
+  myBidText: {fileID: 502287526307136711}
+  roundBagsText: {fileID: 502287526849811401}
+  myBounusText: {fileID: 502287526328348157}
+  myRoundPointsText: {fileID: 502287527924219594}
+  myTotalBags: {fileID: 502287527655530195}
+  myGabPenalty: {fileID: 502287526471538675}
+  myTotalPoints: {fileID: 502287526328650975}
+  opponentBidText: {fileID: 502287527539798235}
+  opponentroundBagsText: {fileID: 502287528114183062}
+  opponentBounusText: {fileID: 502287526457058985}
+  opponentRoundPointsText: {fileID: 502287527299174800}
+  opponentTotalBags: {fileID: 502287527020824121}
+  opponentGabPenalty: {fileID: 502287526761941388}
+  opponentTotalPoints: {fileID: 502287526795334319}

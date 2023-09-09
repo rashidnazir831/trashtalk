@@ -24,7 +24,16 @@ public class Player : IPlayer
     public string id;
     public bool isMaster;
     public string imageURL;
-  //  public Sprite sprite;
+    //  public Sprite sprite;
+
+    public int roundBags;
+    public int roundBounus;
+    public int roundPoints;
+    public int roundTotalBags;
+    public int roundGabPenalty;
+    public int roundTotalPoints;
+
+    public Player partner;
 
     public Player(string playerName, string id, string image, bool isOwn, bool isMaster, bool isBot, int tablePos)
     {
@@ -32,8 +41,7 @@ public class Player : IPlayer
         this.isBot = isBot;
         this.tablePosition = tablePos;
         this.isOwn = isOwn;
-        this.bidPlaced = -1;
-        this.bidWon = 0;
+
 
         this.id = id;
         this.isMaster = isMaster;
@@ -41,6 +49,21 @@ public class Player : IPlayer
 
         winningCards = new List<Card>();
         hand = new List<Card>();
+
+        //Round Related Details
+        this.bidPlaced = -1;
+        this.bidWon = 0;
+        this.roundBags = 0;
+        this.roundBounus = 0;
+        this.roundPoints = 0;
+        this.roundTotalBags = 0;
+        this.roundGabPenalty = 0;
+        this.roundTotalPoints = 0;
+    }
+
+    public void SetPartner(Player partner)
+    {
+        this.partner = partner;
     }
 
     public void AddWinningCard(Card card)

@@ -119,7 +119,7 @@ public class CardDeck : MonoBehaviour
     public IEnumerator DistributeCardsWithDelay()
     {
         //   int playerCount = playerPositions.Length;
-        int cardsPerPlayer = 13;
+        int cardsPerPlayer = 1;
         int cardNumber = 0;
 
         int currentPlayerIndex = Global.isMultiplayer? PlayerManager.instance.GetMasterIndex(): 0;
