@@ -8,6 +8,7 @@ public class EndGamePanel : UIPanel
 {
     public  Button nextButton;
     public Button previousButton;
+    public Sprite[] botImages;
 
     public Text roundText;
 
@@ -27,6 +28,10 @@ public class EndGamePanel : UIPanel
     public Text opponentGabPenalty;
     public Text opponentTotalPoints;
 
+    public EndGamePlayerUI myProfile;
+    public EndGamePlayerUI myPartnerProfile;
+    public EndGamePlayerUI opponentProfile1;
+    public EndGamePlayerUI opponentProfile2;
 
     int currentRoundShowing = 1;
     List<Round> rounds;
@@ -85,6 +90,11 @@ public class EndGamePanel : UIPanel
         Utility.DisableButtonChilds(previousButton);
 
         Round currentRound = rounds[this.currentRoundShowing-1];
+        Player myMainPlayer = currentRound.players[0];
+        Player opponentMainPlayer = currentRound.players[1];
+
+        print("appp: " + opponentMainPlayer.name);
+        print("appp2: " + opponentMainPlayer.partner.name);
 
         roundText.text = $"ROUND {this.currentRoundShowing}";
 
@@ -104,7 +114,12 @@ public class EndGamePanel : UIPanel
         opponentGabPenalty.text = $"{0}";
         opponentTotalPoints.text = $"{this.currentRoundShowing * -100}";
 
-}
+        myProfile.SetUI(myMainPlayer.name, null, 0, "https://i.pravatar.cc/300");
+        myPartnerProfile.SetUI(myMainPlayer.partner.name, myMainPlayer.partner.isBot ? botImages[2] : null, 0, "https://i.pravatar.cc/300");
+        opponentProfile1.SetUI(opponentMainPlayer.name, opponentMainPlayer.partner.isBot ? botImages[1] : null, 0, "https://i.pravatar.cc/300");
+        opponentProfile2.SetUI(opponentMainPlayer.partner.name, opponentMainPlayer.partner.isBot ? botImages[3] : null, 0, "https://i.pravatar.cc/300");
+
+    }
 
     public void OnCloseButton()
     {

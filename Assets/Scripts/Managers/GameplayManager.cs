@@ -39,7 +39,7 @@ public class GameplayManager : MonoBehaviour
         if (!Global.isMultiplayer)
         {
             PlayerManager.instance.ClearPlayers();
-            PlayerManager.instance.AddPlayer("Player 1",null, null, true,true, false, 0);
+            PlayerManager.instance.AddPlayer("YOU",null, null, true,true, false, 0);
             PlayerManager.instance.AddPlayer("Bot 1", null, null, false, false, true, 1);
             PlayerManager.instance.AddPlayer("Bot 2", null, null, false, false, true, 2);
             PlayerManager.instance.AddPlayer("Bot 3", null, null, false, false, true, 3);

@@ -36,6 +36,7 @@ public class Round
 
     public Round(List<Player> roundPlayers)
     {
+        SetPartners(roundPlayers);
         //foreach(Player player in roundPlayers)
         //{
         //    RoundPlayer p = new RoundPlayer(player.name,player.id,player.imageURL,player.isOwn,player.isBot, player.bidPlaced,player.bidWon);
@@ -47,10 +48,29 @@ public class Round
             Player p = new Player(player.name, player.id, player.imageURL, player.isOwn, player.isMaster,player.isBot,player.tablePosition);
             p.bidPlaced = player.bidPlaced;
             p.bidWon = player.bidWon;
+            p.partner = player.partner;
+
+
+
+
+
             players.Add(p);
         }
+
+        
+    }
+
+    void SetPartners(List<Player> roundPlayers)
+    {
+        roundPlayers[0].partner = roundPlayers[2];
+        roundPlayers[1].partner = roundPlayers[3];
+        roundPlayers[2].partner = roundPlayers[0];
+        roundPlayers[3].partner = roundPlayers[1];
     }
 }
+
+
+
 
 public class RoundManager : MonoBehaviour
 {
@@ -71,7 +91,7 @@ public class RoundManager : MonoBehaviour
     {
         Round round = new Round(PlayerManager.instance.player);
 
-    rounds.Add(round);
+        rounds.Add(round);
     }
 
     public void ClearAllRounds()
