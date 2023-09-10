@@ -118,7 +118,10 @@ public class GameplayManager : MonoBehaviour
       //  TableController.instance.ClearCards();
 
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ResetUI");
-        
+
+        UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
+
+
     }
 
     public void OnPlayGameButton()

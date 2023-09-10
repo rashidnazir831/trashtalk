@@ -137,9 +137,11 @@ public class RoundManager : MonoBehaviour
             player.roundBags = roundBag;
 
             int myScore = player.teamBidWon == player.teamBidPlaced ? player.teamBidWon * 10 : player.teamBidWon > player.teamBidPlaced ? (player.teamBidPlaced * 10) + roundBag : 0;
-            int partnerScore = player.partner.teamBidWon == player.partner.teamBidPlaced ? player.partner.teamBidWon * 10 : player.partner.teamBidWon > player.partner.teamBidPlaced ? (player.partner.teamBidPlaced * 10) + roundBag : 0;
+         //   int partnerScore = player.partner.teamBidWon == player.partner.teamBidPlaced ? player.partner.teamBidWon * 10 : player.partner.teamBidWon > player.partner.teamBidPlaced ? (player.partner.teamBidPlaced * 10) + roundBag : 0;
 
-            player.score = myScore + partnerScore;
+         //   player.score = myScore + partnerScore;
+            player.score = myScore;
+
 
             player.roundTotalBags += roundBag;
 
@@ -160,7 +162,7 @@ public class RoundManager : MonoBehaviour
 
             //player.roundGabPenalty = penalties;
             //player.roundTotalPoints += (player.roundTotalPoints + player.score)- penalties;
-            player.roundTotalPoints += (player.roundTotalPoints + player.score);
+            player.roundTotalPoints = (player.roundTotalPoints + player.score);
 
 
             SetTotalScoreToAllRounds(player);

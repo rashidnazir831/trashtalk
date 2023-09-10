@@ -102,7 +102,7 @@ public class PlayersUIPanel : UIPanel
             {
                 print("playerUi: " + playerUI);
                 print("players[i].name: " + PlayerManager.instance.players[i].name);
-                playerUI[i].SetUI(PlayerManager.instance.players[i].name, PlayerManager.instance.players[i].isBot? botImages[i]:null,  PlayerManager.instance.players[i].score, "https://i.pravatar.cc/300");
+                playerUI[i].SetUI(PlayerManager.instance.players[i].name, PlayerManager.instance.players[i].isBot? botImages[i]:null,  PlayerManager.instance.players[i].roundTotalPoints, "https://i.pravatar.cc/300");
             }
     //    }
     }
