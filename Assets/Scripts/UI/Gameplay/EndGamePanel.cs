@@ -98,21 +98,21 @@ public class EndGamePanel : UIPanel
 
         roundText.text = $"ROUND {this.currentRoundShowing}";
 
-        myBidText.text = $"{currentRound.players[0].bidPlaced}/{currentRound.players[0].bidWon}";
-        roundBagsText.text = $"{0}";
+        myBidText.text = $"{myMainPlayer.teamBidWon}/{myMainPlayer.teamBidPlaced}";
+        roundBagsText.text = $"{myMainPlayer.roundBags}";
         myBounusText.text = $"{0}";
-        myRoundPointsText.text = $"{0}";
-        myTotalBags.text = $"{0}";
-        myGabPenalty.text = $"{0}";
-        myTotalPoints.text = $"{this.currentRoundShowing * 200}";
+        myRoundPointsText.text = $"{myMainPlayer.score}";
+        myTotalBags.text = $"{myMainPlayer.roundTotalBags}";
+        myGabPenalty.text = $"{myMainPlayer.roundGabPenalty}";
+        myTotalPoints.text = $"{myMainPlayer.roundTotalPoints}";
 
-        opponentBidText.text = $"{0}";
-        opponentroundBagsText.text = $"{0}";
+        opponentBidText.text = $"{opponentMainPlayer.teamBidWon}/{opponentMainPlayer.teamBidPlaced}";
+        opponentroundBagsText.text = $"{opponentMainPlayer.roundBags}";
         opponentBounusText.text = $"{0}";
-        opponentRoundPointsText.text = $"{0}";
-        opponentRoundPointsText.text = $"{0}";
-        opponentGabPenalty.text = $"{0}";
-        opponentTotalPoints.text = $"{this.currentRoundShowing * -100}";
+        opponentRoundPointsText.text = $"{opponentMainPlayer.score}";
+        opponentTotalBags.text = $"{opponentMainPlayer.roundTotalBags}";
+        opponentGabPenalty.text = $"{opponentMainPlayer.roundGabPenalty}";
+        opponentTotalPoints.text = $"{opponentMainPlayer.roundTotalPoints}";
 
         myProfile.SetUI(myMainPlayer.name, null, 0, "https://i.pravatar.cc/300");
         myPartnerProfile.SetUI(myMainPlayer.partner.name, myMainPlayer.partner.isBot ? botImages[2] : null, 0, "https://i.pravatar.cc/300");
