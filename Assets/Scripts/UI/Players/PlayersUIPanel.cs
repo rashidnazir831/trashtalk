@@ -100,9 +100,10 @@ public class PlayersUIPanel : UIPanel
         print("also coming here: " + PlayerManager.instance.players.Count);
             for (int i=0;i< PlayerManager.instance.players.Count; i++)
             {
+                Player player = PlayerManager.instance.players[i];
                 print("playerUi: " + playerUI);
-                print("players[i].name: " + PlayerManager.instance.players[i].name);
-                playerUI[i].SetUI(PlayerManager.instance.players[i].name, PlayerManager.instance.players[i].isBot? botImages[i]:null,  PlayerManager.instance.players[i].roundTotalPoints, "https://i.pravatar.cc/300");
+                print("players[i].name: " + player.name);
+                playerUI[i].SetUI(player.name, player.isBot? botImages[i]:null, player.roundTotalPoints, player.imageURL);
             }
     //    }
     }

@@ -32,8 +32,42 @@ public class ImageCacheManager : MonoBehaviour
 
     public void CheckOrDownloadImage(string url, Image currentImage = null, Action<Texture2D> onCallBack = null)
     {
-        StartCoroutine(DownloadImage(url, currentImage, onCallBack));//will remove this line
+
+
+        //Jugar
+        if (url.Contains("graph.facebook.com") || url.Contains("googleapis.com"))
+        {
+            StartCoroutine(DownloadImage(url, currentImage));
+            return;
+        }
+        else if (!url.Contains("http"))
+        {
+            //      url = GamePlayManager.instance.config.baseUrl + url;
+        }
+
+        //--
+          if (!IsCacheImageExist(url))
+          {
+              //Debug.Log("DownLoad Image " + url);
+              StartCoroutine(DownloadImage(url, currentImage, onCallBack));
+                //StartCoroutine(DownloadImage(url, currentImage, onCallBack));//will remove this line
+
+
+          }
+          else
+          {
+              //Debug.Log("Load Image " + url);
+              if(currentImage !=null)
+                currentImage.sprite = SpriteReturnFromLink(url);
+
+              if(onCallBack!=null)
+                  onCallBack.Invoke(null);
+          }
+        //to here
+
+
     }
+
     public Sprite SpriteReturnFromLink(string url)
     {
         //if (!string.IsNullOrEmpty(url))
@@ -67,7 +101,7 @@ public class ImageCacheManager : MonoBehaviour
                 //Debug.Log("ImageDownloaded");
                 Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
                 Sprite sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0, 0));
-                if (image)
+                if (image != null)
                     image.sprite = sprite;
                 CacheImage(www, url);
 

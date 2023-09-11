@@ -16,7 +16,7 @@ public class TabPanels : UIPanel
 
     public Image profileThumb;
     public GameObject profileImageLoader;
-    private string profileImageURL = "https://i.pravatar.cc/300";
+ //   private string profileImageURL = "https://i.pravatar.cc/300";
 
     int lastActiveIndex = 0;
     float levelBarWidth;
@@ -35,9 +35,9 @@ public class TabPanels : UIPanel
 
     private void Start()
     {
-        if (this.profileImageURL != null && this.profileImageURL != "")
+        if (PlayerProfile.imageUrl != null && PlayerProfile.imageUrl != "")
         {
-            ImageCacheManager.instance.CheckOrDownloadImage(this.profileImageURL, this.profileThumb, DownloadCallBack);
+            ImageCacheManager.instance.CheckOrDownloadImage(PlayerProfile.imageUrl, this.profileThumb, DownloadCallBack);
         }
         else
             profileImageLoader.SetActive(false);

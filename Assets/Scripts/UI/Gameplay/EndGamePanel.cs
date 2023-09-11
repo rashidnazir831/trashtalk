@@ -114,10 +114,10 @@ public class EndGamePanel : UIPanel
         opponentGabPenalty.text = $"{opponentMainPlayer.roundGabPenalty}";
         opponentTotalPoints.text = $"{opponentMainPlayer.roundTotalPoints}";
 
-        myProfile.SetUI(myMainPlayer.name, null, 0, "https://i.pravatar.cc/300");
-        myPartnerProfile.SetUI(myMainPlayer.partner.name, myMainPlayer.partner.isBot ? botImages[2] : null, 0, "https://i.pravatar.cc/300");
-        opponentProfile1.SetUI(opponentMainPlayer.name, opponentMainPlayer.partner.isBot ? botImages[1] : null, 0, "https://i.pravatar.cc/300");
-        opponentProfile2.SetUI(opponentMainPlayer.partner.name, opponentMainPlayer.partner.isBot ? botImages[3] : null, 0, "https://i.pravatar.cc/300");
+        myProfile.SetUI(myMainPlayer.name, null, 0, myMainPlayer.imageURL);
+        myPartnerProfile.SetUI(myMainPlayer.partner.name, myMainPlayer.partner.isBot ? botImages[2] : null, 0, myMainPlayer.partner.imageURL);
+        opponentProfile1.SetUI(opponentMainPlayer.name, opponentMainPlayer.isBot ? botImages[1] : null, 0, opponentMainPlayer.imageURL);
+        opponentProfile2.SetUI(opponentMainPlayer.partner.name, opponentMainPlayer.partner.isBot ? botImages[3] : null, 0, opponentMainPlayer.partner.imageURL);
 
     }
 

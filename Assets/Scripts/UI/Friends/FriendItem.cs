@@ -17,7 +17,7 @@ public class FriendItem : MonoBehaviour
     public Image thumb;
     public GameObject imageLoader;
 
-    private string imageURL = "https://i.pravatar.cc/300";
+    private string imageURL = "";
     bool isSelected = false;
 
     Action<User, bool> selectionCallBack;
@@ -28,6 +28,7 @@ public class FriendItem : MonoBehaviour
     {
         this.user = user;
         this.selectionCallBack = selectCallBack;
+        this.imageURL = user.ImagePath + "/" + user.Image;
         addButton.SetActive(type == 0 || type==1);
         inviteButton.SetActive(type == 2);
         selectionBtton = (type == 0 || type == 1) ? addButton.transform: inviteButton.transform;
