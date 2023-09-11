@@ -16,7 +16,10 @@ public class TabPanels : UIPanel
 
     public Image profileThumb;
     public GameObject profileImageLoader;
- //   private string profileImageURL = "https://i.pravatar.cc/300";
+    //   private string profileImageURL = "https://i.pravatar.cc/300";
+
+    public delegate void ClickAction();
+    public static event ClickAction OnClicked;
 
     int lastActiveIndex = 0;
     float levelBarWidth;
@@ -28,9 +31,26 @@ public class TabPanels : UIPanel
 
     private void OnEnable()
     {
+        EventManager.UpdateUI += UpdateUI;
+
         UpdateCoinsUI();
         SetLevelUI();
         SelectPanel(3);
+    }
+
+    void OnDisable()
+    {
+        EventManager.UpdateUI -= UpdateUI;
+    }
+
+    void UpdateUI(string type)
+    {
+        switch (type)
+        {
+            case "UpdateCoins":
+                UpdateCoinsUI();
+                break;
+        }
     }
 
     private void Start()
@@ -47,6 +67,7 @@ public class TabPanels : UIPanel
     {
         profileImageLoader.SetActive(false);
     }
+
 
 
     void UpdateCoinsUI()

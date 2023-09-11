@@ -30,21 +30,29 @@ public class ShopPanel : UIPanel
         PurchaseThroughInApp(totalCoins, price, productID);
     }
 
+    int purchasedCoins = 0;
     void PurchaseThroughInApp(int totalCoins, int price, string productID)
     {
         InappManager.instance.PurchaseItem(productID, (payload, signature) => {
-
-            print("In App Success: " + productID);
             Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
-            // keyValuePairs.Add("PageNo", 1);
-            WebServiceManager.instance.APIRequest(WebServiceManager.instance.purchaseCoinsFunction, Method.POST, null, keyValuePairs, OnSuccess, OnFail, CACHEABLE.NULL, true, null);
+            keyValuePairs.Add("UserID", PlayerProfile.Player_UserID);
+            keyValuePairs.Add("ProductID", productID);
+            keyValuePairs.Add("Price", price);
+            keyValuePairs.Add("PurchaseCoins", totalCoins);
+
+            this.purchasedCoins = totalCoins;
+
+            WebServiceManager.instance.APIRequest(WebServiceManager.instance.purchaseCoinsFunction, Method.POST, null, keyValuePairs, OnPurchaseSuccess, OnFail, CACHEABLE.NULL, true, null);
 
         });
     }
 
-    void OnSuccess(JObject resp, long arg2)
+    void OnPurchaseSuccess(JObject resp, long arg2)
     {
+        PlayerProfile.Player_coins += this.purchasedCoins;
 
+        if (EventManager.UpdateUI != null)
+            EventManager.UpdateUI.Invoke("UpdateCoins");
     }
 
     void OnFail(string msg)
