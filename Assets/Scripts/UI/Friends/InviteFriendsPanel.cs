@@ -55,6 +55,26 @@ public class InviteFriendsPanel : MonoBehaviour
 
     public void OnInviteButton()
     {
+        if(PlayerProfile.Player_coins < Global.coinsRequired)
+        {
+            UIEvents.ShowPanel(Panel.Popup);
+            UIEvents.UpdateData(Panel.Popup, (data) => {
+
+                //if ((int)data[0] == 2)//on yes
+                //{
+                //    print("Go To Shop");
+                //}
+                //else
+                //{
+                //    print("Cancel");
+
+                //}
+
+            }, "SetData", $"You need at least {Global.coinsRequired} Coins!", "", "OK");
+
+            return;
+        }
+
         //UIEvents.ShowPanel(Panel.Popup);
         //UIEvents.UpdateData(Panel.Popup, null, "SetData", "Invite sent to your selected friends", "","OK");
 

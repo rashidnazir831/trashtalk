@@ -266,7 +266,14 @@ public class PhotonChat : MonoBehaviourPunCallbacks, IChatClientListener
 
             if ((int)data[0] == 2)//on yes
             {
+
+                if (PlayerProfile.Player_coins < Global.coinsRequired)
+                {
+                    Invoke("OnLessCoins", 0.05f);
+                    return;
+                }
                 print("Accepted");
+
                 PhotonChat.Instance.AcceptGameInvitation(PlayerProfile.Player_UserID, roomId);
             }
             else
@@ -276,5 +283,15 @@ public class PhotonChat : MonoBehaviourPunCallbacks, IChatClientListener
             }
 
         }, "SetData", "You have received game invitation", "Reject", "Accept");
+    }
+
+    void OnLessCoins()
+    {
+        UIEvents.ShowPanel(Panel.Popup);
+        UIEvents.UpdateData(Panel.Popup, (data) =>
+        {
+
+
+        }, "SetData", $"You need at least {Global.coinsRequired} Coins!", "", "OK");
     }
 }

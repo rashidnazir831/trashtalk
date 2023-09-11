@@ -244,6 +244,7 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
 
         Debug.Log("Joined a room");
         Global.isMultiplayer = true;
+        UIEvents.HidePanel(Panel.GameplayPanel);
         UIEvents.HidePanel(Panel.TabPanels);
         UIEvents.HidePanel(Panel.FriendsPanel);
         UIEvents.ShowPanel(Panel.GameplayPanel);

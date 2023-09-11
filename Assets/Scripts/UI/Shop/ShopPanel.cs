@@ -33,7 +33,7 @@ public class ShopPanel : UIPanel
     int purchasedCoins = 0;
     void PurchaseThroughInApp(int totalCoins, int price, string productID)
     {
-        InappManager.instance.PurchaseItem(productID, (payload, signature) => {
+  //      InappManager.instance.PurchaseItem(productID, (payload, signature) => {
             Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
             keyValuePairs.Add("UserID", PlayerProfile.Player_UserID);
             keyValuePairs.Add("ProductID", productID);
@@ -44,7 +44,7 @@ public class ShopPanel : UIPanel
 
             WebServiceManager.instance.APIRequest(WebServiceManager.instance.purchaseCoinsFunction, Method.POST, null, keyValuePairs, OnPurchaseSuccess, OnFail, CACHEABLE.NULL, true, null);
 
-        });
+     //   });
     }
 
     void OnPurchaseSuccess(JObject resp, long arg2)
