@@ -48,28 +48,38 @@ public class PlayerUI : MonoBehaviour
 
     public void MicBtnListener()
     {
-        Color color = muteIcon.color;
-        color.a = 0.5f;
-        muteIcon.color = color;
-
+        bool enableOrDisable = false;
 
         if (userId.Equals(PhotonNetwork.LocalPlayer.UserId)) //Disable Transmission
         {
-            VoiceManager.instance.EnableDisableAudioTransmition();
+            enableOrDisable = VoiceManager.instance.EnableDisableAudioTransmition();
         }
         else //Disable Audio Source
         {
             VoicePlayer voicePlayer = PhotonRoomCreator.instance.voicePlayers.Find(x => x.userId.Equals(this.userId));
             if(voicePlayer)
                 voicePlayer.EnableDisableAudioSource(!voicePlayer.GetComponent<AudioSource>().enabled);
+
+            enableOrDisable = voicePlayer.GetComponent<AudioSource>().enabled;
         }
+        
+        Color color = muteIcon.color;
+        color.a = enableOrDisable ? 1 : 0.5f;
+        muteIcon.color = color;
     }
 
-    public void SetUI(string name="Waiting...",string userId="userId",Sprite botSprite=null, int score=0, string imageUrl=null)
+    public void SetUI(string name="Waiting...",string userId="",Sprite botSprite=null, int score=0, string imageUrl=null)
     {
         //Hunain
         this.userId = userId;
-        muteIcon.gameObject.SetActive(Global.isMultiplayer);
+        if (!string.IsNullOrEmpty(userId) && Global.isMultiplayer)
+        {
+            muteIcon.gameObject.SetActive(true);
+        }
+        else
+        {
+            muteIcon.gameObject.SetActive(false);
+        }
         //Hunain End
 
         if (nameText!=null)

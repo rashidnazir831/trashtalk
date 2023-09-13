@@ -129,7 +129,7 @@ MonoBehaviour:
   frameDuration: 20000
   bitrate: 30000
   sourceType: 0
-  microphoneType: 0
+  microphoneType: 1
   audioClip: {fileID: 0}
   loopAudioClip: 1
   recordingEnabled: 1
@@ -192,6 +192,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RoomID: 
   roomFullPanel: {fileID: 0}
+  voicePlayer: {fileID: 4565815529620512717, guid: a69f82ae7ef4144279d319eca8933f72, type: 3}
+  voicePlayers: []
 --- !u!1 &4426087678821110341
 GameObject:
   m_ObjectHideFlags: 0

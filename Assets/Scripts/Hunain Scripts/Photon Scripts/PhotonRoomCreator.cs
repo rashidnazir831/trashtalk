@@ -192,7 +192,7 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        Debug.LogError("OnJoinRoomFailed");
+        Debug.LogError("OnJoinRoomFailed: " + message);
         if (!PhotonNetwork.InLobby)
         {
             TypedLobby Default = new TypedLobby("US", LobbyType.Default);

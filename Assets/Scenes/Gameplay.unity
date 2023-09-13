@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4439372, g: 0.49315345, b: 0.5721989, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7844,14 +7844,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 104106179}
-    - target: {fileID: 6773233125100539953, guid: 24640a6568fbf4157936e2ed707a3157, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: MuteBGSound
-      objectReference: {fileID: 0}
-    - target: {fileID: 6773233125100539953, guid: 24640a6568fbf4157936e2ed707a3157, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: SoundManager, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 9215373207374992251, guid: 24640a6568fbf4157936e2ed707a3157, type: 3}
       propertyPath: m_Name
       value: GamePlay
@@ -32001,10 +31993,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6729081866688379391, guid: 016be68e56d2a4b18b839029b0b5b406, type: 3}
-      propertyPath: voicePlayer
-      value: 
-      objectReference: {fileID: 4565815529620512717, guid: a69f82ae7ef4144279d319eca8933f72, type: 3}
     - target: {fileID: 7476394074184383854, guid: 016be68e56d2a4b18b839029b0b5b406, type: 3}
       propertyPath: m_RootOrder
       value: 6

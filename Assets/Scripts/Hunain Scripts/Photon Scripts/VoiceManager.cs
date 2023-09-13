@@ -38,12 +38,13 @@ public class VoiceManager : MonoBehaviourPun
     }
 
 
-    public void EnableDisableAudioTransmition()
+    public bool EnableDisableAudioTransmition()
     {
         if (recorder != null)
         {
             recorder.TransmitEnabled = !recorder.TransmitEnabled;
         }
+        return recorder.TransmitEnabled;
     }
 
     private void StartVoiceTransmission()
