@@ -11,6 +11,8 @@ public class SoundManager : MonoBehaviour, ISoundManager
 
     private Dictionary<string, AudioClip> soundEffect;
 
+    public ButtonToggle musicToggle;
+    bool isMusicOn = true;
     private void Awake()
     {
         if (Instance == null)
@@ -24,6 +26,11 @@ public class SoundManager : MonoBehaviour, ISoundManager
         }
         soundEffect = new Dictionary<string, AudioClip>();
         backgroundMusicSource = gameObject.AddComponent<AudioSource>();
+    }
+
+    private void OnEnable()
+    {
+        musicToggle.SetToggle(isMusicOn);
     }
 
     public void AddSound(string name, AudioClip clip)
@@ -43,6 +50,14 @@ public class SoundManager : MonoBehaviour, ISoundManager
             backgroundMusicSource.Play();
 
         }
+    }
+
+    public void MuteBGSound()
+    {
+        isMusicOn = !isMusicOn;
+
+        if (backgroundMusicSource)
+            backgroundMusicSource.mute = !isMusicOn;
     }
 
     public void StopBackgroundMusic()

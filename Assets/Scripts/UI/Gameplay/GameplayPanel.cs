@@ -68,7 +68,7 @@ public class GameplayPanel : UIPanel
                 {
                     PhotonRoomCreator.instance.LeavePhotonRoom();
                 }
-
+                SoundManager.Instance.StopBackgroundMusic();
                 Hide();
                 UIEvents.ShowPanel(Panel.TabPanels);
                 //   UIEvents.ShowPanel(Panel.GameSelectPanel);
