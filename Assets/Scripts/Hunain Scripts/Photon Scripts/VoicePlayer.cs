@@ -13,6 +13,11 @@ public class VoicePlayer : MonoBehaviour
     {
         isLocalPlayer = player.IsLocal;
         userId = player.UserId;
-        GetComponent<AudioSource>().enabled = GetComponent<Speaker>().enabled = !isLocalPlayer;
+        EnableDisableAudioSource(!isLocalPlayer);
+    }
+
+    public void EnableDisableAudioSource(bool state)
+    {
+        GetComponent<AudioSource>().enabled = GetComponent<Speaker>().enabled = state;
     }
 }

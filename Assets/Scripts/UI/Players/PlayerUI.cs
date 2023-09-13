@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -17,6 +18,14 @@ public class PlayerUI : MonoBehaviour
     public Image profileImage;
     public GameObject imageLoader;
     public Image profileBG;
+
+    [Space]
+    [Header("For Audio Input")]
+    public string userId = "";
+    public Image muteIcon;
+    public Button muteBtn;
+
+    
     //private string profileImageURL = "https://i.pravatar.cc/300";
 
     System.Action<int> callBack;
@@ -31,8 +40,38 @@ public class PlayerUI : MonoBehaviour
             SetUI("Bot");
     }
 
-    public void SetUI(string name="Waiting...",Sprite botSprite=null, int score=0, string imageUrl=null)
+    private void Start()
     {
+       if(Global.isMultiplayer)
+            muteBtn.onClick.AddListener(()=> MicBtnListener());
+    }
+
+    public void MicBtnListener()
+    {
+        Color color = muteIcon.color;
+        color.a = 0.5f;
+        muteIcon.color = color;
+
+
+        if (userId.Equals(PhotonNetwork.LocalPlayer.UserId)) //Disable Transmission
+        {
+            VoiceManager.instance.EnableDisableAudioTransmition();
+        }
+        else //Disable Audio Source
+        {
+            VoicePlayer voicePlayer = PhotonRoomCreator.instance.voicePlayers.Find(x => x.userId.Equals(this.userId));
+            if(voicePlayer)
+                voicePlayer.EnableDisableAudioSource(!voicePlayer.GetComponent<AudioSource>().enabled);
+        }
+    }
+
+    public void SetUI(string name="Waiting...",string userId="userId",Sprite botSprite=null, int score=0, string imageUrl=null)
+    {
+        //Hunain
+        this.userId = userId;
+        muteIcon.gameObject.SetActive(Global.isMultiplayer);
+        //Hunain End
+
         if (nameText!=null)
           nameText.text = name;
         if (gameScore != null)

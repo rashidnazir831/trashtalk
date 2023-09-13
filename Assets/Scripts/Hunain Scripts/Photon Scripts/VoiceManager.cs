@@ -4,8 +4,16 @@ using Photon.Voice.Unity;
 
 public class VoiceManager : MonoBehaviourPun
 {
+
     private Recorder recorder;
 
+
+    public static VoiceManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
     private void Start()
     {
         recorder = GetComponent<Recorder>();
@@ -15,6 +23,7 @@ public class VoiceManager : MonoBehaviourPun
         }
     }
 
+    
     private void Update()
     {
         // You can use input or events to control voice transmission, e.g., push-to-talk
@@ -25,6 +34,15 @@ public class VoiceManager : MonoBehaviourPun
         else
         {
             StopVoiceTransmission();
+        }
+    }
+
+
+    public void EnableDisableAudioTransmition()
+    {
+        if (recorder != null)
+        {
+            recorder.TransmitEnabled = !recorder.TransmitEnabled;
         }
     }
 
