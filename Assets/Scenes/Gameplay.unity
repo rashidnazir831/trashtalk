@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.4439372, g: 0.49315345, b: 0.5721989, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7844,6 +7844,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 104106179}
+    - target: {fileID: 7351175583029869562, guid: 24640a6568fbf4157936e2ed707a3157, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -44.53418
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351175583029869562, guid: 24640a6568fbf4157936e2ed707a3157, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -105.864624
+      objectReference: {fileID: 0}
     - target: {fileID: 9215373207374992251, guid: 24640a6568fbf4157936e2ed707a3157, type: 3}
       propertyPath: m_Name
       value: GamePlay
@@ -9419,6 +9427,7 @@ MonoBehaviour:
   panels: {fileID: 172883473}
   coinsText: {fileID: 1204077141}
   levelBar: {fileID: 204616887}
+  playerName: {fileID: 280898283}
   profileThumb: {fileID: 972455073}
   profileImageLoader: {fileID: 401103807}
 --- !u!222 &588599439

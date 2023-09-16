@@ -138,10 +138,18 @@ public class GameplayManager : MonoBehaviour
             string shuffledCards = cardDeck.GetShuffleCardsString();
             PhotonRPCManager.Instance.SpawnPlayers(shuffledCards);
 
+            string[] playerIds = PlayerManager.instance.GetMultiplayerIds();
 
             Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
             keyValuePairs.Add("MatchType", "Multiplayer");
-            keyValuePairs.Add("UserIDs", PlayerManager.instance.GetMultiplayerIds());
+
+
+            for (int i = 0; i < playerIds.Length; i++)
+            {
+                keyValuePairs.Add($"UserIDs[{i}]", playerIds[i]);
+            }
+
+
             keyValuePairs.Add("CoinsToPlay", Global.coinsRequired);
 
             WebServiceManager.instance.APIRequest(WebServiceManager.instance.startGameFunction, Method.POST, null, keyValuePairs,

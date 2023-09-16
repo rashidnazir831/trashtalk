@@ -14,6 +14,7 @@ public class TabPanels : UIPanel
 
     public RectTransform levelBar;
 
+    public Text playerName;
     public Image profileThumb;
     public GameObject profileImageLoader;
     //   private string profileImageURL = "https://i.pravatar.cc/300";
@@ -55,6 +56,8 @@ public class TabPanels : UIPanel
 
     private void Start()
     {
+        playerName.text = PlayerProfile.Player_UserName;
+
         if (PlayerProfile.imageUrl != null && PlayerProfile.imageUrl != "")
         {
             ImageCacheManager.instance.CheckOrDownloadImage(PlayerProfile.imageUrl, this.profileThumb, DownloadCallBack);

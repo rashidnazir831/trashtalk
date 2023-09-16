@@ -426,7 +426,12 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
 
     public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
     {
-        Global.currentGameId = propertiesThatChanged["GameId"].ToString();
+        if (propertiesThatChanged.ContainsKey("GameId"))
+        {
+            Global.currentGameId = propertiesThatChanged["GameId"].ToString();
+            print("Global.currentGameId is " + Global.currentGameId);
+        }
+      //  print("propertiesThatChanged: " + propertiesThatChanged);
         // propertiesThatChanged["GameId"].ToString();
     }
 }
