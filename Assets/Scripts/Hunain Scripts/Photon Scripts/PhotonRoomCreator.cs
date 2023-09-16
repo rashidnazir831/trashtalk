@@ -423,4 +423,10 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
         //}
 
     }
+
+    public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
+    {
+        Global.currentGameId = propertiesThatChanged["GameId"].ToString();
+        // propertiesThatChanged["GameId"].ToString();
+    }
 }

@@ -27,14 +27,14 @@ public class VoiceManager : MonoBehaviourPun
     private void Update()
     {
         // You can use input or events to control voice transmission, e.g., push-to-talk
-        if (Input.GetKey(KeyCode.Space))
-        {
-            StartVoiceTransmission();
-        }
-        else
-        {
-            StopVoiceTransmission();
-        }
+        //if (Input.GetKey(KeyCode.Space))
+        //{
+        //    StartVoiceTransmission();
+        //}
+        //else
+        //{
+        //    StopVoiceTransmission();
+        //}
     }
 
 

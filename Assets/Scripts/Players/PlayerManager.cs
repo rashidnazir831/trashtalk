@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
         currentPlayerIndex = 0;
     }
 
-
+   
 
     public void AddPlayer(string name, string id,string image, bool isOwn, bool isMaster, bool isBot, int tablePos)
     {
@@ -158,5 +158,19 @@ public class PlayerManager : MonoBehaviour
 
 
         return sortedList;
+    }
+
+    public string[] GetMultiplayerIds()
+    {
+        List<string> ids = new List<string>();
+
+        for(int i = 0; i < players.Count; i++)
+        {
+            if (!player[i].isBot)
+            {
+                ids.Add(player[i].id);
+            }
+        }
+        return ids.ToArray();
     }
 }

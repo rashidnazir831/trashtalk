@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json.Linq;
+using Photon.Realtime;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+using Photon.Pun;
 
 public class GameplayManager : MonoBehaviour
 {
@@ -17,6 +21,9 @@ public class GameplayManager : MonoBehaviour
     CardDeck cardDeck;
     BidManager bidManager;
     BotTrick botTrick;
+
+    private Hashtable _myCustomProperties = new Hashtable();
+
 
     private void Awake()
     {
@@ -120,21 +127,37 @@ public class GameplayManager : MonoBehaviour
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ResetUI");
 
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
-
-
     }
 
     public void OnPlayGameButton()
     {
         if (Global.isMultiplayer && Photon.Pun.PhotonNetwork.InRoom && Photon.Pun.PhotonNetwork.IsMasterClient) {
+
             Photon.Pun.PhotonNetwork.CurrentRoom.IsOpen = false;
             Photon.Pun.PhotonNetwork.CurrentRoom.IsVisible = false;
-
             string shuffledCards = cardDeck.GetShuffleCardsString();
-
-            //    cardDeck.ShowHideCardContainer(false);
-
             PhotonRPCManager.Instance.SpawnPlayers(shuffledCards);
+
+
+            Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
+            keyValuePairs.Add("MatchType", "Multiplayer");
+            keyValuePairs.Add("UserIDs", PlayerManager.instance.GetMultiplayerIds());
+            keyValuePairs.Add("CoinsToPlay", Global.coinsRequired);
+
+            WebServiceManager.instance.APIRequest(WebServiceManager.instance.startGameFunction, Method.POST, null, keyValuePairs,
+
+            (JObject resp, long arg2) => {
+                RoomOptions roomOptions = new RoomOptions();
+             //   _myCustomProperties["GameId"] = RoomID;
+                roomOptions.CustomRoomPropertiesForLobby = new string[1] { "GameId" };
+                roomOptions.CustomRoomProperties = _myCustomProperties;
+                PhotonNetwork.CurrentRoom.SetCustomProperties(_myCustomProperties);
+
+            }
+            , (msg)=> {
+                print(msg);
+            }, CACHEABLE.NULL, true, null);
+
         }
         else if(!Global.isMultiplayer)
         {
@@ -151,10 +174,14 @@ public class GameplayManager : MonoBehaviour
         //  UIEvents.UpdateData(Panel.GameplayPanel, OnCardsCoverScreen, "ShowCardIntro");
     }
 
-
     string multiplayerCards = null;
     public void AnimateCardsScreen(string shuffledCards=null)
     {
+        PlayerProfile.Player_coins -= Global.coinsRequired;
+
+        if (EventManager.UpdateUI != null)
+            EventManager.UpdateUI.Invoke("UpdateCoins");
+
         UIEvents.HidePanel(Panel.EndGamePanel);//it is needed to be closed, if other players are still on endgame screen and master started game already
 
         ShowMultiplayerMessage(false);
@@ -575,8 +602,6 @@ public class GameplayManager : MonoBehaviour
 
     }
 
-
-
     public void StartNextRound()
     {
         //  if Need next round
@@ -612,6 +637,22 @@ public class GameplayManager : MonoBehaviour
     public void ShowMultiplayerMessage(bool show, string message="")
     {
         UIEvents.UpdateData(Panel.GameplayPanel, null, "ShowHideMessage", show, message);
+    }
+
+    public void OnWinningGame()
+    {
+        Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
+        keyValuePairs.Add("GameID", Global.currentGameId);
+        keyValuePairs.Add("UserIDs", PlayerManager.instance.GetMultiplayerIds());
+        keyValuePairs.Add("winCoins", Global.coinsRequired);
+
+        WebServiceManager.instance.APIRequest(WebServiceManager.instance.endGameFunction, Method.POST, null, keyValuePairs,
+
+        (JObject resp, long arg2) => {
+        }
+        , (msg) => {
+            print(msg);
+        }, CACHEABLE.NULL, true, null);
     }
 
     private bool IsRoundOver()
