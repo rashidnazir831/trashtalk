@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using Photon.Realtime;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Photon.Pun;
+using TrashTalk;
 
 public class GameplayManager : MonoBehaviour
 {
@@ -138,6 +139,7 @@ public class GameplayManager : MonoBehaviour
             string shuffledCards = cardDeck.GetShuffleCardsString();
             PhotonRPCManager.Instance.SpawnPlayers(shuffledCards);
 
+            return;
             string[] playerIds = PlayerManager.instance.GetMultiplayerIds();
 
             Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
@@ -155,8 +157,9 @@ public class GameplayManager : MonoBehaviour
             WebServiceManager.instance.APIRequest(WebServiceManager.instance.startGameFunction, Method.POST, null, keyValuePairs,
 
             (JObject resp, long arg2) => {
+                var response = GameResponse.FromJson(resp.ToString());
                 RoomOptions roomOptions = new RoomOptions();
-             //   _myCustomProperties["GameId"] = RoomID;
+                _myCustomProperties["GameId"] = response.data.GameID;
                 roomOptions.CustomRoomPropertiesForLobby = new string[1] { "GameId" };
                 roomOptions.CustomRoomProperties = _myCustomProperties;
                 PhotonNetwork.CurrentRoom.SetCustomProperties(_myCustomProperties);
@@ -579,6 +582,7 @@ public class GameplayManager : MonoBehaviour
         {
             RoundManager.instance.AddCurrentRoundProgress();
             SetPlayerTurnIndication(null, true);
+
             Invoke("OnRoundOver", 1);
         }
         else
@@ -597,17 +601,20 @@ public class GameplayManager : MonoBehaviour
         StartTricks();
     }
 
+    //here we will show the animations or bonuses which players gets
     void OnRoundOver()
     {
         print("round over");
 
-       // if(needNextRound) logic will be here
-        StartNextRound();
-
-
-        UIEvents.ShowPanel(Panel.EndGamePanel);
+        Invoke("ShowRoundResult", 1);
         //UIEvents.ShowPanel(Panel.GameOverPanel);
+    }
 
+    void ShowRoundResult()
+    {
+  //    if(needNextRound) logic will be here
+        StartNextRound();
+        UIEvents.ShowPanel(Panel.EndGamePanel);
     }
 
     public void StartNextRound()

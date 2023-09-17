@@ -26,7 +26,7 @@ public class Player : IPlayer
     public string imageURL;
     //  public Sprite sprite;
 
-
+    public int roundBonus;
     public int teamBidPlaced;
     public int teamBidWon;
     public int roundBags;

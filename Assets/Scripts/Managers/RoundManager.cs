@@ -58,15 +58,11 @@ public class Round
             p.roundTotalBags = player.roundTotalBags;
             p.roundGabPenalty = player.roundGabPenalty;
             p.roundTotalPoints = player.roundTotalPoints;
+            p.roundBonus = player.roundBonus;
 
             players.Add(p);
         }
     }
-
-  
-
-
-
 
     //void SetPartners(List<Player> roundPlayers)
     //{
@@ -142,8 +138,9 @@ public class RoundManager : MonoBehaviour
          //   player.score = myScore + partnerScore;
             player.score = myScore;
 
-
             player.roundTotalBags += roundBag;
+
+            player.roundBonus = GetPlayerBonus(player) + GetPlayerBonus(player.partner);
 
             //int penalties = 0;
 
@@ -162,7 +159,7 @@ public class RoundManager : MonoBehaviour
 
             //player.roundGabPenalty = penalties;
             //player.roundTotalPoints += (player.roundTotalPoints + player.score)- penalties;
-            player.roundTotalPoints = (player.roundTotalPoints + player.score);
+            player.roundTotalPoints = (player.roundTotalPoints + player.score) + player.roundBonus;
 
 
             SetTotalScoreToAllRounds(player);
@@ -183,6 +180,35 @@ public class RoundManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    int GetPlayerBonus(Player player)
+    {
+        int bonus = 0;
+        //Check for Boston
+        if(player.bidPlaced == Global.minBostonTricks)
+        {
+            if(player.bidWon < player.bidPlaced)
+            {
+                bonus = -Global.bostonPoints;
+            }
+            else if(player.bidWon == Global.maxTricks)
+            {
+                //Anounce Game win
+            }
+            else
+            {
+                bonus = Global.bostonPoints;
+            }
+        }
+
+        //Check for other rules
+        //else if (player.bidPlaced == 0)
+        //{
+
+        //}
+
+        return bonus;
     }
 
     public void ClearAllRounds()

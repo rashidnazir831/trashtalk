@@ -100,7 +100,7 @@ public class EndGamePanel : UIPanel
 
         myBidText.text = $"{myMainPlayer.teamBidWon}/{myMainPlayer.teamBidPlaced}";
         roundBagsText.text = $"{myMainPlayer.roundBags}";
-        myBounusText.text = $"{0}";
+        myBounusText.text = $"{myMainPlayer.roundBonus}";
         myRoundPointsText.text = $"{myMainPlayer.score}";
         myTotalBags.text = $"{myMainPlayer.roundTotalBags}";
         myGabPenalty.text = $"{myMainPlayer.roundGabPenalty}";
@@ -108,7 +108,7 @@ public class EndGamePanel : UIPanel
 
         opponentBidText.text = $"{opponentMainPlayer.teamBidWon}/{opponentMainPlayer.teamBidPlaced}";
         opponentroundBagsText.text = $"{opponentMainPlayer.roundBags}";
-        opponentBounusText.text = $"{0}";
+        opponentBounusText.text = $"{opponentMainPlayer.roundBonus}";
         opponentRoundPointsText.text = $"{opponentMainPlayer.score}";
         opponentTotalBags.text = $"{opponentMainPlayer.roundTotalBags}";
         opponentGabPenalty.text = $"{opponentMainPlayer.roundGabPenalty}";

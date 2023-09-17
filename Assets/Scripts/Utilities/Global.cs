@@ -8,5 +8,14 @@ public static class Global
     public static int coinsRequired = 100;  //It is temporary and will be changed after getting more screens
     public static string currentGameId = "";
     public static int scoreToWin = 50;
-//    public static List<MutiplayerData> playerData;
+
+    public static int maxTricks = 13;
+
+    //public static int tenFor200Bids = 10;
+    //public static int tenFor200Points = 200;
+
+    public static int minBostonTricks = 10;
+    //public static int maxBostonTricks = 12;
+    public static int bostonPoints = 200; //If made trick 10 - 12
+    //    public static List<MutiplayerData> playerData;
 }
