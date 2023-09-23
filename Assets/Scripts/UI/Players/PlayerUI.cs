@@ -25,6 +25,8 @@ public class PlayerUI : MonoBehaviour
     public Image muteIcon;
     public Button muteBtn;
 
+    public Image bonusImage;
+
     
     //private string profileImageURL = "https://i.pravatar.cc/300";
 
@@ -110,6 +112,15 @@ public class PlayerUI : MonoBehaviour
 
 
     }
+
+    public void ShowBonusImage(Sprite sprite)
+    {
+        bonusImage.gameObject.SetActive(true);
+
+        if(sprite != null)
+            bonusImage.sprite = sprite;
+    }
+
     void DownloadCallBack(Texture2D texture2D)
     {
         imageLoader.SetActive(false);
@@ -157,6 +168,7 @@ public class PlayerUI : MonoBehaviour
         if(cardCountContainer)
             cardCountContainer.SetActive(false);
 
+        bonusImage.gameObject.SetActive(false);
         HideBidUI();
     }
 

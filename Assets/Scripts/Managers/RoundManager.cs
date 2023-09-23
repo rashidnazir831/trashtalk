@@ -194,13 +194,19 @@ public class RoundManager : MonoBehaviour
             }
             else if(player.bidWon == Global.maxTricks)
             {
-                //Anounce Game win
+                //show boston image and set winner data
+                player.bostonWon = true;
+                UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowBunus", player.tablePosition, "Boston");
             }
             else
             {
                 bonus = Global.bostonPoints;
+                UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowBunus", player.tablePosition, "10For200");
+                //show 1 for 200 image
             }
         }
+        //      UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowBunus", player.tablePosition, "Nil");
+        //      UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowBunus", player.tablePosition, "DoubleNil");
 
         //Check for other rules
         //else if (player.bidPlaced == 0)

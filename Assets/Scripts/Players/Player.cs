@@ -35,6 +35,7 @@ public class Player : IPlayer
     public int roundTotalBags;
     public int roundGabPenalty;
     public int roundTotalPoints;
+    public bool bostonWon;
 
     public Player partner;
 
@@ -62,6 +63,7 @@ public class Player : IPlayer
         this.roundTotalBags = 0;
         this.roundGabPenalty = 0;
         this.roundTotalPoints = 0;
+        this.bostonWon = false;
     }
 
     public void SetPartner(Player partner)

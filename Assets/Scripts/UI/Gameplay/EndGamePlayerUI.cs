@@ -11,6 +11,8 @@ public class EndGamePlayerUI : MonoBehaviour
     public Text nameText;
     public Text gameScore;
 
+    public GameObject crown;
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +22,8 @@ public class EndGamePlayerUI : MonoBehaviour
 
     public void SetUI(string name = "Waiting...", Sprite botSprite = null, int score = 0, string imageUrl = null)
     {
+        crown.SetActive(false);
+
         if (nameText != null)
             nameText.text = name;
         if (gameScore != null)

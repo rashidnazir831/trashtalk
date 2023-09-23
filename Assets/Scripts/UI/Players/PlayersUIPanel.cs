@@ -8,6 +8,7 @@ public class PlayersUIPanel : UIPanel
 {
     public GameObject yourTurnHeading;
     public Sprite[] botImages;
+    public Sprite[] bonusImages;
     private PlayerUI[] playerUI;
     private Action<object[]> callBack;
     object[] data;
@@ -61,6 +62,11 @@ public class PlayersUIPanel : UIPanel
                 playerNumber = (int)parameters[1];
                 bool isTurn = (bool)parameters[2];
                 SetTurnIndication(playerNumber,isTurn);
+                break;
+            case "ShowBunus":
+                playerNumber = (int)parameters[1];
+                string bonusType = (string)parameters[2];
+                ShowBonus(bonusType, playerNumber);
                 break;
 
             case "ShowHideYourTurnHeading":
@@ -158,6 +164,32 @@ public class PlayersUIPanel : UIPanel
     {
         this.data = new object[] { bid };
         this.callBack(this.data);
+    }
+
+    void ShowBonus(string type,int playerNumber)
+    {
+        Sprite sprite = null;
+        switch (type)
+        {
+            case "10For200":
+                sprite = bonusImages[0];
+                break;
+            case "Boston":
+                sprite = bonusImages[1];
+                break;
+            case "Nil":
+                sprite = bonusImages[2];
+                break;
+            case "DoubleNil":
+                sprite = bonusImages[3];
+                break;
+        }
+
+        playerUI[playerNumber].ShowBonusImage(sprite);
+
+
+        //this.data = new object[] { bid };
+        //this.callBack(this.data);
     }
 
     void HideAllBidsUIs()
