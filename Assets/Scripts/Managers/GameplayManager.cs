@@ -139,7 +139,7 @@ public class GameplayManager : MonoBehaviour
             string shuffledCards = cardDeck.GetShuffleCardsString();
             PhotonRPCManager.Instance.SpawnPlayers(shuffledCards);
 
-            return;
+          //  return; //will remove this line to start game
             string[] playerIds = PlayerManager.instance.GetMultiplayerIds();
 
             Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
@@ -167,7 +167,7 @@ public class GameplayManager : MonoBehaviour
             }
             , (msg)=> {
                 print(msg);
-            }, CACHEABLE.NULL, true, null);
+            }, CACHEABLE.NULL, false, null);
 
         }
         else if(!Global.isMultiplayer)
@@ -188,10 +188,14 @@ public class GameplayManager : MonoBehaviour
     string multiplayerCards = null;
     public void AnimateCardsScreen(string shuffledCards=null)
     {
-        PlayerProfile.Player_coins -= Global.coinsRequired;
+        if (Global.isMultiplayer)
+        {
+            PlayerProfile.Player_coins -= Global.coinsRequired;
 
-        if (EventManager.UpdateUI != null)
-            EventManager.UpdateUI.Invoke("UpdateCoins");
+            if (EventManager.UpdateUI != null)
+                EventManager.UpdateUI.Invoke("UpdateCoins");
+        }
+      
 
         UIEvents.HidePanel(Panel.EndGamePanel);//it is needed to be closed, if other players are still on endgame screen and master started game already
 
@@ -656,19 +660,60 @@ public class GameplayManager : MonoBehaviour
 
     public void OnWinningGame(Player winner)
     {
+        print("1 Winner is: " + winner.name);
+        if (!Global.isMultiplayer)
+            return;
 
-        Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
-        keyValuePairs.Add("GameID", Global.currentGameId);
-        keyValuePairs.Add("UserIDs", PlayerManager.instance.GetMultiplayerIds());
-        keyValuePairs.Add("winCoins", Global.coinsRequired);
+        int coins = (this.totalPlayers / 2) * Global.coinsRequired;
+        print("2 Winner is: " + winner.name);
 
-        WebServiceManager.instance.APIRequest(WebServiceManager.instance.endGameFunction, Method.POST, null, keyValuePairs,
+        if (winner.isOwn || winner.partner.isOwn)
+        {
+            print("3 Winner is: " + winner.name);
 
-        (JObject resp, long arg2) => {
+            PlayerProfile.Player_coins += coins;
+
+            if (EventManager.UpdateUI != null)
+                EventManager.UpdateUI.Invoke("UpdateCoins");
+
+            string[] winners = GetWinnerIds(winner);
+
+            Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
+            keyValuePairs.Add("GameID", Global.currentGameId);
+
+
+             for (int i = 0; i < winners.Length; i++)
+            {
+                keyValuePairs.Add($"UserIDs[{i}]", winners[i]);
+            }
+
+            keyValuePairs.Add("winCoins", coins);
+
+            WebServiceManager.instance.APIRequest(WebServiceManager.instance.endGameFunction, Method.POST, null, keyValuePairs,
+
+            (JObject resp, long arg2) =>
+            {
+
+
+            }
+            , (msg) =>
+            {
+                print(msg);
+            }, CACHEABLE.NULL, false, null);
         }
-        , (msg) => {
-            print(msg);
-        }, CACHEABLE.NULL, true, null);
+    }
+
+    public string[] GetWinnerIds(Player winner)
+    {
+        List<string> ids = new List<string>();
+
+        if (!winner.isBot)
+            ids.Add(winner.id);
+
+        if(!winner.partner.isBot)
+            ids.Add(winner.partner.id);
+
+        return ids.ToArray();
     }
 
     private bool IsRoundOver()

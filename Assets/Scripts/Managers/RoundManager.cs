@@ -137,11 +137,13 @@ public class RoundManager : MonoBehaviour
             //   int partnerScore = player.partner.teamBidWon == player.partner.teamBidPlaced ? player.partner.teamBidWon * 10 : player.partner.teamBidWon > player.partner.teamBidPlaced ? (player.partner.teamBidPlaced * 10) + roundBag : 0;
 
             //   player.score = myScore + partnerScore;
-            player.score = myScore;
 
             player.roundTotalBags += roundBag;
 
             player.roundBonus = GetPlayerBonus(player) + GetPlayerBonus(player.partner);
+
+            player.score = myScore + player.roundBonus;
+
 
             //int penalties = 0;
 
@@ -160,7 +162,7 @@ public class RoundManager : MonoBehaviour
 
             //player.roundGabPenalty = penalties;
             //player.roundTotalPoints += (player.roundTotalPoints + player.score)- penalties;
-            player.roundTotalPoints = (player.roundTotalPoints + player.score) + player.roundBonus;
+            player.roundTotalPoints = (player.roundTotalPoints + player.score);
     //        SetTotalScoreToAllRounds(player);
 
         }
@@ -177,9 +179,7 @@ public class RoundManager : MonoBehaviour
 
         if(winner != null)
         {
-            print("winner is " + winner.name);
-
-          //  GameplayManager.instance.OnWinningGame(winner);
+            GameplayManager.instance.OnWinningGame(winner);
         }
     }
 
@@ -212,7 +212,6 @@ public class RoundManager : MonoBehaviour
             }
             else if(player.bidWon == Global.maxTricks)
             {
-                //show boston image and set winner data
                 player.bostonWon = true;
                 UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowBunus", player.tablePosition, "Boston");
             }
@@ -220,17 +219,33 @@ public class RoundManager : MonoBehaviour
             {
                 bonus = Global.bostonPoints;
                 UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowBunus", player.tablePosition, "10For200");
-                //show 1 for 200 image
             }
         }
-        //      UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowBunus", player.tablePosition, "Nil");
-        //      UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowBunus", player.tablePosition, "DoubleNil");
 
-        //Check for other rules
-        //else if (player.bidPlaced == 0)
-        //{
-
-        //}
+        if (player.bidPlaced == 0 && player.partner.bidPlaced == 0)  //Check double Nil
+        {
+            if (player.bidWon == 0 && player.partner.bidWon == 0)
+            {
+                bonus = Global.nilPoints;
+                UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowBunus", player.tablePosition, "DoubleNil");
+            }
+            else
+            {
+                bonus = -Global.nilPoints;
+            }
+        }
+        else if (player.bidPlaced == 0)//Check Nil
+        {
+            if (player.bidWon == 0)
+            {
+                bonus = Global.nilPoints;
+                UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowBunus", player.tablePosition, "Nil");
+            }
+            else
+            {
+                bonus = -Global.nilPoints;
+            }
+        }
 
         return bonus;
     }
@@ -247,9 +262,9 @@ public class RoundManager : MonoBehaviour
                 player = p;
                 break;
             }
-            if(p.roundTotalPoints >= Global.scoreToWin)
+            if (p.roundTotalPoints >= Global.scoreToWin)
             {
-                if(player != null && player.roundTotalPoints > p.roundTotalPoints)
+                if (player != null && player.roundTotalPoints > p.roundTotalPoints)
                 {
                 }
                 else
@@ -258,6 +273,26 @@ public class RoundManager : MonoBehaviour
                 }
             }
         }
+
+        //Bellow code is for testing purpose only and will be removed
+        // foreach (Player p in players)
+        // {
+        //     if (p.bostonWon)
+        //     {
+        //         player = p;
+        //         break;
+        //     }
+        ////     if (p.roundTotalPoints >= Global.scoreToWin)
+        ////     {
+        //         if (player != null && player.roundTotalPoints > p.roundTotalPoints)
+        //         {
+        //         }
+        //         else
+        //         {
+        //             player = p;
+        //         }
+        //  //   }
+        // }
 
         return player;
     }
