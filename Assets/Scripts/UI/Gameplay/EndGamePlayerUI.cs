@@ -20,9 +20,9 @@ public class EndGamePlayerUI : MonoBehaviour
         
     }
 
-    public void SetUI(string name = "Waiting...", Sprite botSprite = null, int score = 0, string imageUrl = null)
+    public void SetUI(string name = "Waiting...", Sprite botSprite = null, int score = 0, string imageUrl = null, bool isWinner=false)
     {
-        crown.SetActive(false);
+        crown.SetActive(isWinner);
 
         if (nameText != null)
             nameText.text = name;

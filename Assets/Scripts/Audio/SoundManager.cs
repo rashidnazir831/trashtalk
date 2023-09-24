@@ -70,6 +70,9 @@ public class SoundManager : MonoBehaviour, ISoundManager
 
     public void PlaySoundEffect(Sound soundName)
     {
+        if (!isMusicOn)
+            return;
+
         string name = soundName.ToString();
         if (soundEffect.ContainsKey(name))
         {

@@ -654,8 +654,9 @@ public class GameplayManager : MonoBehaviour
         UIEvents.UpdateData(Panel.GameplayPanel, null, "ShowHideMessage", show, message);
     }
 
-    public void OnWinningGame()
+    public void OnWinningGame(Player winner)
     {
+
         Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
         keyValuePairs.Add("GameID", Global.currentGameId);
         keyValuePairs.Add("UserIDs", PlayerManager.instance.GetMultiplayerIds());

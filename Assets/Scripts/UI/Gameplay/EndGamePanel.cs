@@ -33,6 +33,9 @@ public class EndGamePanel : UIPanel
     public EndGamePlayerUI opponentProfile1;
     public EndGamePlayerUI opponentProfile2;
 
+    public GameObject closeButton;
+    public GameObject homeButton;
+
     int currentRoundShowing = 1;
     List<Round> rounds;
 
@@ -93,6 +96,11 @@ public class EndGamePanel : UIPanel
         Player myMainPlayer = currentRound.players[0];
         Player opponentMainPlayer = currentRound.players[1];
 
+        Player winner = myMainPlayer.gameWinner;
+
+        closeButton.SetActive(winner == null);
+        homeButton.SetActive(winner != null);
+
         print("appp: " + opponentMainPlayer.name);
         print("appp2: " + opponentMainPlayer.partner.name);
 
@@ -114,16 +122,41 @@ public class EndGamePanel : UIPanel
         opponentGabPenalty.text = $"{opponentMainPlayer.roundGabPenalty}";
         opponentTotalPoints.text = $"{opponentMainPlayer.roundTotalPoints}";
 
-        myProfile.SetUI(myMainPlayer.name, null, 0, myMainPlayer.imageURL);
-        myPartnerProfile.SetUI(myMainPlayer.partner.name, myMainPlayer.partner.isBot ? botImages[2] : null, 0, myMainPlayer.partner.imageURL);
-        opponentProfile1.SetUI(opponentMainPlayer.name, opponentMainPlayer.isBot ? botImages[1] : null, 0, opponentMainPlayer.imageURL);
-        opponentProfile2.SetUI(opponentMainPlayer.partner.name, opponentMainPlayer.partner.isBot ? botImages[3] : null, 0, opponentMainPlayer.partner.imageURL);
-
+        myProfile.SetUI(myMainPlayer.name, null, 0, myMainPlayer.imageURL, (winner!=null && (winner.id==myMainPlayer.id || winner.id == myMainPlayer.partner.id)));
+        myPartnerProfile.SetUI(myMainPlayer.partner.name, myMainPlayer.partner.isBot ? botImages[2] : null, 0, myMainPlayer.partner.imageURL, (winner != null && (winner.id == myMainPlayer.id || winner.id == myMainPlayer.partner.id)));
+        opponentProfile1.SetUI(opponentMainPlayer.name, opponentMainPlayer.isBot ? botImages[1] : null, 0, opponentMainPlayer.imageURL, (winner != null && (winner.id == opponentMainPlayer.id || winner.id == opponentMainPlayer.partner.id)));
+        opponentProfile2.SetUI(opponentMainPlayer.partner.name, opponentMainPlayer.partner.isBot ? botImages[3] : null, 0, opponentMainPlayer.partner.imageURL, (winner != null && (winner.id == opponentMainPlayer.id || winner.id == opponentMainPlayer.partner.id)));
     }
+
+    //Player Winner()
+    //{
+    //    Player player = null;
+    //    List<Player> players = rounds[rounds.Count - 1].players;
+
+    //    foreach (Player p in players)
+    //    {
+
+    //    }
+
+
+    //    closeButton.SetActive(player==null);
+    //    homeButton.SetActive(player != null);
+
+    //    return null;
+    //}
 
     public void OnCloseButton()
     {
     //    GameplayManager.instance.StartNextRound();
+        Hide();
+    }
+
+    public void OnHomeButton()
+    {
+        //Close complete game
+        SoundManager.Instance.StopBackgroundMusic();
+        UIEvents.ShowPanel(Panel.TabPanels);
+        UIEvents.HidePanel(Panel.GameplayPanel);
         Hide();
     }
 }

@@ -59,6 +59,7 @@ public class Round
             p.roundGabPenalty = player.roundGabPenalty;
             p.roundTotalPoints = player.roundTotalPoints;
             p.roundBonus = player.roundBonus;
+            p.gameWinner = player.gameWinner;
 
             players.Add(p);
         }
@@ -128,14 +129,14 @@ public class RoundManager : MonoBehaviour
             player.teamBidWon = teamBidWon;
             player.teamBidPlaced = teamBidPlaced;
 
-            int roundBag = teamBidWon > teamBidPlaced? teamBidWon - teamBidPlaced: 0;
+            int roundBag = teamBidWon > teamBidPlaced ? teamBidWon - teamBidPlaced : 0;
 
             player.roundBags = roundBag;
 
             int myScore = player.teamBidWon == player.teamBidPlaced ? player.teamBidWon * 10 : player.teamBidWon > player.teamBidPlaced ? (player.teamBidPlaced * 10) + roundBag : 0;
-         //   int partnerScore = player.partner.teamBidWon == player.partner.teamBidPlaced ? player.partner.teamBidWon * 10 : player.partner.teamBidWon > player.partner.teamBidPlaced ? (player.partner.teamBidPlaced * 10) + roundBag : 0;
+            //   int partnerScore = player.partner.teamBidWon == player.partner.teamBidPlaced ? player.partner.teamBidWon * 10 : player.partner.teamBidWon > player.partner.teamBidPlaced ? (player.partner.teamBidPlaced * 10) + roundBag : 0;
 
-         //   player.score = myScore + partnerScore;
+            //   player.score = myScore + partnerScore;
             player.score = myScore;
 
             player.roundTotalBags += roundBag;
@@ -160,9 +161,25 @@ public class RoundManager : MonoBehaviour
             //player.roundGabPenalty = penalties;
             //player.roundTotalPoints += (player.roundTotalPoints + player.score)- penalties;
             player.roundTotalPoints = (player.roundTotalPoints + player.score) + player.roundBonus;
+    //        SetTotalScoreToAllRounds(player);
 
+        }
+
+        Player winner = null;
+
+        foreach (Player player in players)
+        {
+            player.gameWinner = Winner();
+            winner = player.gameWinner;
 
             SetTotalScoreToAllRounds(player);
+        }
+
+        if(winner != null)
+        {
+            print("winner is " + winner.name);
+
+          //  GameplayManager.instance.OnWinningGame(winner);
         }
     }
 
@@ -177,6 +194,7 @@ public class RoundManager : MonoBehaviour
                     p.roundTotalBags = player.roundTotalBags;
                     p.roundTotalPoints = player.roundTotalPoints;
                     p.roundGabPenalty = player.roundGabPenalty;
+                    p.gameWinner = player.gameWinner;
                 }
             }
         }
@@ -215,6 +233,33 @@ public class RoundManager : MonoBehaviour
         //}
 
         return bonus;
+    }
+
+    Player Winner()
+    {
+        List<Player> players = PlayerManager.instance.player;
+        Player player = null;
+
+        foreach (Player p in players)
+        {
+            if (p.bostonWon)
+            {
+                player = p;
+                break;
+            }
+            if(p.roundTotalPoints >= Global.scoreToWin)
+            {
+                if(player != null && player.roundTotalPoints > p.roundTotalPoints)
+                {
+                }
+                else
+                {
+                    player = p;
+                }
+            }
+        }
+
+        return player;
     }
 
     public void ClearAllRounds()

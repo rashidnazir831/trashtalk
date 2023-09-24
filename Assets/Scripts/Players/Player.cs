@@ -38,6 +38,7 @@ public class Player : IPlayer
     public bool bostonWon;
 
     public Player partner;
+    public Player gameWinner;
 
     public Player(string playerName, string id, string image, bool isOwn, bool isMaster, bool isBot, int tablePos)
     {
@@ -64,6 +65,8 @@ public class Player : IPlayer
         this.roundGabPenalty = 0;
         this.roundTotalPoints = 0;
         this.bostonWon = false;
+        this.gameWinner = null;
+
     }
 
     public void SetPartner(Player partner)
