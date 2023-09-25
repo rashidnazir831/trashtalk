@@ -32,7 +32,7 @@ public class ChatHandler : MonoBehaviour
     private void Start()
     {
         chatBtn.onClick.AddListener(()=> OpenChatPanel());
-        chatBtn.onClick.AddListener(()=> OpenEmojiPanel());
+        emojiBtn.onClick.AddListener(()=> OpenEmojiPanel());
     }
 
     private void OpenChatPanel()
