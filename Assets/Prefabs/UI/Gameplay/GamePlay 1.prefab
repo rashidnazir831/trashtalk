@@ -16392,7 +16392,6 @@ MonoBehaviour:
   userId: 
   muteIcon: {fileID: 1207968276}
   muteBtn: {fileID: 1207968275}
-  chatIconParent: {fileID: 0}
   bonusImage: {fileID: 3941809990984238795}
 --- !u!1 &9215373206665048695
 GameObject:
@@ -16473,7 +16472,6 @@ MonoBehaviour:
   userId: 
   muteIcon: {fileID: 1829815323669075029}
   muteBtn: {fileID: 3370902349358411981}
-  chatIconParent: {fileID: 0}
   bonusImage: {fileID: 3913193730516811527}
 --- !u!1 &9215373206805872999
 GameObject:
@@ -17743,7 +17741,6 @@ MonoBehaviour:
   userId: 
   muteIcon: {fileID: 1962332359}
   muteBtn: {fileID: 1962332358}
-  chatIconParent: {fileID: 0}
   bonusImage: {fileID: 6272744406243408293}
 --- !u!1 &9215373207448606227
 GameObject:
@@ -18012,7 +18009,6 @@ MonoBehaviour:
   userId: 
   muteIcon: {fileID: 336406274130166121}
   muteBtn: {fileID: 4092890910117110932}
-  chatIconParent: {fileID: 0}
   bonusImage: {fileID: 1572339135470161917}
 --- !u!1 &9215373207678396862
 GameObject:
