@@ -5,7 +5,7 @@ using Photon.Voice.Unity;
 public class VoiceManager : MonoBehaviourPun
 {
 
-    private Recorder recorder;
+    public Recorder recorder;
 
 
     public static VoiceManager instance;
@@ -14,27 +14,18 @@ public class VoiceManager : MonoBehaviourPun
     {
         instance = this;
     }
-    private void Start()
+    public void EnableDisableVoiceManager()
     {
-        recorder = GetComponent<Recorder>();
-        if (recorder != null)
+
+        if (recorder != null && Global.isMultiplayer)
         {
+            gameObject.SetActive(true);
             recorder.TransmitEnabled = true; // Enable voice transmission
         }
-    }
-
-    
-    private void Update()
-    {
-        // You can use input or events to control voice transmission, e.g., push-to-talk
-        //if (Input.GetKey(KeyCode.Space))
-        //{
-        //    StartVoiceTransmission();
-        //}
-        //else
-        //{
-        //    StopVoiceTransmission();
-        //}
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
 
@@ -45,21 +36,5 @@ public class VoiceManager : MonoBehaviourPun
             recorder.TransmitEnabled = !recorder.TransmitEnabled;
         }
         return recorder.TransmitEnabled;
-    }
-
-    private void StartVoiceTransmission()
-    {
-        if (recorder != null)
-        {
-            recorder.TransmitEnabled = true;
-        }
-    }
-
-    private void StopVoiceTransmission()
-    {
-        if (recorder != null)
-        {
-            recorder.TransmitEnabled = false;
-        }
     }
 }

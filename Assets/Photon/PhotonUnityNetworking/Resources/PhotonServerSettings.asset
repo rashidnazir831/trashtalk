@@ -44,6 +44,7 @@ MonoBehaviour:
   - Placed_Card_By_Player
   - Set_Player_Turn
   - SpawnPlayers_Rpc
+  - RPC_DisplayChatMessage
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -249,6 +249,9 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
         UIEvents.HidePanel(Panel.FriendsPanel);
         UIEvents.ShowPanel(Panel.GameplayPanel);
 
+        //Hunain
+        VoiceManager.instance.EnableDisableVoiceManager();
+        ChatHandler.instance.EnableDisableChatManager(true);
     }
 
     #region new code

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using Photon.Pun;
+using System;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -110,6 +111,30 @@ public class PlayerUI : MonoBehaviour
                 imageLoader.SetActive(false);
         }
 
+
+    }
+
+
+    public void DisplayChatMsg(string chatTypeStr, int index)
+    {
+        ChatType chatType;
+        if (Enum.TryParse<ChatType>(chatTypeStr, out chatType))
+        {
+            if (chatType.Equals(ChatType.emoji))
+            {
+                Sprite sprite = ChatHandler.instance.emojis[index];
+                GameObject prefab = Instantiate(ChatHandler.instance.emojiPrefab, gameObject.transform);
+                prefab.transform.GetComponentInChildren<Image>(true).sprite = sprite;
+
+            }
+            else
+            {
+                string msg = ChatHandler.instance.texts[index].text;
+                GameObject prefab = Instantiate(ChatHandler.instance.textPrefab, gameObject.transform);
+                prefab.transform.GetComponentInChildren<Text>(true).text = msg;
+                Debug.Log("msg: " + msg);
+            }
+        }
 
     }
 

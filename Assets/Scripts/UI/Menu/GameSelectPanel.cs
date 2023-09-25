@@ -25,7 +25,11 @@ public class GameSelectPanel : UIPanel
         Global.isMultiplayer = false;
         UIEvents.HidePanel(Panel.TabPanels);
         UIEvents.ShowPanel(Panel.GameplayPanel);
-       
+
+        //Hunain
+        VoiceManager.instance.EnableDisableVoiceManager();
+        ChatHandler.instance.EnableDisableChatManager(false);
+
     }
 
     public void OnMultiplayer()

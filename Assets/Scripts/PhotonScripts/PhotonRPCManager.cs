@@ -34,17 +34,6 @@ public class PhotonRPCManager : MonoBehaviourPunCallbacks
         }
     }
 
-    //[ContextMenu("Test")]
-    //public void TestRPC()
-    //{
-    //    SendRPC("TestCallBack_Rpc",RpcTarget.All,"Test");
-    //}
-
-    //[PunRPC]
-    //public void TestCallBack_Rpc(string data)
-    //{
-    //    Debug.Log("data: " + data);
-    //}
 
     [PunRPC]
     public void SpawnPlayers_Rpc(string shuffledCards)
@@ -52,6 +41,13 @@ public class PhotonRPCManager : MonoBehaviourPunCallbacks
         //Call spawning herh
         print("Got Shuffled cards from Master: " + shuffledCards);
         GameplayManager.instance.AnimateCardsScreen(shuffledCards);
+    }
+
+
+    [PunRPC]
+    public void RPC_DisplayChatMessage(string senderId, string chatType, int index)
+    {
+        ChatHandler.instance.DisplayMessage(senderId, chatType, index);
     }
 
     internal void SpawnPlayers(string shuffledCards)
