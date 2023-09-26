@@ -12,7 +12,7 @@ public class FriendsPanel : UIPanel
 
     private void OnEnable()
     {
-        SelectPanel(0);
+      //  SelectPanel(0);
     }
 
     public override void Show()
