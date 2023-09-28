@@ -4,6 +4,8 @@ using UnityEngine;
 
 public enum Panel
 {
+    RegistrationPanel,
+    LoginPanel,
     SignupPanel,
     ProfilePanel,
     PlayersUIPanel,

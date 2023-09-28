@@ -22,6 +22,8 @@ public class WebServiceManager : MonoBehaviour
     public string baseURL;
 
     [Space]
+    [SerializeField] internal string customRegistrationFunction            = "";
+    [SerializeField] internal string customLoginFunction            = "";
     [SerializeField] internal string signUpFunction            = "";
     [SerializeField] internal string getProfileFunction        = "";
     [SerializeField] internal string purchaseCoinsFunction     = "";

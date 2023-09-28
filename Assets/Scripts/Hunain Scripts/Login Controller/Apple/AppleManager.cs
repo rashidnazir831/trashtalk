@@ -48,6 +48,17 @@ public class AppleManager : MonoBehaviour
 
     private void Awake()
     {
+        // Check if the current platform is Android
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            // Hide the Apple login button
+            if (AppleButton != null)
+            {
+                AppleButton.interactable = false;
+            }
+        }
+
+
         if (!profile)
         {
             profile = FindObjectOfType<PlayerProfile>();
@@ -69,7 +80,7 @@ public class AppleManager : MonoBehaviour
         }
 
         CheckIfUserisAlreadyLogin();
-        if (AppleButton != null) AppleButton.onClick.AddListener(() => PerformSigninWithApple());
+        if (AppleButton != null && Application.platform != RuntimePlatform.Android) AppleButton.onClick.AddListener(() => PerformSigninWithApple());
 
     }
 

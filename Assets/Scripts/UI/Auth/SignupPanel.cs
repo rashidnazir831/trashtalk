@@ -7,19 +7,33 @@ public class SignupPanel : UIPanel
 {
     public void ConnectWithFacebook()
     {
-        print("ConnectWithFacebook");
+        //print("ConnectWithFacebook");
     }
 
     public void PlayAsGuest()
     {
-        print("Play As Guest");
-        UIEvents.ShowPanel(Panel.TabPanels);
-        Hide();
+        //print("Play As Guest");
+        //UIEvents.ShowPanel(Panel.TabPanels);
+        //Hide();
     }
 
     public void ConnectWithApple()
     {
-        print("ConnectWithApple");
+        //print("ConnectWithApple");
+    }
+
+    public void CustomSignUp()
+    {
+        print("CustomSignUp");
+        UIEvents.ShowPanel(Panel.RegistrationPanel);
+        Hide();
+    }
+
+    public void CustomLogin()
+    {
+        print("CustomLogin");
+        UIEvents.ShowPanel(Panel.LoginPanel);
+        Hide();
     }
 
     public override void Show()
