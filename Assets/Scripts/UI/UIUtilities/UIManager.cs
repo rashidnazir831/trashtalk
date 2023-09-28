@@ -28,6 +28,11 @@ public class UIManager : MonoBehaviour
 
     public void ShowPanel(string panelName)
     {
+        Debug.Log("panel Name: " + panelName);
+        foreach (var item in panels)
+        {
+            Debug.Log("Dic Name: " + item.Key);
+        }
         if(panels.TryGetValue(panelName,out UIPanel panel))
         {
             panel.Show();

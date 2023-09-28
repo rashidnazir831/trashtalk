@@ -32,7 +32,7 @@ public class SignupPanel : UIPanel
     public void CustomLogin()
     {
         print("CustomLogin");
-        UIEvents.ShowPanel(Panel.LoginPanel);
+        UIEvents.ShowPanel(Panel.CustomLoginPanel);
         Hide();
     }
 

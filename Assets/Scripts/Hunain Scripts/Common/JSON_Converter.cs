@@ -15,6 +15,16 @@ namespace TrashTalk
         public User User { get; set; }
     }
 
+
+    public partial class PlayerDataForCustom
+    {
+        [JsonProperty("msg")]
+        public string Msg { get; set; }
+
+        [JsonProperty("data")]
+        public User User { get; set; }
+    }
+
     public partial class LeaderboardUsers
     {
         public List<User> data;
@@ -104,6 +114,13 @@ namespace TrashTalk
     {
         public static PlayerData FromJson(string json) => JsonConvert.DeserializeObject<PlayerData>(json, TrashTalk.Converter.Settings);
     }
+
+
+    public partial class DeSerialize
+    {
+        public static T FromJson<T>(string json) => JsonConvert.DeserializeObject<T>(json, TrashTalk.Converter.Settings);
+    }
+
 
     public static class Serialize
     {

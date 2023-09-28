@@ -259,8 +259,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseURL: https://api.myprojectstaging.com/TrashTalk/api/
-  customRegistrationFunction: 
-  customLoginFunction: 
+  customRegistrationFunction: register
+  customLoginFunction: login
   signUpFunction: signup-login
   getProfileFunction: profile
   purchaseCoinsFunction: purchase-coins

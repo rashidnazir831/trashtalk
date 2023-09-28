@@ -67,7 +67,7 @@ public class RegistrationScreen : MonoBehaviour
 
 
         UIEvents.ShowPanel(Panel.TabPanels);
-        UIEvents.HidePanel(Panel.LoginPanel);
+        UIEvents.HidePanel(Panel.CustomLoginPanel);
     }
   
     private void OnSignUpSuccess(JObject resp, long arg2)
@@ -76,14 +76,14 @@ public class RegistrationScreen : MonoBehaviour
 
         MesgBar.instance.show("Account Created Successfully.", false);
 
-        var playerData = PlayerData.FromJson(resp.ToString());
+        var playerData = DeSerialize.FromJson<PlayerDataForCustom>(resp.ToString());
         PlayerProfile.UpdatePlayerData(playerData.User);
         PlayerProfile.SaveDataToPrefs();
         PlayerProfile.showPlayerDetails();
 
         PhotonConnectionController.Instance.ConnectingToPhoton();
 
-        UIEvents.ShowPanel(Panel.LoginPanel);
+        UIEvents.ShowPanel(Panel.CustomLoginPanel);
         UIEvents.HidePanel(Panel.RegistrationPanel);
     }
 
@@ -183,6 +183,6 @@ public class RegistrationScreen : MonoBehaviour
     {
         UIEvents.ShowPanel(Panel.SignupPanel);
         UIEvents.HidePanel(Panel.RegistrationPanel);
-        UIEvents.HidePanel(Panel.LoginPanel);
+        UIEvents.HidePanel(Panel.CustomLoginPanel);
     }
 }
