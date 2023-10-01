@@ -76,11 +76,20 @@ public class PlayersUIPanel : UIPanel
             case "SetPlayersData":
                 SetPlayersData();
                 break;
+            case "StopTimer":
+                playerNumber = (int)parameters[1];
+                StopTimer(playerNumber);
+                break;
             case "ResetUI":
                 ResetUI();
                 break;
 
         }
+    }
+
+    void StopTimer(int playerNumber)
+    {
+        playerUI[playerNumber].StopTimer();
     }
 
     public void SetPlayersData()

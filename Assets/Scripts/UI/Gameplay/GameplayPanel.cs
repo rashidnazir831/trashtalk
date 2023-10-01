@@ -53,6 +53,13 @@ public class GameplayPanel : UIPanel
         cardIntroPanel.GetComponentInChildren<AnimationEvents>().SetCallBack(this.callBack);
     }
 
+
+    void ShowTrashTalk(string type)
+    {
+
+    }
+
+
     public void OnHomeButton()
     {
         Time.timeScale = 0;

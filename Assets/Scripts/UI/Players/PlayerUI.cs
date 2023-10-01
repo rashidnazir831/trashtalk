@@ -27,7 +27,7 @@ public class PlayerUI : MonoBehaviour
     public Button muteBtn;
 
     public Image bonusImage;
-
+    public GameObject timerObj;
     
     //private string profileImageURL = "https://i.pravatar.cc/300";
 
@@ -207,10 +207,20 @@ public class PlayerUI : MonoBehaviour
 
     public void SetTurnIndication(bool isTurn)
     {
+        timerObj.SetActive(isTurn);
+
         if (profileBG == null)
             return;
+
         profileBG.color = isTurn?Color.red:Color.white;
     }
+
+    public void StopTimer()
+    {
+        timerObj.SetActive(false);
+    }
+
+
 
     public void HideBidUI()
     {

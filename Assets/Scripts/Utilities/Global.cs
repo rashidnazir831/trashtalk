@@ -18,5 +18,7 @@ public static class Global
     //public static int maxBostonTricks = 12;
     public static int bostonPoints = 200; //If made trick 10 - 12
     public static int nilPoints = 100;
+
+    public static int turnMaxTime = 30;
     //    public static List<MutiplayerData> playerData;
 }

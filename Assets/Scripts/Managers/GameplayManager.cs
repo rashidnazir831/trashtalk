@@ -415,7 +415,6 @@ public class GameplayManager : MonoBehaviour
             {
                 cardHand.ActiveMainPlayerCards();
                 UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowHideYourTurnHeading", true);
-                print("your turn");
             }
             else
             {
@@ -426,7 +425,7 @@ public class GameplayManager : MonoBehaviour
 
     IEnumerator PlayBotTurnByMaster(Player botPlayer)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(Random.Range(1, 3));
         List<Card> hand = botPlayer.hand;
         //Card playedCard = botPlayer.PlayCard(0);
         Card playedCard = botTrick.GetBestCard(botPlayer.hand);
@@ -436,8 +435,9 @@ public class GameplayManager : MonoBehaviour
 
     IEnumerator BotPlay(Player botPlayer)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(Random.Range(1,3));
         List<Card> hand = botPlayer.hand;
+        UIEvents.UpdateData(Panel.PlayersUIPanel, null, "StopTimer", this.currentPlayerIndex);
 
         //Card playedCard = botPlayer.PlayCard(0);
         Card playedCard = botTrick.GetBestCard(botPlayer.hand);
@@ -448,6 +448,7 @@ public class GameplayManager : MonoBehaviour
         print("currentPlayerIndex" + this.currentPlayerIndex);
 
         playedCard.MoveCard(TableController.instance.GetPlayerShowCardTransform(botPlayer.tablePosition),2.5f,true,false, ()=> {
+
             TrickManager.AddCard(playedCard);
 
             botPlayer.hand.Remove(playedCard);
@@ -464,6 +465,8 @@ public class GameplayManager : MonoBehaviour
 
     public void PlaceCardOnTable(Player player, Card playedCard)
     {
+        UIEvents.UpdateData(Panel.PlayersUIPanel, null, "StopTimer", this.currentPlayerIndex);
+
         //cardHand.UpdateCardArrangement();
         cardHand.ActiveMainPlayerCards(false);
 
@@ -500,6 +503,7 @@ public class GameplayManager : MonoBehaviour
         Card card = cardDeck.GetCard(cardCode);
         Player currentPlayer = PlayerManager.instance.GetPlayerById(playerId);
         print("and table position of that player is: " + currentPlayer.tablePosition);
+      //  UIEvents.UpdateData(Panel.PlayersUIPanel, null, "StopTimer", currentPlayer.tablePosition);
 
 
         currentPlayer.hand.Remove(card);
@@ -595,6 +599,21 @@ public class GameplayManager : MonoBehaviour
         }
 
     }
+
+    public void OnTurnTimeUp()
+    {
+        Player currentPlayer = PlayerManager.instance.players[this.currentPlayerIndex];
+
+        if (currentPlayer.isOwn)
+        {
+            //            UIEvents.UpdateData(Panel.PlayersUIPanel, null, "StopTimer", this.currentPlayerIndex);
+            UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowHideYourTurnHeading", false);
+            //Card playedCard = botPlayer.PlayCard(0);
+            Card card = botTrick.GetBestCard(currentPlayer.hand);
+            card.PlaceCardOnTable();
+        }
+    }
+
 
     void ResetTrick()
     {
