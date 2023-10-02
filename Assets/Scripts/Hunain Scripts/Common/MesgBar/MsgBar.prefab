@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82314d29d34d1456b9ddd6c9ca9f9b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shouldPersistOnLoad: 1
   mesgBar: {fileID: 5439221760786287466}
   txt: {fileID: 8684119931845940759}
   holder: {fileID: 1576667283055821775}
@@ -263,19 +264,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: c6bab1e1254aa45169886e6d75df0e99, type: 3}
+    m_Font: {fileID: 12800000, guid: 253eb4f81b3a5264099f294bfc0fbb8c, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 54
+    m_MaxSize: 80
     m_Alignment: 4
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Text
+  m_Text: Message Bar
 --- !u!1 &7286912182559294701
 GameObject:
   m_ObjectHideFlags: 0

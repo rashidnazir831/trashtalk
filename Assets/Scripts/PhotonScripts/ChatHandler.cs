@@ -60,11 +60,13 @@ public class ChatHandler : MonoBehaviour
         // Send an RPC to all players to display the message
         CloseChatPanel();
         CloseEmojiPanel();
-        PhotonRPCManager.Instance.SendRPC("RPC_DisplayChatMessage" , RpcTarget.Others, PhotonNetwork.LocalPlayer.UserId, chatType, index);
+        PhotonRPCManager.Instance.SendRPC("RPC_DisplayChatMessage" , RpcTarget.Others, PhotonNetwork.LocalPlayer.UserId, chatType.ToString(), index);
+
     }
 
     public void DisplayMessage(string senderId, string chatTypeStr, int index)
     {
+        Debug.Log("DisPlay Message");
         PlayerUI playerUI = FindObjectsOfType<PlayerUI>().ToList().Find(x => x.userId.Equals(senderId));
         if (playerUI)
             playerUI.DisplayChatMsg(chatTypeStr, index);
@@ -73,8 +75,8 @@ public class ChatHandler : MonoBehaviour
     internal void EnableDisableChatManager(bool state)
     {
         gameObject.SetActive(state);
-        chatBtn.gameObject.SetActive(true);
-        emojiBtn.gameObject.SetActive(true);
+        chatBtn.gameObject.SetActive(state);
+        emojiBtn.gameObject.SetActive(state);
     }
 }
 

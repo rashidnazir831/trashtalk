@@ -35,11 +35,6 @@ public class RegistrationScreen : MonoBehaviour
 
         PlayerProfile.Player_UserID = PlayerPrefs.GetString(ConstantVariables.UserID);
         PlayerProfile.Player_UserName = PlayerPrefs.GetString(ConstantVariables.UserName);
-        //PlayerProfile.Player_Email = PlayerPrefs.GetString(ConstantVariables.UserEmail);
-        //PlayerProfile.Player_rawImage_Texture2D = TextureConverter.Base64ToTexture2D(PlayerPrefs.GetString("Picture"));
-        //PlayerProfile.authProvider =   PlayerPrefs.GetString(ConstantVariables.AuthProvider);
-        //PlayerProfile.Player_coins =   PlayerPrefs.GetInt("Coins");
-        //Controller.instance.Home_Screen.GetComponent<HomeScreen>().ChipsSettter();
     }
 
     private void ByPassLogin()
@@ -53,18 +48,16 @@ public class RegistrationScreen : MonoBehaviour
         WebServiceManager.instance.APIRequest(WebServiceManager.instance.customLoginFunction, Method.POST, null, keyValuePairs, OnLoginSuccess, OnFail, CACHEABLE.NULL, true, null);
     }
 
-  
     private void OnLoginSuccess(JObject resp, long arg2)
     {
         Debug.Log("OnLoginSuccess: " + resp.ToString());
 
-        var playerData = PlayerData.FromJson(resp.ToString());
+        var playerData = DeSerialize.FromJson<PlayerDataForCustom>(resp.ToString());
         PlayerProfile.UpdatePlayerData(playerData.User);
         PlayerProfile.SaveDataToPrefs();
         PlayerProfile.showPlayerDetails();
 
         PhotonConnectionController.Instance.ConnectingToPhoton();
-
 
         UIEvents.ShowPanel(Panel.TabPanels);
         UIEvents.HidePanel(Panel.CustomLoginPanel);
@@ -75,14 +68,6 @@ public class RegistrationScreen : MonoBehaviour
         Debug.Log("On SignUp Success: " + resp.ToString());
 
         MesgBar.instance.show("Account Created Successfully.", false);
-
-        var playerData = DeSerialize.FromJson<PlayerDataForCustom>(resp.ToString());
-        PlayerProfile.UpdatePlayerData(playerData.User);
-        PlayerProfile.SaveDataToPrefs();
-        PlayerProfile.showPlayerDetails();
-
-        PhotonConnectionController.Instance.ConnectingToPhoton();
-
         UIEvents.ShowPanel(Panel.CustomLoginPanel);
         UIEvents.HidePanel(Panel.RegistrationPanel);
     }

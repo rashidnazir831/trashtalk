@@ -233,7 +233,7 @@ public class WebServiceManager : MonoBehaviour
         //--
         if (www.result == UnityWebRequest.Result.ConnectionError)
         {
-            OnFail?.Invoke("notDone");
+            OnFail?.Invoke("Connection Error");
             RaiseOnWebServiceError(www.error, getFunction);
         }
         else

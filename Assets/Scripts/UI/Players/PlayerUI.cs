@@ -21,6 +21,9 @@ public class PlayerUI : MonoBehaviour
     public Image profileBG;
 
     [Space]
+    [Header("Chat Spawn Transform")]
+    public Transform spawnPoint;
+    [Space]
     [Header("For Audio Input")]
     public string userId = "";
     public Image muteIcon;
@@ -120,20 +123,29 @@ public class PlayerUI : MonoBehaviour
         ChatType chatType;
         if (Enum.TryParse<ChatType>(chatTypeStr, out chatType))
         {
+            GameObject prefab;
             if (chatType.Equals(ChatType.emoji))
             {
                 Sprite sprite = ChatHandler.instance.emojis[index];
-                GameObject prefab = Instantiate(ChatHandler.instance.emojiPrefab, gameObject.transform);
-                prefab.transform.GetComponentInChildren<Image>(true).sprite = sprite;
-
+                prefab = Instantiate(ChatHandler.instance.emojiPrefab, spawnPoint, false);
+                prefab.transform.GetChild(0).GetComponent<Image>().sprite = sprite;
             }
             else
             {
                 string msg = ChatHandler.instance.texts[index].text;
-                GameObject prefab = Instantiate(ChatHandler.instance.textPrefab, gameObject.transform);
+                prefab = Instantiate(ChatHandler.instance.textPrefab, spawnPoint, false);
                 prefab.transform.GetComponentInChildren<Text>(true).text = msg;
                 Debug.Log("msg: " + msg);
             }
+
+            prefab.transform.position = Vector3.zero;
+            prefab.transform.rotation = Quaternion.identity;
+            prefab.transform.localScale = Vector3.one;
+
+            prefab.transform.localPosition = Vector3.zero;
+            prefab.transform.localRotation = Quaternion.identity;
+            prefab.transform.localScale = Vector3.one;
+
         }
 
     }

@@ -36,7 +36,7 @@ public class PlayOrReject : MonoBehaviourPunCallbacks
     {
         if (roomID != null)
         {
-            PlayerProfile.GameId = PhotonChat.Instance.roomID;
+            PlayerProfile.GameId = Global.currentGameId;
             //leave current room if joined
             //agr mein kisi room mein hn or mujhe new game request aagai or mene accept krli, tw pichla room left hoga or new join hoga
             if (PhotonNetwork.InRoom)
