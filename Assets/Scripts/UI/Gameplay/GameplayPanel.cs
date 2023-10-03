@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -9,7 +8,14 @@ public class GameplayPanel : UIPanel
 {
     public GameObject cardIntroPanel;
     public Text messageText;
+    public Image trashTalk;
     private Action<object[]> callBack;
+
+    public List<Sprite> jokerTrashTalks;
+    public List<Sprite> queensTrashTalks;
+    public List<Sprite> jacksTrashTalks;
+    public List<Sprite> kingsTrashTalks;
+    public List<Sprite> acesTrashTalks;
 
 
     public override void Show()
@@ -38,6 +44,12 @@ public class GameplayPanel : UIPanel
                 string message = (string)parameters[2];
                 ShowHideMessage(show,message);
                 break;
+            case "ShowTrashTalk":
+                string suit = (string)parameters[1];
+                string card = (string)parameters[2];
+                ShowTrashTalk(suit, card);
+                break;
+
         }
     }
 
@@ -54,9 +66,75 @@ public class GameplayPanel : UIPanel
     }
 
 
-    void ShowTrashTalk(string type)
+    void ShowTrashTalk(string suit, string card)
     {
+        Sprite sprite = null;
+        if (card != "Ace" && card != "King" && card != "Queen" && card != "Jack" && card != "Joker")
+            return;
 
+
+
+        if(card == "Ace")
+        {
+            if (suit == Card.Suit.Diamonds.ToString())
+                sprite = acesTrashTalks[0];
+            else if (suit == Card.Suit.Hearts.ToString())
+                sprite = acesTrashTalks[1];
+            else if (suit == Card.Suit.Clubs.ToString())
+                sprite = acesTrashTalks[2];
+            else if (suit == Card.Suit.Spades.ToString())
+                sprite = acesTrashTalks[3];
+            else
+                sprite = acesTrashTalks[4];
+        }
+        else if (card == "King")
+        {
+            if (suit == Card.Suit.Diamonds.ToString())
+                sprite = kingsTrashTalks[0];
+            else if (suit == Card.Suit.Hearts.ToString())
+                sprite = kingsTrashTalks[1];
+            else if (suit == Card.Suit.Clubs.ToString())
+                sprite = kingsTrashTalks[2];
+            else if (suit == Card.Suit.Spades.ToString())
+                sprite = kingsTrashTalks[3];
+            else
+                sprite = kingsTrashTalks[4];
+
+        }
+        else if (card == "Queen")
+        {
+            if(suit == Card.Suit.Diamonds.ToString())
+                sprite = queensTrashTalks[0];
+            else if (suit == Card.Suit.Hearts.ToString())
+                sprite = queensTrashTalks[1];
+            else
+                sprite = queensTrashTalks[Utility.GetRandom(2, queensTrashTalks.Count)];
+
+        }
+        else if (card == "Jack")
+        {
+            sprite = jacksTrashTalks[Utility.GetRandom(0, jacksTrashTalks.Count)];
+        }
+        else if (card == "Joker")
+        {
+            //will be added after Joker
+        }
+
+        if (sprite == null)
+            return;
+
+
+        trashTalk.gameObject.SetActive(false);
+
+        trashTalk.sprite = sprite;
+
+        trashTalk.gameObject.SetActive(true);
+        Invoke("HideTrashTalk", 1);
+    }
+
+    void HideTrashTalk()
+    {
+        trashTalk.gameObject.SetActive(false);
     }
 
 

@@ -26,7 +26,8 @@ public class Card : MonoBehaviour,ICard
         Diamonds = 0,
         Spades = 1,
         Hearts = 2,
-        Clubs = 3
+        Clubs = 3,
+        Joker = 4
     }
 
     public Suit suit;

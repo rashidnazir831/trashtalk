@@ -35,4 +35,9 @@ public static class Utility
             }
         }
     }
+
+    public static  int GetRandom(int min, int max)
+    {
+        return Random.Range(min, max);
+    }
 }

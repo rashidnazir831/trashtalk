@@ -8,10 +8,12 @@ using UnityEngine;
         public string name;
         public string shortCode;
         public string suit;
+        public string valueName;
         public string description;
         public int score;
         public int rank;
         public int value;
+
     }
 
 //[System.Serializable]

@@ -425,7 +425,7 @@ public class GameplayManager : MonoBehaviour
 
     IEnumerator PlayBotTurnByMaster(Player botPlayer)
     {
-        yield return new WaitForSeconds(Random.Range(1, 3));
+        yield return new WaitForSeconds(Random.Range(2, 5));
         List<Card> hand = botPlayer.hand;
         //Card playedCard = botPlayer.PlayCard(0);
         Card playedCard = botTrick.GetBestCard(botPlayer.hand);
@@ -435,7 +435,7 @@ public class GameplayManager : MonoBehaviour
 
     IEnumerator BotPlay(Player botPlayer)
     {
-        yield return new WaitForSeconds(Random.Range(1,3));
+        yield return new WaitForSeconds(Random.Range(2,5));
         List<Card> hand = botPlayer.hand;
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "StopTimer", this.currentPlayerIndex);
 
@@ -448,6 +448,7 @@ public class GameplayManager : MonoBehaviour
         print("currentPlayerIndex" + this.currentPlayerIndex);
 
         playedCard.MoveCard(TableController.instance.GetPlayerShowCardTransform(botPlayer.tablePosition),2.5f,true,false, ()=> {
+            ShowTrashTalk(playedCard);
 
             TrickManager.AddCard(playedCard);
 
@@ -480,6 +481,8 @@ public class GameplayManager : MonoBehaviour
 //        cardHand.ActiveMainPlayerCards(false);
 
         playedCard.MoveCard(TableController.instance.GetPlayerShowCardTransform(player.tablePosition), 2.5f,true,false,()=> {
+            ShowTrashTalk(playedCard);
+
             TrickManager.HighlightLowCards();
             cardHand.UpdateCardArrangement();
         });
@@ -489,6 +492,12 @@ public class GameplayManager : MonoBehaviour
         TrickManager.AddCard(playedCard);
         DecideNext();
     }
+
+    void ShowTrashTalk(Card card)
+    {
+        UIEvents.UpdateData(Panel.GameplayPanel, null, "ShowTrashTalk", card.suit.ToString(), card.data.valueName);
+    }
+
 
     void SendCardPlacedData(string playerId, string cardCode)
     {
@@ -513,12 +522,14 @@ public class GameplayManager : MonoBehaviour
         if (currentPlayer.isOwn)
         {
             card.MoveCard(TableController.instance.GetPlayerShowCardTransform(currentPlayer.tablePosition), 2.5f, true, false, () => {
+                ShowTrashTalk(card);
                 TrickManager.HighlightLowCards();
                 cardHand.UpdateCardArrangement();
             });
         }
         else
         {
+            ShowTrashTalk(card);
             card.gameObject.SetActive(true);
             card.SwitchSide(true);
 
