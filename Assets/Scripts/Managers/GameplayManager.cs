@@ -25,6 +25,7 @@ public class GameplayManager : MonoBehaviour
 
     private Hashtable _myCustomProperties = new Hashtable();
 
+    public bool isSpadeActive = false;
 
     private void Awake()
     {
@@ -441,6 +442,15 @@ public class GameplayManager : MonoBehaviour
 
         //Card playedCard = botPlayer.PlayCard(0);
         Card playedCard = botTrick.GetBestCard(botPlayer.hand);
+
+
+        if (playedCard.suit == Card.Suit.Spades)
+        {
+            this.isSpadeActive = true;
+            print("Spade Activated");
+        }
+
+
         print("bot has choosen: " + playedCard.name);
         playedCard.gameObject.SetActive(true);
 
@@ -476,9 +486,13 @@ public class GameplayManager : MonoBehaviour
             SendCardPlacedData(player.id, playedCard.data.shortCode);
             return;
         }
-            
 
-//        cardHand.ActiveMainPlayerCards(false);
+        if (playedCard.suit == Card.Suit.Spades)
+        {
+            this.isSpadeActive = true;
+            print("Spade Activated");
+        }
+        //        cardHand.ActiveMainPlayerCards(false);
 
         playedCard.MoveCard(TableController.instance.GetPlayerShowCardTransform(player.tablePosition), 2.5f,true,false,()=> {
             ShowTrashTalk(playedCard);
@@ -512,8 +526,12 @@ public class GameplayManager : MonoBehaviour
         Card card = cardDeck.GetCard(cardCode);
         Player currentPlayer = PlayerManager.instance.GetPlayerById(playerId);
         print("and table position of that player is: " + currentPlayer.tablePosition);
-      //  UIEvents.UpdateData(Panel.PlayersUIPanel, null, "StopTimer", currentPlayer.tablePosition);
-
+        //  UIEvents.UpdateData(Panel.PlayersUIPanel, null, "StopTimer", currentPlayer.tablePosition);
+        if (card.suit == Card.Suit.Spades)
+        {
+            this.isSpadeActive = true;
+            print("Spade Activated");
+        }
 
         currentPlayer.hand.Remove(card);
         cardHand.OnUseHandCard(card);

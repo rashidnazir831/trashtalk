@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.4439372, g: 0.49315345, b: 0.5721989, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4512,7 +4512,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2670579892167892406, guid: 102d825884bcc463986819b28e5fe40b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.07385254
+      value: -0.07397461
       objectReference: {fileID: 0}
     - target: {fileID: 2670579892167892406, guid: 102d825884bcc463986819b28e5fe40b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6074,7 +6074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511846786572514009, guid: 7ed451aee46ff409ca239b0277e17c29, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.14758301
+      value: -0.14770508
       objectReference: {fileID: 0}
     - target: {fileID: 511846786572514009, guid: 7ed451aee46ff409ca239b0277e17c29, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7926,10 +7926,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1027427138}
     m_Modifications:
+    - target: {fileID: 3694354642217966820, guid: 24640a6568fbf4157936e2ed707a3157, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -105.86011
+      objectReference: {fileID: 0}
     - target: {fileID: 6773233125100539953, guid: 24640a6568fbf4157936e2ed707a3157, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 104106179}
+    - target: {fileID: 7351175583029869562, guid: 24640a6568fbf4157936e2ed707a3157, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -44.534424
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351175583029869562, guid: 24640a6568fbf4157936e2ed707a3157, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -105.8645
+      objectReference: {fileID: 0}
     - target: {fileID: 9215373207374992251, guid: 24640a6568fbf4157936e2ed707a3157, type: 3}
       propertyPath: m_Name
       value: GamePlay
@@ -25954,6 +25966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playButton: {fileID: 843498329}
   cardHand: {fileID: 1678030066}
+  isSpadeActive: 0
 --- !u!114 &1532306109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25968,6 +25981,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIntroPanel: {fileID: 1705394950}
   messageText: {fileID: 2084509724}
+  trashTalk: {fileID: 0}
+  jokerTrashTalks: []
+  queensTrashTalks: []
+  jacksTrashTalks: []
+  kingsTrashTalks: []
+  acesTrashTalks: []
 --- !u!114 &1532306110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27475,6 +27494,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7502729982698800019, guid: 8e90fd623e30946a0a2d317f738b2c66, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 32.840332
+      objectReference: {fileID: 0}
     - target: {fileID: 7502729983000590965, guid: 8e90fd623e30946a0a2d317f738b2c66, type: 3}
       propertyPath: m_Text
       value: Friends
@@ -27514,6 +27537,10 @@ PrefabInstance:
     - target: {fileID: 7502729984235874859, guid: 8e90fd623e30946a0a2d317f738b2c66, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7502729984248475099, guid: 8e90fd623e30946a0a2d317f738b2c66, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 32.840332
       objectReference: {fileID: 0}
     - target: {fileID: 7502729984472271184, guid: 8e90fd623e30946a0a2d317f738b2c66, type: 3}
       propertyPath: m_Name
@@ -36121,6 +36148,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIntroPanel: {fileID: 1070726011}
   messageText: {fileID: 56909393}
+  trashTalk: {fileID: 0}
+  jokerTrashTalks: []
+  queensTrashTalks: []
+  jacksTrashTalks: []
+  kingsTrashTalks: []
+  acesTrashTalks: []
 --- !u!224 &629941572746864536
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36174,6 +36207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playButton: {fileID: 836488843}
   cardHand: {fileID: 1554116841}
+  isSpadeActive: 0
 --- !u!114 &629941572746864539
 MonoBehaviour:
   m_ObjectHideFlags: 0

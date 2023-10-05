@@ -191,10 +191,11 @@ public class HandCardsUI : MonoBehaviour
             {
                 if (isFirstTurn)
                 {
-                    if (hasNormalCards)
-                    {
-                        active = (card.suit != Card.Suit.Spades);
-                    }
+                     if (hasNormalCards)
+                     {
+                        active = (card.suit != Card.Suit.Spades || GameplayManager.instance.isSpadeActive);
+                 //   active = true;
+                     }
                 }
                 else
                 {
@@ -205,11 +206,12 @@ public class HandCardsUI : MonoBehaviour
                     else
                     {
                         active = true;
+                    }
 
-
-                        //old logic
-                        //active = hasNormalCards ? (card.suit != Card.Suit.Spades)?true:false:
-                        //    card.suit == Card.Suit.Spades?true:false;
+                    // New condition, active spades if spades activated
+                    if (GameplayManager.instance.isSpadeActive && card.suit == Card.Suit.Spades)
+                    {
+                        active = true; 
                     }
                 }
             }

@@ -39,6 +39,7 @@ public class BotTrick
                 if (hasNormalCards)
                 {
                     if (card.suit != Card.Suit.Spades && (bestCard == null || card.data.score > bestCard.data.score))
+                  //  if ((bestCard == null || card.data.score > bestCard.data.score))
                         bestCard = card;
                 }
                 else if (bestCard == null || card.data.score > bestCard.data.score)
@@ -50,7 +51,8 @@ public class BotTrick
             {
                 if (hasLeadingSuit)
                 {
-                    if(card.suit == leadingSuit && (bestCard == null || card.data.score > bestCard.data.score))
+                    //if(card.suit == leadingSuit && (bestCard == null || card.data.score > bestCard.data.score))
+                    if (card.suit == leadingSuit && (bestCard == null || card.data.score > bestCard.data.score))
                         bestCard = card;
                 }
                 else
@@ -59,17 +61,6 @@ public class BotTrick
                     {
                         bestCard = card;
                     }
-
-                    //old logic
-                    //if (hasNormalCards)
-                    //{
-                    //    if (card.suit != Card.Suit.Spades && (bestCard == null || card.data.score > bestCard.data.score))
-                    //        bestCard = card;
-                    //}
-                    //else if (bestCard == null || card.data.score > bestCard.data.score)
-                    //{
-                    //    bestCard = card;
-                    //}
                 }
             }
 
