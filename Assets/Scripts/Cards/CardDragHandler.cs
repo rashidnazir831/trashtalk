@@ -23,11 +23,20 @@ public class CardDragHandler : MonoBehaviour,IPointerDownHandler, IDragHandler,I
 
     public void OnPointerDown(PointerEventData eventData)
     {
-       
+        print("card selected");
+        if(CardsController.instance.currentCard == card)
+        {
+            UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowHideYourTurnHeading", false);
+            card.PlaceCardOnTable();
+
+        }
+        else
+            CardsController.instance.OnSelectCard(card);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        return;
         if (!isDragging)
         {
             initialPosition = transform.position;
@@ -39,6 +48,7 @@ public class CardDragHandler : MonoBehaviour,IPointerDownHandler, IDragHandler,I
 
     public void OnDrag(PointerEventData eventData)
     {
+        return;
         if (isDragging)
         {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out Vector2 localPosition);
@@ -49,6 +59,7 @@ public class CardDragHandler : MonoBehaviour,IPointerDownHandler, IDragHandler,I
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        return;
         TableController.instance.ShowTableCardArea(false);
 
         if (!isDragging)

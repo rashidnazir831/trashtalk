@@ -12786,6 +12786,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1738970409363355396}
   - component: {fileID: 6233059672335862313}
+  - component: {fileID: 1027986899779934859}
   m_Layer: 5
   m_Name: MyCardHolderPositions
   m_TagString: Untagged
@@ -12834,6 +12835,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6712571384275127571}
   m_CullTransparentMesh: 1
+--- !u!114 &1027986899779934859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6712571384275127571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f29386fb92a0e43c880469710e91660c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7070316632435646720
 GameObject:
   m_ObjectHideFlags: 0
