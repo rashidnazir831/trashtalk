@@ -213,11 +213,11 @@ MonoBehaviour:
     score: 3
     rank: 3
     value: 0
-  - name: Two of Hearts
-    shortCode: twoOfHearts
-    suit: Hearts
+  - name: High Joker
+    shortCode: highJoker
+    suit: Joker
     valueName: 
-    description: Two of Hearts
+    description: High Joker
     score: 2
     rank: 2
     value: 0
@@ -421,11 +421,11 @@ MonoBehaviour:
     score: 3
     rank: 3
     value: 0
-  - name: Two of Clubs
-    shortCode: twoOfClubs
-    suit: Clubs
+  - name: Low Joker
+    shortCode: lowJoker
+    suit: Joker
     valueName: 
-    description: Two of Clubs
-    score: 2
-    rank: 2
+    description: Low Joker
+    score: 1
+    rank: 1
     value: 0
