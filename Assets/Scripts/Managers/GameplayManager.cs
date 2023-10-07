@@ -25,8 +25,6 @@ public class GameplayManager : MonoBehaviour
 
     private Hashtable _myCustomProperties = new Hashtable();
 
-    public bool isSpadeActive = false;
-
     private void Awake()
     {
         if (instance == null)
@@ -113,7 +111,7 @@ public class GameplayManager : MonoBehaviour
         bidManager.ClearPlayersBid();
         //playButton.SetActive(true);
         this.totalPlayers = PlayerManager.instance.players.Count;
-
+        Global.isSpadeActive = false;
 
         if (Global.isMultiplayer)
             this.currentPlayerIndex = PlayerManager.instance.GetMasterIndex();
@@ -443,11 +441,10 @@ public class GameplayManager : MonoBehaviour
         //Card playedCard = botPlayer.PlayCard(0);
         Card playedCard = botTrick.GetBestCard(botPlayer.hand);
 
-
         if (playedCard.suit == Card.Suit.Spades)
         {
-            this.isSpadeActive = true;
-            print("Spade Activated");
+            print("Spade Activated: " + playedCard.name + " By Player " + playedCard.cardOwner);
+            Global.isSpadeActive = true;
         }
 
 
@@ -489,9 +486,10 @@ public class GameplayManager : MonoBehaviour
 
         if (playedCard.suit == Card.Suit.Spades)
         {
-            this.isSpadeActive = true;
-            print("Spade Activated");
+            print("Spade Activated: " + playedCard.name + " By Player " + playedCard.cardOwner);
+            Global.isSpadeActive = true;
         }
+
         //        cardHand.ActiveMainPlayerCards(false);
 
         playedCard.MoveCard(TableController.instance.GetPlayerShowCardTransform(player.tablePosition), 2.5f,true,false,()=> {
@@ -529,8 +527,8 @@ public class GameplayManager : MonoBehaviour
         //  UIEvents.UpdateData(Panel.PlayersUIPanel, null, "StopTimer", currentPlayer.tablePosition);
         if (card.suit == Card.Suit.Spades)
         {
-            this.isSpadeActive = true;
-            print("Spade Activated");
+            print("Spade Activated: " + card.name + " By Player " + card.cardOwner);
+            Global.isSpadeActive = true;
         }
 
         currentPlayer.hand.Remove(card);

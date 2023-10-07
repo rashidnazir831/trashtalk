@@ -20,5 +20,8 @@ public static class Global
     public static int nilPoints = 100;
 
     public static int turnMaxTime = 30;
+
+    public static bool isSpadeActive = false;
+
     //    public static List<MutiplayerData> playerData;
 }

@@ -184,18 +184,57 @@ public class HandCardsUI : MonoBehaviour
         bool hasNormalCards = HasNormalCards();
         bool hasLeadingSuit = HasLeadingSuit(leadingSuit);
 
+        //old Logic
+        //foreach (Card card in cardsInHand)
+        //{
+        //    bool active = true;
+        //    if (allActive)
+        //    {
+        //        if (isFirstTurn)
+        //        {
+        //             if (hasNormalCards)
+        //             {
+        //                active = (card.suit != Card.Suit.Spades || GameplayManager.instance.isSpadeActive);
+        //         //   active = true;
+        //             }
+        //        }
+        //        else
+        //        {
+        //            if (hasLeadingSuit)
+        //            {
+        //                active = (card.suit == leadingSuit);
+        //            }
+        //            else
+        //            {
+        //                active = true;
+        //            }
+
+        //            // New condition, active spades if spades activated
+        //            if (GameplayManager.instance.isSpadeActive && card.suit == Card.Suit.Spades)
+        //            {
+        //                active = true; 
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        active = allActive;
+        //    }
+
+        //    card.ActiveButton(active);
+        //    card.ActiveDragable(active);
+        //    card.HighlightCard(active);
+        //}
+
         foreach (Card card in cardsInHand)
         {
             bool active = true;
+
             if (allActive)
             {
                 if (isFirstTurn)
                 {
-                     if (hasNormalCards)
-                     {
-                        active = (card.suit != Card.Suit.Spades || GameplayManager.instance.isSpadeActive);
-                 //   active = true;
-                     }
+                    active = true; // On the first turn, all cards are active
                 }
                 else
                 {
@@ -208,11 +247,16 @@ public class HandCardsUI : MonoBehaviour
                         active = true;
                     }
 
-                    // New condition, active spades if spades activated
-                    if (GameplayManager.instance.isSpadeActive && card.suit == Card.Suit.Spades)
+                    if (Global.isSpadeActive && card.suit == Card.Suit.Spades)
                     {
-                        active = true; 
+                        active = true;
                     }
+
+                    // Only leading suit cards and active Spades cards are active
+                    //if (card.suit != leadingSuit && card.suit != Card.Suit.Spades)
+                    //{
+                    //    active = false;
+                    //}
                 }
             }
             else

@@ -44,29 +44,83 @@ public static class TrickManager
 
     static Card GetBestCard()
     {
+        Card.Suit leadingSuit = TrickManager.cards[0].suit;
+
+
         Card bestCard = null;
+        Card highJoker = null;
+        Card lowJoker = null;
+        Card spadeCard = null;
+        Card leadingSuitCard = null;
 
         foreach (Card card in cards)
         {
-
             if (bestCard == null)
             {
                 bestCard = card;
             }
-            else if (card.suit == Card.Suit.Spades && bestCard.suit != Card.Suit.Spades)
+            else if (card.data.score > bestCard.data.score)
             {
-                bestCard = card; // Spades card is the best
-            }
-            else if (card.suit == bestCard.suit && card.data.score > bestCard.data.score)
-            {
-                bestCard = card; // Higher rank of leading suit is the best
-            }
-            else if (card.data.score > bestCard.data.score && bestCard.suit != Card.Suit.Spades)
-            {
-                bestCard = card; // Higher rank of leading suit is the best
+                bestCard = card;
             }
 
+            // Check for Joker cards
+            if (card.suit == Card.Suit.Joker)
+            {
+                if (card.data.shortCode == "highJoker")
+                {
+                    if (highJoker == null || card.data.score > highJoker.data.score)
+                    {
+                        highJoker = card;
+                    }
+                }
+                else if (card.data.shortCode == "lowJoker")
+                {
+                    if (lowJoker == null || card.data.score > lowJoker.data.score)
+                    {
+                        lowJoker = card;
+                    }
+                }
+            }
+
+            // Check for Spades cards
+            if (card.suit == Card.Suit.Spades)
+            {
+                // Spades cards win if no Joker is present
+                if (spadeCard == null || card.data.score > spadeCard.data.score)
+                {
+                    spadeCard = card;
+                }
+            }
+
+            // Check for leading suit cards
+            if (card.suit == leadingSuit && lowJoker == null && highJoker==null && spadeCard == null)
+            {
+                if (leadingSuitCard == null || card.data.score > leadingSuitCard.data.score)
+                {
+                    leadingSuitCard = card;
+                }
+            }
         }
+
+        // Determine the best card considering Jokers and Spades
+        if (highJoker != null)
+        {
+            bestCard = highJoker; // High Joker wins
+        }
+        else if (lowJoker != null)
+        {
+            bestCard = lowJoker; // Low Joker wins if High Joker is not present
+        }
+        else if (spadeCard != null)
+        {
+            bestCard = spadeCard; // Low Joker wins if High Joker is not present
+        }
+        else if (leadingSuitCard != null)
+        {
+            bestCard = leadingSuitCard; // Leading suit card wins if no Jokers or Spades
+        }
+
         return bestCard;
     }
 
