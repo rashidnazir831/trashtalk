@@ -5,24 +5,30 @@ using UnityEngine;
 public class SelectPartnerPanel : MonoBehaviour
 {
     public Transform container;
+    System.Action<string> onSelect;
 
     private void OnEnable()
     {
         DisableAll();
-        SetData(2);
+       // SetData(2);
     }
 
-    public void SetData(int n)
+    public void SetData(List<Player> players, System.Action<string> onSelect)
     {
-        for(int i = 0; i < n; i++)
+        this.onSelect = onSelect;
+
+        for (int i = 0; i < players.Count; i++)
         {
+            if (players[i].isBot || players[i].id == PlayerProfile.Player_UserID)
+                continue;
+
             if (i <= container.childCount)
             {
                 container.GetChild(i).gameObject.SetActive(true);
+                container.GetChild(i).GetComponent<PartnerObject>().SetData(OnSelect, players[i].name, players[i].id, players[i].imageURL);
             }
         }
     }
-
 
     void DisableAll()
     {
@@ -32,9 +38,15 @@ public class SelectPartnerPanel : MonoBehaviour
         }
     }
 
+    void OnSelect(string id)
+    {
+        this.onSelect(id);
+        this.gameObject.SetActive(false);
+    }
+
     public void OnSkipButton()
     {
-        this.gameObject.SetActive(false);
+        OnSelect("");
     }
 
 }

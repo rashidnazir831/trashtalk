@@ -13,6 +13,8 @@ public class GameplayManager : MonoBehaviour
 
     public GameObject playButton;
     public HandCardsUI cardHand;
+
+    public SelectPartnerPanel partnerPanel;
   //  private Trick currentTrick;
 
     int totalPlayers;
@@ -135,38 +137,49 @@ public class GameplayManager : MonoBehaviour
 
             Photon.Pun.PhotonNetwork.CurrentRoom.IsOpen = false;
             Photon.Pun.PhotonNetwork.CurrentRoom.IsVisible = false;
+
             string shuffledCards = cardDeck.GetShuffleCardsString();
-            PhotonRPCManager.Instance.SpawnPlayers(shuffledCards);
 
-          //  return; //will remove this line to start game
-            string[] playerIds = PlayerManager.instance.GetMultiplayerIds();
-
-            Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
-            keyValuePairs.Add("MatchType", "Multiplayer");
+            partnerPanel.gameObject.SetActive(true);
+            partnerPanel.SetData(PlayerManager.instance.player,(id)=> {
 
 
-            for (int i = 0; i < playerIds.Length; i++)
-            {
-                keyValuePairs.Add($"UserIDs[{i}]", playerIds[i]);
-            }
+
+                PhotonRPCManager.Instance.SpawnPlayers(shuffledCards,id);
+
+                //  return; //will remove this line to start game
+                string[] playerIds = PlayerManager.instance.GetMultiplayerIds();
+
+                Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
+                keyValuePairs.Add("MatchType", "Multiplayer");
 
 
-            keyValuePairs.Add("CoinsToPlay", Global.coinsRequired);
+                for (int i = 0; i < playerIds.Length; i++)
+                {
+                    keyValuePairs.Add($"UserIDs[{i}]", playerIds[i]);
+                }
 
-            WebServiceManager.instance.APIRequest(WebServiceManager.instance.startGameFunction, Method.POST, null, keyValuePairs,
 
-            (JObject resp, long arg2) => {
-                var response = GameResponse.FromJson(resp.ToString());
-                RoomOptions roomOptions = new RoomOptions();
-                _myCustomProperties["GameId"] = response.data.GameID;
-                roomOptions.CustomRoomPropertiesForLobby = new string[1] { "GameId" };
-                roomOptions.CustomRoomProperties = _myCustomProperties;
-                PhotonNetwork.CurrentRoom.SetCustomProperties(_myCustomProperties);
+                keyValuePairs.Add("CoinsToPlay", Global.coinsRequired);
 
-            }
-            , (msg)=> {
-                print(msg);
-            }, CACHEABLE.NULL, false, null);
+                WebServiceManager.instance.APIRequest(WebServiceManager.instance.startGameFunction, Method.POST, null, keyValuePairs,
+
+                (JObject resp, long arg2) => {
+                    var response = GameResponse.FromJson(resp.ToString());
+                    RoomOptions roomOptions = new RoomOptions();
+                    _myCustomProperties["GameId"] = response.data.GameID;
+                    roomOptions.CustomRoomPropertiesForLobby = new string[1] { "GameId" };
+                    roomOptions.CustomRoomProperties = _myCustomProperties;
+                    PhotonNetwork.CurrentRoom.SetCustomProperties(_myCustomProperties);
+
+                }
+                , (msg) => {
+                    print(msg);
+                }, CACHEABLE.NULL, false, null);
+
+
+
+            }); 
 
         }
         else if(!Global.isMultiplayer)
@@ -185,8 +198,10 @@ public class GameplayManager : MonoBehaviour
     }
 
     string multiplayerCards = null;
-    public void AnimateCardsScreen(string shuffledCards=null)
+    string partnerID;
+    public void AnimateCardsScreen(string shuffledCards=null, string partnerID="")
     {
+
         if (Global.isMultiplayer)
         {
             PlayerProfile.Player_coins -= Global.coinsRequired;
@@ -200,6 +215,7 @@ public class GameplayManager : MonoBehaviour
 
         ShowMultiplayerMessage(false);
         this.multiplayerCards = shuffledCards;
+        this.partnerID = partnerID;
         playButton.SetActive(false);
         UIEvents.UpdateData(Panel.GameplayPanel, OnCardsCoverScreen, "ShowCardIntro");
     }

@@ -20880,6 +20880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playButton: {fileID: 8601195372962729384}
   cardHand: {fileID: 9215373207507520357}
+  partnerPanel: {fileID: 4188703260647465302}
 --- !u!114 &9215373207374992241
 MonoBehaviour:
   m_ObjectHideFlags: 0
