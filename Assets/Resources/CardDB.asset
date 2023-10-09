@@ -216,7 +216,7 @@ MonoBehaviour:
   - name: High Joker
     shortCode: highJoker
     suit: Joker
-    valueName: 
+    valueName: Joker
     description: High Joker
     score: 2
     rank: 2
@@ -424,7 +424,7 @@ MonoBehaviour:
   - name: Low Joker
     shortCode: lowJoker
     suit: Joker
-    valueName: 
+    valueName: Joker
     description: Low Joker
     score: 1
     rank: 1

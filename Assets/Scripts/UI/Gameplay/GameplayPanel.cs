@@ -117,7 +117,7 @@ public class GameplayPanel : UIPanel
         }
         else if (card == "Joker")
         {
-            //will be added after Joker
+            sprite = jokerTrashTalks[Utility.GetRandom(0, jokerTrashTalks.Count)];
         }
 
         if (sprite == null)

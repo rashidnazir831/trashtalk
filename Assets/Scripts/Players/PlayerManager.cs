@@ -158,6 +158,42 @@ public class PlayerManager : MonoBehaviour
 
 
         return sortedList;
+
+
+
+
+
+        //Logic after picking partner
+        //List<Player> pl = new List<Player>();
+        //pl = this.players;
+
+        //int myIdIndex = pl.FindIndex(x => x.id == PlayerProfile.Player_UserID);
+
+        //if (myIdIndex == -1)
+        //{
+        //    Debug.Log("ID not found in the list.");
+        //    return pl;
+        //}
+
+        //List<Player> sortedList = new List<Player>();
+
+        //int tablePos = 0;
+        //// Add elements after your ID
+        //for (int i = myIdIndex; i < pl.Count; i++)
+        //{
+        //    pl[i].tablePosition = tablePos;
+        //    sortedList.Add(pl[i]);
+        //    tablePos++;
+        //}
+
+        //// Add elements before your ID
+        //for (int i = 0; i < myIdIndex; i++)
+        //{
+        //    pl[i].tablePosition = tablePos;
+        //    sortedList.Add(pl[i]);
+        //}
+
+        //return sortedList;
     }
 
     public string[] GetMultiplayerIds()

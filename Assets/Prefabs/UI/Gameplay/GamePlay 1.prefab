@@ -20842,7 +20842,10 @@ MonoBehaviour:
   cardIntroPanel: {fileID: 3120188484006109032}
   messageText: {fileID: 5491783945865064746}
   trashTalk: {fileID: 2068572436978137661}
-  jokerTrashTalks: []
+  jokerTrashTalks:
+  - {fileID: 21300000, guid: b3664a5e3f7144eec89a6f83b7e7380d, type: 3}
+  - {fileID: 21300000, guid: 4a2c5e4de409d405499ca69c9af255e4, type: 3}
+  - {fileID: 21300000, guid: 90cc85765e7634ebda910c35a47f19b8, type: 3}
   queensTrashTalks:
   - {fileID: 21300000, guid: d986f28f58ff24328b7f2490386c6fb2, type: 3}
   - {fileID: 21300000, guid: dc52026db2ba546f1a8818c1fe8c02bc, type: 3}

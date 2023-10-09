@@ -40,8 +40,8 @@ public class PartnerObject : MonoBehaviour
 
     public void OnClick()
     {
-        print("Selected Partner");
-        this.onSelect(userId);
+      //  print("Selected Partner");
+     //   this.onSelect(userId);
     }
 
 

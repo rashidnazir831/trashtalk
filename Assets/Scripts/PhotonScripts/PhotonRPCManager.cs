@@ -36,11 +36,11 @@ public class PhotonRPCManager : MonoBehaviourPunCallbacks
 
 
     [PunRPC]
-    public void SpawnPlayers_Rpc(string shuffledCards ,string partnerID)
+    public void SpawnPlayers_Rpc(string shuffledCards ,string sortedIds)
     {
         //Call spawning herh
         print("Got Shuffled cards from Master: " + shuffledCards);
-        GameplayManager.instance.AnimateCardsScreen(shuffledCards, partnerID);
+        GameplayManager.instance.AnimateCardsScreen(shuffledCards, sortedIds);
     }
 
 
@@ -50,9 +50,9 @@ public class PhotonRPCManager : MonoBehaviourPunCallbacks
         ChatHandler.instance.DisplayMessage(senderId, chatType, index);
     }
 
-    internal void SpawnPlayers(string shuffledCards,string partnerID)
+    internal void SpawnPlayers(string shuffledCards,string sortedIds)
     {
-        SendRPC("SpawnPlayers_Rpc", RpcTarget.All, shuffledCards, partnerID);
+        SendRPC("SpawnPlayers_Rpc", RpcTarget.All, shuffledCards, sortedIds);
     }
 
     [PunRPC]

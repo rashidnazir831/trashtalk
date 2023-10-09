@@ -7926,6 +7926,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1027427138}
     m_Modifications:
+    - target: {fileID: 1762658661073256108, guid: 24640a6568fbf4157936e2ed707a3157, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.00024414062
+      objectReference: {fileID: 0}
     - target: {fileID: 3694354642217966820, guid: 24640a6568fbf4157936e2ed707a3157, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -105.86011
@@ -25966,7 +25970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playButton: {fileID: 843498329}
   cardHand: {fileID: 1678030066}
-  isSpadeActive: 0
+  partnerPanel: {fileID: 0}
 --- !u!114 &1532306109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36207,7 +36211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playButton: {fileID: 836488843}
   cardHand: {fileID: 1554116841}
-  isSpadeActive: 0
+  partnerPanel: {fileID: 0}
 --- !u!114 &629941572746864539
 MonoBehaviour:
   m_ObjectHideFlags: 0

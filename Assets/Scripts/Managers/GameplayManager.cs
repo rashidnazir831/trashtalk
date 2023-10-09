@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
 using Photon.Realtime;
+using System.Linq;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Photon.Pun;
 using TrashTalk;
@@ -145,10 +146,45 @@ public class GameplayManager : MonoBehaviour
 
 
 
-                PhotonRPCManager.Instance.SpawnPlayers(shuffledCards,id);
+             CreateBotPlayerForMultiplayer();
+
+
+
+                for(int i=0;i< PlayerManager.instance.player.Count; i++)
+                {
+                    print("Before Swiping: " + PlayerManager.instance.player[i].id);
+                }
+
+                if(id != "")
+                {
+                    List<Player> players = PlayerManager.instance.player;
+
+                    int selectedIDIndex = players.FindIndex(x => x.id == id);
+                    int replacingIndex = 2;
+
+                    Player temp = players[replacingIndex];
+                    players[replacingIndex] = players[selectedIDIndex];
+                    players[selectedIDIndex] = temp;
+                }
+
+                string sortedIds = string.Join(",", PlayerManager.instance.player.ConvertAll(x => x.id.ToString()).ToArray());
+
+                print("all ids: " + sortedIds);
+
+                for (int i = 0; i < PlayerManager.instance.player.Count; i++)
+                {
+                    print("After Swiping: " + PlayerManager.instance.player[i].id);
+                }
+
+
+
+                 PhotonRPCManager.Instance.SpawnPlayers(shuffledCards, sortedIds);
+
+
+
 
                 //  return; //will remove this line to start game
-                string[] playerIds = PlayerManager.instance.GetMultiplayerIds();
+              /*  string[] playerIds = PlayerManager.instance.GetMultiplayerIds();
 
                 Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
                 keyValuePairs.Add("MatchType", "Multiplayer");
@@ -175,7 +211,7 @@ public class GameplayManager : MonoBehaviour
                 }
                 , (msg) => {
                     print(msg);
-                }, CACHEABLE.NULL, false, null);
+                }, CACHEABLE.NULL, false, null);*/
 
 
 
@@ -198,8 +234,8 @@ public class GameplayManager : MonoBehaviour
     }
 
     string multiplayerCards = null;
-    string partnerID;
-    public void AnimateCardsScreen(string shuffledCards=null, string partnerID="")
+    string sortedPlayersIds = "";
+    public void AnimateCardsScreen(string shuffledCards=null, string sortedIds = "")
     {
 
         if (Global.isMultiplayer)
@@ -215,7 +251,7 @@ public class GameplayManager : MonoBehaviour
 
         ShowMultiplayerMessage(false);
         this.multiplayerCards = shuffledCards;
-        this.partnerID = partnerID;
+        this.sortedPlayersIds = sortedIds;
         playButton.SetActive(false);
         UIEvents.UpdateData(Panel.GameplayPanel, OnCardsCoverScreen, "ShowCardIntro");
     }
@@ -255,13 +291,12 @@ public class GameplayManager : MonoBehaviour
 
     //}
 
-    //Add bot players if there are less than 4 players in photon room
-    void AddRemainingPlayers()
+    void CreateBotPlayerForMultiplayer()
     {
         int bp = 0;
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
-            if(PlayerManager.instance.player[i].id == null)
+            if (PlayerManager.instance.player[i].id == null)
             {
                 bp++;
                 PlayerManager.instance.players[i].name = $"Bot Player {bp}";
@@ -270,21 +305,56 @@ public class GameplayManager : MonoBehaviour
                 PlayerManager.instance.players[i].isBot = true;
                 PlayerManager.instance.players[i].id = $"BP{bp}";
                 //   PlayerManager.instance.players[i].tablePosition = 0;
-             //   PlayerManager.instance.players[i].photonIndex = i;
+                //   PlayerManager.instance.players[i].photonIndex = i;
             }
         }
+    }
+
+    //Add bot players if there are less than 4 players in photon room
+    void AddRemainingPlayers()
+    {
 
 
+        CreateBotPlayerForMultiplayer();
+
+     //   List<string> playerIds = sortedPlayersIds.Split(',').ToList();
+
+        //print("sortedPlayersIds : " + sortedPlayersIds);
+
+        //for (int i = 0; i < PlayerManager.instance.player.Count; i++)
+        //{
+        //    print("On the other hand " + PlayerManager.instance.player[i].id);
+        //}
+
+
+        //PlayerManager.instance.player = PlayerManager.instance.player
+        //   .OrderBy(item => sortedPlayersIds.IndexOf(item.id))
+        //   .ToList();
+
+
+        //for (int i = 0; i < PlayerManager.instance.player.Count; i++)
+        //{
+        //    print("On the other hand " + PlayerManager.instance.player[i].name);
+        //}
 
 
         PlayerManager.instance.player = PlayerManager.instance.SortMultiplayerPositions();
 
+
         for (int i = 0; i < PlayerManager.instance.player.Count; i++)
         {
-            print("and Here player ids: " + PlayerManager.instance.player[i].id);
-            print("and Table Position is: " + PlayerManager.instance.player[i].tablePosition);
-
+            print("Afterr positioning name " + PlayerManager.instance.player[i].name);
+            print("Afterr positioning photon index " + PlayerManager.instance.player[i].photonIndex);
+            print("Afterr positioning tablePosition " + PlayerManager.instance.player[i].tablePosition);
         }
+
+
+        //for (int i = 0; i < PlayerManager.instance.player.Count; i++)
+        //{
+        //    print("and Here player ids: " + PlayerManager.instance.player[i].id);
+        //    print("and Table Position is: " + PlayerManager.instance.player[i].tablePosition);
+
+        //}
 
         //for(int r=0;r< PlayerManager.instance.players.Count; r++)
         //{
