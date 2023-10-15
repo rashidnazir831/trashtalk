@@ -635,19 +635,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3789513641040727107}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1636197058734400067}
-        m_TargetAssemblyTypeName: ProfilePanel, Assembly-CSharp
-        m_MethodName: OnSubmitButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &3789513641078445085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,13 +1139,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3789513641424673210}
   m_TextComponent: {fileID: 3789513642298786872}
   m_Placeholder: {fileID: 3789513642390540900}
-  m_ContentType: 9
+  m_ContentType: 2
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 5
+  m_KeyboardType: 4
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 1
   m_CharacterLimit: 0
   m_OnSubmit:
     m_PersistentCalls:
@@ -1694,7 +1682,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 3789513641794168031}
   m_TextComponent: {fileID: 3789513641078445087}
   m_Placeholder: {fileID: 3789513642067926090}
@@ -2916,7 +2904,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7958148588017661173
 RectTransform:
   m_ObjectHideFlags: 0

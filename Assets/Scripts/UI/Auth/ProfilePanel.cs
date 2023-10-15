@@ -56,8 +56,8 @@ public class ProfilePanel : UIPanel
         PlayerPrefs.SetString("FirstName", FirstName.text);
         PlayerPrefs.SetString("LastName", LastName.text);
         PlayerPrefs.SetString("Cont_Num", Cont_Num.text);
-         
-        MesgBar.instance.show("Profile updated successfully");
+        OnSubmitButton();
+        //MesgBar.instance.show("Profile updated successfully");
     }
 
     private void OnFail(string obj)
