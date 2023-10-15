@@ -24,6 +24,7 @@ public class WebServiceManager : MonoBehaviour
     [Space]
     [SerializeField] internal string customRegistrationFunction            = "";
     [SerializeField] internal string customLoginFunction            = "";
+    [SerializeField] internal string updateProfileFunction            = "";
     [SerializeField] internal string signUpFunction            = "";
     [SerializeField] internal string getProfileFunction        = "";
     [SerializeField] internal string purchaseCoinsFunction     = "";

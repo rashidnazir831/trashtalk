@@ -2996,5 +2996,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: {fileID: 3789513641916275927}
+  FirstName: {fileID: 3789513641821021077}
+  LastName: {fileID: 3789513640390744401}
+  Cont_Num: {fileID: 3789513641424673211}
   email: {fileID: 3789513641794168028}
-  password: {fileID: 3789513642291221775}
+  submitBtn: {fileID: 3789513641040727109}
