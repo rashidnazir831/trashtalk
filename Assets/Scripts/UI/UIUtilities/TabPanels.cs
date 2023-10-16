@@ -34,7 +34,7 @@ public class TabPanels : UIPanel
     {
         EventManager.UpdateUI += UpdateUI;
 
-        UpdateCoinsUI();
+        UpdateUI("coins");
         SetLevelUI();
         SelectPanel(3);
     }
@@ -44,15 +44,15 @@ public class TabPanels : UIPanel
         EventManager.UpdateUI -= UpdateUI;
     }
 
-    void UpdateUI(string type)
-    {
-        switch (type)
-        {
-            case "UpdateCoins":
-                UpdateCoinsUI();
-                break;
-        }
-    }
+    //void UpdateUI(string type)
+    //{
+    //    switch (type)
+    //    {
+    //        case "UpdateCoins":
+    //            UpdateCoinsUI();
+    //            break;
+    //    }
+    //}
 
     private void Start()
     {
@@ -73,10 +73,13 @@ public class TabPanels : UIPanel
 
 
 
-    void UpdateCoinsUI()
+
+    public void UpdateUI(string type)
     {
         coinsText.text = PlayerProfile.Player_coins.ToString();
+        playerName.text = PlayerProfile.Player_UserName.ToString();
     }
+
 
     void SetLevelUI()
     {

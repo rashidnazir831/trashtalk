@@ -38,11 +38,11 @@ public class ProfilePanel : UIPanel
         }
 
         
-        if (displayName.text == PlayerProfile.Player_UserName)
-        {
-            MesgBar.instance.show("Nothing to update.");
-            return;
-        }
+        //if (displayName.text == PlayerProfile.Player_UserName)
+        //{
+        //    MesgBar.instance.show("Nothing to update.");
+        //    return;
+        //}
 
         PlayerProfile.Player_UserName = displayName.text;
         Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();

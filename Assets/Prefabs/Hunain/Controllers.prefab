@@ -261,6 +261,7 @@ MonoBehaviour:
   baseURL: https://api.myprojectstaging.com/TrashTalk/api/
   customRegistrationFunction: register
   customLoginFunction: login
+  updateProfileFunction: update-profile
   signUpFunction: signup-login
   getProfileFunction: profile
   purchaseCoinsFunction: purchase-coins
