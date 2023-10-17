@@ -125,9 +125,6 @@ public class FacebookManager : MonoBehaviour
     {
         if (FB.IsLoggedIn)
         {
-            UIEvents.ShowPanel(Panel.TabPanels);
-            UIEvents.HidePanel(Panel.SignupPanel);
-
             string query = "/me/friends";
             FB.API("/me?fields=id,name,email", HttpMethod.GET, GetData);
             FB.API("me/picture?type=square&height=350&width=350", HttpMethod.GET, GetPicture);
@@ -175,6 +172,10 @@ public class FacebookManager : MonoBehaviour
         {
             PlayerProfile.Player_Email = GuestLoginGenerator.GenerateUniqueEmail();
         }
+
+        UIEvents.ShowPanel(Panel.TabPanels);
+        UIEvents.HidePanel(Panel.SignupPanel);
+
     }
 
 

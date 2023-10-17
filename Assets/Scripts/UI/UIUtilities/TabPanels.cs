@@ -77,7 +77,7 @@ public class TabPanels : UIPanel
     public void UpdateUI(string type)
     {
         coinsText.text = PlayerProfile.Player_coins.ToString();
-        playerName.text = PlayerProfile.Player_UserName.ToString();
+        playerName.text = PlayerProfile.Player_UserName;
     }
 
 
