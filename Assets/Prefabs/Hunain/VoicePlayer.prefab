@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLocalPlayer: 0
+  userId: 
 --- !u!82 &1801885816530549016
 AudioSource:
   m_ObjectHideFlags: 0
