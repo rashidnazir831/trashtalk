@@ -7,10 +7,14 @@ using System.Linq;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Photon.Pun;
 using TrashTalk;
+using UnityEngine.UI;
 
 public class GameplayManager : MonoBehaviour
 {
+
     public static GameplayManager instance;
+
+    public Text gameStartingText;
 
     public GameObject playButton;
     public HandCardsUI cardHand;
@@ -132,12 +136,34 @@ public class GameplayManager : MonoBehaviour
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
     }
 
+
+    public IEnumerator AutomaticallyStartGame()
+    {
+
+        gameStartingText.gameObject.SetActive(true);
+        for (int i = 5; i >= 0; i--)
+        {
+            gameStartingText.text = "Round will starts in " + i + " sec . . .";
+            yield return new WaitForSeconds(1);
+        }
+
+        OnPlayGameButton();
+    }
+
     public void OnPlayGameButton()
     {
-        if (Global.isMultiplayer && Photon.Pun.PhotonNetwork.InRoom && Photon.Pun.PhotonNetwork.IsMasterClient) {
+        gameStartingText.gameObject.SetActive(false);
 
-            Photon.Pun.PhotonNetwork.CurrentRoom.IsOpen = false;
-            Photon.Pun.PhotonNetwork.CurrentRoom.IsVisible = false;
+        if (Global.isMultiplayer && PhotonNetwork.InRoom)
+        {
+            //Hunain
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                return;
+            }
+
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            PhotonNetwork.CurrentRoom.IsVisible = false;
 
             string shuffledCards = cardDeck.GetShuffleCardsString();
 
@@ -750,6 +776,7 @@ public class GameplayManager : MonoBehaviour
     {
   //    if(needNextRound) logic will be here
         StartNextRound();
+        StartCoroutine(AutomaticallyStartGame());
         UIEvents.ShowPanel(Panel.EndGamePanel);
     }
 

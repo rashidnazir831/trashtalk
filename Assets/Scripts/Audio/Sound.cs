@@ -7,5 +7,6 @@ public enum Sound
     Music,
     Flip,
     Click,
-    Hint
+    Hint,
+    StopWatch
 }

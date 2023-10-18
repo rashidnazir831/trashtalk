@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
-
+using Photon.Pun;
 
 public class EndGamePanel : UIPanel
 {
@@ -101,6 +101,12 @@ public class EndGamePanel : UIPanel
         closeButton.SetActive(winner == null);
         homeButton.SetActive(winner != null);
 
+        if (Global.isMultiplayer && PhotonNetwork.InRoom)
+        {
+            closeButton.GetComponent<Button>().interactable = PhotonNetwork.IsMasterClient;
+        }
+
+        
         print("appp: " + opponentMainPlayer.name);
         print("appp2: " + opponentMainPlayer.partner.name);
 

@@ -42,6 +42,8 @@ public class SoundManager : MonoBehaviour, ISoundManager
     {
         string name = soundName.ToString();
 
+        SettingPanel.insideGamePlayScreen = true;
+
         if (soundEffect.ContainsKey(name))
         {
             AudioClip clip = soundEffect[name];
@@ -62,6 +64,8 @@ public class SoundManager : MonoBehaviour, ISoundManager
 
     public void StopBackgroundMusic()
     {
+        SettingPanel.insideGamePlayScreen = false;
+
         if (backgroundMusicSource != null)
         {
             backgroundMusicSource.Stop();
@@ -88,6 +92,7 @@ public class SoundManager : MonoBehaviour, ISoundManager
 
         // Clean up finished sound effect sources
     }
+
 
     private IEnumerator CleanupSoundEffect(AudioSource source)
     {

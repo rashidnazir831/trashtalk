@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SettingPanel : UIPanel
@@ -13,7 +14,7 @@ public class SettingPanel : UIPanel
     public Button rulesBtn;
 
     public Button logout;
-    public bool insideGamePlayScreen;
+    public static bool insideGamePlayScreen;
 
     public override void Hide()
     {
@@ -73,7 +74,7 @@ public class SettingPanel : UIPanel
     private void LogOutCallBack()
     {
         PlayerPrefs.DeleteAll();
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     // Update is called once per frame

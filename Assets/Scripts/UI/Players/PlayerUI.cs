@@ -220,7 +220,7 @@ public class PlayerUI : MonoBehaviour
     public void SetTurnIndication(bool isTurn)
     {
         timerObj.SetActive(isTurn);
-
+        if(isTurn) Invoke(nameof(PlayTimerSound),23f);
         if (profileBG == null)
             return;
 
@@ -233,6 +233,11 @@ public class PlayerUI : MonoBehaviour
     }
 
 
+    void PlayTimerSound()
+    {
+        Debug.Log("Timer Sound On");
+        SoundManager.Instance.PlaySoundEffect(Sound.StopWatch);
+    }
 
     public void HideBidUI()
     {
