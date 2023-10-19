@@ -17,15 +17,23 @@ public class InviteFriendsPanel : MonoBehaviour
     private void Start()
     {
         //    selectedList = new List<GameObject>();
+    }
+
+    private void OnEnable()
+    {
         selectedUsers = new List<User>();
         inviteButton.interactable = false;
         ShowList();
     }
 
+    private void OnDisable()
+    {
+        selectedUsers = new List<User>();
+        ClearContianer(container);
+    }
+
     void ShowList()
     {
-        ClearContianer(container);
-
         List<User> users = PlayerProfile.instance.globalUsers;
 
         emptyDataText.SetActive(users.Count == 0);
