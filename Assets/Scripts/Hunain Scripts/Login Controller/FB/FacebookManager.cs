@@ -24,36 +24,62 @@ public class FacebookManager : MonoBehaviour
     {
         if (!FB.IsInitialized)
         {
-            FB.Init(() =>
-            {
-                if (FB.IsInitialized)
-                {
-                    FB.ActivateApp();
-                    Debug.Log("Activating app fb init if");
-                }
+            Debug.Log("Initializing Facebook.");
+            FB.Init(InitCallback);
 
-                else
-                    Debug.LogError("Couldn't initialize app");
-                if (FB.IsLoggedIn)
-                {
-                    Debug.Log("Successfull Login");
-                    AfterSuccessfullLogin();
-                }
-            },
-            isGameShown =>
-            {
-                if (!isGameShown)
-                    Time.timeScale = 0;
-                else
-                    Time.timeScale = 1;
+            //FB.Init(() =>
+            //{
+            //    if (FB.IsInitialized)
+            //    {
+            //        FB.ActivateApp();
+            //        Debug.Log("Activating app fb init if");
+            //    }
 
-            });
+            //    else
+            //        Debug.LogError("Couldn't initialize app");
+            //    if (FB.IsLoggedIn)
+            //    {
+            //        Debug.Log("Successfull Login");
+            //        AfterSuccessfullLogin();
+            //    }
+            //},
+            //isGameShown =>
+            //{
+            //    if (!isGameShown)
+            //        Time.timeScale = 0;
+            //    else
+            //        Time.timeScale = 1;
+
+            //});
         }
         else
         {
+            Debug.Log("====>Already Initialized.");
+
             FB.ActivateApp();
-            Debug.Log("else Facebook Login");
+            //Debug.Log("else Facebook Login");
+            //AfterSuccessfullLogin();
+        }
+
+        // Check if the user is already logged in
+        if (FB.IsLoggedIn)
+        {
+            // Continue with your app's logic after silent login
+            Debug.Log("====>Already Logged in.");
             AfterSuccessfullLogin();
+        }
+    }
+
+    private void InitCallback()
+    {
+        if (FB.IsInitialized)
+        {
+            // Signal that Facebook SDK is initialized
+            FB.ActivateApp();
+        }
+        else
+        {
+            Debug.LogError("====>Failed to initialize the Facebook SDK");
         }
     }
 
@@ -72,28 +98,45 @@ public class FacebookManager : MonoBehaviour
 
     public void FacebookLogin()
     {
-        Debug.Log("Facebook Login");
-        var permission = new List<string>() { "public_profile", "user_friends", "email" };
-        FB.LogInWithReadPermissions(permission, AuthCallback);
-        Debug.Log(permission);
-        AfterSuccessfullLogin();
+        Debug.Log("====>FacebookLogin()");
+        if (!FB.IsInitialized)
+        {
+            Debug.Log("Initializing Facebook.");
+            FB.Init(InitCallback);
+        }
+
+        if (!FB.IsLoggedIn)
+        {
+            Debug.Log("Facebook Login");
+            var permission = new List<string>() { "public_profile", "user_friends", "email" };
+            FB.LogInWithReadPermissions(permission, AuthCallback);
+            Debug.Log(permission);
+        }
+        else
+        {
+            Debug.LogError("Facebook is already logged in.");
+        }
+        //AfterSuccessfullLogin();
     }
     public void FacebookLogOut()
     {
         Debug.Log("FacebookLogOut.");
         FB.LogOut();
     }
-    private void AuthCallback(ILoginResult loginResult)
+
+    private void AuthCallback(ILoginResult result)
     {
         if (FB.IsLoggedIn)
         {
+            // Continue with your app's logic after successful login
             AfterSuccessfullLogin();
         }
         else
         {
-            Debug.Log("Login Failed");
+            Debug.Log("Facebook login failed.");
         }
     }
+
     #endregion
 
     #region if Fb is Logged in Anywhere/Any app
