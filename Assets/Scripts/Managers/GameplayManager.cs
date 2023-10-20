@@ -152,6 +152,8 @@ public class GameplayManager : MonoBehaviour
 
     public void OnPlayGameButton()
     {
+        StopCoroutine(nameof(AutomaticallyStartGame));
+
         gameStartingText.gameObject.SetActive(false);
 
         if (Global.isMultiplayer && PhotonNetwork.InRoom)

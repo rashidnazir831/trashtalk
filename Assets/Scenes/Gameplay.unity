@@ -36229,9 +36229,29 @@ PrefabInstance:
     m_TransformParent: {fileID: 1027427138}
     m_Modifications:
     - target: {fileID: 502287528239934295, guid: 04d523d008ffa47058995719de8fa1ef, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1278432143}
+    - target: {fileID: 502287528239934295, guid: 04d523d008ffa47058995719de8fa1ef, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 8878171050848890887}
+    - target: {fileID: 502287528239934295, guid: 04d523d008ffa47058995719de8fa1ef, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnPlayGameButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 502287528239934295, guid: 04d523d008ffa47058995719de8fa1ef, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnCloseButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 502287528239934295, guid: 04d523d008ffa47058995719de8fa1ef, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameplayManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 502287528239934295, guid: 04d523d008ffa47058995719de8fa1ef, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: EndGamePanel, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 9065150459490789234, guid: 04d523d008ffa47058995719de8fa1ef, type: 3}
       propertyPath: m_Name
       value: EndGamePanel
