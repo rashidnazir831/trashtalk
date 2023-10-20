@@ -158,9 +158,15 @@ public class PlayerUI : MonoBehaviour
             prefab.transform.localPosition = Vector3.zero;
             prefab.transform.localRotation = Quaternion.identity;
             prefab.transform.localScale = Vector3.one;
+            StartCoroutine(_DestroyChat(prefab));
 
         }
+    }
 
+    IEnumerator _DestroyChat(GameObject prefab)
+    {
+        yield return new WaitForSeconds(1.5f);
+        Destroy(prefab);
     }
 
     public void ShowBonusImage(Sprite sprite)
