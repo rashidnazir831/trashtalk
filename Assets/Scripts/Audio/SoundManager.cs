@@ -94,10 +94,45 @@ public class SoundManager : MonoBehaviour, ISoundManager
     }
 
 
+    AudioSource audioSource;
+
+    public void PlayTimerEffect()
+    {
+        if (!isMusicOn)
+            return;
+
+        string name = Sound.StopWatch.ToString();
+        if (soundEffect.ContainsKey(name))
+        {
+            AudioClip clip = soundEffect[name];
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.clip = clip;
+            audioSource.Play();
+            
+            StartCoroutine(_StopTimerEffect());
+        }
+    }
+
+    public void StopTimerEffect()
+    {
+        StartCoroutine(_StopTimerEffect());
+    }
+
+    public IEnumerator _StopTimerEffect()
+    {
+        if (audioSource)
+        {
+            yield return new WaitForSeconds(audioSource.clip.length);
+            Destroy(audioSource);
+        }
+    }
+
+
+
+
     private IEnumerator CleanupSoundEffect(AudioSource source)
     {
         yield return new WaitForSeconds(source.clip.length);
-      //  soundEffectSources.Remove(source);
         Destroy(source);
     }
 }

@@ -243,6 +243,7 @@ public class PlayerUI : MonoBehaviour
     public void StopTimer()
     {
         CancelInvoke();
+        SoundManager.Instance.StopTimerEffect();
         //CancelInvoke(nameof(PlayTimerSound));
         timerObj.SetActive(false);
     }
@@ -251,7 +252,7 @@ public class PlayerUI : MonoBehaviour
     void PlayTimerSound()
     {
         Debug.Log("Timer Sound On");
-        SoundManager.Instance.PlaySoundEffect(Sound.StopWatch);
+        SoundManager.Instance.PlayTimerEffect();
     }
 
     public void HideBidUI()

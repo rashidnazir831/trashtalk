@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using System;
 using TrashTalk;
+using System.Linq;
 
 public class PhotonConnectionController : MonoBehaviourPunCallbacks
 {
@@ -14,6 +15,7 @@ public class PhotonConnectionController : MonoBehaviourPunCallbacks
     //public InvitationPanel invitationPanel;
     public static PhotonConnectionController Instance;
 
+    public TabPanels tabPanels;
 
     private void Awake()
     {
@@ -67,9 +69,10 @@ public class PhotonConnectionController : MonoBehaviourPunCallbacks
 
     public void ConnectingToPhoton()
     {
+        tabPanels.UpdateUI("coins");
         Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
         keyValuePairs.Add("PageNo", 1);
-
+        
         //  PageNo
         WebServiceManager.instance.APIRequest(WebServiceManager.instance.globalDatabaseUsers, Method.POST, null, keyValuePairs, OnGetGlobalUsers, OnFailGlobalUser, CACHEABLE.NULL, true, null);
 

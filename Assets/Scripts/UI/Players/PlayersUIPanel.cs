@@ -9,14 +9,14 @@ public class PlayersUIPanel : UIPanel
     public GameObject yourTurnHeading;
     public Sprite[] botImages;
     public Sprite[] bonusImages;
-    private PlayerUI[] playerUI;
+    public PlayerUI[] playerUI;
     private Action<object[]> callBack;
     object[] data;
     
 
     private void Start()
     {
-        playerUI = GetComponentsInChildren<PlayerUI>();
+        //playerUI = GetComponentsInChildren<PlayerUI>();
     }
 
     public override void Show()

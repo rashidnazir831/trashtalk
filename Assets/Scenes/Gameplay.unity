@@ -6160,6 +6160,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 511846786572514015, guid: 7ed451aee46ff409ca239b0277e17c29, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ed451aee46ff409ca239b0277e17c29, type: 3}
 --- !u!114 &334773040 stripped
@@ -22504,6 +22508,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4b6181f3b7f9f4257bc6fd45ada72dd8, type: 3}
   - {fileID: 21300000, guid: e89d12660509d48618360eeff7a030e7, type: 3}
   bonusImages: []
+  playerUI: []
 --- !u!222 &1310089299
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -36474,6 +36479,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4b6181f3b7f9f4257bc6fd45ada72dd8, type: 3}
   - {fileID: 21300000, guid: e89d12660509d48618360eeff7a030e7, type: 3}
   bonusImages: []
+  playerUI: []
 --- !u!224 &629941573056401992
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36811,6 +36817,10 @@ PrefabInstance:
       propertyPath: LoginScreen
       value: 
       objectReference: {fileID: 334773042}
+    - target: {fileID: 7476394075691339910, guid: 016be68e56d2a4b18b839029b0b5b406, type: 3}
+      propertyPath: tabPanels
+      value: 
+      objectReference: {fileID: 588599438}
     - target: {fileID: 7476394075776382552, guid: 016be68e56d2a4b18b839029b0b5b406, type: 3}
       propertyPath: profile
       value: 
