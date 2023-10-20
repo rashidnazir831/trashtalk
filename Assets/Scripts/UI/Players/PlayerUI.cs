@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 using System;
+using System.Linq;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -62,11 +63,23 @@ public class PlayerUI : MonoBehaviour
         }
         else //Disable Audio Source
         {
-            VoicePlayer voicePlayer = PhotonRoomCreator.instance.voicePlayers.Find(x => x.userId.Equals(this.userId));
-            if(voicePlayer)
-                voicePlayer.EnableDisableAudioSource(!voicePlayer.GetComponent<AudioSource>().enabled);
 
-            enableOrDisable = voicePlayer.GetComponent<AudioSource>().enabled;
+            VoicePlayer voicePlayer = PhotonRoomCreator.instance.voicePlayers.Find(x => x.userId.Equals(this.userId));
+
+            
+            if(voicePlayer == null)
+                voicePlayer = FindObjectsOfType<VoicePlayer>().ToList().Find(x => x.userId.Equals(this.userId));
+
+            if (voicePlayer)
+            {
+                Debug.Log("Disable voice for: " + voicePlayer.userId);
+                voicePlayer.EnableDisableAudioSource();
+            }
+            else
+            {
+                Debug.Log("Voice Player not found: " + userId);
+            }
+            enableOrDisable = voicePlayer.audioSource.enabled;
         }
         
         Color color = muteIcon.color;
@@ -229,6 +242,8 @@ public class PlayerUI : MonoBehaviour
 
     public void StopTimer()
     {
+        CancelInvoke();
+        //CancelInvoke(nameof(PlayTimerSound));
         timerObj.SetActive(false);
     }
 

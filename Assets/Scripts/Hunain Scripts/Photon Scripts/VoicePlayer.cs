@@ -1,27 +1,27 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Photon.Voice.Unity;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class VoicePlayer : MonoBehaviour
 {
     public bool isLocalPlayer = false;
     public string userId = "";
 
+    public Photon.Realtime.Player photonPlayer;
 
-
+    public AudioSource audioSource;
+    public Speaker speaker;
 
     public void SetData(Photon.Realtime.Player player)
     {
         isLocalPlayer = player.IsLocal;
         userId = player.UserId;
-        EnableDisableAudioSource(!isLocalPlayer);
+        photonPlayer = player;
+        //EnableDisableAudioSource(!isLocalPlayer);
     }
 
-    public void EnableDisableAudioSource(bool state)
+    public void EnableDisableAudioSource()
     {
-        GetComponent<AudioSource>().enabled = GetComponent<Speaker>().enabled = state;
+        audioSource.enabled = speaker.enabled = !audioSource.enabled;
     }
 }

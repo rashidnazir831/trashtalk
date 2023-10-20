@@ -403,6 +403,10 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
             return;
         foreach (var item in PhotonNetwork.CurrentRoom.Players)
         {
+            if (item.Value.IsLocal)
+            {
+                continue;
+            }
             var player = Instantiate(voicePlayer.gameObject);
             var obj = player.GetComponent<VoicePlayer>();
             voicePlayers.Add(obj);

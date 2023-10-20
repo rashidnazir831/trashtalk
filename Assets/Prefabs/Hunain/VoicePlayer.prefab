@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLocalPlayer: 0
   userId: 
+  audioSource: {fileID: 1801885816530549016}
+  speaker: {fileID: 2584058873534744603}
 --- !u!82 &1801885816530549016
 AudioSource:
   m_ObjectHideFlags: 0
