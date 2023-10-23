@@ -50,26 +50,42 @@ public class RegistrationScreen : MonoBehaviour
 
     private void OnLoginSuccess(JObject resp, long arg2)
     {
-        Debug.Log("OnLoginSuccess: " + resp.ToString());
+        if (arg2 == 200 || arg2 == 201)
+        {
+            Debug.Log("OnLoginSuccess: " + resp.ToString());
 
-        var playerData = DeSerialize.FromJson<PlayerDataForCustom>(resp.ToString());
-        PlayerProfile.UpdatePlayerData(playerData.User);
-        PlayerProfile.SaveDataToPrefs();
-        PlayerProfile.showPlayerDetails();
+            var playerData = DeSerialize.FromJson<PlayerDataForCustom>(resp.ToString());
+            PlayerProfile.UpdatePlayerData(playerData.User);
+            PlayerProfile.SaveDataToPrefs();
+            PlayerProfile.showPlayerDetails();
 
-        PhotonConnectionController.Instance.ConnectingToPhoton();
+            Debug.Log("playerData: " + Serialize.ToJson(playerData));
 
-        UIEvents.ShowPanel(Panel.TabPanels);
-        UIEvents.HidePanel(Panel.CustomLoginPanel);
+            PhotonConnectionController.Instance.ConnectingToPhoton();
+
+            UIEvents.ShowPanel(Panel.TabPanels);
+            UIEvents.HidePanel(Panel.CustomLoginPanel);
+        }
+        else
+        {
+            MesgBar.instance.show("No user found.");
+        }
     }
-  
+
     private void OnSignUpSuccess(JObject resp, long arg2)
     {
-        Debug.Log("On SignUp Success: " + resp.ToString());
+        if (arg2 == 200 || arg2 == 201)
+        {
+            Debug.Log("On SignUp Success: " + resp.ToString());
 
-        MesgBar.instance.show("Account Created Successfully.", false);
-        UIEvents.ShowPanel(Panel.CustomLoginPanel);
-        UIEvents.HidePanel(Panel.RegistrationPanel);
+            MesgBar.instance.show("Account Created Successfully.", false);
+            UIEvents.ShowPanel(Panel.CustomLoginPanel);
+            UIEvents.HidePanel(Panel.RegistrationPanel);
+        }
+        else
+        {
+            MesgBar.instance.show("Sign Up Fail.");
+        }
     }
 
     private void OnFail(string obj)
@@ -83,15 +99,15 @@ public class RegistrationScreen : MonoBehaviour
     {
         //string guestUserID = GuestLoginGenerator.GenerateUniqueUserId();
         //string username = usernameInput.text;
-        string password = passwordInputLogin.text;
-        string email = emailInputLogin.text;
+        string password = passwordInputLogin.text.Trim();
+        string email = emailInputLogin.text.Trim();
 
 
 
         // Perform basic validation (you should implement more robust validation)
         if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(email))
         {
-            MesgBar.instance.show("Please fill in all fields.", true);
+            MesgBar.instance.show("All fields are required.", true);
             return;
         }
 

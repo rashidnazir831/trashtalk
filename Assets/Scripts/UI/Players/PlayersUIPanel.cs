@@ -61,6 +61,7 @@ public class PlayersUIPanel : UIPanel
             case "SetTurnIndication":
                 playerNumber = (int)parameters[1];
                 bool isTurn = (bool)parameters[2];
+                Debug.Log("SetTurnIndication: " + isTurn);
                 SetTurnIndication(playerNumber,isTurn);
                 break;
             case "ShowBunus":

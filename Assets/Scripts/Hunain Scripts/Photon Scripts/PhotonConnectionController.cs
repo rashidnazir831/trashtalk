@@ -107,4 +107,10 @@ public class PhotonConnectionController : MonoBehaviourPunCallbacks
         
     }
 
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        base.OnDisconnected(cause);
+        Debug.LogError("Photon Disconnect: " + cause);
+    }
+
 }

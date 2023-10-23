@@ -60,7 +60,7 @@ public class GameplayManager : MonoBehaviour
         }
         else
         {
-            ShowMultiplayerMessage(true, Photon.Pun.PhotonNetwork.IsMasterClient?"Waiting other players to join game.":"Waiting master to start game.");
+            ShowMultiplayerMessage(true, Photon.Pun.PhotonNetwork.IsMasterClient?"Waiting for other players to join the game.":"Waiting for master to start the game.");
         }
 
         cardDeck = GetComponentInChildren<CardDeck>();
@@ -508,8 +508,7 @@ public class GameplayManager : MonoBehaviour
     public void PlayTurn()
     {
        Player currentPlayer = PlayerManager.instance.players[this.currentPlayerIndex];
-        
-       PlayerManager.instance.SetPlayerTurn(this.currentPlayerIndex);
+        PlayerManager.instance.SetPlayerTurn(this.currentPlayerIndex);
        SetPlayerTurnIndication(currentPlayer); 
         if (currentPlayer.isBot)
         {
@@ -804,7 +803,7 @@ public class GameplayManager : MonoBehaviour
         }
         else
         {
-            ShowMultiplayerMessage(true, "Waiting master to start round.");
+            ShowMultiplayerMessage(true, "Waiting for master to start the game.");
         }
         ResetGame();
     }

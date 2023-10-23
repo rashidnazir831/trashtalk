@@ -216,6 +216,8 @@ public class PlayerUI : MonoBehaviour
 
     public void ResetUI()
     {
+        Debug.Log("ResetUI");
+        timerObj.SetActive(false);
         if (bidCount != null)
             bidCount.text = "";
         if (myBids != null)
@@ -236,10 +238,15 @@ public class PlayerUI : MonoBehaviour
         });
     }
 
+    //Waiting for master to start the game
+    //wating for other to join the game
+    //Are you sure you want to logout
     public void SetTurnIndication(bool isTurn)
     {
+        //CancelInvoke(nameof(PlayTimerSound));
+        //SoundManager.Instance.StopTimerEffect();
         timerObj.SetActive(isTurn);
-        if(isTurn) Invoke(nameof(PlayTimerSound),23f);
+        //if(isTurn) Invoke(nameof(PlayTimerSound),23f);
         if (profileBG == null)
             return;
 
@@ -248,18 +255,18 @@ public class PlayerUI : MonoBehaviour
 
     public void StopTimer()
     {
-        CancelInvoke();
-        SoundManager.Instance.StopTimerEffect();
+        //CancelInvoke(nameof(PlayTimerSound));
+        //SoundManager.Instance.StopTimerEffect();
         //CancelInvoke(nameof(PlayTimerSound));
         timerObj.SetActive(false);
     }
 
 
-    void PlayTimerSound()
-    {
-        Debug.Log("Timer Sound On");
-        SoundManager.Instance.PlayTimerEffect();
-    }
+    //void PlayTimerSound()
+    //{
+    //    Debug.Log("Timer Sound On");
+    //    SoundManager.Instance.PlayTimerEffect();
+    //}
 
     public void HideBidUI()
     {

@@ -62,9 +62,15 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
         Debug.Log("OnPlayerLeftRoom() Player: "+ otherPlayer);
         Debug.Log("Player Left Room, Id is:  "  + otherPlayer.UserId) ;
         GameplayManager.instance.ReplaceBotWithPlayer(otherPlayer.UserId);
-      //  UpdatePlayerList();
+        //  UpdatePlayerList();
+        Debug.Log("IsMaster Left: " + otherPlayer.IsMasterClient);
     }
 
+    public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
+    {
+        base.OnMasterClientSwitched(newMasterClient);
+        Debug.Log("OnMasterClientSwitched: " + newMasterClient.UserId );
+    }
 
     /// <summary>
     /// Main Method for creating Rooms

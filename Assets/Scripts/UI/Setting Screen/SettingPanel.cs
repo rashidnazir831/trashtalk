@@ -39,7 +39,7 @@ public class SettingPanel : UIPanel
     // Start is called before the first frame update
     void Start()
     {
-        logout.onClick.AddListener(()=> LogOutCallBack());
+        //logout.onClick.AddListener(()=> LogOutCallBack());
         termsOfServices.onClick.AddListener(()=> TC_CallBack());
         privacyPolicy.onClick.AddListener(()=> HTP_CallBack());
         rulesBtn.onClick.AddListener(()=> Rules_CallBack());
@@ -71,7 +71,10 @@ public class SettingPanel : UIPanel
 
     }
 
-    private void LogOutCallBack()
+    /// <summary>
+    /// Calling this from inspection
+    /// </summary>
+    public void LogOutCallBack()
     {
         //UIEvents.HidePanel(Panel.TabPanels);
         //UIEvents.HidePanel(Panel.GameSelectPanel);
@@ -79,6 +82,8 @@ public class SettingPanel : UIPanel
         PlayerPrefs.DeleteAll();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+
 
     // Update is called once per frame
     void Update()

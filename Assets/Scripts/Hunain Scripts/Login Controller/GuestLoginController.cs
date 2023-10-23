@@ -30,7 +30,7 @@ public class GuestLoginController : MonoBehaviour
         loginBtn.onClick.AddListener(() => login());
         if (PlayerPrefs.GetString(ConstantVariables.AuthProvider) == ConstantVariables.Guest)
         {
-            Debug.Log("ByPass Login");
+            Debug.Log("ByPass Guest Login");
             ByPassLogin();
         }
     }

@@ -116,7 +116,7 @@ public class PlayerProfile : MonoBehaviour
         PlayerProfile.Player_Access_Token = user.AccessToken;
         PlayerProfile.gamesWon = user.winCount;
         PlayerProfile.imageUrl = user.ImagePath + "/" + user.Image;
-
+        Debug.Log("PlayerProfile.Player_Access_Token&&&&&&&&&&&&&&&& " + PlayerProfile.Player_Access_Token);
         string url = user.ImagePath + "/" + user.Image;
         ImageCacheManager.instance.CheckOrDownloadImage(url,null,GetImage);//TextureConverter.Base64ToTexture2D(user.Image);
     }

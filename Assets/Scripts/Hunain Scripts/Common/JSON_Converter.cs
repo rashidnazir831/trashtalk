@@ -124,7 +124,7 @@ namespace TrashTalk
 
     public static class Serialize
     {
-        public static string ToJson(this PlayerData self) => JsonConvert.SerializeObject(self, TrashTalk.Converter.Settings);
+        public static string ToJson<T>(this T self) => JsonConvert.SerializeObject(self, TrashTalk.Converter.Settings);
     }
 
     internal static class Converter

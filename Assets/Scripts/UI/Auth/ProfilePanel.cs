@@ -14,6 +14,7 @@ public class ProfilePanel : UIPanel
     public InputField LastName;
     public InputField Cont_Num;
     public InputField email;
+    public InputField password;
     public Button submitBtn;
 
     PlayerProfile profile;
@@ -26,6 +27,7 @@ public class ProfilePanel : UIPanel
     public void Start()
     {
         email.interactable = false;
+        password.interactable = false;
         submitBtn.onClick.AddListener(()=> UpdateProfile());
     }
 
