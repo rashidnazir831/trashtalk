@@ -37488,10 +37488,14 @@ PrefabInstance:
     - target: {fileID: 6272708415844478740, guid: 04d523d008ffa47058995719de8fa1ef, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 503867577}
+      objectReference: {fileID: 8878171050848890887}
+    - target: {fileID: 6272708415844478740, guid: 04d523d008ffa47058995719de8fa1ef, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnHomeButton
+      objectReference: {fileID: 0}
     - target: {fileID: 6272708415844478740, guid: 04d523d008ffa47058995719de8fa1ef, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameplayPanel, Assembly-CSharp
+      value: EndGamePanel, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 9065150459490789234, guid: 04d523d008ffa47058995719de8fa1ef, type: 3}
       propertyPath: m_Name

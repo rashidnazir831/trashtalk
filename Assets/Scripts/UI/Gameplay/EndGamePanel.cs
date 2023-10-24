@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class EndGamePanel : UIPanel
 {
@@ -167,10 +168,18 @@ public class EndGamePanel : UIPanel
 
     public void OnHomeButton()
     {
-        //Close complete game
-        SoundManager.Instance.StopBackgroundMusic();
-        UIEvents.ShowPanel(Panel.TabPanels);
-        UIEvents.HidePanel(Panel.GameplayPanel);
-        Hide();
+        ////Close complete game
+        //SoundManager.Instance.StopBackgroundMusic();
+        //UIEvents.ShowPanel(Panel.TabPanels);
+        //UIEvents.HidePanel(Panel.GameplayPanel);
+        //UIEvents.HidePanel(Panel.EndGamePanel);
+        //Hide();
+        if (Global.isMultiplayer && Photon.Pun.PhotonNetwork.InRoom)
+        {
+            PhotonRoomCreator.instance.LeavePhotonRoom();
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
 }
+

@@ -50,8 +50,8 @@ public class RegistrationScreen : MonoBehaviour
         keyValuePairs.Add("Email", email);
         keyValuePairs.Add("Password", password);
 
-        Debug.LogError("&&&&&&&&&&: "+ email);
-        Debug.LogError("&&&&&&&&&&: "+ password);
+        //Debug.LogError("&&&&&&&&&&: "+ email);
+        //Debug.LogError("&&&&&&&&&&: "+ password);
 
         WebServiceManager.instance.APIRequest(WebServiceManager.instance.customLoginFunction, Method.POST, null, keyValuePairs, OnLoginSuccess, OnFail, CACHEABLE.NULL, true, null);
     }
