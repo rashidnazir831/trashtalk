@@ -98,12 +98,20 @@ public class EndGamePanel : UIPanel
 
         Player winner = myMainPlayer.gameWinner;
 
-        closeButton.SetActive(winner == null);
-        homeButton.SetActive(winner != null);
-
-        if (Global.isMultiplayer && PhotonNetwork.InRoom)
+        if (winner == null)
         {
-            closeButton.GetComponent<Button>().interactable = PhotonNetwork.IsMasterClient;
+            closeButton.SetActive(true);
+            homeButton.SetActive(false);
+        }
+        else
+        {
+            closeButton.SetActive(false);
+            homeButton.SetActive(true);
+        }
+
+        if (Global.isMultiplayer)
+        {
+            closeButton.GetComponent<Button>().interactable = PhotonNetwork.LocalPlayer.IsMasterClient;
         }
 
         

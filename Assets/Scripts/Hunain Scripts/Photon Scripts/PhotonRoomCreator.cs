@@ -64,6 +64,7 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
         GameplayManager.instance.ReplaceBotWithPlayer(otherPlayer.UserId);
         //  UpdatePlayerList();
         Debug.Log("IsMaster Left: " + otherPlayer.IsMasterClient);
+
     }
 
     public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)

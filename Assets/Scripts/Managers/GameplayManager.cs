@@ -400,8 +400,9 @@ public class GameplayManager : MonoBehaviour
             if (p.id == playerID)
             {
                 print("Bot has Taken over player Id: " + playerID);
+                MesgBar.instance.show( p.name +" Left.");
 
-            //    p.id = $"BP{p.photonIndex}";
+                //    p.id = $"BP{p.photonIndex}";
                 p.name = $"Bot Player {i}";
                 p.isBot = true;
                 p.isMaster = false;
@@ -777,7 +778,7 @@ public class GameplayManager : MonoBehaviour
     {
   //    if(needNextRound) logic will be here
         StartNextRound();
-        StartCoroutine(AutomaticallyStartGame());
+        //StartCoroutine(AutomaticallyStartGame());
         UIEvents.ShowPanel(Panel.EndGamePanel);
     }
 
