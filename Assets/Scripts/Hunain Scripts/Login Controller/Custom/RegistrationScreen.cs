@@ -73,6 +73,7 @@ public class RegistrationScreen : MonoBehaviour
 
             UIEvents.ShowPanel(Panel.TabPanels);
             UIEvents.HidePanel(Panel.CustomLoginPanel);
+            UIEvents.HidePanel(Panel.SignupPanel);
         }
         else
         {

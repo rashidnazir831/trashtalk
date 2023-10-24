@@ -34,7 +34,7 @@ public class SplashPanel : UIPanel
         progressBar.sizeDelta = new Vector2(targetWidth, progressBar.rect.height);
 
         yield return new WaitForSeconds(1f);
-        if (PlayerPrefs.HasKey(ConstantVariables.AuthProvider) && PlayerPrefs.GetString(ConstantVariables.AuthProvider).Equals(ConstantVariables.Guest))
+        if (PlayerPrefs.HasKey(ConstantVariables.AuthProvider) && (PlayerPrefs.GetString(ConstantVariables.AuthProvider).Equals(ConstantVariables.Guest) || PlayerPrefs.GetString(ConstantVariables.AuthProvider).Equals(ConstantVariables.Custom)))
         {
             Debug.Log("%%%%%%%%%%%" + gameObject.name);
 
