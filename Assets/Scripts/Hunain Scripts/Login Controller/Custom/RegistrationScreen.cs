@@ -55,11 +55,11 @@ public class RegistrationScreen : MonoBehaviour
             Debug.Log("OnLoginSuccess: " + resp.ToString());
 
             var playerData = DeSerialize.FromJson<PlayerDataForCustom>(resp.ToString());
+            Debug.Log("playerData: " + Serialize.ToJson(playerData.User));
             PlayerProfile.UpdatePlayerData(playerData.User);
             PlayerProfile.SaveDataToPrefs();
             PlayerProfile.showPlayerDetails();
 
-            Debug.Log("playerData: " + Serialize.ToJson(playerData));
 
             PhotonConnectionController.Instance.ConnectingToPhoton();
 
@@ -173,6 +173,7 @@ public class RegistrationScreen : MonoBehaviour
             keyValuePairs.Add("FullName", username);
             keyValuePairs.Add("Email", email);
             keyValuePairs.Add("Password", password);
+            keyValuePairs.Add("AuthProvider", PlayerProfile.authProvider);
             //keyValuePairs.Add("AuthProvider", PlayerProfile.authProvider);
 
             WebServiceManager.instance.APIRequest(WebServiceManager.instance.customRegistrationFunction, Method.POST, null, keyValuePairs, OnSignUpSuccess, OnFail, CACHEABLE.NULL, true, null);

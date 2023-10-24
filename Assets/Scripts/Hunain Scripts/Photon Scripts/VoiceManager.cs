@@ -1,6 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 using Photon.Voice.Unity;
+using UnityEngine.UI;
 
 public class VoiceManager : MonoBehaviourPun
 {
@@ -28,13 +29,17 @@ public class VoiceManager : MonoBehaviourPun
         }
     }
 
-
+    public Image micImage;
+    public Sprite micOnImage;
+    public Sprite micOffImage;
     public bool EnableDisableAudioTransmition()
     {
         if (recorder != null)
         {
             recorder.TransmitEnabled = !recorder.TransmitEnabled;
         }
+
+        micImage.sprite = recorder.TransmitEnabled ? micOnImage: micOffImage;
         return recorder.TransmitEnabled;
     }
 }

@@ -53,12 +53,14 @@ public class PlayerUI : MonoBehaviour
             muteBtn.onClick.AddListener(()=> MicBtnListener());
     }
 
+
     public void MicBtnListener()
     {
         bool enableOrDisable = false;
 
         if (userId.Equals(PhotonNetwork.LocalPlayer.UserId)) //Disable Transmission
         {
+
             enableOrDisable = VoiceManager.instance.EnableDisableAudioTransmition();
         }
         else //Disable Audio Source
@@ -82,9 +84,10 @@ public class PlayerUI : MonoBehaviour
             enableOrDisable = voicePlayer.audioSource.enabled;
         }
         
-        Color color = muteIcon.color;
-        color.a = enableOrDisable ? 1 : 0.5f;
-        muteIcon.color = color;
+        
+        //Color color = muteIcon.color;
+        //color.a = enableOrDisable ? 1 : 0.5f;
+        //muteIcon.color = color;
     }
 
     public void SetUI(string name="Waiting...",string userId="",Sprite botSprite=null, int score=0, string imageUrl=null)
