@@ -152,7 +152,7 @@ public class GameplayManager : MonoBehaviour
 
     public void OnPlayGameButton()
     {
-        StopCoroutine(nameof(AutomaticallyStartGame));
+        StopCoroutine(nameof(AutomaticallyStartGame)); //Not using
 
         gameStartingText.gameObject.SetActive(false);
 
@@ -170,13 +170,9 @@ public class GameplayManager : MonoBehaviour
             string shuffledCards = cardDeck.GetShuffleCardsString();
 
             partnerPanel.gameObject.SetActive(true);
-            partnerPanel.SetData(PlayerManager.instance.player,(id)=> {
-
-
-
-             CreateBotPlayerForMultiplayer();
-
-
+            partnerPanel.SetData(PlayerManager.instance.player,(id)=>
+            {
+                CreateBotPlayerForMultiplayer();
 
                 for(int i=0;i< PlayerManager.instance.player.Count; i++)
                 {

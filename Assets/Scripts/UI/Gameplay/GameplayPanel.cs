@@ -17,6 +17,7 @@ public class GameplayPanel : UIPanel
     public List<Sprite> kingsTrashTalks;
     public List<Sprite> acesTrashTalks;
 
+    public static bool forceQuit = false; //To Handle Player Left Sce
 
     public override void Show()
     {
@@ -65,7 +66,10 @@ public class GameplayPanel : UIPanel
         cardIntroPanel.GetComponentInChildren<AnimationEvents>().SetCallBack(this.callBack);
     }
 
-
+    private void OnEnable()
+    {
+        forceQuit = false;
+    }
     void ShowTrashTalk(string suit, string card)
     {
         Sprite sprite = null;
@@ -148,7 +152,7 @@ public class GameplayPanel : UIPanel
 
             if ((int)obj[0] == 2)//on yes
             {
-
+                forceQuit = true;
                 if (Global.isMultiplayer && Photon.Pun.PhotonNetwork.InRoom)
                 {
                     PhotonRoomCreator.instance.LeavePhotonRoom();

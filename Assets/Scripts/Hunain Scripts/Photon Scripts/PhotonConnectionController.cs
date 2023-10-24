@@ -111,6 +111,7 @@ public class PhotonConnectionController : MonoBehaviourPunCallbacks
     {
         base.OnDisconnected(cause);
         Debug.LogError("Photon Disconnect: " + cause);
+        PhotonNetwork.Reconnect();
     }
 
 }

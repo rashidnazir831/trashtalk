@@ -67,6 +67,26 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
 
     }
 
+    /// <summary>
+    /// Called when local user leave the room
+    /// </summary>
+    public override void OnLeftRoom()
+    {
+        if (!GameplayPanel.forceQuit)
+        {
+            Debug.LogError("Left room");
+            MesgBar.instance.show("Connection Lost");
+            if (Global.isMultiplayer && PhotonNetwork.InRoom)
+            {
+                LeavePhotonRoom();
+            }
+            SoundManager.Instance.StopBackgroundMusic();
+            UIEvents.HidePanel(Panel.GameplayPanel);
+            UIEvents.HidePanel(Panel.EndGamePanel);
+            UIEvents.ShowPanel(Panel.TabPanels);
+        }
+    }
+
     public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
     {
         base.OnMasterClientSwitched(newMasterClient);
