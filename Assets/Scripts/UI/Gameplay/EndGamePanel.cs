@@ -110,10 +110,10 @@ public class EndGamePanel : UIPanel
             homeButton.SetActive(true);
         }
 
-        if (Global.isMultiplayer)
-        {
-            closeButton.GetComponent<Button>().interactable = PhotonNetwork.LocalPlayer.IsMasterClient;
-        }
+        //if (Global.isMultiplayer)
+        //{
+        //    closeButton.GetComponent<Button>().interactable = PhotonNetwork.LocalPlayer.IsMasterClient;
+        //}
 
         
         print("appp: " + opponentMainPlayer.name);

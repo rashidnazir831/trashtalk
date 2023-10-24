@@ -32,6 +32,12 @@ public class VoiceManager : MonoBehaviourPun
     public Image micImage;
     public Sprite micOnImage;
     public Sprite micOffImage;
+
+    public void ResetMicIcon()
+    {
+        micImage.sprite =  micOnImage;
+    }
+
     public bool EnableDisableAudioTransmition()
     {
         if (recorder != null)

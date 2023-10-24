@@ -175,12 +175,14 @@ public class HandCardsUI : MonoBehaviour
     {
         Card.Suit leadingSuit = Card.Suit.Spades;
         bool isFirstTurn = true;
-
+        
         if (TrickManager.cards.Count > 0)
         {
             leadingSuit = TrickManager.cards[0].suit;
             isFirstTurn = false;
         }
+
+        Debug.Log("######allActive:" + allActive + " isFirstTurn:" + isFirstTurn + " totalPlayerPlayed:" + GameplayManager.instance.totalPlayerPlayed + " cards.Count:" + TrickManager.cards.Count);
         bool hasNormalCards = HasNormalCards();
         bool hasLeadingSuit = HasLeadingSuit(leadingSuit);
 
@@ -234,6 +236,7 @@ public class HandCardsUI : MonoBehaviour
             {
                 if (isFirstTurn)
                 {
+                    Debug.Log("Active All Cards.");
                     active = true; // On the first turn, all cards are active
                 }
                 else
@@ -261,6 +264,7 @@ public class HandCardsUI : MonoBehaviour
             }
             else
             {
+                //Disale All Cards Logic : Understandings by Hunain
                 active = allActive;
             }
 

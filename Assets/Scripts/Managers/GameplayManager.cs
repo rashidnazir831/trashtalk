@@ -22,9 +22,9 @@ public class GameplayManager : MonoBehaviour
     public SelectPartnerPanel partnerPanel;
   //  private Trick currentTrick;
 
-    int totalPlayers;
+    public int totalPlayers;
     int currentPlayerIndex;
-    int totalPlayerPlayed;  //total Player played one round
+    public int totalPlayerPlayed;  //total Player played one round
 
     CardDeck cardDeck;
     BidManager bidManager;
@@ -388,13 +388,37 @@ public class GameplayManager : MonoBehaviour
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
     }
 
+    Photon.Realtime.Player GetNewMasterClient() 
+    {
+        Photon.Realtime.Player masterPlayer = null;
+        foreach (var item in PhotonNetwork.CurrentRoom.Players)
+        {
+            if (item.Value.IsMasterClient)
+            {
+                masterPlayer = item.Value;
+                break;
+            }
+        }
+        return masterPlayer;
+    }
+
     public void ReplaceBotWithPlayer(string playerID)
     {
-        for(int i=0;i< PlayerManager.instance.players.Count;i++)
+
+        //PlayerManager.instance.players[i].isMaster = PhotonNetwork.PlayerList[i].IsMasterClient;
+
+        Photon.Realtime.Player newMasterPlayer = null;
+
+        for (int i=0;i< PlayerManager.instance.players.Count;i++)
         {
             Player p = PlayerManager.instance.players[i];
             if (p.id == playerID)
             {
+                if (p.isMaster) //if master player left the game, update the master player
+                {
+                    newMasterPlayer = GetNewMasterClient();
+                    Debug.Log("New Master Client is: "+ newMasterPlayer.NickName);
+                }
                 print("Bot has Taken over player Id: " + playerID);
                 MesgBar.instance.show( p.name +" Left.");
 
@@ -406,6 +430,12 @@ public class GameplayManager : MonoBehaviour
             }
         }
 
+        if (newMasterPlayer != null)
+        {
+            Debug.Log("Updating Master Client on client.");
+            Player player = PlayerManager.instance.players.Find(x => x.id.Equals(newMasterPlayer.UserId));
+            player.isMaster = true;
+        }
         UIEvents.UpdateData(Panel.PlayersUIPanel, null, "SetPlayersData");
     }
 

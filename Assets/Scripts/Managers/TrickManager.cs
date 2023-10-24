@@ -150,5 +150,9 @@ public static class TrickManager
     public static void ResetTrick()
     {
         cards.Clear();
+        if (cards.Count>0)
+        {
+            cards = new List<Card>();
+        }
     }
 }

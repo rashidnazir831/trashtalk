@@ -96,7 +96,11 @@ public class PlayerUI : MonoBehaviour
         this.userId = userId;
         if (!string.IsNullOrEmpty(userId) && Global.isMultiplayer)
         {
-           if(userId.Equals(PhotonNetwork.LocalPlayer.UserId))  muteIcon.gameObject.SetActive(true);
+            if (userId.Equals(PhotonNetwork.LocalPlayer.UserId))
+            {
+                VoiceManager.instance.ResetMicIcon();
+                muteIcon.gameObject.SetActive(true);
+            }
         }
         else
         {

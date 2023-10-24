@@ -90,7 +90,8 @@ public class PhotonRoomCreator : MonoBehaviourPunCallbacks
     public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
     {
         base.OnMasterClientSwitched(newMasterClient);
-        Debug.Log("OnMasterClientSwitched: " + newMasterClient.UserId );
+        Debug.Log("OnMasterClientSwitched: " + newMasterClient.UserId);
+
     }
 
     /// <summary>
