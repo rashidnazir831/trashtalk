@@ -35,6 +35,8 @@ public class RegistrationScreen : MonoBehaviour
 
         PlayerProfile.Player_UserID = PlayerPrefs.GetString(ConstantVariables.UserID);
         PlayerProfile.Player_UserName = PlayerPrefs.GetString(ConstantVariables.UserName);
+        PlayerProfile.Player_Email = PlayerPrefs.GetString(ConstantVariables.UserEmail);
+        PlayerProfile.Player_Password = PlayerPrefs.GetString(ConstantVariables.UserPassword);
     }
 
     private void ByPassLogin()
@@ -42,8 +44,14 @@ public class RegistrationScreen : MonoBehaviour
         loadDataFromPRefs();
 
         Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
-        keyValuePairs.Add("Email", PlayerProfile.Player_Email);
-        keyValuePairs.Add("Password", PlayerProfile.Player_Password);
+
+        string email = PlayerProfile.Player_Email;
+        string password = PlayerProfile.Player_Password;
+        keyValuePairs.Add("Email", email);
+        keyValuePairs.Add("Password", password);
+
+        Debug.LogError("&&&&&&&&&&: "+ email);
+        Debug.LogError("&&&&&&&&&&: "+ password);
 
         WebServiceManager.instance.APIRequest(WebServiceManager.instance.customLoginFunction, Method.POST, null, keyValuePairs, OnLoginSuccess, OnFail, CACHEABLE.NULL, true, null);
     }

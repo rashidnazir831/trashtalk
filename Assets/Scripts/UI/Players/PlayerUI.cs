@@ -58,12 +58,12 @@ public class PlayerUI : MonoBehaviour
     {
         bool enableOrDisable = false;
 
-        if (userId.Equals(PhotonNetwork.LocalPlayer.UserId)) //Disable Transmission
+        if (userId.Equals(PhotonNetwork.LocalPlayer.UserId)) //Disable Mic Transmission of myself
         {
 
             enableOrDisable = VoiceManager.instance.EnableDisableAudioTransmition();
         }
-        else //Disable Audio Source
+        else //Disable Other Player Audio Source
         {
 
             VoicePlayer voicePlayer = PhotonRoomCreator.instance.voicePlayers.Find(x => x.userId.Equals(this.userId));

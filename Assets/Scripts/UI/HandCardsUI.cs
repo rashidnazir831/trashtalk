@@ -249,7 +249,7 @@ public class HandCardsUI : MonoBehaviour
 
                     if (Global.isSpadeActive && card.suit == Card.Suit.Spades)
                     {
-                        active = true;
+                       // active = true;
                     }
 
                     // Only leading suit cards and active Spades cards are active
