@@ -169,77 +169,51 @@ public class GameplayManager : MonoBehaviour
 
             string shuffledCards = cardDeck.GetShuffleCardsString();
 
-            partnerPanel.gameObject.SetActive(true);
-            partnerPanel.SetData(PlayerManager.instance.player,(id)=>
-            {
-                CreateBotPlayerForMultiplayer();
+            #region Comments
 
-                for(int i=0;i< PlayerManager.instance.player.Count; i++)
-                {
-                    print("Before Swiping: " + PlayerManager.instance.player[i].id);
-                }
+            /*
+                        partnerPanel.gameObject.SetActive(true);
+                        partnerPanel.SetData(PlayerManager.instance.player,(id)=>
+                        {
+                            CreateBotPlayerForMultiplayer();
 
-                if(id != "")
-                {
-                    List<Player> players = PlayerManager.instance.player;
+                            for(int i=0;i< PlayerManager.instance.player.Count; i++)
+                            {
+                                print("Before Swiping: " + PlayerManager.instance.player[i].id);
+                            }
 
-                    int selectedIDIndex = players.FindIndex(x => x.id == id);
-                    int replacingIndex = 2;
+                            if(id != "")
+                            {
+                                List<Player> players = PlayerManager.instance.player;
 
-                    Player temp = players[replacingIndex];
-                    players[replacingIndex] = players[selectedIDIndex];
-                    players[selectedIDIndex] = temp;
-                }
+                                int selectedIDIndex = players.FindIndex(x => x.id == id);
+                                int replacingIndex = 2;
 
-                string sortedIds = string.Join(",", PlayerManager.instance.player.ConvertAll(x => x.id.ToString()).ToArray());
+                                Player temp = players[replacingIndex];
+                                players[replacingIndex] = players[selectedIDIndex];
+                                players[selectedIDIndex] = temp;
+                            }
 
-                print("all ids: " + sortedIds);
+                            string sortedIds = string.Join(",", PlayerManager.instance.player.ConvertAll(x => x.id.ToString()).ToArray());
 
-                for (int i = 0; i < PlayerManager.instance.player.Count; i++)
-                {
-                    print("After Swiping: " + PlayerManager.instance.player[i].id);
-                }
+                            print("all ids: " + sortedIds);
 
+                            for (int i = 0; i < PlayerManager.instance.player.Count; i++)
+                            {
+                                print("After Swiping: " + PlayerManager.instance.player[i].id);
+                            }
 
+                             PhotonRPCManager.Instance.SpawnPlayers(shuffledCards, sortedIds);
 
-                 PhotonRPCManager.Instance.SpawnPlayers(shuffledCards, sortedIds);
+                        });
 
+             */
 
+            #endregion Comments
 
-
-                //  return; //will remove this line to start game
-              /*  string[] playerIds = PlayerManager.instance.GetMultiplayerIds();
-
-                Dictionary<string, object> keyValuePairs = new Dictionary<string, object>();
-                keyValuePairs.Add("MatchType", "Multiplayer");
-
-
-                for (int i = 0; i < playerIds.Length; i++)
-                {
-                    keyValuePairs.Add($"UserIDs[{i}]", playerIds[i]);
-                }
-
-
-                keyValuePairs.Add("CoinsToPlay", Global.coinsRequired);
-
-                WebServiceManager.instance.APIRequest(WebServiceManager.instance.startGameFunction, Method.POST, null, keyValuePairs,
-
-                (JObject resp, long arg2) => {
-                    var response = GameResponse.FromJson(resp.ToString());
-                    RoomOptions roomOptions = new RoomOptions();
-                    _myCustomProperties["GameId"] = response.data.GameID;
-                    roomOptions.CustomRoomPropertiesForLobby = new string[1] { "GameId" };
-                    roomOptions.CustomRoomProperties = _myCustomProperties;
-                    PhotonNetwork.CurrentRoom.SetCustomProperties(_myCustomProperties);
-
-                }
-                , (msg) => {
-                    print(msg);
-                }, CACHEABLE.NULL, false, null);*/
-
-
-
-            }); 
+            CreateBotPlayerForMultiplayer();
+            string sortedIds = string.Join(",", PlayerManager.instance.player.ConvertAll(x => x.id.ToString()).ToArray());
+            PhotonRPCManager.Instance.SpawnPlayers(shuffledCards, sortedIds);
 
         }
         else if(!Global.isMultiplayer)
@@ -515,11 +489,13 @@ public class GameplayManager : MonoBehaviour
         {
             if (Photon.Pun.PhotonNetwork.IsMasterClient)
             {      
+                if(TrickManager.cards.Count == 0) PhotonRPCManager.Instance.ResetTrick();
                 PhotonRPCManager.Instance.SetPlayerTurn(PlayerManager.instance.player[this.currentPlayerIndex].id, PlayerManager.instance.player[this.currentPlayerIndex].photonIndex);
             }
             return;
         }
 
+        //For Practice Mode
         PlayTurn();
     }
 
@@ -534,8 +510,8 @@ public class GameplayManager : MonoBehaviour
 
     public void PlayTurn()
     {
-       Player currentPlayer = PlayerManager.instance.players[this.currentPlayerIndex];
-        PlayerManager.instance.SetPlayerTurn(this.currentPlayerIndex);
+        Player currentPlayer = PlayerManager.instance.players[this.currentPlayerIndex];
+       PlayerManager.instance.SetPlayerTurn(this.currentPlayerIndex);
        SetPlayerTurnIndication(currentPlayer); 
         if (currentPlayer.isBot)
         {
@@ -561,6 +537,7 @@ public class GameplayManager : MonoBehaviour
             }
         }
     }
+
 
     IEnumerator PlayBotTurnByMaster(Player botPlayer)
     {
@@ -737,6 +714,7 @@ public class GameplayManager : MonoBehaviour
             return;
         }
 
+        //Bot Player
         PlayTurn();
     }
 
@@ -773,17 +751,24 @@ public class GameplayManager : MonoBehaviour
 
         if (currentPlayer.isOwn)
         {
-            //            UIEvents.UpdateData(Panel.PlayersUIPanel, null, "StopTimer", this.currentPlayerIndex);
+            //UIEvents.UpdateData(Panel.PlayersUIPanel, null, "StopTimer", this.currentPlayerIndex);
             UIEvents.UpdateData(Panel.PlayersUIPanel, null, "ShowHideYourTurnHeading", false);
             //Card playedCard = botPlayer.PlayCard(0);
             Card card = botTrick.GetBestCard(currentPlayer.hand);
             card.PlaceCardOnTable();
+        }
+        if (currentPlayer.isBot && Global.isMultiplayer)
+        {
+            //Hunain
+            Debug.Log("**********Bug Solved**********");
+            PlayTurn();
         }
     }
 
 
     void ResetTrick()
     {
+        Debug.Log("ResetTrick");
         TrickManager.ResetTrick();
 
         this.currentPlayerIndex = this.trickWinner.tablePosition;
