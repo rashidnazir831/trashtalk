@@ -81,6 +81,18 @@ public class PhotonRPCManager : MonoBehaviourPunCallbacks
         SendRPC("Set_Player_Turn", RpcTarget.All, playerId, photonIndex);
     }
 
+
+    [PunRPC]
+    public void ResetTrick_RPC()
+    {
+        TrickManager.ResetTrick();
+    }
+
+    internal void ResetTrick()
+    {
+        SendRPC("ResetTrick_RPC", RpcTarget.All);
+    }
+
     [PunRPC]
     public void Placed_Card_By_Player(string playerId, string cardCode)
     {

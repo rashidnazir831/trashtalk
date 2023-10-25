@@ -37,11 +37,17 @@ public class ChatHandler : MonoBehaviour
 
     private void OpenChatPanel()
     {
+        CloseChatPanel();
+        CloseEmojiPanel();
+
         chatPanel.SetActive(true);
     }
 
     private void OpenEmojiPanel()
     {
+        CloseChatPanel();
+        CloseEmojiPanel();
+
         emojiPanel.SetActive(true);
     }
 
