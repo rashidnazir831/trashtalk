@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.4439372, g: 0.49315345, b: 0.5721989, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10363,7 +10363,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 48aaac87ee00c474c84678cf2a8b9337, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -26996,6 +26996,8 @@ MonoBehaviour:
   playButton: {fileID: 843498329}
   cardHand: {fileID: 1678030066}
   partnerPanel: {fileID: 0}
+  totalPlayers: 0
+  totalPlayerPlayed: 0
 --- !u!114 &1532306109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28689,7 +28691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7502729984626355123, guid: 8e90fd623e30946a0a2d317f738b2c66, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -88
+      value: -88.00012
       objectReference: {fileID: 0}
     - target: {fileID: 7502729984639885878, guid: 8e90fd623e30946a0a2d317f738b2c66, type: 3}
       propertyPath: m_IsActive
@@ -37666,6 +37668,8 @@ MonoBehaviour:
   playButton: {fileID: 836488843}
   cardHand: {fileID: 1554116841}
   partnerPanel: {fileID: 0}
+  totalPlayers: 0
+  totalPlayerPlayed: 0
 --- !u!114 &629941572746864539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37827,7 +37831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1987334262190601948, guid: 8a295f258733147d48788d958594dc8b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1987334262190601949, guid: 8a295f258733147d48788d958594dc8b, type: 3}
       propertyPath: m_Pivot.x

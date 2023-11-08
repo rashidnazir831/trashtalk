@@ -118,14 +118,14 @@ public class GuestLoginController : MonoBehaviour
 
 public class GuestLoginGenerator
 {
-    private const string namePrefix = "guest_";
+    private const string namePrefix = "Guest_";
     private const string passwordSuffix = "_pass";
 
     static string uniqueId = Random.Range(1, 51).ToString();
 
     public static string GenerateUniqueEmail()
     {
-        string email = namePrefix + uniqueId + "@trashtalk.com";
+        string email = namePrefix.ToLower() + uniqueId + "@trashtalk.com";
         return email;
     }
 
@@ -143,7 +143,7 @@ public class GuestLoginGenerator
 
     public static string GenerateRandomPassword()
     {
-        string password = namePrefix + uniqueId + passwordSuffix;
+        string password = namePrefix.ToLower() + uniqueId + passwordSuffix;
         return password;
     }
 }
